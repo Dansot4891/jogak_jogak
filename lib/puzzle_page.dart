@@ -55,7 +55,7 @@ class _PuzzleViewState extends State<PuzzleView> {
           
                   setState(() {});
                 },
-                child: Text('이미지 선택'),
+                child: Text('이미지 선택 이미지 선택 이미지 선택 이미지 선택'),
               ),
               if (pieces.isNotEmpty)
                 Expanded(
