@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "581342125266",
+    "project_id": "jogak-jogak",
+    "storage_bucket": "jogak-jogak.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581342125266:android:8cc765e5528a62a84fa10b",
+        "android_client_info": {
+          "package_name": "com.example.jogak_jogak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlxyHuHsm59XwlHUWt_mxWwtsdVUQQq2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

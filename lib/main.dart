@@ -1,8 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/presentation/page/sign_in/login_page.dart';
+import 'package:jogak_jogak/firebase_options.dart';
+import 'package:jogak_jogak/presentation/page/sign_in/sign_in_page.dart';
 import 'package:jogak_jogak/presentation/page/puzzle_game/puzzle_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -21,7 +28,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Pretendard',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const LoginPage()
+      home: const SignInPage()
     );
   }
 }

@@ -4,14 +4,14 @@ import 'package:jogak_jogak/presentation/page/base/base_page.dart';
 import 'package:jogak_jogak/presentation/widgets/base/button/app_button.dart';
 import 'package:jogak_jogak/presentation/widgets/base/text_field/text_field.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignInPageState extends State<SignInPage> {
   final _email = TextEditingController();
   final _password = TextEditingController();
 
