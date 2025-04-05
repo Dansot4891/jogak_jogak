@@ -7,6 +7,7 @@ import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 
 import 'package:jogak_jogak/main.dart';
+import 'package:jogak_jogak/presentation/page/base/base_page.dart';
 
 class PuzzlePage extends StatefulWidget {
   const PuzzlePage({super.key});
@@ -28,109 +29,107 @@ class _PuzzlePageState extends State<PuzzlePage> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextButton(
-                onPressed: () async {
-                  final imgFile = await ImgPicker.pickImage();
-                  file = imgFile;
-                  if (imgFile == null) {
-                    return;
-                  }
-
-                  final fileList = await ImgCrop.cropImage(
-                    imgFile,
-                    gridViewSize: gridViewSize,
-                    width: width,
-                  );
-                  if (fileList == null) {
-                    return;
-                  }
-                  pieces = fileList;
-
-                  setState(() {});
-                },
-                child: Text('이미지 선택 이미지 선택 이미지 선택 이미지 선택'),
-              ),
-              if (pieces.isNotEmpty)
-                Expanded(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          itemCount: gridViewSize * gridViewSize,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: gridViewSize,
-                              ),
-                          itemBuilder: (context, index) {
-                            return DragTarget<int>(
-                              builder: (context, candidateData, rejectedData) {
-                                final piece = pieces[index];
-                                return imagePuzzlePiece(
-                                  file: piece.file,
-                                  width: width,
-                                  isFrame: !piece.isRight,
-                                );
-                              },
-                              onAcceptWithDetails: (
-                                DragTargetDetails<int> details,
-                              ) {
-                                if (index == details.data) {
-                                  setState(() {
-                                    pieces =
-                                        pieces
-                                            .map(
-                                              (e) =>
-                                                  e.index == details.data
-                                                      ? e.copyWith(
-                                                        isRight: !e.isRight,
-                                                      )
-                                                      : e,
-                                            )
-                                            .toList();
-                                  });
-                                }
-                              },
-                            );
-                          },
-                        ),
+    return BasePage(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+              onPressed: () async {
+                final imgFile = await ImgPicker.pickImage();
+                file = imgFile;
+                if (imgFile == null) {
+                  return;
+                }
+      
+                final fileList = await ImgCrop.cropImage(
+                  imgFile,
+                  gridViewSize: gridViewSize,
+                  width: width,
+                );
+                if (fileList == null) {
+                  return;
+                }
+                pieces = fileList;
+      
+                setState(() {});
+              },
+              child: Text('이미지 선택 이미지 선택 이미지 선택 이미지 선택'),
+            ),
+            if (pieces.isNotEmpty)
+              Expanded(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        itemCount: gridViewSize * gridViewSize,
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: gridViewSize,
+                            ),
+                        itemBuilder: (context, index) {
+                          return DragTarget<int>(
+                            builder: (context, candidateData, rejectedData) {
+                              final piece = pieces[index];
+                              return imagePuzzlePiece(
+                                file: piece.file,
+                                width: width,
+                                isFrame: !piece.isRight,
+                              );
+                            },
+                            onAcceptWithDetails: (
+                              DragTargetDetails<int> details,
+                            ) {
+                              if (index == details.data) {
+                                setState(() {
+                                  pieces =
+                                      pieces
+                                          .map(
+                                            (e) =>
+                                                e.index == details.data
+                                                    ? e.copyWith(
+                                                      isRight: !e.isRight,
+                                                    )
+                                                    : e,
+                                          )
+                                          .toList();
+                                });
+                              }
+                            },
+                          );
+                        },
                       ),
-                      Expanded(
-                        child: Stack(
-                          children:
-                              pieces.map((e) {
-                                return Positioned(
-                                  top: e.topRandom,
-                                  left: e.leftRandom,
-                                  child: Draggable(
-                                    data: e.index,
-                                    feedback: imagePuzzlePiece(
-                                      file: e.file,
-                                      width: width,
-                                    ),
-                                    childWhenDragging: emptyBox(),
-                                    child: imagePuzzlePiece(
-                                      file: e.file,
-                                      width: width,
-                                      isRight: e.isRight,
-                                    ),
+                    ),
+                    Expanded(
+                      child: Stack(
+                        children:
+                            pieces.map((e) {
+                              return Positioned(
+                                top: e.topRandom,
+                                left: e.leftRandom,
+                                child: Draggable(
+                                  data: e.index,
+                                  feedback: imagePuzzlePiece(
+                                    file: e.file,
+                                    width: width,
                                   ),
-                                );
-                              }).toList(),
-                        ),
+                                  childWhenDragging: emptyBox(),
+                                  child: imagePuzzlePiece(
+                                    file: e.file,
+                                    width: width,
+                                    isRight: e.isRight,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
     );

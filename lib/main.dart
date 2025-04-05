@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/puzzle_page.dart';
+import 'package:jogak_jogak/presentation/page/sign_in/login_page.dart';
+import 'package:jogak_jogak/presentation/page/puzzle_game/puzzle_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Pretendard',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const PuzzlePage()
+      home: const LoginPage()
     );
   }
 }
