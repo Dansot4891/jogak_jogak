@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Pretendard',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const PuzzleView()
+      home: const PuzzlePage()
     );
   }
 }

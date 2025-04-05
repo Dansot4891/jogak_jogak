@@ -8,14 +8,14 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:jogak_jogak/main.dart';
 
-class PuzzleView extends StatefulWidget {
-  const PuzzleView({super.key});
+class PuzzlePage extends StatefulWidget {
+  const PuzzlePage({super.key});
 
   @override
-  State<PuzzleView> createState() => _PuzzleViewState();
+  State<PuzzlePage> createState() => _PuzzlePageState();
 }
 
-class _PuzzleViewState extends State<PuzzleView> {
+class _PuzzlePageState extends State<PuzzlePage> {
   // 파일
   File? file;
 
@@ -42,17 +42,17 @@ class _PuzzleViewState extends State<PuzzleView> {
                   if (imgFile == null) {
                     return;
                   }
-          
+
                   final fileList = await ImgCrop.cropImage(
                     imgFile,
                     gridViewSize: gridViewSize,
-                    width: width
+                    width: width,
                   );
                   if (fileList == null) {
                     return;
                   }
                   pieces = fileList;
-          
+
                   setState(() {});
                 },
                 child: Text('이미지 선택 이미지 선택 이미지 선택 이미지 선택'),
@@ -65,9 +65,10 @@ class _PuzzleViewState extends State<PuzzleView> {
                         child: GridView.builder(
                           shrinkWrap: true,
                           itemCount: gridViewSize * gridViewSize,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: gridViewSize,
-                          ),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: gridViewSize,
+                              ),
                           itemBuilder: (context, index) {
                             return DragTarget<int>(
                               builder: (context, candidateData, rejectedData) {
@@ -78,10 +79,24 @@ class _PuzzleViewState extends State<PuzzleView> {
                                   isFrame: !piece.isRight,
                                 );
                               },
-                              onAcceptWithDetails: (DragTargetDetails<int> details){
-                                setState(() {
-                                  pieces = pieces.map((e) => e.index == details.data ? e.copyWith(isRight: !e.isRight) : e).toList();
-                                });
+                              onAcceptWithDetails: (
+                                DragTargetDetails<int> details,
+                              ) {
+                                if (index == details.data) {
+                                  setState(() {
+                                    pieces =
+                                        pieces
+                                            .map(
+                                              (e) =>
+                                                  e.index == details.data
+                                                      ? e.copyWith(
+                                                        isRight: !e.isRight,
+                                                      )
+                                                      : e,
+                                            )
+                                            .toList();
+                                  });
+                                }
                               },
                             );
                           },
@@ -121,7 +136,7 @@ class _PuzzleViewState extends State<PuzzleView> {
     );
   }
 
-  SizedBox emptyBox(){
+  SizedBox emptyBox() {
     return SizedBox();
   }
 
@@ -132,22 +147,18 @@ class _PuzzleViewState extends State<PuzzleView> {
     required double width,
     bool isFrame = false,
     bool isRight = false,
-    }) {
-      // 퍼즐틀일 경우 테두리만 가진 박스 반환
-    if(isFrame){
+  }) {
+    // 퍼즐틀일 경우 테두리만 가진 박스 반환
+    if (isFrame) {
       return Container(
         width: (width / gridViewSize),
         height: (width / gridViewSize),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey,
-          )
-        ),
+        decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
       );
     }
     // 하단 퍼즐 조각에서
     // 정답이라면 SizedBox 반환
-    if(isRight){
+    if (isRight) {
       return emptyBox();
     }
     return Image.file(
@@ -231,10 +242,8 @@ class ImgCrop {
           default:
             throw Exception('지원되지 않는 확장자');
         }
-        final topRandom =
-                                    10 + Random().nextDouble() * width / 3 * 2;
-                                final leftRandom =
-                                    10 + Random().nextDouble() * width / 3 * 2;
+        final topRandom = 10 + Random().nextDouble() * width / 3 * 2;
+        final leftRandom = 10 + Random().nextDouble() * width / 3 * 2;
         final imgPuzzle = ImagePuzzle(
           index: index,
           file: outputFile,
