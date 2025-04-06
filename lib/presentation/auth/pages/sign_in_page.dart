@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/style/text_style.dart';
-import 'package:jogak_jogak/presentation/page/base/base_page.dart';
-import 'package:jogak_jogak/presentation/widgets/base/button/app_button.dart';
-import 'package:jogak_jogak/presentation/widgets/base/text_field/text_field.dart';
+import 'package:jogak_jogak/core/style/text_style.dart';
+import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
+import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
+import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
