@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/core/style/bouncing_boxes_background.dart';
+import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/firebase_options.dart';
 import 'package:jogak_jogak/presentation/auth/pages/sign_in_page.dart';
+import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
 import 'package:jogak_jogak/presentation/auth/pages/sign_up_page.dart';
+import 'package:jogak_jogak/presentation/rank/ranking_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Pretendard',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const BouncingBoxesBackground()
+      home: const RankingPage(),
     );
   }
 }

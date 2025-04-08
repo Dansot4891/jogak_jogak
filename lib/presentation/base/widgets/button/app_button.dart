@@ -28,8 +28,8 @@ class AppButton extends StatelessWidget {
     // --- --- --- --- ---
     this.bgColor,
     this.border,
-    this.borderRadius = 20,
-    this.verticalPadding = 16,
+    this.borderRadius = 16,
+    this.verticalPadding = 12,
     this.horizontalPadding = 0,
     this.horizontalMargin = 0,
     required this.onTap,
@@ -39,7 +39,10 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      // borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
       onTap: onTap,
+      splashColor: Colors.white,
+      highlightColor: Colors.black,
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: horizontalMargin),
         padding: EdgeInsets.symmetric(
@@ -54,7 +57,7 @@ class AppButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: AppTextStyle.textField,
+            style: AppTextStyle.button,
           ),
         ),
       ),
