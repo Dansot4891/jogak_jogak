@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class AppSize {
   AppSize._();
 
-  static late double devicePixelRatio;
+  static late double devicePixelRatio; // 디바이스 픽셀 비율
   static late double screenWidth; // 디바이스 넓이
   static late double screenHeight; // 디바이스 높이
-
+  static late EdgeInsets screenPadding; // 화면 패딩값 추출  
   static bool _isInitialized = false; // 초기화 상태 확인 변수
   
   // 비율로 처리했을 때 높이 넓이. (402 * 874) 기준
@@ -28,6 +28,7 @@ class AppSize {
     devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     screenWidth = MediaQuery.sizeOf(context).width;
     screenHeight = MediaQuery.sizeOf(context).height;
+    screenPadding = MediaQuery.of(context).padding;
     _isInitialized = true;
   }
 }
