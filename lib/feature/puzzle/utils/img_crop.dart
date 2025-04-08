@@ -1,7 +1,7 @@
 
 import 'dart:io';
-import 'dart:math';
 import 'package:image/image.dart' as img;
+import 'package:jogak_jogak/core/module/random/random_generator.dart';
 import 'package:jogak_jogak/feature/puzzle/repository/entity/puzzle_entity.dart';
 
 class ImgCrop {
@@ -12,6 +12,7 @@ class ImgCrop {
     required int gridViewSize,
     required double width,
   }) async {
+    final randomGenerator = RandomGenerator();
     final List<PuzzleEntity> fileList = [];
     // 이미지의 width, height를 가져오기 위해 파일 읽기
     final bytes = await file.readAsBytes();
@@ -58,8 +59,8 @@ class ImgCrop {
           default:
             throw Exception('지원되지 않는 확장자');
         }
-        final topRandom = 10 + Random().nextDouble() * width / 3 * 2;
-        final leftRandom = 10 + Random().nextDouble() * width / 3 * 2;
+        final topRandom = randomGenerator.nextDouble(width / 3 * 2, seed: 10);
+        final leftRandom = randomGenerator.nextDouble(width / 3 * 2, seed: 10);
         final imgPuzzle = PuzzleEntity(
           index: index,
           file: outputFile,

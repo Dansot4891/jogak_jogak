@@ -47,7 +47,7 @@ class AppButton extends StatelessWidget {
           horizontal: horizontalPadding,
         ),
         decoration: BoxDecoration(
-          color: _isOnTapNull ? Colors.grey : bgColor ?? AppColor.mainColor,
+          color: _isOnTapNull ? Colors.grey : bgColor ?? AppColor.main,
           borderRadius: BorderRadius.circular(borderRadius),
           border: border,
         ),
