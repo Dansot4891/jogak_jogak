@@ -23,8 +23,19 @@ abstract class AppTextStyle {
   static TextStyle title2 = boldStyle(20, null);
   static TextStyle tabbar = mediumStyle(16, null);
   static TextStyle textField = mediumStyle(14, null);
-  static TextStyle subText1 = mediumStyle(20, null).copyWith(color: AppColor.grey80);
-  static TextStyle subText2 = mediumStyle(20, null).copyWith(color: AppColor.greyA7);
+  static TextStyle subText1 = mediumStyle(
+    20,
+    null,
+  ).copyWith(color: AppColor.grey80);
+  static TextStyle subText2 = mediumStyle(
+    20,
+    null,
+  ).copyWith(color: AppColor.greyA7);
   static TextStyle body1 = mediumStyle(14, null);
-  static TextStyle button = mediumStyle(18, null).copyWith(color: AppColor.white);
+  static TextStyle body2 = mediumStyle(18, null);
+  static TextStyle button = mediumStyle(
+    18,
+    null,
+  ).copyWith(color: AppColor.white);
+  static TextStyle rank = mediumStyle(16, null);
 }

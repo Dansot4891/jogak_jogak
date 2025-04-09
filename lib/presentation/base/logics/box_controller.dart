@@ -5,7 +5,7 @@ class BoxController {
   // singleton pattern
   static final BoxController instance = BoxController._internal();
   BoxController._internal();
-  factory BoxController() => instance;
+  factory BoxController({int? minusHeight}) => instance;
 
   // 박스 관련 변수
   final int _boxCount = 6;
@@ -13,29 +13,33 @@ class BoxController {
   final List<_Box> _boxes = [];
 
   // 박스를 가져올 때 초기화한다.
-  List<_Box> get boxes{
-    if(!_initialized){
-      _initBoxes();
+  List<_Box> boxes({double minusWidth = 0, double minusHeight = 0}) {
+    if (!_initialized) {
+      _initBoxes(minusHeight: minusHeight, minusWidth: minusWidth);
     }
     return _boxes;
   }
-  
+
   // 랜덤 생성 class
   final _random = RandomGenerator();
-  
+
   // 초기화 변수
   bool _initialized = false;
 
-  final _screenWidth = AppSize.screenWidth;
-  final _screenHeight =
-      AppSize.screenHeight -
-      AppSize.screenPadding.bottom -
-      AppSize.screenPadding.top;
+  late double _screenWidth;
+  late double _screenHeight;
 
   // 박스 초기화
-  void _initBoxes() {
+  void _initBoxes({double minusWidth = 0, double minusHeight = 0}) {
     // 이미 초기화 되어있다면 return;
     if (_initialized) return;
+
+    _screenWidth = AppSize.screenWidth - minusWidth;
+    _screenHeight =
+        AppSize.screenHeight -
+        AppSize.screenPadding.bottom -
+        AppSize.screenPadding.top -
+        minusHeight;
 
     for (int i = 0; i < _boxCount; i++) {
       _boxes.add(
@@ -56,7 +60,7 @@ class BoxController {
   // 박스 업데이트
   void updateBoxes() {
     // 만약 초기화되지 않았다면 return
-    if(!_initialized){
+    if (!_initialized) {
       return;
     }
     for (var box in _boxes) {

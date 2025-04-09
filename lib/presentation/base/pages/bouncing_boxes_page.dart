@@ -14,10 +14,14 @@ class BouncingBoxesBackground extends StatefulWidget {
   final Color? backgroundColor;
   final bool? resizeToAvoidBottomInset;
   final bool useSafeArea;
+  final double minusHeight;
+  final double minusWidth;
 
   const BouncingBoxesBackground({
     this.title,
     required this.body,
+    this.minusWidth = 0,
+    this.minusHeight = 0,
     this.appBar,
     this.bottomNavigationBar,
     this.floatingActionButton,
@@ -45,9 +49,9 @@ class _BouncingBoxesBackgroundState extends State<BouncingBoxesBackground>
       vsync: this,
       duration: const Duration(days: 1),
     )..addListener(() {
-        BoxController.instance.updateBoxes();
-        setState(() {});
-      });
+      BoxController.instance.updateBoxes();
+      setState(() {});
+    });
     _controller.repeat(); // 계속 반복
   }
 
@@ -59,7 +63,10 @@ class _BouncingBoxesBackgroundState extends State<BouncingBoxesBackground>
 
   @override
   Widget build(BuildContext context) {
-    final boxes = BoxController().boxes;
+    final boxes = BoxController().boxes(
+      minusWidth: widget.minusWidth,
+      minusHeight: widget.minusHeight,
+    );
 
     return BasePage(
       title: widget.title,
