@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
-import 'package:jogak_jogak/core/style/text_style.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/util/img_picker.dart';
 
 class PuzzleImageBox extends StatefulWidget {

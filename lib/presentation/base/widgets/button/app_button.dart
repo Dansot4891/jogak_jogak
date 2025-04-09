@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
-import 'package:jogak_jogak/core/style/text_style.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 
 class AppButton extends StatelessWidget {
   // Todo
@@ -54,12 +54,7 @@ class AppButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius),
           border: border,
         ),
-        child: Center(
-          child: Text(
-            text,
-            style: AppTextStyle.button,
-          ),
-        ),
+        child: Center(child: Text(text, style: AppTextStyle.button)),
       ),
     );
   }
