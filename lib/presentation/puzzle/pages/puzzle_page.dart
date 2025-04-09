@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/util/img_picker.dart';
 import 'package:jogak_jogak/feature/puzzle/repository/entity/puzzle_entity.dart';
 import 'package:jogak_jogak/feature/puzzle/utils/img_crop.dart';
@@ -21,6 +23,8 @@ class _PuzzlePageState extends State<PuzzlePage> {
 
   // 잘린 이미지들의 리스트
   List<PuzzleEntity> pieces = [];
+  // 정답 리스트
+  List<PuzzleEntity> correctPieces = [];
 
   // gridview의 n x n 사이즈
   int gridViewSize = 4;
@@ -56,11 +60,12 @@ class _PuzzlePageState extends State<PuzzlePage> {
                         if (fileList == null) {
                           return;
                         }
-                        pieces = fileList;
+                        correctPieces = List.from(fileList);
+                        pieces = List.from(fileList);
 
                         setState(() {});
                       },
-                      child: Text('이미지 선택'),
+                      child: Text('⚠️ 화면이 잘리면서 원본과 다를 수 있습니다!', style: AppTextStyle.body1.copyWith(color: AppColor.red),),
                     ),
                   ),
                   if (file != null)
@@ -73,7 +78,9 @@ class _PuzzlePageState extends State<PuzzlePage> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.width - _horizonPadding * 2,
+                      height:
+                          MediaQuery.of(context).size.width -
+                          _horizonPadding * 2,
                       child: GridView.builder(
                         shrinkWrap: true,
                         itemCount: gridViewSize * gridViewSize,
@@ -84,7 +91,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                           return DragTarget<int>(
                             // -- builder --
                             builder: (context, candidateData, rejectedData) {
-                              final piece = pieces[index];
+                              final piece = correctPieces[index];
                               return PuzzlePiece(
                                 file: piece.file,
                                 isFrame: !piece.isRight,
@@ -100,6 +107,17 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                 setState(() {
                                   pieces =
                                       pieces
+                                          .map(
+                                            (e) =>
+                                                e.index == details.data
+                                                    ? e.copyWith(
+                                                      isRight: !e.isRight,
+                                                    )
+                                                    : e,
+                                          )
+                                          .toList();
+                                  correctPieces =
+                                      correctPieces
                                           .map(
                                             (e) =>
                                                 e.index == details.data
@@ -140,23 +158,47 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                     // 이동된 위치에서 y가
                                     // 80 + 상단 그리드뷰보단 크고, 전체 높이에서 이미지 높이만큼 뺀 값보단 작아야한다.
                                     //    => 위 조건들을 만족할 때만 위치를 이동시킨다.
-                                    if(
-                                      (dx > _horizonPadding && dx < AppSize.screenWidth - 16 - ((AppSize.screenWidth - 32) / gridViewSize))
-                                        && (dy > 80 + AppSize.fractionHeight(0.5) && dy < AppSize.screenHeight - 16 - ((AppSize.screenWidth - 32) / gridViewSize))){
-                                        setState(() {
-                                          // index가 같은것을 찾아서
-                                          final piece = pieces.where((p) => p.index == e.index).first.copyWith(
-                                            // grideview + 상단 height 제외
-                                              top: details.offset.dy - 80 - AppSize.screenWidth - 32,
+                                    if ((dx > _horizonPadding &&
+                                            dx <
+                                                AppSize.screenWidth -
+                                                    16 -
+                                                    ((AppSize.screenWidth -
+                                                            32) /
+                                                        gridViewSize)) &&
+                                        (dy >
+                                                80 +
+                                                    AppSize.fractionHeight(
+                                                      0.5,
+                                                    ) &&
+                                            dy <
+                                                AppSize.screenHeight -
+                                                    16 -
+                                                    ((AppSize.screenWidth -
+                                                            32) /
+                                                        gridViewSize))) {
+                                      setState(() {
+                                        // index가 같은것을 찾아서
+                                        final piece = pieces
+                                            .where((p) => p.index == e.index)
+                                            .first
+                                            .copyWith(
+                                              // grideview + 상단 height 제외
+                                              top:
+                                                  details.offset.dy -
+                                                  80 -
+                                                  AppSize.screenWidth -
+                                                  32,
                                               // 왼쪽 margin값 제외
-                                              left: details.offset.dx - _horizonPadding,
-                                          );
-                                          // 해당 객체를 삭제후
-                                          // 리스트 마지막에 추가
-                                          //    => 해당 이미지를 stack 내에서 맨 위로 올리기위해서
-                                          pieces.remove(piece);
-                                          pieces.add(piece);
-                                        });
+                                              left:
+                                                  details.offset.dx -
+                                                  _horizonPadding,
+                                            );
+                                        // 해당 객체를 삭제후
+                                        // 리스트 마지막에 추가
+                                        //    => 해당 이미지를 stack 내에서 맨 위로 올리기위해서
+                                        pieces.remove(piece);
+                                        pieces.add(piece);
+                                      });
                                     }
                                   },
                                   // 기본 설정 위젯

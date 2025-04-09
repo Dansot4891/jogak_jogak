@@ -29,6 +29,10 @@ class MyPage extends StatelessWidget {
             Spacer(),
             SettingCard(text: '로그아웃', onTap: () {}),
             SettingCard(text: '회원탈퇴', onTap: () {}, baseColor: AppColor.greyC5),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Text('ver 1.0.0', style: AppTextStyle.version),
+            ),
           ],
         ),
       ),
