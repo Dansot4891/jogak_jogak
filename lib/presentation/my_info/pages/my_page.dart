@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
@@ -10,6 +11,7 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BouncingBoxesBackground(
+      minusHeight: AppSize.bottomNaviationHeight,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: Column(
@@ -29,18 +31,6 @@ class MyPage extends StatelessWidget {
             SettingCard(text: '회원탈퇴', onTap: () {}, baseColor: AppColor.greyC5),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.my_library_add),
-            label: 'my',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.my_library_add),
-            label: 'my',
-          ),
-        ],
       ),
     );
   }
