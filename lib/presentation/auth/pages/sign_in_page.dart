@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/core/style/text_style.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
@@ -46,9 +46,7 @@ class _SignInPageState extends State<SignInPage> {
                 ],
               ),
             ),
-            AppButton(text: '로그인', onTap: () {
-
-            }),
+            AppButton(text: '로그인', onTap: () {}),
             Spacer(),
           ],
         ),

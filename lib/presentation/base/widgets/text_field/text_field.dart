@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jogak_jogak/core/style/text_style.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -65,7 +65,7 @@ class CustomTextFormField extends StatelessWidget {
       enabled: enabled,
       obscureText: obsecure,
       textAlign: textAlign,
-      validator: validator == null ? null : validator,
+      validator: validator,
       textAlignVertical: TextAlignVertical.top,
       style: AppTextStyle.textField,
       onChanged: onChanged,
@@ -80,33 +80,28 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: prefixIcon,
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(
-            color: borderColor ?? Colors.black,
-          ),
+          borderSide: BorderSide(color: borderColor ?? Colors.black),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(
-            color: Colors.red,
-          ),
+          borderSide: BorderSide(color: Colors.red),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(color: Colors.red)),
-        contentPadding: contentPadding ?? const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          borderSide: BorderSide(color: Colors.red),
+        ),
+        contentPadding:
+            contentPadding ??
+            const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         hintText: hintText,
         hintStyle: hintStyle ?? AppTextStyle.textField,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(
-            color: borderColor ?? Colors.black,
-          ),
+          borderSide: BorderSide(color: borderColor ?? Colors.black),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(
-            color: borderColor ?? Colors.black,
-          ),
+          borderSide: BorderSide(color: borderColor ?? Colors.black),
         ),
         focusColor: Colors.black,
       ),
