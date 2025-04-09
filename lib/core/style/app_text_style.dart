@@ -38,4 +38,8 @@ abstract class AppTextStyle {
     null,
   ).copyWith(color: AppColor.white);
   static TextStyle rank = mediumStyle(16, null);
+  static TextStyle version = mediumStyle(
+    12,
+    null,
+  ).copyWith(color: AppColor.greyA7);
 }
