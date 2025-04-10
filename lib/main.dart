@@ -4,6 +4,7 @@ import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/firebase/firebase_options.dart';
 import 'package:jogak_jogak/presentation/my_info/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
+import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Pretendard',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyPage(),
+      home: const RankingPage(),
     );
   }
 }
