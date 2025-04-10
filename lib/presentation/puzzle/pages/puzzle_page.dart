@@ -1,12 +1,9 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
-import 'package:jogak_jogak/core/util/img_picker.dart';
-import 'package:jogak_jogak/feature/puzzle/repository/entity/puzzle_entity.dart';
-import 'package:jogak_jogak/feature/puzzle/utils/img_crop.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
+import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/widgets/empty_box.dart';
 import 'package:jogak_jogak/presentation/puzzle/widgets/puzzle_piece.dart';
 
@@ -18,20 +15,10 @@ class PuzzlePage extends StatefulWidget {
 }
 
 class _PuzzlePageState extends State<PuzzlePage> {
-  // 파일
-  File? file;
-
-  // 잘린 이미지들의 리스트
-  List<PuzzleEntity> pieces = [];
-  // 정답 리스트
-  List<PuzzleEntity> correctPieces = [];
-
-  // gridview의 n x n 사이즈
-  int gridViewSize = 4;
+  final _controller = PuzzleController();
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return BasePage(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: _horizonPadding),
@@ -46,34 +33,38 @@ class _PuzzlePageState extends State<PuzzlePage> {
                     alignment: Alignment.center,
                     child: TextButton(
                       onPressed: () async {
-                        final imgFile = await ImgPicker.pickImage();
-                        file = imgFile;
-                        if (imgFile == null) {
-                          return;
-                        }
-
-                        final fileList = await ImgCrop.cropImage(
-                          imgFile,
-                          gridViewSize: gridViewSize,
-                          width: width,
-                        );
-                        if (fileList == null) {
-                          return;
-                        }
-                        correctPieces = List.from(fileList);
-                        pieces = List.from(fileList);
+                        await _controller.selectPuzzle();
 
                         setState(() {});
                       },
-                      child: Text('⚠️ 화면이 잘리면서 원본과 다를 수 있습니다!', style: AppTextStyle.body1.copyWith(color: AppColor.red),),
+                      child: Text(
+                        '⚠️ 화면이 잘리면서 원본과 다를 수 있습니다!',
+                        style: AppTextStyle.body1.copyWith(color: AppColor.red),
+                      ),
                     ),
                   ),
-                  if (file != null)
-                    Image.file(file!, width: 80, height: 80, fit: BoxFit.cover),
+                  GestureDetector(
+                    onTap: () async {
+                      await _controller.cropImage();
+
+                      setState(() {});
+                    },
+                    child: Text(
+                      'c',
+                      style: AppTextStyle.body1.copyWith(color: AppColor.red),
+                    ),
+                  ),
+                  if (_controller.file != null)
+                    Image.file(
+                      _controller.file!,
+                      width: 60,
+                      height: 60,
+                      fit: BoxFit.cover,
+                    ),
                 ],
               ),
             ),
-            if (pieces.isNotEmpty)
+            if (_controller.pieces.isNotEmpty)
               Expanded(
                 child: Column(
                   children: [
@@ -83,19 +74,20 @@ class _PuzzlePageState extends State<PuzzlePage> {
                           _horizonPadding * 2,
                       child: GridView.builder(
                         shrinkWrap: true,
-                        itemCount: gridViewSize * gridViewSize,
+                        itemCount:
+                            _controller.gridViewSize * _controller.gridViewSize,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: gridViewSize,
+                          crossAxisCount: _controller.gridViewSize,
                         ),
                         itemBuilder: (context, index) {
                           return DragTarget<int>(
                             // -- builder --
                             builder: (context, candidateData, rejectedData) {
-                              final piece = correctPieces[index];
+                              final piece = _controller.correctPieces[index];
                               return PuzzlePiece(
                                 file: piece.file,
                                 isFrame: !piece.isRight,
-                                gridViewSize: gridViewSize,
+                                gridViewSize: _controller.gridViewSize,
                               );
                             },
                             // draagable로부터
@@ -103,32 +95,9 @@ class _PuzzlePageState extends State<PuzzlePage> {
                             onAcceptWithDetails: (
                               DragTargetDetails<int> details,
                             ) {
-                              if (index == details.data) {
-                                setState(() {
-                                  pieces =
-                                      pieces
-                                          .map(
-                                            (e) =>
-                                                e.index == details.data
-                                                    ? e.copyWith(
-                                                      isRight: !e.isRight,
-                                                    )
-                                                    : e,
-                                          )
-                                          .toList();
-                                  correctPieces =
-                                      correctPieces
-                                          .map(
-                                            (e) =>
-                                                e.index == details.data
-                                                    ? e.copyWith(
-                                                      isRight: !e.isRight,
-                                                    )
-                                                    : e,
-                                          )
-                                          .toList();
-                                });
-                              }
+                              setState(() {
+                                _controller.matchPiece(index, details.data);
+                              });
                             },
                           );
                         },
@@ -137,7 +106,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                     Expanded(
                       child: Stack(
                         children:
-                            pieces.map((e) {
+                            _controller.pieces.map((e) {
                               return Positioned(
                                 top: e.top,
                                 left: e.left,
@@ -146,7 +115,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                   // 드래그 완료 후 상태 위젯
                                   feedback: PuzzlePiece(
                                     file: e.file,
-                                    gridViewSize: gridViewSize,
+                                    gridViewSize: _controller.gridViewSize,
                                   ),
                                   // 드래그중일 때 원래 위젯 위치에 존재할 위젯
                                   childWhenDragging: EmptyBox(),
@@ -161,50 +130,55 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                     if ((dx > _horizonPadding &&
                                             dx <
                                                 AppSize.screenWidth -
-                                                    16 -
+                                                    _horizonPadding -
                                                     ((AppSize.screenWidth -
-                                                            32) /
-                                                        gridViewSize)) &&
-                                        (dy >
-                                                80 +
-                                                    AppSize.fractionHeight(
-                                                      0.5,
-                                                    ) &&
+                                                            _horizonPadding *
+                                                                2) /
+                                                        _controller
+                                                            .gridViewSize)) &&
+                                        (dy > 80 + AppSize.screenWidth - 32 &&
                                             dy <
                                                 AppSize.screenHeight -
                                                     16 -
                                                     ((AppSize.screenWidth -
                                                             32) /
-                                                        gridViewSize))) {
+                                                        _controller
+                                                            .gridViewSize))) {
                                       setState(() {
-                                        // index가 같은것을 찾아서
-                                        final piece = pieces
-                                            .where((p) => p.index == e.index)
-                                            .first
-                                            .copyWith(
-                                              // grideview + 상단 height 제외
-                                              top:
-                                                  details.offset.dy -
-                                                  80 -
-                                                  AppSize.screenWidth -
-                                                  32,
-                                              // 왼쪽 margin값 제외
-                                              left:
-                                                  details.offset.dx -
-                                                  _horizonPadding,
-                                            );
-                                        // 해당 객체를 삭제후
-                                        // 리스트 마지막에 추가
-                                        //    => 해당 이미지를 stack 내에서 맨 위로 올리기위해서
-                                        pieces.remove(piece);
-                                        pieces.add(piece);
+                                        _controller.movePiece(
+                                          index: e.index,
+                                          dx: details.offset.dx,
+                                          dy: details.offset.dy,
+                                          horizonPadding: _horizonPadding,
+                                        );
+                                        // // index가 같은것을 찾아서
+                                        // final piece = _controller.pieces
+                                        //     .where((p) => p.index == e.index)
+                                        //     .first
+                                        //     .copyWith(
+                                        //       // grideview + 상단 height 제외
+                                        //       top:
+                                        //           details.offset.dy -
+                                        //           80 -
+                                        //           AppSize.screenWidth -
+                                        //           32,
+                                        //       // 왼쪽 margin값 제외
+                                        //       left:
+                                        //           details.offset.dx -
+                                        //           _horizonPadding,
+                                        //     );
+                                        // // 해당 객체를 삭제후
+                                        // // 리스트 마지막에 추가
+                                        // //    => 해당 이미지를 stack 내에서 맨 위로 올리기위해서
+                                        // pieces.remove(piece);
+                                        // pieces.add(piece);
                                       });
                                     }
                                   },
                                   // 기본 설정 위젯
                                   child: PuzzlePiece(
                                     file: e.file,
-                                    gridViewSize: gridViewSize,
+                                    gridViewSize: _controller.gridViewSize,
                                     isRight: e.isRight,
                                   ),
                                 ),
