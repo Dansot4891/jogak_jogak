@@ -16,6 +16,7 @@ class BouncingBoxesBackground extends StatefulWidget {
   final bool useSafeArea;
   final double minusHeight;
   final double minusWidth;
+  final bool isScaffold;
 
   const BouncingBoxesBackground({
     this.title,
@@ -30,6 +31,7 @@ class BouncingBoxesBackground extends StatefulWidget {
     this.backgroundColor,
     this.resizeToAvoidBottomInset,
     this.useSafeArea = true,
+    this.isScaffold = false,
     super.key,
   });
 
@@ -67,6 +69,22 @@ class _BouncingBoxesBackgroundState extends State<BouncingBoxesBackground>
       minusWidth: widget.minusWidth,
       minusHeight: widget.minusHeight,
     );
+
+    if (!widget.isScaffold) {
+      return Stack(
+        children: [
+          ...boxes.map(
+            (box) => BouncingBox(
+              left: box.x,
+              top: box.y,
+              angle: box.angle,
+              boxSize: box.boxSize,
+            ),
+          ),
+          widget.body,
+        ],
+      );
+    }
 
     return BasePage(
       title: widget.title,

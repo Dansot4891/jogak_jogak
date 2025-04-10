@@ -5,7 +5,7 @@ class BoxController {
   // singleton pattern
   static final BoxController instance = BoxController._internal();
   BoxController._internal();
-  factory BoxController({int? minusHeight}) => instance;
+  factory BoxController() => instance;
 
   // 박스 관련 변수
   final int _boxCount = 6;
