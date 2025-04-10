@@ -34,15 +34,17 @@ class PuzzleEntity {
   @override
   bool operator ==(covariant PuzzleEntity other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.index == index &&
-      other.file == file;
+
+    return other.index == index && other.file == file;
   }
 
   @override
   int get hashCode {
-    return index.hashCode ^
-      file.hashCode;
+    return index.hashCode ^ file.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'PuzzleEntity(index: $index, file: $file, isRight: $isRight, top: $top, left: $left)';
   }
 }
