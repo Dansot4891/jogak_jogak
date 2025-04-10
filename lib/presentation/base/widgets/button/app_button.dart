@@ -18,6 +18,7 @@ class AppButton extends StatelessWidget {
   final double borderRadius;
   final double verticalPadding;
   final double horizontalPadding;
+  final bool isExpanded;
 
   const AppButton({
     required this.text,
@@ -32,14 +33,22 @@ class AppButton extends StatelessWidget {
     this.verticalPadding = 12,
     this.horizontalPadding = 0,
     this.horizontalMargin = 0,
+    this.isExpanded = false,
     required this.onTap,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    if (isExpanded) {
+      return Expanded(child: appButton());
+    }
+    return appButton();
+  }
+
+  InkWell appButton() {
     return InkWell(
-      // borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+      // borderRadius: BorderRadius.circular(borderRadius),
       onTap: onTap,
       splashColor: Colors.white,
       highlightColor: Colors.black,
@@ -54,7 +63,12 @@ class AppButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius),
           border: border,
         ),
-        child: Center(child: Text(text, style: AppTextStyle.button)),
+        child: Center(
+          child: Text(
+            text,
+            style: AppTextStyle.button.copyWith(color: textColor),
+          ),
+        ),
       ),
     );
   }
