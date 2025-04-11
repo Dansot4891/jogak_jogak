@@ -1,10 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
-import 'package:jogak_jogak/core/util/img_picker.dart';
+import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 
 class PuzzleImageBox extends StatefulWidget {
   const PuzzleImageBox({super.key});
@@ -14,14 +13,13 @@ class PuzzleImageBox extends StatefulWidget {
 }
 
 class _PuzzleImageBoxState extends State<PuzzleImageBox> {
-  File? _file;
+  final _controller = PuzzleController();
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        final file = await ImgPicker.pickImage();
         setState(() {
-          _file = file;
+          _controller.selectPuzzle();
         });
       },
       borderRadius: _borderRadiusGeometry,
@@ -33,7 +31,7 @@ class _PuzzleImageBoxState extends State<PuzzleImageBox> {
           border: Border.all(color: AppColor.grey80),
         ),
         child:
-            _file == null
+            _controller.file == null
                 ? Center(
                   child: Text('이미지를 선택해주세요', style: AppTextStyle.subText1),
                 )
@@ -44,7 +42,7 @@ class _PuzzleImageBoxState extends State<PuzzleImageBox> {
                       Image.file(
                         width: _boxSize,
                         height: _boxSize,
-                        File(_file!.path),
+                        File(_controller.file!.path),
                         fit: BoxFit.cover,
                       ),
                       Align(
@@ -52,7 +50,7 @@ class _PuzzleImageBoxState extends State<PuzzleImageBox> {
                         child: InkWell(
                           onTap: () {
                             setState(() {
-                              _file = null;
+                              _controller.removePuzzle();
                             });
                           },
                           borderRadius: _borderRadiusGeometry,
@@ -63,7 +61,7 @@ class _PuzzleImageBoxState extends State<PuzzleImageBox> {
                               color: Colors.white.withValues(alpha: 0.2),
                               borderRadius: _borderRadiusGeometry,
                             ),
-                            child: Icon(Icons.close, color: Colors.black),
+                            child: const Icon(Icons.close, color: Colors.black),
                           ),
                         ),
                       ),

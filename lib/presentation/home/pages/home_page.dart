@@ -5,6 +5,7 @@ import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/home/widgets/alert_message.dart';
 import 'package:jogak_jogak/presentation/home/widgets/level_buttons.dart';
 import 'package:jogak_jogak/presentation/home/widgets/puzzle_image_box.dart';
+import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -19,15 +20,23 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('사진을 넣거나 랜덤 퍼즐로\n가볍게 시작해보세요!', style: AppTextStyle.title2),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
               child: PuzzleImageBox(),
             ),
             const LevelButtons(),
             const SizedBox(height: 8),
             AppButton(text: '오늘의 퍼즐 가져오기', onTap: () {}),
             const AlertMessage(),
-            AppButton(text: '게임 시작', onTap: () {}),
+            AppButton(
+              text: '게임 시작',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PuzzlePage()),
+                );
+              },
+            ),
           ],
         ),
       ),

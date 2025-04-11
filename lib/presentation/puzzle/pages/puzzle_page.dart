@@ -46,8 +46,6 @@ class _PuzzlePageState extends State<PuzzlePage> {
                   GestureDetector(
                     onTap: () async {
                       await _controller.cropImage();
-
-                      setState(() {});
                     },
                     child: Text(
                       'c',
@@ -118,7 +116,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                     gridViewSize: _controller.gridViewSize,
                                   ),
                                   // 드래그중일 때 원래 위젯 위치에 존재할 위젯
-                                  childWhenDragging: EmptyBox(),
+                                  childWhenDragging: const EmptyBox(),
                                   onDragEnd: (details) {
                                     final dx = details.offset.dx;
                                     final dy = details.offset.dy;

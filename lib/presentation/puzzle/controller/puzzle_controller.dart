@@ -28,6 +28,11 @@ class PuzzleController {
     }
   }
 
+  // 이미지 삭제
+  Future<void> removePuzzle() async {
+    file = null;
+  }
+
   Future<void> cropImage() async {
     // 앞에서 무조건 이미지가 선택되어야 한다.
     // 파일이 없으면 종료
