@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jogak_jogak/core/style/app_text_style.dart';
+import 'package:jogak_jogak/app/style/app_text_style.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -84,11 +84,11 @@ class CustomTextFormField extends StatelessWidget {
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(color: Colors.red),
+          borderSide: const BorderSide(color: Colors.red),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(color: Colors.red),
+          borderSide: const BorderSide(color: Colors.red),
         ),
         contentPadding:
             contentPadding ??

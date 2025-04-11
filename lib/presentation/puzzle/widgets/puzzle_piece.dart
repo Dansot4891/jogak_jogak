@@ -32,7 +32,7 @@ class PuzzlePiece extends StatelessWidget {
     // 하단 퍼즐 조각에서
     // 정답이라면 SizedBox 반환
     if (isRight) {
-      return EmptyBox();
+      return const EmptyBox();
     }
     return Image.file(
       file,

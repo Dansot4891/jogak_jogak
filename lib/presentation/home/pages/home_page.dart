@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/core/style/app_text_style.dart';
+import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/home/widgets/alert_message.dart';

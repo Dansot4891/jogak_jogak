@@ -13,4 +13,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     // TODO: implement signOut
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> signUp() {
+    // TODO: implement signUp
+    throw UnimplementedError();
+  }
 }

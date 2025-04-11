@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/core/style/app_color.dart';
-import 'package:jogak_jogak/core/style/app_text_style.dart';
+import 'package:jogak_jogak/app/style/app_color.dart';
+import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 
 class AppDialog extends Dialog {
@@ -98,7 +98,7 @@ class AppDialog extends Dialog {
                     bgColor: AppColor.greyE6,
                     isExpanded: true,
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   AppButton(
                     text: btnLeftText!,
                     onTap: onBtnRightClicked,

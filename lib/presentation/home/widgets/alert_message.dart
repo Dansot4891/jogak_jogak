@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/core/style/app_color.dart';
-import 'package:jogak_jogak/core/style/app_text_style.dart';
+import 'package:jogak_jogak/app/style/app_color.dart';
+import 'package:jogak_jogak/app/style/app_text_style.dart';
 
 class AlertMessage extends StatelessWidget {
   const AlertMessage({super.key});
@@ -19,7 +19,7 @@ class AlertMessage extends StatelessWidget {
               text: ' 오늘의 퍼즐은 매 게임마다 변경됩니다 ',
               style: AppTextStyle.subText2,
             ),
-            TextSpan(text: '!!'),
+            const TextSpan(text: '!!'),
           ],
         ),
       ),

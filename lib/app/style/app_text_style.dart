@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jogak_jogak/core/style/app_color.dart';
+import 'package:jogak_jogak/app/style/app_color.dart';
 
 abstract class AppTextStyle {
   static TextStyle baseStyle(double size, double? height) => TextStyle(
