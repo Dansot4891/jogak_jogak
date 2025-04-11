@@ -11,7 +11,7 @@ import 'package:jogak_jogak/feature/ranking/repository/ranking_repository_impl.d
 void main() {
   group('ranking repo test', () {
     final mock = [
-      RankingModel(
+      const RankingModel(
         nickname: '임명우',
         level: 3,
         email: 'test@gmail.com',
