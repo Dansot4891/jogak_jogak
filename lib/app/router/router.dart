@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jogak_jogak/presentation/auth/pages/sign_in_page.dart';
 import 'package:jogak_jogak/presentation/auth/pages/sign_up_page.dart';
@@ -8,20 +9,20 @@ import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
 class AppRouter {
   static GoRouter appRouter() {
-    return GoRouter(routes: routes, initialLocation: AppRoutes.signIn.path);
+    return GoRouter(routes: routes, initialLocation: AppRoute.signIn.path);
   }
 }
 
 final routes = [
   // sign
   GoRoute(
-    path: AppRoutes.signUp.path,
+    path: AppRoute.signUp.path,
     builder: (context, state) {
       return const SignUpPage();
     },
   ),
   GoRoute(
-    path: AppRoutes.signIn.path,
+    path: AppRoute.signIn.path,
     builder: (context, state) {
       return const SignInPage();
     },
@@ -29,19 +30,19 @@ final routes = [
 
   // roottab
   GoRoute(
-    path: AppRoutes.home.path,
+    path: AppRoute.home.path,
     builder: (context, state) {
       return const HomePage();
     },
   ),
   GoRoute(
-    path: AppRoutes.ranking.path,
+    path: AppRoute.ranking.path,
     builder: (context, state) {
       return const RankingPage();
     },
   ),
   GoRoute(
-    path: AppRoutes.myPage.path,
+    path: AppRoute.myPage.path,
     builder: (context, state) {
       return const MyPage();
     },
@@ -51,13 +52,13 @@ final routes = [
   // 비밀번호/닉네임 변경 ui 구현 후 라우트 작성
   // change user info
   // GoRoute(
-  //   path: AppRoutes.signUp.path,
+  //   path: AppRoute.signUp.path,
   //   builder: (context, state) {
   //     return const SignUpPage();
   //   },
   // ),
   // GoRoute(
-  //   path: AppRoutes.signUp.path,
+  //   path: AppRoute.signUp.path,
   //   builder: (context, state) {
   //     return const SignUpPage();
   //   },
@@ -65,7 +66,7 @@ final routes = [
 
   // inGame
   GoRoute(
-    path: AppRoutes.puzzle.path,
+    path: AppRoute.puzzle.path,
     builder: (context, state) {
       return const PuzzlePage();
     },
@@ -73,7 +74,7 @@ final routes = [
 ];
 
 // AppRoute들을 enum으로 정리
-enum AppRoutes {
+enum AppRoute {
   signUp('/sign-up'),
   signIn('/sign-in'),
   home('/home'),
@@ -85,5 +86,38 @@ enum AppRoutes {
 
   final String path;
 
-  const AppRoutes(this.path);
+  const AppRoute(this.path);
 }
+
+void pop(BuildContext context) {
+  context.pop();
+}
+
+// 전체 앱에서 화면 이동할 때 사용하는 함수
+Future<void> navigate(
+  BuildContext context, {
+  required AppRoute route,
+  NavigationMethod method = NavigationMethod.push,
+  dynamic extra,
+}) async {
+  final goRouter = GoRouter.of(context);
+
+  switch (method) {
+    case NavigationMethod.push:
+      await goRouter.push(route.path, extra: extra);
+      break;
+    case NavigationMethod.replace:
+      await goRouter.replace(route.path, extra: extra);
+      break;
+    case NavigationMethod.go:
+      goRouter.go(route.path, extra: extra);
+      break;
+
+    case NavigationMethod.pushReplacement:
+      await goRouter.pushReplacement(route.path, extra: extra);
+      break;
+  }
+}
+
+// Navigation methods enum
+enum NavigationMethod { push, replace, go, pushReplacement }

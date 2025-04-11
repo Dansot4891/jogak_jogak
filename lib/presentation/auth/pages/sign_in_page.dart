@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
@@ -37,7 +38,9 @@ class _SignInPageState extends State<SignInPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      navigate(context, route: AppRoute.signUp);
+                    },
                     child: Text('회원가입', style: AppTextStyle.body1),
                   ),
                   TextButton(
