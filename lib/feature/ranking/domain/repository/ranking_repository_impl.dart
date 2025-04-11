@@ -18,6 +18,7 @@ class RankingRepositoryImpl implements RankingRepository {
       final rankings = resp.mapToEntityList((e) => e.toEntity());
       return Success(rankings);
     } catch (e) {
+      print(e);
       return const Error(UnexpectedException());
     }
   }

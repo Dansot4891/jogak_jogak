@@ -7,7 +7,7 @@ class RankingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TabbarPage(tabs: _tabs, children: _chilren);
+    return const TabbarPage(tabs: _tabs, children: _chilren);
   }
 
   static const List<String> _tabs = ['3 X 3', '4 X 4', '5 X 5'];

@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/firebase/firebase_options.dart';
 import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
-import 'package:jogak_jogak/presentation/my_info/pages/my_page.dart';
-import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
-import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
