@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/util/img_picker.dart';
-import 'package:jogak_jogak/feature/puzzle/repository/entity/puzzle_entity.dart';
+import 'package:jogak_jogak/feature/puzzle/data/entity/puzzle_entity.dart';
 import 'package:jogak_jogak/feature/puzzle/utils/img_crop.dart';
 
 class PuzzleController {

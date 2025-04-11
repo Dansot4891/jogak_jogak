@@ -1,8 +1,7 @@
-
 import 'dart:io';
 import 'package:image/image.dart' as img;
 import 'package:jogak_jogak/core/module/random/random_generator.dart';
-import 'package:jogak_jogak/feature/puzzle/repository/entity/puzzle_entity.dart';
+import 'package:jogak_jogak/feature/puzzle/data/entity/puzzle_entity.dart';
 
 class ImgCrop {
   // image를 자르는 함수
