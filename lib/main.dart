@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/firebase/firebase_options.dart';
-import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,13 +18,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // app size 할당
     AppSize.init(context);
-    return MaterialApp(
+    final router = AppRouter.appRouter();
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Pretendard',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const RootTab(),
+      routerConfig: router,
     );
   }
 }

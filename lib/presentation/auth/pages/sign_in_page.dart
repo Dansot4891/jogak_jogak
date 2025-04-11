@@ -19,6 +19,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return BouncingBoxesBackground(
       resizeToAvoidBottomInset: true,
+      isScaffold: true,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
