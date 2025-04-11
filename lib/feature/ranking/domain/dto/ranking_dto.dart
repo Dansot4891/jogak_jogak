@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'ranking_model.g.dart';
+part 'ranking_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class RankingModel {
+class RankingDto {
   final String? nickname;
   final int? level;
   final String? email;
   final String? playTime;
   final int? rank;
 
-  const RankingModel({
+  const RankingDto({
     this.nickname,
     this.level,
     this.email,
@@ -19,12 +19,12 @@ class RankingModel {
     this.rank,
   });
 
-  factory RankingModel.fromFireBase(
+  factory RankingDto.fromFireBase(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
-  ) => RankingModel.fromJson(snapshot.data()!);
+  ) => RankingDto.fromJson(snapshot.data()!);
 
-  factory RankingModel.fromJson(Map<String, dynamic> json) =>
-      _$RankingModelFromJson(json);
+  factory RankingDto.fromJson(Map<String, dynamic> json) =>
+      _$RankingDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RankingModelToJson(this);
+  Map<String, dynamic> toJson() => _$RankingDtoToJson(this);
 }

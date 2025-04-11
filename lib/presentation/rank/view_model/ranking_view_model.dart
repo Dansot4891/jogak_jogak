@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
-import 'package:jogak_jogak/feature/ranking/data/entity/ranking_entity.dart';
+import 'package:jogak_jogak/feature/ranking/data/model/ranking.dart';
 import 'package:jogak_jogak/feature/ranking/data/repository/ranking_repository.dart';
 
 class RankingViewModel with ChangeNotifier {
@@ -10,9 +10,9 @@ class RankingViewModel with ChangeNotifier {
     fetchRankings();
   }
 
-  List<RankingEntity> _rankings = [];
+  List<Ranking> _rankings = [];
 
-  List<RankingEntity> get rankings => _rankings;
+  List<Ranking> get rankings => _rankings;
 
   void fetchRankings() async {
     final resp = await _rankingRepo.getRankings();

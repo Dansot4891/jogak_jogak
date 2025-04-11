@@ -1,8 +1,8 @@
-import 'package:jogak_jogak/feature/ranking/domain/model/ranking_model.dart';
-import 'package:jogak_jogak/feature/ranking/data/entity/ranking_entity.dart';
+import 'package:jogak_jogak/feature/ranking/domain/dto/ranking_dto.dart';
+import 'package:jogak_jogak/feature/ranking/data/model/ranking.dart';
 
-extension RankingMapper on RankingModel {
-  RankingEntity? toEntity() {
+extension RankingMapper on RankingDto {
+  Ranking? toEntity() {
     if (nickname == null ||
         level == null ||
         email == null ||
@@ -10,7 +10,7 @@ extension RankingMapper on RankingModel {
         rank == null) {
       return null;
     }
-    return RankingEntity(
+    return Ranking(
       nickname: nickname!,
       level: level!,
       email: email!,

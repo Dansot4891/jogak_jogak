@@ -1,10 +1,10 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jogak_jogak/feature/ranking/domain/data_source/mock/mock_ranking_data_source_impl.dart';
-import 'package:jogak_jogak/feature/ranking/domain/model/ranking_model.dart';
+import 'package:jogak_jogak/feature/ranking/domain/dto/ranking_dto.dart';
 
 void main() async {
-  final mockData = const RankingModel(
+  final mockData = const RankingDto(
     nickname: '임명우',
     level: 3,
     email: 'test@gmail.com',
@@ -17,7 +17,7 @@ void main() async {
     await instance.collection('ranking').add(mockData.toJson());
     final snapshot = await instance.collection('ranking').get();
     final firebaseData =
-        snapshot.docs.map((e) => RankingModel.fromJson(e.data())).toList();
+        snapshot.docs.map((e) => RankingDto.fromJson(e.data())).toList();
 
     final mockDataSource = MockRankingDataSourceImpl();
     final ranking = await mockDataSource.getRankings();

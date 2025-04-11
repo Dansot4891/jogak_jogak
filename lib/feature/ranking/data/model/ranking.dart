@@ -1,10 +1,10 @@
-class RankingEntity {
+class Ranking {
   final String nickname;
   final int level;
   final String email;
   final String playTime;
   final int rank;
-  const RankingEntity({
+  const Ranking({
     required this.nickname,
     required this.level,
     required this.email,
@@ -12,14 +12,14 @@ class RankingEntity {
     required this.rank,
   });
 
-  RankingEntity copyWith({
+  Ranking copyWith({
     String? nickname,
     int? level,
     String? email,
     String? playTime,
     int? rank,
   }) {
-    return RankingEntity(
+    return Ranking(
       nickname: nickname ?? this.nickname,
       level: level ?? this.level,
       email: email ?? this.email,
@@ -30,11 +30,11 @@ class RankingEntity {
 
   @override
   String toString() {
-    return 'RankingEntity(nickname: $nickname, level: $level, email: $email, playTime: $playTime, rank: $rank)';
+    return 'Ranking(nickname: $nickname, level: $level, email: $email, playTime: $playTime, rank: $rank)';
   }
 
   @override
-  bool operator ==(covariant RankingEntity other) {
+  bool operator ==(covariant Ranking other) {
     if (identical(this, other)) return true;
 
     return other.nickname == nickname &&

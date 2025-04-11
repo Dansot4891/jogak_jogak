@@ -1,13 +1,13 @@
 import 'dart:io';
 
-class PuzzleEntity {
+class Puzzle {
   final int index;
   final File file;
   final bool isRight;
   final double top;
   final double left;
 
-  const PuzzleEntity({
+  const Puzzle({
     required this.index,
     required this.file,
     required this.top,
@@ -15,14 +15,14 @@ class PuzzleEntity {
     this.isRight = false,
   });
 
-  PuzzleEntity copyWith({
+  Puzzle copyWith({
     int? index,
     File? file,
     bool? isRight,
     double? top,
     double? left,
   }) {
-    return PuzzleEntity(
+    return Puzzle(
       index: index ?? this.index,
       file: file ?? this.file,
       isRight: isRight ?? this.isRight,
@@ -32,7 +32,7 @@ class PuzzleEntity {
   }
 
   @override
-  bool operator ==(covariant PuzzleEntity other) {
+  bool operator ==(covariant Puzzle other) {
     if (identical(this, other)) return true;
 
     return other.index == index && other.file == file;
@@ -45,6 +45,6 @@ class PuzzleEntity {
 
   @override
   String toString() {
-    return 'PuzzleEntity(index: $index, file: $file, isRight: $isRight, top: $top, left: $left)';
+    return 'Puzzle(index: $index, file: $file, isRight: $isRight, top: $top, left: $left)';
   }
 }
