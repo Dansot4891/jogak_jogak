@@ -39,7 +39,7 @@ class MyPage extends StatelessWidget {
               hasScrollBody: false,
               child: Column(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   SettingCard(
                     text: '로그아웃',
                     onTap: () {
