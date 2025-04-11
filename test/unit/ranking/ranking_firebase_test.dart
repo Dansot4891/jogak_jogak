@@ -1,10 +1,10 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jogak_jogak/feature/ranking/data_source/mock/mock_ranking_data_source_impl.dart';
-import 'package:jogak_jogak/feature/ranking/data_source/remote/model/ranking_model.dart';
+import 'package:jogak_jogak/feature/ranking/data/data_source/mock/mock_ranking_data_source_impl.dart';
+import 'package:jogak_jogak/feature/ranking/data/model/ranking_model.dart';
 
 void main() async {
-  final mockData = RankingModel(
+  final mockData = const RankingModel(
     nickname: '임명우',
     level: 3,
     email: 'test@gmail.com',

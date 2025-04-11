@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:jogak_jogak/feature/ranking/data_source/remote/model/ranking_model.dart';
-import 'package:jogak_jogak/feature/ranking/data_source/remote/ranking_remote_data_source.dart';
+import 'package:jogak_jogak/feature/ranking/data/model/ranking_model.dart';
+import 'package:jogak_jogak/feature/ranking/data/data_source/remote/ranking_remote_data_source.dart';
 
 class RankingRemoteDataSourceImpl implements RankingRemoteDataSource {
   @override
