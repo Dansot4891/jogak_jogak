@@ -3,7 +3,7 @@ import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
-import 'package:jogak_jogak/presentation/my_info/pages/my_page.dart';
+import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
 class RootTab extends StatefulWidget {

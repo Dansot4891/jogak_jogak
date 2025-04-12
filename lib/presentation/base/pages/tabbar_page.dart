@@ -51,6 +51,7 @@ class TabbarPage extends StatelessWidget {
               dividerColor: AppColor.sub,
               labelColor: AppColor.main,
               labelStyle: AppTextStyle.tabbar,
+              indicatorSize: TabBarIndicatorSize.tab,
               tabs: tabs.map((e) => Tab(text: e)).toList(),
             ),
             Expanded(child: TabBarView(children: children)),
