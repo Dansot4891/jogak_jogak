@@ -4,8 +4,8 @@ import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
 
-class UpdateNicknameScreen extends StatelessWidget {
-  const UpdateNicknameScreen({super.key});
+class UpdateNicknamePage extends StatelessWidget {
+  const UpdateNicknamePage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/util/dialog/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
-import 'package:jogak_jogak/presentation/my_info/widgets/setting_card.dart';
+import 'package:jogak_jogak/presentation/my_info/mypage/widgets/setting_card.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({super.key});
