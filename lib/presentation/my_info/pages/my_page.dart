@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/core/style/app_color.dart';
-import 'package:jogak_jogak/core/style/app_text_style.dart';
+import 'package:jogak_jogak/app/style/app_color.dart';
+import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/util/dialog/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
+import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/my_info/widgets/setting_card.dart';
 
 class MyPage extends StatelessWidget {
@@ -11,7 +13,7 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BouncingBoxesBackground(
-      isScaffold: true,
+      isScaffold: false,
       minusHeight: AppSize.bottomNaviationHeight,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -37,11 +39,38 @@ class MyPage extends StatelessWidget {
               hasScrollBody: false,
               child: Column(
                 children: [
-                  Spacer(),
-                  SettingCard(text: '로그아웃', onTap: () {}),
+                  const Spacer(),
+                  SettingCard(
+                    text: '로그아웃',
+                    onTap: () {
+                      AppShowDialog.show(
+                        context,
+                        AppDialog(
+                          title: '로그아웃',
+                          subText: '로그아웃 하시겠습니까?',
+                          btnText: '취소',
+                          btnLeftText: '확인',
+                          onBtnRightClicked: () {},
+                          onBtnClicked: () {},
+                        ),
+                      );
+                    },
+                  ),
                   SettingCard(
                     text: '회원탈퇴',
-                    onTap: () {},
+                    onTap: () {
+                      AppShowDialog.show(
+                        context,
+                        AppDialog(
+                          title: '회원탈퇴',
+                          subText: '회원탈퇴 하시겠습니까?',
+                          btnText: '취소',
+                          btnLeftText: '확인',
+                          onBtnRightClicked: () {},
+                          onBtnClicked: () {},
+                        ),
+                      );
+                    },
                     baseColor: AppColor.greyC5,
                   ),
                   Align(

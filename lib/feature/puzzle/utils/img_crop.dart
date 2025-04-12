@@ -1,19 +1,18 @@
-
 import 'dart:io';
 import 'package:image/image.dart' as img;
 import 'package:jogak_jogak/core/module/random/random_generator.dart';
-import 'package:jogak_jogak/feature/puzzle/repository/entity/puzzle_entity.dart';
+import 'package:jogak_jogak/feature/puzzle/data/model/puzzle.dart';
 
 class ImgCrop {
   // image를 자르는 함수
-  static Future<List<PuzzleEntity>?> cropImage(
+  static Future<List<Puzzle>?> cropImage(
     File file, {
     // 그리드뷰 사이즈 n x n
     required int gridViewSize,
     required double width,
   }) async {
     final randomGenerator = RandomGenerator();
-    final List<PuzzleEntity> fileList = [];
+    final List<Puzzle> fileList = [];
     // 이미지의 width, height를 가져오기 위해 파일 읽기
     final bytes = await file.readAsBytes();
     final image = img.decodeImage(bytes);
@@ -61,7 +60,7 @@ class ImgCrop {
         }
         final topRandom = randomGenerator.nextDouble(width / 3 * 2, seed: 10);
         final leftRandom = randomGenerator.nextDouble(width / 3 * 2, seed: 10);
-        final imgPuzzle = PuzzleEntity(
+        final imgPuzzle = Puzzle(
           index: index,
           file: outputFile,
           top: topRandom,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/core/style/app_color.dart';
-import 'package:jogak_jogak/core/style/app_text_style.dart';
+import 'package:jogak_jogak/app/style/app_color.dart';
+import 'package:jogak_jogak/app/style/app_text_style.dart';
 
 class RankingGraph extends StatelessWidget {
   final int index;
@@ -33,7 +33,7 @@ class RankingGraph extends StatelessWidget {
             width: AppSize.ratioWidth(50),
             decoration: BoxDecoration(
               color: AppColor.sub,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),

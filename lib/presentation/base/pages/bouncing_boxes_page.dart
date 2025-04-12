@@ -31,7 +31,7 @@ class BouncingBoxesBackground extends StatefulWidget {
     this.backgroundColor,
     this.resizeToAvoidBottomInset,
     this.useSafeArea = true,
-    this.isScaffold = false,
+    this.isScaffold = true,
     super.key,
   });
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/core/style/app_color.dart';
-import 'package:jogak_jogak/core/style/app_text_style.dart';
+import 'package:jogak_jogak/app/style/app_color.dart';
+import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/widgets/empty_box.dart';
@@ -46,8 +46,6 @@ class _PuzzlePageState extends State<PuzzlePage> {
                   GestureDetector(
                     onTap: () async {
                       await _controller.cropImage();
-
-                      setState(() {});
                     },
                     child: Text(
                       'c',
@@ -118,7 +116,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                     gridViewSize: _controller.gridViewSize,
                                   ),
                                   // 드래그중일 때 원래 위젯 위치에 존재할 위젯
-                                  childWhenDragging: EmptyBox(),
+                                  childWhenDragging: const EmptyBox(),
                                   onDragEnd: (details) {
                                     final dx = details.offset.dx;
                                     final dy = details.offset.dy;

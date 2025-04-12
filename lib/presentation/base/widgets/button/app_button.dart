@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/core/style/app_color.dart';
-import 'package:jogak_jogak/core/style/app_text_style.dart';
+import 'package:jogak_jogak/app/style/app_color.dart';
+import 'package:jogak_jogak/app/style/app_text_style.dart';
 
-class AppButton extends StatelessWidget {
+class AppButton extends StatefulWidget {
   // Todo
   // TextStyle 설정
   // --- text style ---
@@ -18,6 +18,7 @@ class AppButton extends StatelessWidget {
   final double borderRadius;
   final double verticalPadding;
   final double horizontalPadding;
+  final bool isExpanded;
 
   const AppButton({
     required this.text,
@@ -32,32 +33,61 @@ class AppButton extends StatelessWidget {
     this.verticalPadding = 12,
     this.horizontalPadding = 0,
     this.horizontalMargin = 0,
+    this.isExpanded = false,
     required this.onTap,
     super.key,
   });
 
   @override
+  State<AppButton> createState() => _AppButtonState();
+}
+
+class _AppButtonState extends State<AppButton> {
+  // 누름시 버튼 색상을 변경하기 위한 변수값
+  bool disable = false;
+
+  @override
   Widget build(BuildContext context) {
+    if (widget.isExpanded) {
+      return Expanded(child: appButton());
+    }
+    return appButton();
+  }
+
+  InkWell appButton() {
     return InkWell(
-      // borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-      onTap: onTap,
-      splashColor: Colors.white,
-      highlightColor: Colors.black,
+      borderRadius: BorderRadius.circular(widget.borderRadius),
+      onTap: widget.onTap,
+      onTapDown: (details) {
+        setState(() {
+          disable = true;
+        });
+      },
+      onTapUp: (details) {
+        setState(() {
+          disable = false;
+        });
+      },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: horizontalMargin),
+        margin: EdgeInsets.symmetric(horizontal: widget.horizontalMargin),
         padding: EdgeInsets.symmetric(
-          vertical: verticalPadding,
-          horizontal: horizontalPadding,
+          vertical: widget.verticalPadding,
+          horizontal: widget.horizontalPadding,
         ),
         decoration: BoxDecoration(
-          color: _isOnTapNull ? Colors.grey : bgColor ?? AppColor.main,
-          borderRadius: BorderRadius.circular(borderRadius),
-          border: border,
+          color: _isOnTapNull ? Colors.grey : widget.bgColor ?? AppColor.main,
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+          border: widget.border,
         ),
-        child: Center(child: Text(text, style: AppTextStyle.button)),
+        child: Center(
+          child: Text(
+            widget.text,
+            style: AppTextStyle.button.copyWith(color: widget.textColor),
+          ),
+        ),
       ),
     );
   }
 
-  bool get _isOnTapNull => onTap == null;
+  bool get _isOnTapNull => widget.onTap == null || disable;
 }

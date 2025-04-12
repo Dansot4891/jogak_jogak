@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/util/img_picker.dart';
-import 'package:jogak_jogak/feature/puzzle/repository/entity/puzzle_entity.dart';
+import 'package:jogak_jogak/feature/puzzle/data/model/puzzle.dart';
 import 'package:jogak_jogak/feature/puzzle/utils/img_crop.dart';
 
 class PuzzleController {
@@ -13,9 +13,9 @@ class PuzzleController {
   // 파일
   File? file;
   // 잘린 이미지들의 리스트
-  List<PuzzleEntity> pieces = [];
+  List<Puzzle> pieces = [];
   // 정답 리스트
-  List<PuzzleEntity> correctPieces = [];
+  List<Puzzle> correctPieces = [];
   // gridview의 n x n 사이즈
   int gridViewSize = 3;
 
@@ -26,6 +26,11 @@ class PuzzleController {
     if (imgFile == null) {
       return;
     }
+  }
+
+  // 이미지 삭제
+  Future<void> removePuzzle() async {
+    file = null;
   }
 
   Future<void> cropImage() async {

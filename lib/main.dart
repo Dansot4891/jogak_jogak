@@ -1,9 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/firebase_options.dart';
-import 'package:jogak_jogak/presentation/my_info/pages/my_page.dart';
-import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
+import 'package:jogak_jogak/core/firebase/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,13 +18,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // app size 할당
     AppSize.init(context);
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Pretendard',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyPage(),
+      // TODO: 추후 app router를 전역적으로 관리하도록 설정해야함
+      // 현재는 빌드마다 계속 생성함
+      routerConfig: AppRouter.appRouter(),
     );
   }
 }
