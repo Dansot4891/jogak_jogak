@@ -3,10 +3,13 @@ import 'package:jogak_jogak/feature/ranking/domain/dto/ranking_dto.dart';
 import 'package:jogak_jogak/feature/ranking/domain/data_source/remote/ranking_remote_data_source.dart';
 
 class RankingRemoteDataSourceImpl implements RankingRemoteDataSource {
+  final FirebaseFirestore _instance;
+
+  RankingRemoteDataSourceImpl(this._instance);
+
   @override
   Future<List<RankingDto>> getRankings() async {
-    final instance = FirebaseFirestore.instance;
-    final snapshot = await instance.collection('rank').get();
+    final snapshot = await _instance.collection('rank').get();
     print('snapshot: $snapshot');
     print('snapshot.docs: ${snapshot.docs}');
     print('snapshot.metadata: ${snapshot.metadata}');
