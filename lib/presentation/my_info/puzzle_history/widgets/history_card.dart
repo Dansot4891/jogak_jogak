@@ -18,8 +18,8 @@ class HistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0),
+    return Container(
+      padding: EdgeInsets.only(top: showDivider ? 0 : 12, bottom: 12),
       child: Column(
         children: [
           if (showDivider)

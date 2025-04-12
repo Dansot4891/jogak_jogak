@@ -42,7 +42,12 @@ class MyPage extends StatelessWidget {
                       navigate(context, route: AppRoute.updateName);
                     },
                   ),
-                  SettingCard(text: '퍼즐 기록', onTap: () {}),
+                  SettingCard(
+                    text: '퍼즐 기록',
+                    onTap: () {
+                      navigate(context, route: AppRoute.puzzleHistory);
+                    },
+                  ),
                 ],
               ),
             ),

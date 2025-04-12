@@ -13,10 +13,7 @@ import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
 class AppRouter {
   static GoRouter appRouter() {
-    return GoRouter(
-      routes: routes,
-      initialLocation: AppRoute.puzzleHistory.path,
-    );
+    return GoRouter(routes: routes, initialLocation: AppRoute.signIn.path);
   }
 }
 
