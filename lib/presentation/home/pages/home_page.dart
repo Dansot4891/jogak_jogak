@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/home/widgets/alert_message.dart';
 import 'package:jogak_jogak/presentation/home/widgets/level_buttons.dart';
 import 'package:jogak_jogak/presentation/home/widgets/puzzle_image_box.dart';
-import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BouncingBoxesBackground(
+      isScaffold: false,
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         width: double.infinity,
@@ -31,10 +32,7 @@ class HomePage extends StatelessWidget {
             AppButton(
               text: '게임 시작',
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const PuzzlePage()),
-                );
+                navigate(context, route: AppRoute.puzzle);
               },
             ),
           ],

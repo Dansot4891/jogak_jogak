@@ -50,7 +50,16 @@ class _SignInPageState extends State<SignInPage> {
                 ],
               ),
             ),
-            AppButton(text: '로그인', onTap: () {}),
+            AppButton(
+              text: '로그인',
+              onTap: () {
+                navigate(
+                  context,
+                  route: AppRoute.root,
+                  method: NavigationMethod.go,
+                );
+              },
+            ),
             const Spacer(),
           ],
         ),

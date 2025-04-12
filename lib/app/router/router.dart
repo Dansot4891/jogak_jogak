@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jogak_jogak/presentation/auth/pages/sign_in_page.dart';
 import 'package:jogak_jogak/presentation/auth/pages/sign_up_page.dart';
+import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
 import 'package:jogak_jogak/presentation/my_info/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
@@ -29,6 +30,12 @@ final routes = [
   ),
 
   // roottab
+  GoRoute(
+    path: AppRoute.root.path,
+    builder: (context, state) {
+      return const RootTab();
+    },
+  ),
   GoRoute(
     path: AppRoute.home.path,
     builder: (context, state) {
@@ -75,6 +82,7 @@ final routes = [
 
 // AppRoute들을 enum으로 정리
 enum AppRoute {
+  root('/root'),
   signUp('/sign-up'),
   signIn('/sign-in'),
   home('/home'),
@@ -112,7 +120,6 @@ Future<void> navigate(
     case NavigationMethod.go:
       goRouter.go(route.path, extra: extra);
       break;
-
     case NavigationMethod.pushReplacement:
       await goRouter.pushReplacement(route.path, extra: extra);
       break;

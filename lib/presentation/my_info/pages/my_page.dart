@@ -13,7 +13,7 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BouncingBoxesBackground(
-      isScaffold: true,
+      isScaffold: false,
       minusHeight: AppSize.bottomNaviationHeight,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),

@@ -7,7 +7,6 @@ import 'package:jogak_jogak/presentation/my_info/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
 class RootTab extends StatefulWidget {
-  static String get routeName => 'home';
   const RootTab({super.key});
 
   @override
@@ -21,10 +20,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller = TabController(
-      length: 3,
-      vsync: this,
-    ); //vsync 를 사용하려면 with SingleTickerProviderStateMixin를 같이 사용해야함
+    controller = TabController(length: 3, vsync: this);
     controller.addListener(tabListener);
   }
 

@@ -16,6 +16,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
+  final _name = TextEditingController();
   final _password = TextEditingController();
   final _passwordCheck = TextEditingController();
 
@@ -37,6 +38,20 @@ class _SignUpPageState extends State<SignUpPage> {
                 controller: _email,
                 hintText: '이메일 입력',
                 validator: AppValidator.emailValid,
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomTextFormField(
+                      controller: _name,
+                      hintText: '닉네임 입력',
+                      validator: AppValidator.emailValid,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  AppButton(text: '중복 확인', horizontalPadding: 16, onTap: () {}),
+                ],
               ),
               const SizedBox(height: 40),
               CustomTextFormField(

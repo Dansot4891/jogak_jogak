@@ -18,14 +18,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // app size 할당
     AppSize.init(context);
-    final router = AppRouter.appRouter();
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Pretendard',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      routerConfig: router,
+      // TODO: 추후 app router를 전역적으로 관리하도록 설정해야함
+      // 현재는 빌드마다 계속 생성함
+      routerConfig: AppRouter.appRouter(),
     );
   }
 }
