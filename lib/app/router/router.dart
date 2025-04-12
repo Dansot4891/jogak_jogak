@@ -4,9 +4,10 @@ import 'package:jogak_jogak/presentation/auth/pages/sign_in_page.dart';
 import 'package:jogak_jogak/presentation/auth/pages/sign_up_page.dart';
 import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
-import 'package:jogak_jogak/presentation/my_info/pages/change_password_screen.dart';
-import 'package:jogak_jogak/presentation/my_info/pages/my_page.dart';
-import 'package:jogak_jogak/presentation/my_info/pages/update_nickname_screen.dart';
+import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page.dart';
+import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
+import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page.dart';
+import 'package:jogak_jogak/presentation/my_info/update_name/pages/update_nickname_page.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
@@ -57,19 +58,22 @@ final routes = [
     },
   ),
 
-  // Todo -----------------------------
-  // 비밀번호/닉네임 변경 ui 구현 후 라우트 작성
-  // change user info
   GoRoute(
     path: AppRoute.changePw.path,
     builder: (context, state) {
-      return const ChangePasswordScreen();
+      return const ChangePasswordPage();
     },
   ),
   GoRoute(
     path: AppRoute.updateName.path,
     builder: (context, state) {
-      return const UpdateNicknameScreen();
+      return const UpdateNicknamePage();
+    },
+  ),
+  GoRoute(
+    path: AppRoute.puzzleHistory.path,
+    builder: (context, state) {
+      return const PuzzleHistoryPage();
     },
   ),
 
@@ -85,13 +89,21 @@ final routes = [
 // AppRoute들을 enum으로 정리
 enum AppRoute {
   root('/root'),
+  // auth
   signUp('/sign-up'),
   signIn('/sign-in'),
+
+  // root tab
   home('/home'),
   ranking('/ranking'),
   myPage('/my-page'),
+
+  // my info
   changePw('/change-pw'),
   updateName('/update-name'),
+  puzzleHistory('/puzzle_history'),
+
+  // in Game
   puzzle('/puzzle');
 
   final String path;

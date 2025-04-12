@@ -26,6 +26,9 @@ abstract class AppTextStyle {
   static TextStyle title1 = boldStyle(24, null);
   static TextStyle title2 = boldStyle(20, null);
 
+  // header
+  static TextStyle header = boldStyle(16, null);
+
   // tabbar
   static TextStyle tabbar = mediumStyle(16, null);
 

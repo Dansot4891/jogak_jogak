@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/util/dialog/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
-import 'package:jogak_jogak/presentation/my_info/widgets/setting_card.dart';
+import 'package:jogak_jogak/presentation/my_info/mypage/widgets/setting_card.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({super.key});
@@ -29,9 +30,24 @@ class MyPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Text('임명우님\n환영합니다.', style: AppTextStyle.title2),
                   ),
-                  SettingCard(text: '비밀번호 변경', onTap: () {}),
-                  SettingCard(text: '닉네임 변경', onTap: () {}),
-                  SettingCard(text: '퍼즐 기록', onTap: () {}),
+                  SettingCard(
+                    text: '비밀번호 변경',
+                    onTap: () {
+                      navigate(context, route: AppRoute.changePw);
+                    },
+                  ),
+                  SettingCard(
+                    text: '닉네임 변경',
+                    onTap: () {
+                      navigate(context, route: AppRoute.updateName);
+                    },
+                  ),
+                  SettingCard(
+                    text: '퍼즐 기록',
+                    onTap: () {
+                      navigate(context, route: AppRoute.puzzleHistory);
+                    },
+                  ),
                 ],
               ),
             ),
