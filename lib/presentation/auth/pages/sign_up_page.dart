@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/util/app_validator.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
+import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
 
@@ -21,6 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return BasePage(
+      appBar: const DefaultAppbar(),
       resizeToAvoidBottomInset: true,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

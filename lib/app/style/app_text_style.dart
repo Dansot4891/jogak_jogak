@@ -19,6 +19,9 @@ abstract class AppTextStyle {
   static TextStyle boldStyle(double size, double? height) =>
       baseStyle(size, height).copyWith(fontWeight: FontWeight.w700);
 
+  // appbar
+  static TextStyle appbar = mediumStyle(20, null);
+
   // title
   static TextStyle title1 = boldStyle(24, null);
   static TextStyle title2 = boldStyle(20, null);
