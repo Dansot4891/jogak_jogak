@@ -80,7 +80,11 @@ class AppDialog extends Dialog {
             if (subText != null)
               Padding(
                 padding: const EdgeInsets.only(top: 16, bottom: 20),
-                child: Text(subText!, style: AppTextStyle.body2),
+                child: Text(
+                  subText!,
+                  style: AppTextStyle.body2.copyWith(color: AppColor.greyA7),
+                  textAlign: TextAlign.center,
+                ),
               ),
             if (subText == null) const SizedBox(height: 16),
 
