@@ -18,6 +18,17 @@ class _PuzzlePageState extends State<PuzzlePage> {
   final _controller = PuzzleController();
 
   @override
+  void initState() {
+    crop();
+    super.initState();
+  }
+
+  void crop() async {
+    await _controller.cropImage();
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BasePage(
       body: Padding(
@@ -41,15 +52,6 @@ class _PuzzlePageState extends State<PuzzlePage> {
                         '⚠️ 화면이 잘리면서 원본과 다를 수 있습니다!',
                         style: AppTextStyle.body1.copyWith(color: AppColor.red),
                       ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      await _controller.cropImage();
-                    },
-                    child: Text(
-                      'c',
-                      style: AppTextStyle.body1.copyWith(color: AppColor.red),
                     ),
                   ),
                   if (_controller.file != null)

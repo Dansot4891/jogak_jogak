@@ -18,72 +18,17 @@ class AppRouter {
 }
 
 final routes = [
-  // sign
-  GoRoute(
-    path: AppRoute.signUp.path,
-    builder: (context, state) {
-      return const SignUpPage();
-    },
-  ),
-  GoRoute(
-    path: AppRoute.signIn.path,
-    builder: (context, state) {
-      return const SignInPage();
-    },
-  ),
+  // auth
+  ...AuthPath.routes,
 
   // roottab
-  GoRoute(
-    path: AppRoute.root.path,
-    builder: (context, state) {
-      return const RootTab();
-    },
-  ),
-  GoRoute(
-    path: AppRoute.home.path,
-    builder: (context, state) {
-      return const HomePage();
-    },
-  ),
-  GoRoute(
-    path: AppRoute.ranking.path,
-    builder: (context, state) {
-      return const RankingPage();
-    },
-  ),
-  GoRoute(
-    path: AppRoute.myPage.path,
-    builder: (context, state) {
-      return const MyPage();
-    },
-  ),
+  ...RootTabPath.routes,
 
-  GoRoute(
-    path: AppRoute.changePw.path,
-    builder: (context, state) {
-      return const ChangePasswordPage();
-    },
-  ),
-  GoRoute(
-    path: AppRoute.updateName.path,
-    builder: (context, state) {
-      return const UpdateNicknamePage();
-    },
-  ),
-  GoRoute(
-    path: AppRoute.puzzleHistory.path,
-    builder: (context, state) {
-      return const PuzzleHistoryPage();
-    },
-  ),
+  // user
+  ...UserPath.routes,
 
   // inGame
-  GoRoute(
-    path: AppRoute.puzzle.path,
-    builder: (context, state) {
-      return const PuzzlePage();
-    },
-  ),
+  ...PuzzlePath.routes,
 ];
 
 // AppRoute들을 enum으로 정리
@@ -142,3 +87,83 @@ Future<void> navigate(
 
 // Navigation methods enum
 enum NavigationMethod { push, replace, go, pushReplacement }
+
+abstract class AuthPath {
+  static final List<GoRoute> routes = [
+    GoRoute(
+      path: AppRoute.signUp.path,
+      builder: (context, state) {
+        return const SignUpPage();
+      },
+    ),
+    GoRoute(
+      path: AppRoute.signIn.path,
+      builder: (context, state) {
+        return const SignInPage();
+      },
+    ),
+  ];
+}
+
+abstract class RootTabPath {
+  static final List<GoRoute> routes = [
+    GoRoute(
+      path: AppRoute.root.path,
+      builder: (context, state) {
+        return const RootTab();
+      },
+    ),
+    GoRoute(
+      path: AppRoute.home.path,
+      builder: (context, state) {
+        return const HomePage();
+      },
+    ),
+    GoRoute(
+      path: AppRoute.ranking.path,
+      builder: (context, state) {
+        return const RankingPage();
+      },
+    ),
+    GoRoute(
+      path: AppRoute.myPage.path,
+      builder: (context, state) {
+        return const MyPage();
+      },
+    ),
+  ];
+}
+
+abstract class UserPath {
+  static final List<GoRoute> routes = [
+    GoRoute(
+      path: AppRoute.changePw.path,
+      builder: (context, state) {
+        return const ChangePasswordPage();
+      },
+    ),
+    GoRoute(
+      path: AppRoute.updateName.path,
+      builder: (context, state) {
+        return const UpdateNicknamePage();
+      },
+    ),
+    GoRoute(
+      path: AppRoute.puzzleHistory.path,
+      builder: (context, state) {
+        return const PuzzleHistoryPage();
+      },
+    ),
+  ];
+}
+
+abstract class PuzzlePath {
+  static final List<GoRoute> routes = [
+    GoRoute(
+      path: AppRoute.puzzle.path,
+      builder: (context, state) {
+        return const PuzzlePage();
+      },
+    ),
+  ];
+}
