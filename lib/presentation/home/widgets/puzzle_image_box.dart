@@ -3,24 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 
 class PuzzleImageBox extends StatefulWidget {
-  const PuzzleImageBox({super.key});
+  final HomeViewModel viewModel;
+  const PuzzleImageBox(this.viewModel, {super.key});
 
   @override
   State<PuzzleImageBox> createState() => _PuzzleImageBoxState();
 }
 
 class _PuzzleImageBoxState extends State<PuzzleImageBox> {
-  final _controller = PuzzleController();
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        setState(() {
-          _controller.selectPuzzle();
-        });
+        widget.viewModel.selectImage();
       },
       borderRadius: _borderRadiusGeometry,
       child: Container(
@@ -31,7 +30,7 @@ class _PuzzleImageBoxState extends State<PuzzleImageBox> {
           border: Border.all(color: AppColor.grey80),
         ),
         child:
-            _controller.file == null
+            widget.viewModel.state.file == null
                 ? Center(
                   child: Text('이미지를 선택해주세요', style: AppTextStyle.subText1),
                 )
@@ -42,17 +41,13 @@ class _PuzzleImageBoxState extends State<PuzzleImageBox> {
                       Image.file(
                         width: _boxSize,
                         height: _boxSize,
-                        File(_controller.file!.path),
+                        File(widget.viewModel.state.file!.path),
                         fit: BoxFit.cover,
                       ),
                       Align(
                         alignment: Alignment.topRight,
                         child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              _controller.removePuzzle();
-                            });
-                          },
+                          onTap: () {},
                           borderRadius: _borderRadiusGeometry,
                           child: Container(
                             margin: const EdgeInsets.all(8),
