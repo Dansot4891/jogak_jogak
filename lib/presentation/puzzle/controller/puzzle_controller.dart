@@ -44,6 +44,7 @@ class PuzzleController {
       file!,
       gridViewSize: gridViewSize,
       width: AppSize.screenWidth,
+      height: AppSize.screenHeight,
     );
     if (fileList == null) {
       return;

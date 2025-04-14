@@ -30,17 +30,29 @@ class _PuzzlePageState extends State<PuzzlePage> {
                 SizedBox(
                   height: 80,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '⚠️ 화면이 잘리면서 원본과 다를 수 있습니다!',
-                        style: AppTextStyle.body1.copyWith(color: AppColor.red),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '⚠️ 화면이 잘리면서 원본과 다를 수 있습니다!',
+                            style: AppTextStyle.body1.copyWith(
+                              color: AppColor.red,
+                            ),
+                          ),
+                          Text(
+                            '현재 시간: ${viewModel.state.elapsedSeconds}',
+                            style: AppTextStyle.body1,
+                          ),
+                        ],
                       ),
                       if (viewModel.state.file != null)
                         Image.file(
                           viewModel.state.file!,
-                          width: 60,
-                          height: 60,
+                          width: 70,
+                          height: 70,
                           fit: BoxFit.cover,
                         ),
                     ],

@@ -3,13 +3,14 @@ import 'package:image/image.dart' as img;
 import 'package:jogak_jogak/core/module/random/random_generator.dart';
 import 'package:jogak_jogak/feature/puzzle/data/model/puzzle.dart';
 
-class ImgCrop {
+abstract class ImgCrop {
   // image를 자르는 함수
   static Future<List<Puzzle>?> cropImage(
     File file, {
     // 그리드뷰 사이즈 n x n
     required int gridViewSize,
     required double width,
+    required double height,
   }) async {
     final randomGenerator = RandomGenerator();
     final List<Puzzle> fileList = [];
@@ -58,8 +59,17 @@ class ImgCrop {
           default:
             throw Exception('지원되지 않는 확장자');
         }
-        final topRandom = randomGenerator.nextDouble(width / 3 * 2, seed: 10);
-        final leftRandom = randomGenerator.nextDouble(width / 3 * 2, seed: 10);
+        // 랜덤값 할당
+        final topRandom = randomGenerator.nextDouble(
+          // 전체 높이에서
+          // 1. 상단 이미지 미리보기, 공백 크기인 약 100
+          // 2. 그리드뷰 퍼즐판 width(디바이스 너비)
+          // 3. 퍼즐 조각의 크기
+          // 을 빼고 나머지 크기에서 랜덤값으로 지정한다.
+          height - width - 100 - width / gridViewSize,
+          seed: 0,
+        );
+        final leftRandom = randomGenerator.nextDouble(width / 7 * 4, seed: 10);
         final imgPuzzle = Puzzle(
           index: index,
           file: outputFile,

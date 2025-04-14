@@ -10,6 +10,7 @@ class PuzzleState {
   final int gridViewSize;
   // 경과 시간
   final int elapsedSeconds;
+  final bool gameOver;
 
   const PuzzleState({
     this.file,
@@ -17,6 +18,7 @@ class PuzzleState {
     this.gridViewSize = 3,
     this.correctPieces = const [],
     this.elapsedSeconds = 0,
+    this.gameOver = false,
   });
 
   PuzzleState copyWith({
@@ -25,6 +27,7 @@ class PuzzleState {
     List<Puzzle>? correctPieces,
     int? gridViewSize,
     int? elapsedSeconds,
+    bool? gameOver,
   }) {
     return PuzzleState(
       file: file ?? this.file,
@@ -32,6 +35,7 @@ class PuzzleState {
       correctPieces: correctPieces ?? this.correctPieces,
       gridViewSize: gridViewSize ?? this.gridViewSize,
       elapsedSeconds: elapsedSeconds ?? this.elapsedSeconds,
+      gameOver: gameOver ?? this.gameOver,
     );
   }
 }

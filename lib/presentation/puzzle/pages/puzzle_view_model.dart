@@ -41,6 +41,7 @@ class PuzzleViewModel extends ChangeNotifier {
     if (targetIndex == matchIndex) {
       _controller.matchPiece(targetIndex, matchIndex);
     }
+    if (_state.correctPieces == _state.elapsedSeconds) {}
     notifyListeners();
   }
 
@@ -64,7 +65,7 @@ class PuzzleViewModel extends ChangeNotifier {
   void startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (state.elapsedSeconds > 0) {
+      if (state.elapsedSeconds >= 0) {
         _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
         notifyListeners();
       } else {
