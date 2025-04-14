@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_state.dart';
 
 class PuzzleViewModel extends ChangeNotifier {
   final PuzzleController _controller = PuzzleController();
+  Timer? _timer;
 
   PuzzleState _state = const PuzzleState();
   PuzzleState get state => _state;
@@ -15,14 +18,15 @@ class PuzzleViewModel extends ChangeNotifier {
   // 뷰모델 처음 생성시 시작되는 함수
   // 필요한 데이터 할당
   void _initialize() async {
-    print('initialize');
     await cropImage();
+    startTimer();
     _state = state.copyWith(
       file: _controller.file,
       pieces: _controller.pieces,
       gridViewSize: _controller.gridViewSize,
       correctPieces: _controller.correctPieces,
     );
+    notifyListeners();
   }
 
   // 이미지 자르기
@@ -37,6 +41,7 @@ class PuzzleViewModel extends ChangeNotifier {
     if (targetIndex == matchIndex) {
       _controller.matchPiece(targetIndex, matchIndex);
     }
+    notifyListeners();
   }
 
   // 퍼즐 이동
@@ -52,5 +57,25 @@ class PuzzleViewModel extends ChangeNotifier {
       dy: dy,
       horizonPadding: horizonPadding,
     );
+    notifyListeners();
+  }
+
+  // 타이머 시작
+  void startTimer() {
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (state.elapsedSeconds > 0) {
+        _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
+        notifyListeners();
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }
