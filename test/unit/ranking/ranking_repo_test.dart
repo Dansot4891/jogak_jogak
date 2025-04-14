@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jogak_jogak/core/helper/list_map_extension.dart';
+import 'package:jogak_jogak/core/helper/extension/list_map_extension.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
 import 'package:jogak_jogak/feature/ranking/domain/data_source/mock/mock_ranking_data_source_impl.dart';

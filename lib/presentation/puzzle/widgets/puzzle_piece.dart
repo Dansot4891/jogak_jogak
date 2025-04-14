@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/core/helper/img_size_extesion.dart';
+import 'package:jogak_jogak/core/helper/extension/img_size_extesion.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/presentation/puzzle/widgets/empty_box.dart';
 

@@ -11,7 +11,7 @@ class HomeViewModel with ChangeNotifier {
 
   // 난이도 변경
   void selectLevel(int level) {
-    _state = state.copyWith(level: level);
+    _state = state.copyWith(level: level, file: state.file);
     _puzzleController.selectLevel(level);
     notifyListeners();
   }

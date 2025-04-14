@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/core/helper/date_time_extension.dart';
+import 'package:jogak_jogak/core/helper/extension/date_time_extension.dart';
 import 'package:jogak_jogak/feature/user/data/model/puzzle_history.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';

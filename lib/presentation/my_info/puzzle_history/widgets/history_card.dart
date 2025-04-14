@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
-import 'package:jogak_jogak/core/helper/date_time_extension.dart';
+import 'package:jogak_jogak/core/helper/extension/date_time_extension.dart';
 
 class HistoryCard extends StatelessWidget {
   final int level;
