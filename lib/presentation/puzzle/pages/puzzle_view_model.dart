@@ -40,8 +40,14 @@ class PuzzleViewModel extends ChangeNotifier {
   void matchPiece(int targetIndex, int matchIndex) {
     if (targetIndex == matchIndex) {
       _controller.matchPiece(targetIndex, matchIndex);
+      _state = state.copyWith(
+        pieces: _controller.pieces,
+        correctPieces: _controller.correctPieces,
+      );
     }
-    if (_state.correctPieces == _state.elapsedSeconds) {}
+    if (_state.pieces == _state.correctPieces) {
+      _state = state.copyWith(gameOver: true);
+    }
     notifyListeners();
   }
 
@@ -65,12 +71,11 @@ class PuzzleViewModel extends ChangeNotifier {
   void startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (state.elapsedSeconds >= 0) {
-        _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
-        notifyListeners();
-      } else {
+      if (_state.gameOver) {
         timer.cancel();
       }
+      _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
+      notifyListeners();
     });
   }
 
