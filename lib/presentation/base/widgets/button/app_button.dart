@@ -63,6 +63,11 @@ class _AppButtonState extends State<AppButton> {
           disable = true;
         });
       },
+      onTapCancel: () {
+        setState(() {
+          disable = false;
+        });
+      },
       onTapUp: (details) {
         setState(() {
           disable = false;

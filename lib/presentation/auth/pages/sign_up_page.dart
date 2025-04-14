@@ -14,7 +14,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _name = TextEditingController();
   final _password = TextEditingController();
@@ -27,58 +26,55 @@ class _SignUpPageState extends State<SignUpPage> {
       resizeToAvoidBottomInset: true,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              const Spacer(),
-              Text('조각조각', style: AppTextStyle.title1),
-              const SizedBox(height: 12),
-              CustomTextFormField(
-                controller: _email,
-                hintText: '이메일 입력',
-                validator: AppValidator.emailValid,
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomTextFormField(
-                      controller: _name,
-                      hintText: '닉네임 입력',
-                      validator: AppValidator.emailValid,
-                    ),
+        child: Column(
+          children: [
+            const Spacer(),
+            Text('조각조각', style: AppTextStyle.title1),
+            const SizedBox(height: 12),
+            CustomTextFormField(
+              controller: _email,
+              hintText: '이메일 입력',
+              validator: AppValidator.emailValid,
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: CustomTextFormField(
+                    controller: _name,
+                    hintText: '닉네임 입력',
+                    onChanged: (val) {
+                      setState(() {});
+                    },
+                    validator: AppValidator.emailValid,
                   ),
-                  const SizedBox(width: 4),
-                  AppButton(text: '중복 확인', horizontalPadding: 16, onTap: () {}),
-                ],
-              ),
-              const SizedBox(height: 40),
-              CustomTextFormField(
-                controller: _password,
-                hintText: '비밀번호 입력',
-                obsecure: true,
-                maxLines: 1,
-              ),
-              const SizedBox(height: 8),
-              CustomTextFormField(
-                controller: _passwordCheck,
-                hintText: '비밀번호 재확인',
-                obsecure: true,
-                maxLines: 1,
-              ),
-              const SizedBox(height: 16),
-              AppButton(
-                text: '회원가입',
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    return;
-                  }
-                },
-              ),
-              const Spacer(),
-            ],
-          ),
+                ),
+                const SizedBox(width: 4),
+                AppButton(
+                  text: '중복 확인',
+                  horizontalPadding: 16,
+                  onTap: _name.text.isEmpty ? null : () {},
+                ),
+              ],
+            ),
+            const SizedBox(height: 40),
+            CustomTextFormField(
+              controller: _password,
+              hintText: '비밀번호 입력',
+              obsecure: true,
+              maxLines: 1,
+            ),
+            const SizedBox(height: 8),
+            CustomTextFormField(
+              controller: _passwordCheck,
+              hintText: '비밀번호 재확인',
+              obsecure: true,
+              maxLines: 1,
+            ),
+            const SizedBox(height: 16),
+            AppButton(text: '회원가입', onTap: () {}),
+            const Spacer(),
+          ],
         ),
       ),
     );
