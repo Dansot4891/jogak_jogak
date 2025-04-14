@@ -21,4 +21,10 @@ class HomeViewModel with ChangeNotifier {
     _state = state.copyWith(file: _puzzleController.file);
     notifyListeners();
   }
+
+  void removeImage() {
+    _puzzleController.removePuzzle();
+    _state = state.copyWith(file: _puzzleController.file);
+    notifyListeners();
+  }
 }

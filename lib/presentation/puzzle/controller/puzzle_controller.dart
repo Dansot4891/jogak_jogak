@@ -29,7 +29,7 @@ class PuzzleController {
   }
 
   // 이미지 삭제
-  Future<void> removePuzzle() async {
+  void removePuzzle() {
     file = null;
   }
 
