@@ -69,9 +69,12 @@ class HomePage extends StatelessWidget {
                 const AlertMessage(),
                 AppButton(
                   text: '게임 시작',
-                  onTap: () {
-                    navigate(context, route: AppRoute.puzzle);
-                  },
+                  onTap:
+                      viewModel.state.file == null
+                          ? null
+                          : () {
+                            navigate(context, route: AppRoute.puzzle);
+                          },
                 ),
               ],
             ),

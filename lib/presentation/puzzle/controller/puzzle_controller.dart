@@ -61,22 +61,20 @@ class PuzzleController {
   // targetIndex : 맞추려는 퍼즐 피스
   // matchIndex : 사용자가 집은 퍼즐 피스
   void matchPiece(int targetIndex, int matchIndex) {
-    if (targetIndex == matchIndex) {
-      pieces =
-          pieces
-              .map(
-                (e) =>
-                    e.index == matchIndex ? e.copyWith(isRight: !e.isRight) : e,
-              )
-              .toList();
-      correctPieces =
-          correctPieces
-              .map(
-                (e) =>
-                    e.index == matchIndex ? e.copyWith(isRight: !e.isRight) : e,
-              )
-              .toList();
-    }
+    pieces =
+        pieces
+            .map(
+              (e) =>
+                  e.index == matchIndex ? e.copyWith(isRight: !e.isRight) : e,
+            )
+            .toList();
+    correctPieces =
+        correctPieces
+            .map(
+              (e) =>
+                  e.index == matchIndex ? e.copyWith(isRight: !e.isRight) : e,
+            )
+            .toList();
   }
 
   // 퍼즐 이동
