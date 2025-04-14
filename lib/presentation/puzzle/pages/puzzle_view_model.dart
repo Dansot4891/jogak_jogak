@@ -45,7 +45,10 @@ class PuzzleViewModel extends ChangeNotifier {
         correctPieces: _controller.correctPieces,
       );
     }
-    if (_state.pieces == _state.correctPieces) {
+    // 현재 퍼즐 개수에서 맞춘것과 실제 정답의 개수와 같다면
+    // 게임 종료
+    if (_state.pieces.where((e) => e.isRight).length ==
+        _state.correctPieces.length) {
       _state = state.copyWith(gameOver: true);
     }
     notifyListeners();
