@@ -5,7 +5,6 @@ import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
 import 'package:jogak_jogak/presentation/home/widgets/alert_message.dart';
-import 'package:jogak_jogak/presentation/home/widgets/level_buttons.dart';
 import 'package:jogak_jogak/presentation/home/widgets/puzzle_image_box.dart';
 
 final HomeViewModel viewModel = HomeViewModel();
@@ -34,7 +33,37 @@ class HomePage extends StatelessWidget {
                   ),
                   child: PuzzleImageBox(viewModel),
                 ),
-                const LevelButtons(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: AppButton(
+                        text: '3 X 3',
+                        onTap: () {
+                          viewModel.selectLevel(3);
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: AppButton(
+                        text: '4 X 4',
+                        onTap: () {
+                          viewModel.selectLevel(4);
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: AppButton(
+                        text: '5 X 5',
+                        onTap: () {
+                          viewModel.selectLevel(5);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 8),
                 AppButton(text: '오늘의 퍼즐 가져오기', onTap: () {}),
                 const AlertMessage(),

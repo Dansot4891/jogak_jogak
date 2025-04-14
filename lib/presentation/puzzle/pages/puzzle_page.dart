@@ -44,7 +44,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                     alignment: Alignment.center,
                     child: TextButton(
                       onPressed: () async {
-                        await _controller.selectPuzzle();
+                        await _controller.selectImage();
 
                         setState(() {});
                       },

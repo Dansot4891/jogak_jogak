@@ -4,6 +4,8 @@ import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/firebase/firebase_options.dart';
 
+final router = AppRouter.appRouter();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
       ),
       // TODO: 추후 app router를 전역적으로 관리하도록 설정해야함
       // 현재는 빌드마다 계속 생성함
-      routerConfig: AppRouter.appRouter(),
+      routerConfig: router,
     );
   }
 }

@@ -20,7 +20,7 @@ class PuzzleController {
   int gridViewSize = 3;
 
   // 이미지 선택
-  Future<void> selectPuzzle() async {
+  Future<void> selectImage() async {
     final imgFile = await ImgPicker.pickImage();
     file = imgFile;
     if (imgFile == null) {
@@ -53,7 +53,7 @@ class PuzzleController {
   }
 
   // 난이도 변경
-  void changeLevel(int level) {
+  void selectLevel(int level) {
     gridViewSize = level;
   }
 
