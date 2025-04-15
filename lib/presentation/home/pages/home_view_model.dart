@@ -17,6 +17,8 @@ class HomeViewModel with ChangeNotifier {
 
   // 랜덤 이미지 조회
   void getRandomImageUrl() async {
+    _state = state.copyWith(state: BaseState.loading);
+    notifyListeners();
     final result = await _puzzleRepository.getRandomImageUrl();
     switch (result) {
       case Success<PuzzleImage>():
@@ -31,6 +33,7 @@ class HomeViewModel with ChangeNotifier {
           error: result.error.message,
         );
     }
+    notifyListeners();
   }
 
   // 난이도 변경
