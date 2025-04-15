@@ -37,6 +37,7 @@ dependencies:
   # image
   image_picker: ^1.1.2
   image: ^4.5.4
+  path_provider: ^2.1.5
 
   # firebase
   cloud_firestore: ^5.6.6
@@ -46,6 +47,9 @@ dependencies:
 
   # routing
   go_router: ^14.8.1
+
+  # api
+  dio: ^5.8.0+1
   
   json_annotation: ^4.9.0
 
