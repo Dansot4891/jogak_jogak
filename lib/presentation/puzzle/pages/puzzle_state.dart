@@ -23,6 +23,7 @@ class PuzzleState {
 
   PuzzleState copyWith({
     File? file,
+    bool clearFile = false,
     List<Puzzle>? pieces,
     List<Puzzle>? correctPieces,
     int? gridViewSize,
@@ -30,7 +31,7 @@ class PuzzleState {
     bool? gameOver,
   }) {
     return PuzzleState(
-      file: file ?? this.file,
+      file: clearFile ? null : file ?? this.file,
       pieces: pieces ?? this.pieces,
       correctPieces: correctPieces ?? this.correctPieces,
       gridViewSize: gridViewSize ?? this.gridViewSize,

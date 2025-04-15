@@ -101,4 +101,14 @@ class PuzzleController {
     pieces.remove(piece); // 값을 찾아서 제거
     pieces.add(piece); // 맨 뒤로 삽입
   }
+
+  void withFileReset() {
+    file = null;
+    reset();
+  }
+
+  void reset() {
+    pieces = const [];
+    correctPieces = const [];
+  }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
+import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
@@ -19,13 +21,25 @@ class PuzzlePage extends StatefulWidget {
 
 class _PuzzlePageState extends State<PuzzlePage> {
   @override
+  void initState() {
+    viewModel.initialize();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BasePage(
-      appBar: const DefaultAppbar(title: '조각조각'),
-      body: ListenableBuilder(
-        listenable: viewModel,
-        builder: (context, child) {
-          return Padding(
+    return ListenableBuilder(
+      listenable: viewModel,
+      builder: (context, child) {
+        return BasePage(
+          appBar: DefaultAppbar(
+            title: '조각조각',
+            onTap: () {
+              viewModel.reset();
+              pop(context);
+            },
+          ),
+          body: Padding(
             padding: EdgeInsets.symmetric(horizontal: _horizonPadding),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -156,17 +170,21 @@ class _PuzzlePageState extends State<PuzzlePage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(AppImage.clear),
-                          Text('퍼즐, 클리어!', style: AppTextStyle.body1),
+                          Image.asset(
+                            AppImage.clear,
+                            width: AppSize.fractionHeight(0.2),
+                            height: AppSize.fractionHeight(0.2),
+                          ),
+                          Text('퍼즐, 클리어!', style: AppTextStyle.title1),
                         ],
                       ),
                     ),
                   ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

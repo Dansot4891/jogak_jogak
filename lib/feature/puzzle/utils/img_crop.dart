@@ -66,7 +66,7 @@ abstract class ImgCrop {
           // 2. 그리드뷰 퍼즐판 width(디바이스 너비)
           // 3. 퍼즐 조각의 크기
           // 을 빼고 나머지 크기에서 랜덤값으로 지정한다.
-          height - width - 100 - width / gridViewSize,
+          height - width - 56 - 70 - ((width - 32) / gridViewSize),
           seed: 0,
         );
         final leftRandom = randomGenerator.nextDouble(width / 7 * 4, seed: 10);

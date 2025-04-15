@@ -12,13 +12,11 @@ class PuzzleViewModel extends ChangeNotifier {
   PuzzleState _state = const PuzzleState();
   PuzzleState get state => _state;
 
-  PuzzleViewModel() {
-    _initialize();
-  }
+  PuzzleViewModel();
 
   // 뷰모델 처음 생성시 시작되는 함수
   // 필요한 데이터 할당
-  void _initialize() async {
+  void initialize() async {
     await cropImage();
     startTimer();
     _state = state.copyWith(
@@ -98,6 +96,20 @@ class PuzzleViewModel extends ChangeNotifier {
       _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
       notifyListeners();
     });
+  }
+
+  // 데이터 리셋
+  void reset() async {
+    _timer?.cancel();
+    _timer = null;
+    _state = state.copyWith(
+      correctPieces: const [],
+      pieces: const [],
+      elapsedSeconds: 0,
+      gameOver: false,
+    );
+    _controller.reset();
+    notifyListeners();
   }
 
   @override
