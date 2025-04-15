@@ -1,1 +1,1 @@
-enum BaseState { complete, loading, error }
+enum BaseState { init, complete, loading, error }
