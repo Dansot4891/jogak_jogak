@@ -12,13 +12,13 @@ class RankingRepositoryImpl implements RankingRepository {
   RankingRepositoryImpl(this._dataSource);
 
   @override
-  Future<Result<List<Ranking>, CustomException>> getRankings() async {
+  Future<Result<List<Ranking>>> getRankings() async {
     try {
       final resp = await _dataSource.getRankings();
       final rankings = resp.mapToEntityList((e) => e.toEntity());
-      return Success(rankings);
+      return Result.success(rankings);
     } catch (e) {
-      return const Error(UnexpectedException());
+      return const Result.error(UnexpectedException());
     }
   }
 }

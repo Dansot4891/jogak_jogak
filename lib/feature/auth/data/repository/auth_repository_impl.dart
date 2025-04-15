@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
+import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
 import 'package:jogak_jogak/feature/auth/data/repository/auth_repository.dart';
 import 'package:jogak_jogak/feature/auth/domain/data_source/remote/auth_remote_data_source.dart';
 
@@ -18,13 +19,19 @@ class AuthRepositoryImpl implements AuthRepository {
         email: email,
         password: password,
       );
-    } catch (e) {}
+      return Result.success(response);
+    } catch (e) {
+      return const Result.error(UnexpectedException());
+    }
   }
 
   @override
-  Future<Result<void>> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<Result<void>> signOut() async {
+    try {
+      return Result.success(await _dataSource.signOut());
+    } catch (e) {
+      return const Result.error(UnexpectedException());
+    }
   }
 
   @override
@@ -32,8 +39,17 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
     required String username,
-  }) {
-    // TODO: implement signUp
-    throw UnimplementedError();
+  }) async {
+    try {
+      return Result.success(
+        await _dataSource.signUp(
+          email: email,
+          password: password,
+          username: username,
+        ),
+      );
+    } catch (e) {
+      return const Result.error(UnexpectedException());
+    }
   }
 }

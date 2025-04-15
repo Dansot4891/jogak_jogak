@@ -30,7 +30,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     // uid가 존재하지 않는다면 에러
     if (id == null) {
-      throw const UnexpectedException();
+      throw const UIDNotFoundException();
     }
 
     // 유저의 닉네임을 store에 저장

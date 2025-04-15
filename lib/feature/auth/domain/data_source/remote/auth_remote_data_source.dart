@@ -8,7 +8,7 @@ abstract interface class AuthRemoteDataSource {
 
   Future<void> signOut();
 
-  Future<UserCredential> signUp({
+  Future<void> signUp({
     required String email,
     required String password,
     required String username,
