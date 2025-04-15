@@ -34,7 +34,7 @@ require(detStorePassword != null) { "storePassword not found in key.properties f
 
 
 android {
-    namespace = "com.example.jogak_jogak"
+    namespace = "com.kr.jogak_jogak"
     compileSdk = flutter.compileSdkVersion
     // NDK 버전을 명시적으로 설정
     ndkVersion = "27.0.12077973"
@@ -50,7 +50,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.jogak_jogak"
+        applicationId = "com.kr.jogak_jogak"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 23
