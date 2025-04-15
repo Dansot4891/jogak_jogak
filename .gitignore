@@ -49,3 +49,9 @@ app.*.map.json
 
 # env 파일은 깃에서 제외
 .env
+
+# Keystore files
+/android/app/keystore.jks
+
+# Key properties file
+/android/key.properties

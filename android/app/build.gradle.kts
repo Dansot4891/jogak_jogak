@@ -1,3 +1,8 @@
+// Import this first
+import java.io.File
+import java.io.FileInputStream
+import java.util.*
+
 plugins {
     id("com.android.application")
     // START: FlutterFire Configuration
@@ -8,10 +13,31 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// key.properties 파일 경로를 읽어오는 코드
+val keyPropertiesFile = file("key.properties")  // 여기서 경로 설정을 상대경로로 지정
+println("key.properties file path: ${keyPropertiesFile.absolutePath}")
+val keyProperties = Properties().apply {
+    load(FileInputStream(keyPropertiesFile))  // 상대 경로로 key.properties 파일을 로드
+}
+
+// get a property
+val detKeyAlias = keyProperties.getProperty("key.alias.name")
+val detKeyPassword = keyProperties.getProperty("key.alias.password")
+val detStoreFile = keyProperties.getProperty("key.store.file")
+val detStorePassword = keyProperties.getProperty("key.store.password")
+
+// Ensure properties are not null
+require(detKeyAlias != null) { "keyAlias not found in key.properties file." }
+require(detKeyPassword != null) { "keyPassword not found in key.properties file." }
+require(detStoreFile != null) { "storeFile not found in key.properties file." }
+require(detStorePassword != null) { "storePassword not found in key.properties file." }
+
+
 android {
     namespace = "com.example.jogak_jogak"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    // NDK 버전을 명시적으로 설정
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -27,17 +53,26 @@ android {
         applicationId = "com.example.jogak_jogak"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+    }
+
+    signingConfigs {
+        create("release") {
+            keyAlias = detKeyAlias
+            keyPassword = detKeyPassword
+            storeFile = file(detStoreFile)
+            storePassword = detStorePassword
+        }
     }
 
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 }
