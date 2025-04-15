@@ -1,15 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class UserDto {
-  final String username;
-  final String email;
+  String? username;
+  String? email;
 
-  UserDto({required this.username, required this.email});
+  UserDto({this.username, this.email});
 
-  // -- fromJson은 불필요 --
+  factory UserDto.fromFireBase(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+  ) => UserDto.fromJson(snapshot.data()!);
+
+  factory UserDto.fromJson(Map<String, dynamic> json) =>
+      _$UserDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserDtoToJson(this);
 }

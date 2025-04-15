@@ -1,5 +1,6 @@
-class User {
+class AppUser {
   final String username;
+  final String email;
 
-  const User(this.username);
+  const AppUser({required this.username, required this.email});
 }
