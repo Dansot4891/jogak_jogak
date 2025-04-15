@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
 import 'package:jogak_jogak/feature/auth/data/repository/auth_repository.dart';
@@ -10,7 +9,7 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._dataSource);
 
   @override
-  Future<Result<UserCredential>> signIn({
+  Future<Result<String>> signIn({
     required String email,
     required String password,
   }) async {

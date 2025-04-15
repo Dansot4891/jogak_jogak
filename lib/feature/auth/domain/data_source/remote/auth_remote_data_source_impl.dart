@@ -15,7 +15,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<UserCredential> signUp({
+  Future<void> signUp({
     required String email,
     required String password,
     required String username,
@@ -40,11 +40,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         .collection(FirebaseCollections.users)
         .doc(id)
         .set(user.toJson());
-    return userCredential;
   }
 
   @override
-  Future<UserCredential> signIn({
+  Future<String> signIn({
     required String email,
     required String password,
   }) async {
@@ -52,6 +51,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       email: email,
       password: password,
     );
-    return userCredential;
+    if (userCredential.user == null) {
+      throw const UserNotFoundException();
+    }
+    return userCredential.user!.uid;
   }
 }

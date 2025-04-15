@@ -10,9 +10,14 @@ class UnexpectedException extends CustomException {
   const UnexpectedException() : super(501, '문제가 발생했어요. 잠시 후 다시 시도해주세요.');
 }
 
-// 유저 uid를 찾을 수 없을 때
+// 파이어베이스 Auth에서 유저 uid를 찾을 수 없을 때
 class UIDNotFoundException extends CustomException {
   const UIDNotFoundException() : super(404, 'UID가 존재하지 않습니다. 올바른 UID를 확인해주세요.');
+}
+
+// 파이어베이스 Auth에서 유저를 찾을 수 없을 때
+class UserNotFoundException extends CustomException {
+  const UserNotFoundException() : super(405, '유저가 존재하지 않습니다.');
 }
 
 // 회원가입시 이메일이 존재할 때

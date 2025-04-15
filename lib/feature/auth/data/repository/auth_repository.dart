@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 
 abstract interface class AuthRepository {
@@ -10,7 +9,7 @@ abstract interface class AuthRepository {
     required String username,
   });
 
-  Future<Result<UserCredential>> signIn({
+  Future<Result<String>> signIn({
     required String email,
     required String password,
   });
