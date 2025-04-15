@@ -25,3 +25,8 @@ class EmailAlreadyExistsException extends CustomException {
   const EmailAlreadyExistsException()
     : super(409, '이미 존재하는 이메일입니다. 다른 이메일을 사용해주세요.');
 }
+
+// 파이어베이스의 랜덤 이미지들의 총개수를 불러올 수 없을 때
+class FailedToFetchImageCountException extends CustomException {
+  const FailedToFetchImageCountException() : super(509, '데이터를 불러오는 데 실패했습니다.');
+}
