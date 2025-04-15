@@ -53,7 +53,12 @@ class HomeViewModel with ChangeNotifier {
   // 이미지 제거
   void removeImage() {
     _puzzleController.removePuzzle();
-    _state = state.copyWith(file: _puzzleController.file);
+    _state = state.copyWith(fileClear: true);
+    notifyListeners();
+  }
+
+  void resetState() {
+    _state = state.copyWith(state: BaseState.success);
     notifyListeners();
   }
 }

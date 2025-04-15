@@ -23,6 +23,7 @@ abstract class TemporaryDir {
 
       return File(filePath);
     } catch (e) {
+      print(e);
       return null;
     }
   }

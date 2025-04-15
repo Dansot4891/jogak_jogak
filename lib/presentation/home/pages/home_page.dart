@@ -56,7 +56,12 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  AppButton(text: '오늘의 퍼즐 가져오기', onTap: () {}),
+                  AppButton(
+                    text: '오늘의 퍼즐 가져오기',
+                    onTap: () {
+                      viewModel.getRandomImageUrl();
+                    },
+                  ),
                   const AlertMessage(),
                   AppButton(
                     text: '게임 시작',
@@ -73,7 +78,24 @@ class HomePage extends StatelessWidget {
             init: const Center(child: CircularProgressIndicator()),
             loading: const Center(child: CircularProgressIndicator()),
             error: Center(
-              child: Text(viewModel.state.error, style: AppTextStyle.body1),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(viewModel.state.error, style: AppTextStyle.body1),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 40,
+                    ),
+                    child: AppButton(
+                      text: '돌아가기',
+                      onTap: () {
+                        viewModel.resetState();
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },

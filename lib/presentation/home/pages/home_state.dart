@@ -21,12 +21,13 @@ class HomeState {
   HomeState copyWith({
     int? level,
     File? file,
+    bool fileClear = false,
     BaseState? state,
     String? error,
   }) {
     return HomeState(
       level: level ?? this.level,
-      file: file ?? this.file,
+      file: fileClear ? null : file ?? this.file,
       state: state ?? this.state,
       error: error ?? this.error,
     );
