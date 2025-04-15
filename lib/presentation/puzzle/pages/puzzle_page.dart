@@ -129,57 +129,34 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                         // 이동된 위치에서 y가
                                         // 80 + 상단 그리드뷰보단 크고, 전체 높이에서 이미지 높이만큼 뺀 값보단 작아야한다.
                                         //    => 위 조건들을 만족할 때만 위치를 이동시킨다.
-                                        if ((dx > _horizonPadding &&
-                                                dx <
-                                                    AppSize.screenWidth -
-                                                        _horizonPadding -
-                                                        ((AppSize.screenWidth -
-                                                                _horizonPadding *
-                                                                    2) /
-                                                            viewModel
-                                                                .state
-                                                                .gridViewSize)) &&
-                                            (dy >
-                                                    80 +
-                                                        AppSize.screenWidth -
-                                                        32 &&
-                                                dy <
-                                                    AppSize.screenHeight -
-                                                        16 -
-                                                        ((AppSize.screenWidth -
-                                                                32) /
-                                                            viewModel
-                                                                .state
-                                                                .gridViewSize))) {
-                                          setState(() {
-                                            viewModel.movePiece(
-                                              index: e.index,
-                                              dx: details.offset.dx,
-                                              dy: details.offset.dy,
-                                              horizonPadding: _horizonPadding,
-                                            );
-                                            // // index가 같은것을 찾아서
-                                            // final piece = _controller.pieces
-                                            //     .where((p) => p.index == e.index)
-                                            //     .first
-                                            //     .copyWith(
-                                            //       // grideview + 상단 height 제외
-                                            //       top:
-                                            //           details.offset.dy -
-                                            //           80 -
-                                            //           AppSize.screenWidth -
-                                            //           32,
-                                            //       // 왼쪽 margin값 제외
-                                            //       left:
-                                            //           details.offset.dx -
-                                            //           _horizonPadding,
-                                            //     );
-                                            // // 해당 객체를 삭제후
-                                            // // 리스트 마지막에 추가
-                                            // //    => 해당 이미지를 stack 내에서 맨 위로 올리기위해서
-                                            // pieces.remove(piece);
-                                            // pieces.add(piece);
-                                          });
+                                        viewModel.movePiece(
+                                          index: e.index,
+                                          dx: dx,
+                                          dy: dy,
+                                          horizonPadding: _horizonPadding,
+                                        );
+                                        {
+                                          // // index가 같은것을 찾아서
+                                          // final piece = _controller.pieces
+                                          //     .where((p) => p.index == e.index)
+                                          //     .first
+                                          //     .copyWith(
+                                          //       // grideview + 상단 height 제외
+                                          //       top:
+                                          //           details.offset.dy -
+                                          //           80 -
+                                          //           AppSize.screenWidth -
+                                          //           32,
+                                          //       // 왼쪽 margin값 제외
+                                          //       left:
+                                          //           details.offset.dx -
+                                          //           _horizonPadding,
+                                          //     );
+                                          // // 해당 객체를 삭제후
+                                          // // 리스트 마지막에 추가
+                                          // //    => 해당 이미지를 stack 내에서 맨 위로 올리기위해서
+                                          // pieces.remove(piece);
+                                          // pieces.add(piece);
                                         }
                                       },
                                       // 기본 설정 위젯

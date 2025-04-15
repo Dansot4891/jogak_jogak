@@ -90,8 +90,8 @@ class PuzzleController {
         .where((p) => p.index == index)
         .first
         .copyWith(
-          // grideview + 상단 height 제외
-          top: dy - 80 - AppSize.screenWidth - 32,
+          // grideview + padding + 상단 height 제외
+          top: dy - 80 - AppSize.screenWidth - 2 * horizonPadding,
           // 왼쪽 margin값 제외
           left: dx - horizonPadding,
         );

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_state.dart';
 
@@ -61,13 +62,25 @@ class PuzzleViewModel extends ChangeNotifier {
     required double dy, // 이동된 부분에서의 y 위치
     required double horizonPadding, // padding
   }) {
-    _controller.movePiece(
-      index: index,
-      dx: dx,
-      dy: dy,
-      horizonPadding: horizonPadding,
-    );
-    notifyListeners();
+    if ((dx > horizonPadding &&
+            dx <
+                AppSize.screenWidth -
+                    horizonPadding -
+                    ((AppSize.screenWidth - horizonPadding * 2) /
+                        state.gridViewSize)) &&
+        (dy > 80 + AppSize.screenWidth - 32 &&
+            dy <
+                AppSize.screenHeight -
+                    16 -
+                    ((AppSize.screenWidth - 32) / state.gridViewSize))) {
+      _controller.movePiece(
+        index: index,
+        dx: dx,
+        dy: dy,
+        horizonPadding: horizonPadding,
+      );
+      notifyListeners();
+    }
   }
 
   // 타이머 시작
