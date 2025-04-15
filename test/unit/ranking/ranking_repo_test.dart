@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jogak_jogak/core/helper/extension/list_map_extension.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
-import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
 import 'package:jogak_jogak/feature/ranking/domain/data_source/mock/mock_ranking_data_source_impl.dart';
 import 'package:jogak_jogak/feature/ranking/domain/dto/ranking_dto.dart';
 import 'package:jogak_jogak/feature/ranking/domain/mapper/ranking_mapper.dart';
@@ -25,10 +24,10 @@ void main() {
       final resp = await repo.getRankings();
 
       switch (resp) {
-        case Success<List<Ranking>, CustomException>():
+        case Success<List<Ranking>>():
           expect(resp.data, mock.mapToEntityList((e) => e.toEntity()));
           break;
-        case Error<List<Ranking>, CustomException>():
+        case Error<List<Ranking>>():
           expect(resp.error, 501);
           break;
       }
