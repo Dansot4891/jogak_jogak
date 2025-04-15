@@ -27,6 +27,6 @@ class EmailAlreadyExistsException extends CustomException {
 }
 
 // 파이어베이스의 랜덤 이미지들의 총개수를 불러올 수 없을 때
-class FailedToFetchImageCountException extends CustomException {
-  const FailedToFetchImageCountException() : super(509, '데이터를 불러오는 데 실패했습니다.');
+class FailedToFetchImageException extends CustomException {
+  const FailedToFetchImageException() : super(509, '데이터를 불러오는 데 실패했습니다.');
 }

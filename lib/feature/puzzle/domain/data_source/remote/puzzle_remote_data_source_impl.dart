@@ -18,7 +18,7 @@ class PuzzleRemoteDataSourceImpl implements PuzzleDataSource {
         await _instance.collection(FirebaseCollections.puzzle).count().get();
     final count = querySnapshot.count;
     if (querySnapshot.count == null) {
-      throw const FailedToFetchImageCountException();
+      throw const FailedToFetchImageException();
     }
     // 1부터 길이까지의 랜덤값 추출
     final id = _generator.nextInt(count!, seed: 1);

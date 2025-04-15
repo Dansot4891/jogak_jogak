@@ -6,10 +6,10 @@ part 'puzzle_image_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PuzzleImageDto {
-  final String imageUrl;
-  final String source;
+  String? imageUrl;
+  String? source;
 
-  PuzzleImageDto({required this.imageUrl, required this.source});
+  PuzzleImageDto({this.imageUrl, this.source});
 
   factory PuzzleImageDto.fromFireBase(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
