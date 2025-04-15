@@ -3,6 +3,7 @@ import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
+import 'package:jogak_jogak/core/helper/extension/timer_extension.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
@@ -60,7 +61,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                             ),
                           ),
                           Text(
-                            '현재 시간: ${viewModel.state.elapsedSeconds}',
+                            '현재 시간: ${(viewModel.state.elapsedSeconds).formattedElapsed()}',
                             style: AppTextStyle.body1,
                           ),
                         ],
