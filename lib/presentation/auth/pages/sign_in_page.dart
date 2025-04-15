@@ -52,8 +52,8 @@ class _SignInPageState extends State<SignInPage> {
                         AppDialog.doubleBtns(
                           title: '비밀번호 재설정',
                           subText: '가입하신 이메일로\n비밀번호 재설정 메일이 전송됩니다.',
-                          btnLeftText: '확인',
-                          btnRightText: '취소',
+                          btnLeftText: '취소',
+                          btnRightText: '확인',
                           onBtnLeftClicked: () {},
                           onBtnRightClicked: () {},
                         ),
@@ -66,13 +66,16 @@ class _SignInPageState extends State<SignInPage> {
             ),
             AppButton(
               text: '로그인',
-              onTap: () {
-                navigate(
-                  context,
-                  route: AppRoute.root,
-                  method: NavigationMethod.go,
-                );
-              },
+              onTap:
+                  _email.text.isEmpty || _password.text.isEmpty
+                      ? null
+                      : () {
+                        navigate(
+                          context,
+                          route: AppRoute.root,
+                          method: NavigationMethod.go,
+                        );
+                      },
             ),
             const Spacer(),
           ],
