@@ -91,7 +91,7 @@ class PuzzleController {
         .first
         .copyWith(
           // grideview + padding + 상단 height 제외
-          top: dy - 80 - AppSize.screenWidth - 2 * horizonPadding,
+          top: dy - 56 - 70 - AppSize.screenWidth - (2 * horizonPadding),
           // 왼쪽 margin값 제외
           left: dx - horizonPadding,
         );

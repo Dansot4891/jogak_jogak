@@ -62,13 +62,18 @@ class PuzzleViewModel extends ChangeNotifier {
     required double dy, // 이동된 부분에서의 y 위치
     required double horizonPadding, // padding
   }) {
+    // 이동된 위치에서 x가
+    // 패딩값보단 크고, 전체 너비에서 이미지 너비만큼 뺀 값보단 작아야하고,
+    // 이동된 위치에서 y가
+    // 56 + 60 + 상단 그리드뷰보단 크고, 전체 높이에서 이미지 높이만큼 뺀 값보단 작아야한다.
+    //    => 위 조건들을 만족할 때만 위치를 이동시킨다.
     if ((dx > horizonPadding &&
             dx <
                 AppSize.screenWidth -
                     horizonPadding -
                     ((AppSize.screenWidth - horizonPadding * 2) /
                         state.gridViewSize)) &&
-        (dy > 80 + AppSize.screenWidth - 32 &&
+        (dy > 56 + 70 + AppSize.screenWidth - 32 &&
             dy <
                 AppSize.screenHeight -
                     16 -

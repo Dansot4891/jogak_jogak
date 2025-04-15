@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
+import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
 import 'package:jogak_jogak/presentation/puzzle/widgets/empty_box.dart';
 import 'package:jogak_jogak/presentation/puzzle/widgets/puzzle_piece.dart';
@@ -20,15 +21,17 @@ class _PuzzlePageState extends State<PuzzlePage> {
   @override
   Widget build(BuildContext context) {
     return BasePage(
+      appBar: const DefaultAppbar(title: '조각조각'),
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (context, child) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: _horizonPadding),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 80,
+                  height: 70,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -51,14 +54,15 @@ class _PuzzlePageState extends State<PuzzlePage> {
                       if (viewModel.state.file != null)
                         Image.file(
                           viewModel.state.file!,
-                          width: 70,
-                          height: 70,
+                          width: 60,
+                          height: 60,
                           fit: BoxFit.cover,
                         ),
                     ],
                   ),
                 ),
-                if (viewModel.state.pieces.isNotEmpty)
+                if (viewModel.state.pieces.isNotEmpty &&
+                    !viewModel.state.gameOver)
                   Expanded(
                     child: Column(
                       children: [
@@ -124,40 +128,12 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                       onDragEnd: (details) {
                                         final dx = details.offset.dx;
                                         final dy = details.offset.dy;
-                                        // 이동된 위치에서 x가
-                                        // 패딩값보단 크고, 전체 너비에서 이미지 너비만큼 뺀 값보단 작아야하고,
-                                        // 이동된 위치에서 y가
-                                        // 80 + 상단 그리드뷰보단 크고, 전체 높이에서 이미지 높이만큼 뺀 값보단 작아야한다.
-                                        //    => 위 조건들을 만족할 때만 위치를 이동시킨다.
                                         viewModel.movePiece(
                                           index: e.index,
                                           dx: dx,
                                           dy: dy,
                                           horizonPadding: _horizonPadding,
                                         );
-                                        {
-                                          // // index가 같은것을 찾아서
-                                          // final piece = _controller.pieces
-                                          //     .where((p) => p.index == e.index)
-                                          //     .first
-                                          //     .copyWith(
-                                          //       // grideview + 상단 height 제외
-                                          //       top:
-                                          //           details.offset.dy -
-                                          //           80 -
-                                          //           AppSize.screenWidth -
-                                          //           32,
-                                          //       // 왼쪽 margin값 제외
-                                          //       left:
-                                          //           details.offset.dx -
-                                          //           _horizonPadding,
-                                          //     );
-                                          // // 해당 객체를 삭제후
-                                          // // 리스트 마지막에 추가
-                                          // //    => 해당 이미지를 stack 내에서 맨 위로 올리기위해서
-                                          // pieces.remove(piece);
-                                          // pieces.add(piece);
-                                        }
                                       },
                                       // 기본 설정 위젯
                                       child: PuzzlePiece(
@@ -172,6 +148,18 @@ class _PuzzlePageState extends State<PuzzlePage> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                if (viewModel.state.gameOver)
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(AppImage.clear),
+                          Text('퍼즐, 클리어!', style: AppTextStyle.body1),
+                        ],
+                      ),
                     ),
                   ),
               ],
