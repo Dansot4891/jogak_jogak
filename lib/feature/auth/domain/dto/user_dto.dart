@@ -5,8 +5,9 @@ part 'user_dto.g.dart';
 @JsonSerializable(explicitToJson: true)
 class UserDto {
   final String username;
+  final String email;
 
-  UserDto({required this.username});
+  UserDto({required this.username, required this.email});
 
   // -- fromJson은 불필요 --
 
