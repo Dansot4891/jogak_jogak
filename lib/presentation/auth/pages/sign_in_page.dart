@@ -58,7 +58,7 @@ class _SignInPageState extends State<SignInPage> {
                 navigate(
                   context,
                   route: AppRoute.root,
-                  method: NavigationMethod.go,
+                  method: NavigationMethod.replace,
                 );
               },
             ),
