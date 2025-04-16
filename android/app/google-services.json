@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:581342125266:android:8cc765e5528a62a84fa10b",
+        "mobilesdk_app_id": "1:581342125266:android:204a568c4becf3b14fa10b",
         "android_client_info": {
-          "package_name": "com.example.jogak_jogak"
+          "package_name": "com.kr.jogak_jogak"
         }
       },
       "oauth_client": [],
@@ -26,9 +26,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:581342125266:android:204a568c4becf3b14fa10b",
+        "mobilesdk_app_id": "1:581342125266:android:c22405bdd6c4d9394fa10b",
         "android_client_info": {
-          "package_name": "com.kr.jogak_jogak"
+          "package_name": "com.kr.jogakjogak"
         }
       },
       "oauth_client": [],

@@ -20,7 +20,11 @@ class PuzzleController {
   int gridViewSize = 3;
 
   // 이미지 선택
-  Future<void> selectImage() async {
+  Future<void> selectImage({File? obtainedFile}) async {
+    if (obtainedFile != null) {
+      file = obtainedFile;
+      return;
+    }
     final imgFile = await ImgPicker.pickImage();
     file = imgFile;
     if (imgFile == null) {

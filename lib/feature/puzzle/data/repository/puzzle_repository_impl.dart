@@ -20,7 +20,6 @@ class PuzzleRepositoryImpl implements PuzzleRepository {
       }
       return Result.success(puzzleImage);
     } catch (e) {
-      print(e);
       return const Result.error(UnexpectedException());
     }
   }

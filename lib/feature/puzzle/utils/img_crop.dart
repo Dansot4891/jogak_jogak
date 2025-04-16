@@ -47,7 +47,7 @@ abstract class ImgCrop {
         final outputPath =
             '${file.path}_crop_${DateTime.now().millisecondsSinceEpoch}.$extension';
         final outputFile = File(outputPath);
-
+        print('extension: $extension');
         // 파일 확장자에 따라 이미지 할당
         switch (extension) {
           case 'jpg':

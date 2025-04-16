@@ -22,11 +22,13 @@ class HomeViewModel with ChangeNotifier {
     final result = await _puzzleRepository.getRandomImageUrl();
     switch (result) {
       case Success<PuzzleImage>():
+        final url = result.data.imageUrl;
         final obtainedFile = await TemporaryDir.getImageToTemporaryPath(
-          url: result.data.imageUrl,
-          imageName: 'tmp_image',
+          url: url,
+          imageName: 'tmp_image.${url.split('.').last}',
         );
-        _state = state.copyWith(file: obtainedFile);
+        _state = state.copyWith(file: obtainedFile, state: BaseState.success);
+        _puzzleController.selectImage(obtainedFile: obtainedFile);
       case Error():
         _state = state.copyWith(
           state: BaseState.error,
@@ -57,6 +59,7 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  // 데이터 리셋
   void resetState() {
     _state = state.copyWith(state: BaseState.success);
     notifyListeners();
