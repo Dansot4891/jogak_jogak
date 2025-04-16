@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/core/util/dialog/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
+import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
 
 class ChangePasswordPage extends StatelessWidget {
@@ -17,20 +19,25 @@ class ChangePasswordPage extends StatelessWidget {
           children: [
             CustomTextFormField(
               controller: TextEditingController(),
-              hintText: '현재 비밀번호',
+              hintText: '이메일',
             ),
-            const SizedBox(height: 32),
-            CustomTextFormField(
-              controller: TextEditingController(),
-              hintText: '새 비밀번호',
+            const SizedBox(height: 20),
+            AppButton(
+              text: '메일 발송',
+              onTap: () {
+                AppShowDialog.show(
+                  context,
+                  AppDialog.doubleBtns(
+                    title: '비밀번호 재설정',
+                    subText: '해당 이메일로\n비밀번호 재설정 메일이 전송됩니다.',
+                    btnLeftText: '취소',
+                    btnRightText: '확인',
+                    onBtnLeftClicked: () {},
+                    onBtnRightClicked: () {},
+                  ),
+                );
+              },
             ),
-            const SizedBox(height: 8),
-            CustomTextFormField(
-              controller: TextEditingController(),
-              hintText: '새 비밀번호 확인',
-            ),
-            const SizedBox(height: 16),
-            AppButton(text: '닉네임 변경', onTap: () {}),
           ],
         ),
       ),

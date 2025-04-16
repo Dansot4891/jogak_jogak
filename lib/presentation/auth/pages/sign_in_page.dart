@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/router/router.dart';
+import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
-import 'package:jogak_jogak/core/util/dialog/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
-import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
 
 class SignInPage extends StatefulWidget {
@@ -47,17 +45,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      AppShowDialog.show(
-                        context,
-                        AppDialog.doubleBtns(
-                          title: '비밀번호 재설정',
-                          subText: '가입하신 이메일로\n비밀번호 재설정 메일이 전송됩니다.',
-                          btnLeftText: '취소',
-                          btnRightText: '확인',
-                          onBtnLeftClicked: () {},
-                          onBtnRightClicked: () {},
-                        ),
-                      );
+                      navigate(context, route: AppRoute.changePw);
                     },
                     child: Text('비밀번호 재설정', style: AppTextStyle.body1),
                   ),

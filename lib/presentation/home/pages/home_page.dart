@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/router/router.dart';
+import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
 import 'package:jogak_jogak/feature/puzzle/data/repository/puzzle_repository_impl.dart';
