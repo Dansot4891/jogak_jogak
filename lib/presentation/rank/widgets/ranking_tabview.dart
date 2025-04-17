@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
-import 'package:jogak_jogak/feature/ranking/domain/data_source/mock/mock_ranking_data_source_impl.dart';
-import 'package:jogak_jogak/feature/ranking/data/repository/ranking_repository_impl.dart';
+import 'package:jogak_jogak/feature/ranking/data/data_source/mock/mock_ranking_data_source_impl.dart';
+import 'package:jogak_jogak/feature/ranking/domain/repository/ranking_repository_impl.dart';
 import 'package:jogak_jogak/presentation/rank/view_model/ranking_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/widgets/ranking_graph.dart';
 import 'package:jogak_jogak/presentation/rank/widgets/ranking_row.dart';

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:jogak_jogak/feature/puzzle/data/model/puzzle.dart';
+import 'package:jogak_jogak/feature/puzzle/domain/model/puzzle.dart';
 
 class PuzzleState {
   final File? file;

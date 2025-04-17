@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/auth/data/repository/auth_repository.dart';
-import 'package:jogak_jogak/feature/user/data/model/user.dart';
-import 'package:jogak_jogak/feature/user/data/repository/user_repository.dart';
+import 'package:jogak_jogak/feature/user/domain/model/user.dart';
+import 'package:jogak_jogak/feature/user/domain/repository/user_repository.dart';
 import 'package:jogak_jogak/presentation/user/state/user_state.dart';
 
 class UserProvider extends ChangeNotifier {

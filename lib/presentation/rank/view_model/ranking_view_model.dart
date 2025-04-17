@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
-import 'package:jogak_jogak/feature/ranking/data/model/ranking.dart';
-import 'package:jogak_jogak/feature/ranking/data/repository/ranking_repository.dart';
+import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
+import 'package:jogak_jogak/feature/ranking/domain/repository/ranking_repository.dart';
 
 class RankingViewModel with ChangeNotifier {
   final RankingRepository _rankingRepo;

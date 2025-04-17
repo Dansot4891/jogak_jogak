@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jogak_jogak/core/constants/firebase_collections.dart';
-import 'package:jogak_jogak/feature/user/data/model/puzzle_history.dart';
-import 'package:jogak_jogak/feature/user/domain/data_source.dart/user_data_source.dart';
-import 'package:jogak_jogak/feature/user/domain/dto/user_dto.dart';
+import 'package:jogak_jogak/feature/user/domain/model/puzzle_history.dart';
+import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart';
+import 'package:jogak_jogak/feature/user/data/dto/user_dto.dart';
 
 class UserRemoteDataSource implements UserDataSource {
   final FirebaseFirestore _store;

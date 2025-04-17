@@ -1,9 +1,9 @@
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
-import 'package:jogak_jogak/feature/user/data/model/user.dart';
-import 'package:jogak_jogak/feature/user/data/repository/user_repository.dart';
-import 'package:jogak_jogak/feature/user/domain/data_source.dart/user_data_source.dart';
-import 'package:jogak_jogak/feature/user/domain/mapper/user_mapper.dart';
+import 'package:jogak_jogak/feature/user/domain/model/user.dart';
+import 'package:jogak_jogak/feature/user/domain/repository/user_repository.dart';
+import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart';
+import 'package:jogak_jogak/feature/user/data/mapper/user_mapper.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserDataSource _dataSource;

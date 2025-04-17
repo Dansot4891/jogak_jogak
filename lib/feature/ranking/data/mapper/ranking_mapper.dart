@@ -1,5 +1,5 @@
-import 'package:jogak_jogak/feature/ranking/domain/dto/ranking_dto.dart';
-import 'package:jogak_jogak/feature/ranking/data/model/ranking.dart';
+import 'package:jogak_jogak/feature/ranking/data/dto/ranking_dto.dart';
+import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
 
 extension RankingMapper on RankingDto {
   Ranking? toEntity() {

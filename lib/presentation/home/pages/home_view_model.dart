@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/helper/temporary_dir/temporary_dir.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
-import 'package:jogak_jogak/feature/puzzle/data/model/puzzle_image.dart';
-import 'package:jogak_jogak/feature/puzzle/data/repository/puzzle_repository.dart';
+import 'package:jogak_jogak/feature/puzzle/domain/model/puzzle_image.dart';
+import 'package:jogak_jogak/feature/puzzle/domain/repository/puzzle_repository.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_state.dart';
 

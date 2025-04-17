@@ -1,5 +1,5 @@
 import 'package:jogak_jogak/core/module/state/base_state.dart';
-import 'package:jogak_jogak/feature/user/data/model/user.dart';
+import 'package:jogak_jogak/feature/user/domain/model/user.dart';
 
 class UserState {
   final BaseState state;

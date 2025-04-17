@@ -1,5 +1,5 @@
-import 'package:jogak_jogak/feature/puzzle/data/model/puzzle_image.dart';
-import 'package:jogak_jogak/feature/puzzle/domain/dto/puzzle_image_dto.dart';
+import 'package:jogak_jogak/feature/puzzle/domain/model/puzzle_image.dart';
+import 'package:jogak_jogak/feature/puzzle/data/dto/puzzle_image_dto.dart';
 
 extension PuzzleImageMapper on PuzzleImageDto {
   PuzzleImage? toPuzzleImage() {

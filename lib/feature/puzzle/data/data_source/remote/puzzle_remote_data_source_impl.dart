@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jogak_jogak/core/constants/firebase_collections.dart';
 import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
 import 'package:jogak_jogak/core/module/random/random_generator.dart';
-import 'package:jogak_jogak/feature/puzzle/domain/data_source/puzzle_data_source.dart';
-import 'package:jogak_jogak/feature/puzzle/domain/dto/puzzle_image_dto.dart';
+import 'package:jogak_jogak/feature/puzzle/data/data_source/puzzle_data_source.dart';
+import 'package:jogak_jogak/feature/puzzle/data/dto/puzzle_image_dto.dart';
 
 class PuzzleRemoteDataSourceImpl implements PuzzleDataSource {
   final FirebaseFirestore _instance;
