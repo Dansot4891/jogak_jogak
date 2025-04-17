@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
-import 'package:jogak_jogak/feature/puzzle/domain/repository/puzzle_repository_impl.dart';
+import 'package:jogak_jogak/feature/puzzle/data/repository_impl/puzzle_repository_impl.dart';
 import 'package:jogak_jogak/feature/puzzle/data/data_source/remote/puzzle_remote_data_source_impl.dart';
+import 'package:jogak_jogak/feature/puzzle/domain/use_case/get_random_image_url_use_case.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
@@ -13,7 +14,11 @@ import 'package:jogak_jogak/presentation/home/widgets/level_button.dart';
 import 'package:jogak_jogak/presentation/home/widgets/puzzle_image_box.dart';
 
 final HomeViewModel viewModel = HomeViewModel(
-  PuzzleRepositoryImpl(PuzzleRemoteDataSourceImpl(FirebaseFirestore.instance)),
+  GetRandomImageUrlUseCase(
+    PuzzleRepositoryImpl(
+      PuzzleRemoteDataSourceImpl(FirebaseFirestore.instance),
+    ),
+  ),
 );
 
 class HomePage extends StatelessWidget {

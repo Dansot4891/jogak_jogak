@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jogak_jogak/core/constants/firebase_collections.dart';
 import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
 import 'package:jogak_jogak/feature/user/data/dto/user_dto.dart';
-import 'package:jogak_jogak/feature/auth/domain/data_source/remote/auth_remote_data_source.dart';
+import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_data_source.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final FirebaseAuth _auth = FirebaseAuth.instance;

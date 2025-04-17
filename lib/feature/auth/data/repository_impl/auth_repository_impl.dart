@@ -1,7 +1,7 @@
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
-import 'package:jogak_jogak/feature/auth/data/repository/auth_repository.dart';
-import 'package:jogak_jogak/feature/auth/domain/data_source/remote/auth_remote_data_source.dart';
+import 'package:jogak_jogak/feature/auth/domain/repository/auth_repository.dart';
+import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_data_source.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _dataSource;

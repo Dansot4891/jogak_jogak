@@ -5,7 +5,7 @@ import 'package:jogak_jogak/feature/ranking/data/data_source/mock/mock_ranking_d
 import 'package:jogak_jogak/feature/ranking/data/dto/ranking_dto.dart';
 import 'package:jogak_jogak/feature/ranking/data/mapper/ranking_mapper.dart';
 import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
-import 'package:jogak_jogak/feature/ranking/domain/repository/ranking_repository_impl.dart';
+import 'package:jogak_jogak/feature/ranking/data/repository_impl/ranking_repository_impl.dart';
 
 void main() {
   group('ranking repo test', () {

@@ -3,13 +3,13 @@ import 'package:jogak_jogak/core/helper/temporary_dir/temporary_dir.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/puzzle/domain/model/puzzle_image.dart';
-import 'package:jogak_jogak/feature/puzzle/domain/repository/puzzle_repository.dart';
+import 'package:jogak_jogak/feature/puzzle/domain/use_case/get_random_image_url_use_case.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_state.dart';
 
 class HomeViewModel with ChangeNotifier {
-  final PuzzleRepository _puzzleRepository;
-  HomeViewModel(this._puzzleRepository);
+  final GetRandomImageUrlUseCase _getRandomImageUrlUseCase;
+  HomeViewModel(this._getRandomImageUrlUseCase);
 
   final _puzzleController = PuzzleController();
   HomeState _state = const HomeState();
@@ -19,7 +19,7 @@ class HomeViewModel with ChangeNotifier {
   void getRandomImageUrl() async {
     _state = state.copyWith(state: BaseState.loading);
     notifyListeners();
-    final result = await _puzzleRepository.getRandomImageUrl();
+    final result = await _getRandomImageUrlUseCase.getRandomImageUrl();
     switch (result) {
       case Success<PuzzleImage>():
         final url = result.data.imageUrl;
