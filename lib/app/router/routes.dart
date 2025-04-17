@@ -27,39 +27,42 @@ final routes = [
 
 // AppRoute들을 enum으로 정리
 enum AppRoute {
-  root('/root'),
+  root(path: '/root', name: 'root,'),
   // auth
-  signUp('/sign-up'),
-  signIn('/sign-in'),
+  signUp(path: '/sign-up', name: 'sign-up'),
+  signIn(path: '/sign-in', name: 'sign-in'),
 
   // root tab
-  home('/home'),
-  ranking('/ranking'),
-  myPage('/my-page'),
+  home(path: '/home', name: 'home'),
+  ranking(path: '/ranking', name: 'ranking'),
+  myPage(path: '/my-page', name: 'my-page'),
 
   // my info
-  changePw('/change-pw'),
-  updateName('/update-name'),
-  puzzleHistory('/puzzle_history'),
+  changePw(path: '/change-pw', name: 'change-pw'),
+  updateName(path: '/update-name', name: 'update-name'),
+  puzzleHistory(path: '/puzzle_history', name: 'puzzle_history'),
 
   // in Game
-  puzzle('/puzzle');
+  puzzle(path: '/puzzle', name: 'puzzle');
 
   final String path;
+  final String name;
 
-  const AppRoute(this.path);
+  const AppRoute({required this.path, required this.name});
 }
 
 abstract class AuthPath {
   static final List<GoRoute> routes = [
     GoRoute(
       path: AppRoute.signUp.path,
+      name: AppRoute.signUp.name,
       builder: (context, state) {
         return const SignUpPage();
       },
     ),
     GoRoute(
       path: AppRoute.signIn.path,
+      name: AppRoute.signIn.name,
       builder: (context, state) {
         return const SignInPage();
       },
@@ -71,24 +74,28 @@ abstract class RootTabPath {
   static final List<GoRoute> routes = [
     GoRoute(
       path: AppRoute.root.path,
+      name: AppRoute.root.name,
       builder: (context, state) {
         return const RootTab();
       },
     ),
     GoRoute(
       path: AppRoute.home.path,
+      name: AppRoute.home.name,
       builder: (context, state) {
         return const HomePage();
       },
     ),
     GoRoute(
       path: AppRoute.ranking.path,
+      name: AppRoute.ranking.name,
       builder: (context, state) {
         return const RankingPage();
       },
     ),
     GoRoute(
       path: AppRoute.myPage.path,
+      name: AppRoute.myPage.name,
       builder: (context, state) {
         return const MyPage();
       },
@@ -100,18 +107,21 @@ abstract class UserPath {
   static final List<GoRoute> routes = [
     GoRoute(
       path: AppRoute.changePw.path,
+      name: AppRoute.changePw.name,
       builder: (context, state) {
         return const ChangePasswordPage();
       },
     ),
     GoRoute(
       path: AppRoute.updateName.path,
+      name: AppRoute.updateName.name,
       builder: (context, state) {
         return const UpdateNicknamePage();
       },
     ),
     GoRoute(
       path: AppRoute.puzzleHistory.path,
+      name: AppRoute.puzzleHistory.name,
       builder: (context, state) {
         return const PuzzleHistoryPage();
       },
@@ -123,6 +133,7 @@ abstract class PuzzlePath {
   static final List<GoRoute> routes = [
     GoRoute(
       path: AppRoute.puzzle.path,
+      name: AppRoute.puzzle.name,
       builder: (context, state) {
         return const PuzzlePage();
       },
