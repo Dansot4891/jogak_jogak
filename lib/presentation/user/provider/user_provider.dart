@@ -3,18 +3,18 @@ import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/model/user.dart';
-import 'package:jogak_jogak/feature/user/domain/repository/user_repository.dart';
-import 'package:jogak_jogak/presentation/user/state/user_state.dart';
+import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
+import 'package:jogak_jogak/presentation/user/provider/user_state.dart';
 
 class UserProvider extends ChangeNotifier {
   final SignInUseCase _signInUseCase;
-  final UserRepository _userRepository;
+  final GetUserUseCase _getUserUseCase;
 
   UserProvider({
     required SignInUseCase signInUseCase,
-    required UserRepository userRepository,
+    required GetUserUseCase getUserUseCase,
   }) : _signInUseCase = signInUseCase,
-       _userRepository = userRepository;
+       _getUserUseCase = getUserUseCase;
 
   UserState _state = const UserState();
   UserState get state => _state;
@@ -28,7 +28,7 @@ class UserProvider extends ChangeNotifier {
     // 로그인 결과
     switch (loginResult) {
       case Success<String>():
-        final userResult = await _userRepository.getUser(loginResult.data);
+        final userResult = await _getUserUseCase.execute(loginResult.data);
         // 유저 정보 조회 결과
         switch (userResult) {
           case Success<AppUser>():
