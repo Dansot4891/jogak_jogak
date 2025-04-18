@@ -7,7 +7,7 @@ import 'package:jogak_jogak/core/module/state/state_handling.dart';
 import 'package:jogak_jogak/feature/ranking/data/data_source/remote/ranking_remote_data_source_impl.dart';
 import 'package:jogak_jogak/feature/ranking/data/repository_impl/ranking_repository_impl.dart';
 import 'package:jogak_jogak/feature/ranking/domain/use_case/get_rankings_use_case.dart';
-import 'package:jogak_jogak/presentation/rank/view_model/ranking_view_model.dart';
+import 'package:jogak_jogak/presentation/rank/pages/ranking_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/widgets/ranking_graph.dart';
 import 'package:jogak_jogak/presentation/rank/widgets/ranking_row.dart';
 

@@ -32,7 +32,7 @@ class HomeViewModel with ChangeNotifier {
       case Error():
         _state = state.copyWith(
           state: BaseState.error,
-          error: result.error.message,
+          errorMessage: result.error.message,
         );
     }
     notifyListeners();

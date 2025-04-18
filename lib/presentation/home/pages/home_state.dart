@@ -7,7 +7,7 @@ class HomeState {
   final int level;
   final File? file;
   final BaseState state;
-  final String error;
+  final String errorMessage;
 
   const HomeState({
     this.level = 3,
@@ -15,7 +15,7 @@ class HomeState {
     // 에러 났을 때만 ui가 변동된다.
     // 기본값은 success
     this.state = BaseState.success,
-    this.error = '',
+    this.errorMessage = '',
   });
 
   HomeState copyWith({
@@ -23,13 +23,13 @@ class HomeState {
     File? file,
     bool fileClear = false,
     BaseState? state,
-    String? error,
+    String? errorMessage,
   }) {
     return HomeState(
       level: level ?? this.level,
       file: fileClear ? null : file ?? this.file,
       state: state ?? this.state,
-      error: error ?? this.error,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }

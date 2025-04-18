@@ -11,6 +11,7 @@ import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
 import 'package:jogak_jogak/presentation/home/widgets/alert_message.dart';
+import 'package:jogak_jogak/presentation/home/widgets/home_error.dart';
 import 'package:jogak_jogak/presentation/home/widgets/level_button.dart';
 import 'package:jogak_jogak/presentation/home/widgets/puzzle_image_box.dart';
 
@@ -36,25 +37,9 @@ class HomePage extends StatelessWidget {
             state: viewModel.state.state,
             init: const BaseLoadingView(),
             loading: const BaseLoadingView(),
-            error: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(viewModel.state.error, style: AppTextStyle.body1),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 12,
-                      horizontal: 40,
-                    ),
-                    child: AppButton(
-                      text: '돌아가기',
-                      onTap: () {
-                        viewModel.resetState();
-                      },
-                    ),
-                  ),
-                ],
-              ),
+            error: HomeError(
+              message: viewModel.state.errorMessage,
+              onTap: () => viewModel.resetState(),
             ),
             success: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
