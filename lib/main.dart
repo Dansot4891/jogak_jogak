@@ -23,6 +23,7 @@ void main() async {
               (_) => UserProvider(
                 signInUseCase: locator(),
                 getUserUseCase: locator(),
+                signUpUseCase: locator(),
               ),
         ),
       ],

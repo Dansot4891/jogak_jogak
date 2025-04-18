@@ -21,7 +21,6 @@ import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart'
 import 'package:jogak_jogak/feature/user/data/repository_impl/user_repository_impl.dart';
 import 'package:jogak_jogak/feature/user/domain/repository/user_repository.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
-import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
 final locator = GetIt.instance;
 
@@ -52,11 +51,6 @@ void diSetup() {
   locator.registerSingleton(SignUpUseCase(locator()));
   locator.registerSingleton(SignInUseCase(locator()));
   locator.registerSingleton(GetUserUseCase(locator()));
-
-  // Provider
-  locator.registerSingleton(
-    UserProvider(signInUseCase: locator(), getUserUseCase: locator()),
-  );
 
   // ViewModel
   // viewmodel은 해당 화면에서 provier를 이용해서 사용한다.
