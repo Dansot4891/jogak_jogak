@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
 import 'package:jogak_jogak/feature/puzzle/data/repository_impl/puzzle_repository_impl.dart';
 import 'package:jogak_jogak/feature/puzzle/data/data_source/remote/puzzle_remote_data_source_impl.dart';
@@ -33,6 +34,28 @@ class HomePage extends StatelessWidget {
         builder: (context, child) {
           return StateHandling(
             state: viewModel.state.state,
+            init: const BaseLoadingView(),
+            loading: const BaseLoadingView(),
+            error: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(viewModel.state.error, style: AppTextStyle.body1),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 40,
+                    ),
+                    child: AppButton(
+                      text: '돌아가기',
+                      onTap: () {
+                        viewModel.resetState();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
             success: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               width: double.infinity,
@@ -76,28 +99,6 @@ class HomePage extends StatelessWidget {
                             : () {
                               navigate(context, route: AppRoute.puzzle);
                             },
-                  ),
-                ],
-              ),
-            ),
-            init: const Center(child: CircularProgressIndicator()),
-            loading: const Center(child: CircularProgressIndicator()),
-            error: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(viewModel.state.error, style: AppTextStyle.body1),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 12,
-                      horizontal: 40,
-                    ),
-                    child: AppButton(
-                      text: '돌아가기',
-                      onTap: () {
-                        viewModel.resetState();
-                      },
-                    ),
                   ),
                 ],
               ),

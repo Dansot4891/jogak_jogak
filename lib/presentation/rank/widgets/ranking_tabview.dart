@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
 import 'package:jogak_jogak/feature/ranking/data/data_source/remote/ranking_remote_data_source_impl.dart';
 import 'package:jogak_jogak/feature/ranking/data/repository_impl/ranking_repository_impl.dart';
@@ -30,9 +31,9 @@ class RankingTabview extends StatelessWidget {
         final rankings = state.rankings;
         return StateHandling(
           state: state.state,
-          init: const Center(child: CircularProgressIndicator()),
-          loading: const Center(child: CircularProgressIndicator()),
-          error: const Center(child: CircularProgressIndicator()),
+          init: const BaseLoadingView(),
+          loading: const BaseLoadingView(),
+          error: BaseErrorView(state.errorMessage),
           success: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
