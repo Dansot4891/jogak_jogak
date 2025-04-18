@@ -68,12 +68,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           child: CustomTextFormField(
                             controller: _name,
                             hintText: '닉네임 입력',
+                            maxLength: 10,
                             onChanged: (val) {
                               setState(() {
                                 isAbleUsername = null;
                               });
                             },
-                            validator: AppValidator.emailValid,
                           ),
                         ),
                         const SizedBox(width: 4),
