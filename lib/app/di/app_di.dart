@@ -25,6 +25,7 @@ import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
+import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_view_model.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
@@ -32,6 +33,9 @@ import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 final locator = GetIt.instance;
 
 void diSetup() {
+  // controller
+  locator.registerSingleton(PuzzleController());
+
   // DataSource
   locator.registerSingleton<PuzzleDataSource>(
     PuzzleRemoteDataSourceImpl(FirebaseFirestore.instance),
