@@ -16,7 +16,7 @@ class HomeViewModel with ChangeNotifier {
   HomeState get state => _state;
 
   // 랜덤 이미지 조회
-  void getRandomImageUrl() async {
+  Future<void> getRandomImageUrl() async {
     _state = state.copyWith(state: BaseState.loading);
     notifyListeners();
     final result = await _getRandomImageUrlUseCase.execute();
