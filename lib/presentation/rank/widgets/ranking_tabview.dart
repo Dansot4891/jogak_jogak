@@ -17,7 +17,7 @@ final _viewModel = RankingViewModel(
       RankingRemoteDataSourceImpl(FirebaseFirestore.instance),
     ),
   ),
-);
+)..fetchRankings(3);
 
 class RankingTabview extends StatelessWidget {
   const RankingTabview({super.key});
