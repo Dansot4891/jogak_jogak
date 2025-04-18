@@ -21,4 +21,16 @@ class UserRemoteDataSourceImpl implements UserDataSource {
         await _store.collection(FirebaseCollections.users).doc(uid).get();
     return UserDto.fromFireBase(snapshot);
   }
+
+  @override
+  Future<bool> checkUsername(String username) async {
+    final snapshot =
+        await _store
+            .collection(FirebaseCollections.users)
+            .where('username', isEqualTo: username)
+            .get();
+    // 해당 닉네임이 사용가능하면 true
+    // 해당 닉네임이 사용 불가능하면 false
+    return snapshot.docs.isEmpty;
+  }
 }

@@ -5,4 +5,6 @@ abstract interface class UserDataSource {
   Future<UserDto> getUser(String uid);
 
   Future<List<PuzzleHistory>> getPuzzleHistory(String email);
+
+  Future<bool> checkUsername(String username);
 }

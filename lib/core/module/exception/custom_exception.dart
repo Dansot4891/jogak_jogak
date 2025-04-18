@@ -7,7 +7,7 @@ abstract class CustomException implements Exception {
 
 // 알 수 없는 에러일 때 사용
 class UnexpectedException extends CustomException {
-  const UnexpectedException() : super(501, '문제가 발생했어요. 잠시 후 다시 시도해주세요.');
+  const UnexpectedException() : super(501, '문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
 }
 
 // 파이어베이스 Auth에서 유저 uid를 찾을 수 없을 때

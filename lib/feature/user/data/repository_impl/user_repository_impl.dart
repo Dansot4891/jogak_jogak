@@ -19,4 +19,10 @@ class UserRepositoryImpl implements UserRepository {
     final userDto = await _dataSource.getUser(uid);
     return userDto.toUser();
   }
+
+  @override
+  Future<bool> checkUsername(String username) async {
+    final userDto = await _dataSource.checkUsername(username);
+    return userDto;
+  }
 }
