@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
@@ -28,10 +27,8 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   void initState() {
-    if (FirebaseAuth.instance.currentUser != null) {
-      final UserProvider provider = locator();
-      // provider.signIn(email: email, password: password)
-    }
+    final UserProvider provider = locator();
+    provider.autoLogin();
     super.initState();
   }
 

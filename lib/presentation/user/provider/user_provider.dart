@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
@@ -85,6 +86,23 @@ class UserProvider extends ChangeNotifier {
     switch (result) {
       case Success<void>():
       case Error<void>():
+    }
+  }
+
+  void autoLogin() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final uid = user.uid;
+      final result = await _getUserUseCase.execute(uid);
+      switch (result) {
+        case Success<AppUser>():
+          _state = state.copyWith(user: result.data, state: BaseState.success);
+        case Error():
+          _state = state.copyWith(
+            state: BaseState.error,
+            error: result.error.message,
+          );
+      }
     }
   }
 }
