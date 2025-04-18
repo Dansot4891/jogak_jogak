@@ -51,9 +51,6 @@ dependencies:
   # api
   dio: ^5.8.0+1
 
-  # state management
-  provider: ^6.1.4
-
   # dependency injection
   get_it: ^8.0.3
   

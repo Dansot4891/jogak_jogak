@@ -23,6 +23,7 @@ import 'package:jogak_jogak/feature/user/data/repository_impl/user_repository_im
 import 'package:jogak_jogak/feature/user/domain/repository/user_repository.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
+import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
 final locator = GetIt.instance;
 
@@ -55,9 +56,15 @@ void diSetup() {
   locator.registerSingleton(SignOutUseCase(locator()));
   locator.registerSingleton(GetUserUseCase(locator()));
   locator.registerSingleton(CheckUsernameUseCase(locator()));
-  locator.registerSingleton(GetUserUseCase(locator()));
+
+  // 전역 provider
+  locator.registerSingleton(
+    UserProvider(
+      signInUseCase: locator(),
+      getUserUseCase: locator(),
+      signUpUseCase: locator(),
+    ),
+  );
 
   // ViewModel
-  // viewmodel은 해당 화면에서 provier를 이용해서 사용한다.
-  // => 해당 뷰에서만 이용되기때문에 굳이 전역으로 사용하지 않아도 됨.
 }
