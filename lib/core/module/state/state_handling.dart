@@ -3,17 +3,17 @@ import 'package:jogak_jogak/core/module/state/base_state.dart';
 
 class StateHandling extends StatelessWidget {
   final BaseState state;
-  final Widget success;
   final Widget init;
   final Widget loading;
   final Widget error;
+  final Widget success;
   const StateHandling({
     super.key,
     required this.state,
-    required this.success,
     required this.init,
     required this.loading,
     required this.error,
+    required this.success,
   });
 
   @override
