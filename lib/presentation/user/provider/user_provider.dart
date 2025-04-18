@@ -20,7 +20,10 @@ class UserProvider extends ChangeNotifier {
   UserState get state => _state;
 
   // 로그인
-  Future<void> signIn({required String email, required String password}) async {
+  Future<BaseState> signIn({
+    required String email,
+    required String password,
+  }) async {
     final loginResult = await _signInUseCase.execute(
       email: email,
       password: password,
@@ -48,5 +51,6 @@ class UserProvider extends ChangeNotifier {
           error: loginResult.error.message,
         );
     }
+    return state.state;
   }
 }
