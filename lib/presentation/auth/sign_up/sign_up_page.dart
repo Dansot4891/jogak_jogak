@@ -136,7 +136,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   if (result) {
                                     navigate(
                                       context,
-                                      route: AppRoute.root,
+                                      route: AppRoute.home,
                                       method: NavigationMethod.go,
                                     );
                                   } else {

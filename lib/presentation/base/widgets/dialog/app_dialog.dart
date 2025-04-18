@@ -29,14 +29,14 @@ class AppDialog extends Dialog {
     required String title,
     required String btnText,
     String? subText,
-    required VoidCallback onBtnClicked,
+    VoidCallback? onBtnClicked,
     double? width,
   }) {
     return AppDialog(
       title: title,
       subText: subText,
       btnText: btnText,
-      onBtnClicked: onBtnClicked,
+      onBtnClicked: onBtnClicked ?? () {},
       width: width,
     );
   }

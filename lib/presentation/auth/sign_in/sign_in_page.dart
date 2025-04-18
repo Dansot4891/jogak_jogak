@@ -77,7 +77,7 @@ class _SignInPageState extends State<SignInPage> {
                     case BaseState.success:
                       navigate(
                         context,
-                        route: AppRoute.root,
+                        route: AppRoute.home,
                         method: NavigationMethod.replace,
                       );
                     default:
