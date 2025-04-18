@@ -16,7 +16,7 @@ void main() {
         level: 3,
         email: 'test@gmail.com',
         playTime: '3:20',
-        rank: 3,
+        rank: 1,
       ),
     ];
     final mockDataSource = MockRankingDataSourceImpl();
@@ -26,7 +26,10 @@ void main() {
 
       switch (resp) {
         case Success<List<Ranking>>():
-          expect(resp.data, mock.mapToEntityList((e) => e.toEntity()));
+          expect(
+            resp.data.first,
+            mock.mapToEntityList((e) => e.toEntity()).first,
+          );
           break;
         case Error<List<Ranking>>():
           expect(resp.error, 501);

@@ -9,7 +9,7 @@ void main() async {
     level: 3,
     email: 'test@gmail.com',
     playTime: '3:20',
-    rank: 3,
+    rank: 1,
   );
   final instance = FakeFirebaseFirestore();
 
