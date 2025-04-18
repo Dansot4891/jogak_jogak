@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_data_source_impl.dart';
@@ -28,7 +29,7 @@ void diSetup() {
   // ------------------
   // puzzle / home
   locator.registerSingleton<PuzzleDataSource>(
-    PuzzleRemoteDataSourceImpl(locator()),
+    PuzzleRemoteDataSourceImpl(FirebaseFirestore.instance),
   );
   locator.registerSingleton<PuzzleRepository>(PuzzleRepositoryImpl(locator()));
   locator.registerSingleton(GetRandomImageUrlUseCase(locator()));
@@ -36,7 +37,7 @@ void diSetup() {
   // ------------------
   // ranking
   locator.registerSingleton<RankingDataSource>(
-    RankingRemoteDataSourceImpl(locator()),
+    RankingRemoteDataSourceImpl(FirebaseFirestore.instance),
   );
   locator.registerSingleton<RankingRepository>(
     RankingRepositoryImpl(locator()),
@@ -46,8 +47,7 @@ void diSetup() {
   // ------------------
   // user
   locator.registerSingleton<UserDataSource>(
-    UserRemoteDataSourceImpl(locator()),
+    UserRemoteDataSourceImpl(FirebaseFirestore.instance),
   );
   locator.registerSingleton<UserRepository>(UserRepositoryImpl(locator()));
-  locator.registerSingleton(GetRankingsUseCase(locator()));
 }
