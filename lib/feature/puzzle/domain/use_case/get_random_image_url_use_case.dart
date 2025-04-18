@@ -8,7 +8,7 @@ class GetRandomImageUrlUseCase {
 
   GetRandomImageUrlUseCase(this._puzzleRepository);
 
-  Future<Result<PuzzleImage>> getRandomImageUrl() async {
+  Future<Result<PuzzleImage>> execute() async {
     try {
       final puzzleImage = await _puzzleRepository.getRandomImageUrl();
       if (puzzleImage == null) {

@@ -19,7 +19,7 @@ class HomeViewModel with ChangeNotifier {
   void getRandomImageUrl() async {
     _state = state.copyWith(state: BaseState.loading);
     notifyListeners();
-    final result = await _getRandomImageUrlUseCase.getRandomImageUrl();
+    final result = await _getRandomImageUrlUseCase.execute();
     switch (result) {
       case Success<PuzzleImage>():
         final url = result.data.imageUrl;
