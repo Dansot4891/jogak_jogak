@@ -97,6 +97,7 @@ class UserProvider extends ChangeNotifier {
       switch (result) {
         case Success<AppUser>():
           _state = state.copyWith(user: result.data, state: BaseState.success);
+          notifyListeners();
         case Error():
           _state = state.copyWith(
             state: BaseState.error,
