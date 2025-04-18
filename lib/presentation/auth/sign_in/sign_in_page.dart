@@ -36,7 +36,7 @@ class _SignInPageState extends State<SignInPage> {
               Image.asset(AppImage.appIcon, width: AppSize.fractionWidth(0.6)),
               const SizedBox(height: 20),
               Text('조각조각', style: AppTextStyle.title1),
-              const SizedBox(height: 100),
+              const SizedBox(height: 40),
               CustomTextFormField(controller: _email, hintText: '이메일 입력'),
               const SizedBox(height: 8),
               CustomTextFormField(controller: _password, hintText: '비밀번호 입력'),

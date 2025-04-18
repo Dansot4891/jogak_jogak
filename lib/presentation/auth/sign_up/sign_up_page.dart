@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
-import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/core/helper/validator/app_validator.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
+import 'package:jogak_jogak/core/module/state/base_state.dart';
+import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
@@ -14,7 +14,6 @@ import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
-import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
 class SignUpPage extends StatefulWidget {
   final SignUpViewModel viewModel;
@@ -41,6 +40,9 @@ class _SignUpPageState extends State<SignUpPage> {
       body: ListenableBuilder(
         listenable: widget.viewModel,
         builder: (context, child) {
+          if (widget.viewModel.state.state == BaseState.loading) {
+            return const BaseLoadingView();
+          }
           return Form(
             key: _formKey,
             child: Padding(
@@ -126,30 +128,28 @@ class _SignUpPageState extends State<SignUpPage> {
                                   _passwordCheck.text.isNotEmpty
                               ? () async {
                                 if (_formKey.currentState!.validate()) {
-                                  final UserProvider provider = locator();
-                                  final result = await provider.signup(
+                                  final result = await widget.viewModel.signup(
                                     email: _email.text,
                                     password: _password.text,
                                     username: _name.text,
                                   );
-                                  switch (result) {
-                                    case BaseState.success:
-                                      navigate(
-                                        context,
-                                        route: AppRoute.root,
-                                        method: NavigationMethod.go,
-                                      );
-                                    default:
-                                      AppShowDialog.show(
-                                        context,
-                                        AppDialog.singleBtn(
-                                          title: '에러가 발생하였습니다.',
-                                          btnText: '확인',
-                                          onBtnClicked: () {
-                                            pop(context);
-                                          },
-                                        ),
-                                      );
+                                  if (result) {
+                                    navigate(
+                                      context,
+                                      route: AppRoute.root,
+                                      method: NavigationMethod.go,
+                                    );
+                                  } else {
+                                    AppShowDialog.show(
+                                      context,
+                                      AppDialog.singleBtn(
+                                        title: '에러가 발생하였습니다.',
+                                        btnText: '확인',
+                                        onBtnClicked: () {
+                                          pop(context);
+                                        },
+                                      ),
+                                    );
                                   }
                                 }
                               }
