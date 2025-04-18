@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
+import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/core/helper/validator/app_validator.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
+import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
@@ -44,9 +47,13 @@ class _SignUpPageState extends State<SignUpPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  const Spacer(),
+                  Image.asset(
+                    AppImage.appIcon,
+                    width: AppSize.fractionWidth(0.6),
+                  ),
+                  const SizedBox(height: 20),
                   Text('조각조각', style: AppTextStyle.title1),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 40),
                   CustomTextFormField(
                     controller: _email,
                     hintText: '이메일 입력',
@@ -79,7 +86,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                   final resp = await widget.viewModel
                                       .checkUsername(_name.text);
                                   isAbleUsername = resp;
-                                  print('resp: $resp');
                                   setState(() {});
                                 },
                       ),
@@ -88,7 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Container(
                     alignment: Alignment.centerLeft,
                     height: 40,
-                    child: Text(noticeText),
+                    child: noticeWidget,
                   ),
                   CustomTextFormField(
                     controller: _password,
@@ -114,7 +120,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     text: '회원가입',
                     onTap:
                         isAbleUsername == true &&
-                                _password.text == _passwordCheck.text
+                                _password.text == _passwordCheck.text &&
+                                _password.text.isNotEmpty &&
+                                _passwordCheck.text.isNotEmpty
                             ? () async {
                               if (_formKey.currentState!.validate()) {
                                 final UserProvider provider = locator();
@@ -156,10 +164,16 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  String get noticeText =>
+  Widget get noticeWidget =>
       isAbleUsername == null
-          ? ''
+          ? const Text('')
           : isAbleUsername == true
-          ? '사용 가능한 닉네임입니다.'
-          : '사용 불가능한 닉네임입니다.';
+          ? Text(
+            '사용 가능한 닉네임입니다.',
+            style: AppTextStyle.body1.copyWith(color: AppColor.blue),
+          )
+          : Text(
+            '사용 불가능한 닉네임입니다.',
+            style: AppTextStyle.body1.copyWith(color: AppColor.red),
+          );
 }

@@ -20,4 +20,7 @@ abstract class AppColor {
 
   // red
   static Color get red => const Color(0xFFE40000);
+
+  // blue
+  static Color get blue => const Color(0xFF4A53FA);
 }

@@ -68,6 +68,7 @@ class UserProvider extends ChangeNotifier {
       password: password,
       username: username,
     );
+    print('sign up result = $result');
     switch (result) {
       case Success<void>():
         return signIn(email: email, password: password);
