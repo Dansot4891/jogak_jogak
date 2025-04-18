@@ -39,7 +39,12 @@ class _SignInPageState extends State<SignInPage> {
               const SizedBox(height: 40),
               CustomTextFormField(controller: _email, hintText: '이메일 입력'),
               const SizedBox(height: 8),
-              CustomTextFormField(controller: _password, hintText: '비밀번호 입력'),
+              CustomTextFormField(
+                controller: _password,
+                obsecure: true,
+                maxLines: 1,
+                hintText: '비밀번호 입력',
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Row(
