@@ -6,6 +6,7 @@ import 'package:jogak_jogak/feature/ranking/data/dto/ranking_dto.dart';
 import 'package:jogak_jogak/feature/ranking/data/mapper/ranking_mapper.dart';
 import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
 import 'package:jogak_jogak/feature/ranking/data/repository_impl/ranking_repository_impl.dart';
+import 'package:jogak_jogak/feature/ranking/domain/use_case/get_rankings_use_case.dart';
 
 void main() {
   group('ranking repo test', () {
@@ -19,9 +20,9 @@ void main() {
       ),
     ];
     final mockDataSource = MockRankingDataSourceImpl();
-    final repo = RankingRepositoryImpl(mockDataSource);
+    final repo = GetRankingsUseCase(RankingRepositoryImpl(mockDataSource));
     test('ranking repo test', () async {
-      final resp = await repo.getRankings();
+      final resp = await repo.execute();
 
       switch (resp) {
         case Success<List<Ranking>>():

@@ -1,6 +1,4 @@
 import 'package:jogak_jogak/core/helper/extension/list_map_extension.dart';
-import 'package:jogak_jogak/core/module/error_handling/result.dart';
-import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
 import 'package:jogak_jogak/feature/ranking/data/data_source/remote/ranking_remote_data_source.dart';
 import 'package:jogak_jogak/feature/ranking/data/mapper/ranking_mapper.dart';
 import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
@@ -12,13 +10,9 @@ class RankingRepositoryImpl implements RankingRepository {
   RankingRepositoryImpl(this._dataSource);
 
   @override
-  Future<Result<List<Ranking>>> getRankings() async {
-    try {
-      final resp = await _dataSource.getRankings();
-      final rankings = resp.mapToEntityList((e) => e.toEntity());
-      return Result.success(rankings);
-    } catch (e) {
-      return const Result.error(UnexpectedException());
-    }
+  Future<List<Ranking>> getRankings() async {
+    final resp = await _dataSource.getRankings();
+    final rankings = resp.mapToEntityList((e) => e.toEntity());
+    return rankings;
   }
 }

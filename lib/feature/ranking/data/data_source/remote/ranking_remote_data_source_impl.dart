@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:jogak_jogak/core/constants/firebase_collections.dart';
 import 'package:jogak_jogak/feature/ranking/data/dto/ranking_dto.dart';
 import 'package:jogak_jogak/feature/ranking/data/data_source/remote/ranking_remote_data_source.dart';
 
@@ -9,7 +10,8 @@ class RankingRemoteDataSourceImpl implements RankingRemoteDataSource {
 
   @override
   Future<List<RankingDto>> getRankings() async {
-    final snapshot = await _instance.collection('rank').get();
+    final snapshot =
+        await _instance.collection(FirebaseCollections.ranking).get();
     print('snapshot: $snapshot');
     print('snapshot.docs: ${snapshot.docs}');
     print('snapshot.metadata: ${snapshot.metadata}');
