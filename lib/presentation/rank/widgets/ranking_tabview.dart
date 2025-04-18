@@ -1,34 +1,27 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
-import 'package:jogak_jogak/feature/ranking/data/data_source/remote/ranking_remote_data_source_impl.dart';
-import 'package:jogak_jogak/feature/ranking/data/repository_impl/ranking_repository_impl.dart';
-import 'package:jogak_jogak/feature/ranking/domain/use_case/get_rankings_use_case.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/widgets/ranking_graph.dart';
 import 'package:jogak_jogak/presentation/rank/widgets/ranking_row.dart';
 
-final _viewModel = RankingViewModel(
-  GetRankingsUseCase(
-    RankingRepositoryImpl(
-      RankingRemoteDataSourceImpl(FirebaseFirestore.instance),
-    ),
-  ),
-);
-
 class RankingTabview extends StatelessWidget {
   final int level;
-  const RankingTabview(this.level, {super.key});
+  final RankingViewModel viewModel;
+  const RankingTabview({
+    required this.level,
+    required this.viewModel,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: _viewModel..fetchRankings(level),
+      listenable: viewModel..fetchRankings(level),
       builder: (context, child) {
-        final state = _viewModel.state;
+        final state = viewModel.state;
         final rankings =
             state.withLevelRanking.firstWhere((e) => e.level == level).rankings;
         return StateHandling(

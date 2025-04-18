@@ -6,7 +6,7 @@ class MyPageState {
   final BaseState state;
   MyPageState({
     this.username = '',
-    this.version = '',
+    this.version = 'ver 1.0.0',
     this.state = BaseState.init,
   });
 

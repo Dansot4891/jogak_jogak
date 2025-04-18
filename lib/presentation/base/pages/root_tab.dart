@@ -5,6 +5,7 @@ import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
+import 'package:jogak_jogak/app/di/app_di.dart';
 
 class RootTab extends StatefulWidget {
   const RootTab({super.key});
@@ -42,7 +43,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
       body: TabBarView(
         physics: const NeverScrollableScrollPhysics(),
         controller: controller,
-        children: const [HomePage(), RankingPage(), MyPage()],
+        children: [HomePage(locator()), const RankingPage(), MyPage(locator())],
       ),
 
       bottomNavigationBar: Column(
