@@ -61,7 +61,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           controller: _name,
                           hintText: '닉네임 입력',
                           onChanged: (val) {
-                            setState(() {});
+                            setState(() {
+                              isAbleUsername = null;
+                            });
                           },
                           validator: AppValidator.emailValid,
                         ),
@@ -73,13 +75,21 @@ class _SignUpPageState extends State<SignUpPage> {
                         onTap:
                             _name.text.isEmpty
                                 ? null
-                                : () {
-                                  widget.viewModel.checkUsername(_name.text);
+                                : () async {
+                                  final resp = await widget.viewModel
+                                      .checkUsername(_name.text);
+                                  isAbleUsername = resp;
+                                  print('resp: $resp');
+                                  setState(() {});
                                 },
                       ),
                     ],
                   ),
-                  const SizedBox(height: 40, child: Text('')),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    height: 40,
+                    child: Text(noticeText),
+                  ),
                   CustomTextFormField(
                     controller: _password,
                     hintText: '비밀번호 입력',
@@ -145,4 +155,11 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
+  String get noticeText =>
+      isAbleUsername == null
+          ? ''
+          : isAbleUsername == true
+          ? '사용 가능한 닉네임입니다.'
+          : '사용 불가능한 닉네임입니다.';
 }
