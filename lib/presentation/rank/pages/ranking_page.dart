@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/core/constants/app_data.dart';
 import 'package:jogak_jogak/presentation/base/pages/tabbar_page.dart';
 import 'package:jogak_jogak/presentation/rank/widgets/ranking_tabview.dart';
 
@@ -10,10 +11,8 @@ class RankingPage extends StatelessWidget {
     return TabbarPage(tabs: _tabs, children: _chilren, onTap: (val) {});
   }
 
-  static const List<String> _tabs = ['3 X 3', '4 X 4', '5 X 5'];
-  static const List<Widget> _chilren = [
-    RankingTabview(3),
-    RankingTabview(4),
-    RankingTabview(5),
-  ];
+  static final List<String> _tabs =
+      AppData.levels.map((e) => '$e X $e').toList();
+  static final List<Widget> _chilren =
+      AppData.levels.map((e) => RankingTabview(e)).toList();
 }

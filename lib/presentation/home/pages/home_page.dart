@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/constants/app_data.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
 import 'package:jogak_jogak/feature/puzzle/data/repository_impl/puzzle_repository_impl.dart';
@@ -60,13 +61,17 @@ class HomePage extends StatelessWidget {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      LevelButton(viewModel: viewModel, level: 3),
-                      const SizedBox(width: 8),
-                      LevelButton(viewModel: viewModel, level: 4),
-                      const SizedBox(width: 8),
-                      LevelButton(viewModel: viewModel, level: 5),
-                    ],
+                    children:
+                        AppData.levels
+                            .map(
+                              (e) => LevelButton(
+                                selectedLevel: viewModel.state.level,
+                                level: e,
+                                horizontalMargin: 4,
+                                onTap: () => viewModel.selectLevel(e),
+                              ),
+                            )
+                            .toList(),
                   ),
                   const SizedBox(height: 8),
                   AppButton(
