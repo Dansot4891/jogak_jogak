@@ -21,6 +21,7 @@ class MyPage extends StatelessWidget {
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (context, child) {
+          final state = viewModel.state;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: CustomScrollView(
@@ -33,7 +34,10 @@ class MyPage extends StatelessWidget {
                       const Icon(Icons.extension_outlined, size: 120),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        child: Text('임명우님\n환영합니다.', style: AppTextStyle.title2),
+                        child: Text(
+                          '${state.username}님\n환영합니다.',
+                          style: AppTextStyle.title2,
+                        ),
                       ),
                       SettingCard(
                         text: '비밀번호 변경',
@@ -96,7 +100,7 @@ class MyPage extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.bottomRight,
-                        child: Text('ver 1.0.0', style: AppTextStyle.version),
+                        child: Text(state.version, style: AppTextStyle.version),
                       ),
                     ],
                   ),

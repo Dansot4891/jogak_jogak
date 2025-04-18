@@ -80,8 +80,8 @@ void diSetup() {
   locator.registerSingleton(
     SignUpViewModel(userProvider: locator(), checkUsernameUseCase: locator()),
   );
-  locator.registerSingleton(HomeViewModel(locator()));
-  locator.registerSingleton(PuzzleViewModel());
-  locator.registerSingleton(RankingViewModel(locator()));
-  locator.registerSingleton(MyPageViewModel(locator()));
+  locator.registerFactory(() => HomeViewModel(locator()));
+  locator.registerFactory(() => PuzzleViewModel());
+  locator.registerFactory(() => RankingViewModel(locator()));
+  locator.registerFactory(() => MyPageViewModel(locator()));
 }
