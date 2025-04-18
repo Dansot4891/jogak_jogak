@@ -1,23 +1,27 @@
 import 'package:jogak_jogak/core/module/state/base_state.dart';
-import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
+import 'package:jogak_jogak/feature/ranking/domain/model/with_level_ranking.dart';
 
 class RankingState {
-  final List<Ranking> rankings;
+  final List<WithLevelRanking> withLevelRanking;
   final BaseState state;
   final String errorMessage;
   const RankingState({
-    this.rankings = const [],
+    this.withLevelRanking = const [
+      WithLevelRanking(level: 3),
+      WithLevelRanking(level: 4),
+      WithLevelRanking(level: 5),
+    ],
     this.state = BaseState.init,
     this.errorMessage = '',
   });
 
   RankingState copyWith({
-    List<Ranking>? rankings,
+    List<WithLevelRanking>? withLevelRanking,
     BaseState? state,
     String? errorMessage,
   }) {
     return RankingState(
-      rankings: rankings ?? this.rankings,
+      withLevelRanking: withLevelRanking ?? this.withLevelRanking,
       state: state ?? this.state,
       errorMessage: errorMessage ?? this.errorMessage,
     );

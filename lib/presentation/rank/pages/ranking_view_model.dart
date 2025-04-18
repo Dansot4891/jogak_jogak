@@ -17,7 +17,15 @@ class RankingViewModel with ChangeNotifier {
     switch (result) {
       case Success():
         _state = state.copyWith(
-          rankings: result.data,
+          withLevelRanking:
+              state.withLevelRanking
+                  .map(
+                    (e) =>
+                        e.level == level
+                            ? e.copyWith(rankings: result.data)
+                            : e,
+                  )
+                  .toList(),
           state: BaseState.success,
         );
         break;

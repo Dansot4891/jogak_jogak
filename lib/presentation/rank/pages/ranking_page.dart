@@ -12,8 +12,8 @@ class RankingPage extends StatelessWidget {
 
   static const List<String> _tabs = ['3 X 3', '4 X 4', '5 X 5'];
   static const List<Widget> _chilren = [
-    RankingTabview(),
-    RankingTabview(),
-    RankingTabview(),
+    RankingTabview(3),
+    RankingTabview(4),
+    RankingTabview(5),
   ];
 }

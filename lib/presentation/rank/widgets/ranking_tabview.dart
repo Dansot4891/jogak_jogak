@@ -17,18 +17,20 @@ final _viewModel = RankingViewModel(
       RankingRemoteDataSourceImpl(FirebaseFirestore.instance),
     ),
   ),
-)..fetchRankings(3);
+);
 
 class RankingTabview extends StatelessWidget {
-  const RankingTabview({super.key});
+  final int level;
+  const RankingTabview(this.level, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: _viewModel,
+      listenable: _viewModel..fetchRankings(level),
       builder: (context, child) {
         final state = _viewModel.state;
-        final rankings = state.rankings;
+        final rankings =
+            state.withLevelRanking.firstWhere((e) => e.level == level).rankings;
         return StateHandling(
           state: state.state,
           init: const BaseLoadingView(),
