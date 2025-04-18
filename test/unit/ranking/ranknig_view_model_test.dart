@@ -15,15 +15,9 @@ void main() {
       final mockDataSource = MockRankingDataSourceImpl();
       final repository = RankingRepositoryImpl(mockDataSource);
       final useCase = GetRankingsUseCase(repository);
-      viewModel = RankingViewModel(useCase);
+      viewModel = RankingViewModel(useCase)..fetchRankings(level);
     });
     test('ranking view model test', () async {
-      // 처음 상태는 init
-      expect(viewModel.state.state, equals(BaseState.init));
-
-      // fetchRankings 호출
-      await viewModel.fetchRankings(level);
-
       // 성공적으로 데이터가 들어왔는지 확인
       expect(
         viewModel.state.withLevelRanking

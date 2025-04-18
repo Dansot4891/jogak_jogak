@@ -17,7 +17,7 @@ class RankingViewModel with ChangeNotifier {
   );
   RankingState get state => _state;
 
-  Future<void> fetchRankings(int level) async {
+  void fetchRankings(int level) async {
     final result = await _getRankingsUseCase.execute(level);
     switch (result) {
       case Success():
