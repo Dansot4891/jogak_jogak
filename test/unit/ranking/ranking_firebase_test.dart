@@ -20,7 +20,7 @@ void main() async {
         snapshot.docs.map((e) => RankingDto.fromJson(e.data())).toList();
 
     final mockDataSource = MockRankingDataSourceImpl();
-    final ranking = await mockDataSource.getRankings();
+    final ranking = await mockDataSource.getRankings(3);
 
     expect(ranking.isNotEmpty, true);
     expect(firebaseData[0].email, ranking[0].email);

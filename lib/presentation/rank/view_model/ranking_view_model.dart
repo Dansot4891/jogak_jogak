@@ -7,15 +7,16 @@ class RankingViewModel with ChangeNotifier {
   final GetRankingsUseCase _getRankingsUseCase;
 
   RankingViewModel(this._getRankingsUseCase) {
-    fetchRankings();
+    // 처음 불러오는 값은 무조건 3
+    fetchRankings(3);
   }
 
   List<Ranking> _rankings = [];
 
   List<Ranking> get rankings => _rankings;
 
-  void fetchRankings() async {
-    final result = await _getRankingsUseCase.execute();
+  void fetchRankings(int level) async {
+    final result = await _getRankingsUseCase.execute(level);
     switch (result) {
       case Success():
         _rankings = result.data;

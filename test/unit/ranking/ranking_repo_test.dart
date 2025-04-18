@@ -22,7 +22,7 @@ void main() {
     final mockDataSource = MockRankingDataSourceImpl();
     final repo = GetRankingsUseCase(RankingRepositoryImpl(mockDataSource));
     test('ranking repo test', () async {
-      final resp = await repo.execute();
+      final resp = await repo.execute(3);
 
       switch (resp) {
         case Success<List<Ranking>>():

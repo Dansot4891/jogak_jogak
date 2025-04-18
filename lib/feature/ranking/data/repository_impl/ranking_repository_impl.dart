@@ -10,8 +10,8 @@ class RankingRepositoryImpl implements RankingRepository {
   RankingRepositoryImpl(this._dataSource);
 
   @override
-  Future<List<Ranking>> getRankings() async {
-    final resp = await _dataSource.getRankings();
+  Future<List<Ranking>> getRankings(int level) async {
+    final resp = await _dataSource.getRankings(level);
     final rankings = resp.mapToEntityList((e) => e.toEntity());
     return rankings;
   }

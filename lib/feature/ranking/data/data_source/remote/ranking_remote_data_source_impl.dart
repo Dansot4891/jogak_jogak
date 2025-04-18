@@ -9,14 +9,9 @@ class RankingRemoteDataSourceImpl implements RankingRemoteDataSource {
   RankingRemoteDataSourceImpl(this._instance);
 
   @override
-  Future<List<RankingDto>> getRankings() async {
+  Future<List<RankingDto>> getRankings(int level) async {
     final snapshot =
         await _instance.collection(FirebaseCollections.ranking).get();
-    print('snapshot: $snapshot');
-    print('snapshot.docs: ${snapshot.docs}');
-    print('snapshot.metadata: ${snapshot.metadata}');
-    print('snapshot.size: ${snapshot.size}');
-    print('snapshot.docChanges: ${snapshot.docChanges}');
     final ranking =
         snapshot.docs.map((e) => RankingDto.fromFireBase(e)).toList();
     return ranking;

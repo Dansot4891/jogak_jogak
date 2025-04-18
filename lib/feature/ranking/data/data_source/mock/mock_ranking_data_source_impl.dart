@@ -3,7 +3,7 @@ import 'package:jogak_jogak/feature/ranking/data/data_source/remote/ranking_remo
 
 class MockRankingDataSourceImpl implements RankingRemoteDataSource {
   @override
-  Future<List<RankingDto>> getRankings() async {
+  Future<List<RankingDto>> getRankings(int level) async {
     return [
       const RankingDto(
         nickname: '임명우',

@@ -8,9 +8,9 @@ class GetRankingsUseCase {
 
   GetRankingsUseCase(this._rankingRepository);
 
-  Future<Result<List<Ranking>>> execute() async {
+  Future<Result<List<Ranking>>> execute(int level) async {
     try {
-      final rankings = await _rankingRepository.getRankings();
+      final rankings = await _rankingRepository.getRankings(level);
       return Result.success(rankings);
     } catch (e) {
       return const Result.error(UnexpectedException());
