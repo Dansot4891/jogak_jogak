@@ -7,15 +7,12 @@ import 'package:jogak_jogak/presentation/rank/pages/ranking_state.dart';
 class RankingViewModel with ChangeNotifier {
   final GetRankingsUseCase _getRankingsUseCase;
 
-  RankingViewModel(this._getRankingsUseCase) {
-    // 처음 불러오는 값은 무조건 3
-    fetchRankings(3);
-  }
+  RankingViewModel(this._getRankingsUseCase);
 
   RankingState _state = const RankingState();
   RankingState get state => _state;
 
-  void fetchRankings(int level) async {
+  Future<void> fetchRankings(int level) async {
     final result = await _getRankingsUseCase.execute(level);
     switch (result) {
       case Success():
