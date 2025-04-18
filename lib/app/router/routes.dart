@@ -13,12 +13,14 @@ import 'package:jogak_jogak/presentation/my_info/update_name/pages/update_nickna
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
+final _shellNavigatorKey = GlobalKey<NavigatorState>();
+
 final routes = [
   // auth
   ...AuthPath.routes,
 
   // roottab
-  ...RootTabPath.routes,
+  RootTabPath.shellRoute,
 
   // user
   ...UserPath.routes,
@@ -74,19 +76,20 @@ abstract class AuthPath {
 }
 
 abstract class RootTabPath {
-  static final List<GoRoute> routes = [
-    GoRoute(
-      path: AppRoute.root.path,
-      name: AppRoute.root.name,
-      builder: (context, state) {
-        return const RootTab();
-      },
-    ),
+  static final ShellRoute shellRoute = ShellRoute(
+    navigatorKey: _shellNavigatorKey,
+    builder: (context, state, child) {
+      return RootTab(child);
+    },
+    routes: _routes,
+  );
+
+  static final List<GoRoute> _routes = [
     GoRoute(
       path: AppRoute.home.path,
       name: AppRoute.home.name,
       builder: (context, state) {
-        return const HomePage();
+        return HomePage(locator());
       },
     ),
     GoRoute(
@@ -100,7 +103,7 @@ abstract class RootTabPath {
       path: AppRoute.myPage.path,
       name: AppRoute.myPage.name,
       builder: (context, state) {
-        return const MyPage();
+        return MyPage(locator());
       },
     ),
   ];
