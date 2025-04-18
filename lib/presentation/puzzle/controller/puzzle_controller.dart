@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/core/util/img_picker.dart';
+import 'package:jogak_jogak/core/helper/img_picker/img_picker.dart';
 import 'package:jogak_jogak/feature/puzzle/domain/model/puzzle.dart';
 import 'package:jogak_jogak/feature/puzzle/utils/img_crop.dart';
 

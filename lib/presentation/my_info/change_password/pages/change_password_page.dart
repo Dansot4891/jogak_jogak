@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/core/util/dialog/app_show_dialog.dart';
+import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';

@@ -3,7 +3,7 @@ import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
-import 'package:jogak_jogak/core/util/dialog/app_show_dialog.dart';
+import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
