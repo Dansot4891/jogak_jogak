@@ -20,7 +20,7 @@ class UserProvider extends ChangeNotifier {
   UserState get state => _state;
 
   // 로그인
-  void signIn({required String email, required String password}) async {
+  Future<void> signIn({required String email, required String password}) async {
     final loginResult = await _signInUseCase.execute(
       email: email,
       password: password,
