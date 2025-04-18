@@ -6,11 +6,7 @@ class RankingState {
   final BaseState state;
   final String errorMessage;
   const RankingState({
-    this.withLevelRanking = const [
-      WithLevelRanking(level: 3),
-      WithLevelRanking(level: 4),
-      WithLevelRanking(level: 5),
-    ],
+    required this.withLevelRanking,
     this.state = BaseState.init,
     this.errorMessage = '',
   });
