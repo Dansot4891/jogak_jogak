@@ -70,7 +70,7 @@ class UserProvider extends ChangeNotifier {
     );
     switch (result) {
       case Success<void>():
-        return BaseState.success;
+        return signIn(email: email, password: password);
       case Error<void>():
         return BaseState.error;
     }

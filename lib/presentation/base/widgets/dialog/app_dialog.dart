@@ -10,7 +10,7 @@ class AppDialog extends Dialog {
   final String? btnLeftText;
   final String? subText;
   final VoidCallback onBtnClicked;
-  final VoidCallback? onBtnRightClicked;
+  final VoidCallback? onBtnLeftClicked;
   final double? width;
   const AppDialog({
     required this.title,
@@ -19,7 +19,7 @@ class AppDialog extends Dialog {
     this.innerWidget,
     this.btnLeftText,
     required this.onBtnClicked,
-    this.onBtnRightClicked,
+    this.onBtnLeftClicked,
     this.width,
     super.key,
   });
@@ -57,7 +57,7 @@ class AppDialog extends Dialog {
       btnText: btnLeftText,
       btnLeftText: btnRightText,
       onBtnClicked: onBtnLeftClicked,
-      onBtnRightClicked: onBtnRightClicked,
+      onBtnLeftClicked: onBtnRightClicked,
       width: width,
     );
   }
@@ -92,9 +92,15 @@ class AppDialog extends Dialog {
             if (innerWidget != null) innerWidget!,
 
             // two button
-            if (btnLeftText != null && onBtnRightClicked != null)
+            if (btnLeftText != null && onBtnLeftClicked != null)
               Row(
                 children: [
+                  AppButton(
+                    text: btnLeftText!,
+                    onTap: onBtnLeftClicked!,
+                    isExpanded: true,
+                  ),
+                  const SizedBox(width: 8),
                   AppButton(
                     text: btnText,
                     onTap: onBtnClicked,
@@ -102,21 +108,15 @@ class AppDialog extends Dialog {
                     bgColor: AppColor.greyE6,
                     isExpanded: true,
                   ),
-                  const SizedBox(width: 8),
-                  AppButton(
-                    text: btnLeftText!,
-                    onTap: onBtnRightClicked,
-                    isExpanded: true,
-                  ),
                 ],
               ),
 
             // one button
-            if (btnLeftText == null || onBtnRightClicked == null)
+            if (btnLeftText == null || onBtnLeftClicked == null)
               AppButton(
                 text: btnText,
                 onTap: onBtnClicked,
-                bgColor: AppColor.sub,
+                bgColor: AppColor.main,
               ),
           ],
         ),

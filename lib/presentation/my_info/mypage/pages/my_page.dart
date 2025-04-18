@@ -66,7 +66,7 @@ class MyPage extends StatelessWidget {
                           subText: '로그아웃 하시겠습니까?',
                           btnText: '취소',
                           btnLeftText: '확인',
-                          onBtnRightClicked: () {},
+                          onBtnLeftClicked: () {},
                           onBtnClicked: () {},
                         ),
                       );
@@ -82,7 +82,7 @@ class MyPage extends StatelessWidget {
                           subText: '회원탈퇴 하시겠습니까?',
                           btnText: '취소',
                           btnLeftText: '확인',
-                          onBtnRightClicked: () {},
+                          onBtnLeftClicked: () {},
                           onBtnClicked: () {},
                         ),
                       );
