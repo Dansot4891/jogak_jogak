@@ -25,6 +25,7 @@ import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
+import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_view_model.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_view_model.dart';
@@ -82,4 +83,5 @@ void diSetup() {
   locator.registerSingleton(HomeViewModel(locator()));
   locator.registerSingleton(PuzzleViewModel());
   locator.registerSingleton(RankingViewModel(locator()));
+  locator.registerSingleton(MyPageViewModel(locator()));
 }
