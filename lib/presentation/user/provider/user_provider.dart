@@ -53,4 +53,6 @@ class UserProvider extends ChangeNotifier {
     }
     return state.state;
   }
+
+  // Future<BaseState> signup() async {}
 }

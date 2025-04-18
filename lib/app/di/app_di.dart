@@ -59,4 +59,6 @@ void diSetup() {
   );
 
   // ViewModel
+  // viewmodel은 해당 화면에서 provier를 이용해서 사용한다.
+  // => 해당 뷰에서만 이용되기때문에 굳이 전역으로 사용하지 않아도 됨.
 }

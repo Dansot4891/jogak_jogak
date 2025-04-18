@@ -4,6 +4,8 @@ import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/firebase/firebase_options.dart';
+import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 
 final router = AppRouter.appRouter();
 
@@ -12,7 +14,21 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   diSetup();
 
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        // 전역적으로 관리되는 데이터는 메인에서 활용
+        ChangeNotifierProvider(
+          create:
+              (_) => UserProvider(
+                signInUseCase: locator(),
+                getUserUseCase: locator(),
+              ),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
