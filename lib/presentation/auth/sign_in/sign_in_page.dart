@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
@@ -22,6 +23,17 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final _email = TextEditingController();
   final _password = TextEditingController();
+
+  late UserProvider provider;
+
+  @override
+  void initState() {
+    if (FirebaseAuth.instance.currentUser != null) {
+      final UserProvider provider = locator();
+      // provider.signIn(email: email, password: password)
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +80,6 @@ class _SignInPageState extends State<SignInPage> {
               AppButton(
                 text: '로그인',
                 onTap: () async {
-                  final UserProvider provider = locator();
                   final result = await provider.signIn(
                     email: _email.text,
                     password: _password.text,

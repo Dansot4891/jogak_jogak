@@ -71,6 +71,7 @@ void diSetup() {
       signInUseCase: locator(),
       getUserUseCase: locator(),
       signUpUseCase: locator(),
+      signOutUseCase: locator(),
     ),
   );
 

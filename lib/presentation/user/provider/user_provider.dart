@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/sign_out_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_up_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/model/user.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
@@ -11,14 +12,17 @@ class UserProvider extends ChangeNotifier {
   final SignInUseCase _signInUseCase;
   final GetUserUseCase _getUserUseCase;
   final SignUpUseCase _signUpUseCase;
+  final SignOutUseCase _signOutUseCase;
 
   UserProvider({
     required SignInUseCase signInUseCase,
     required GetUserUseCase getUserUseCase,
     required SignUpUseCase signUpUseCase,
+    required SignOutUseCase signOutUseCase,
   }) : _signInUseCase = signInUseCase,
        _getUserUseCase = getUserUseCase,
-       _signUpUseCase = signUpUseCase;
+       _signUpUseCase = signUpUseCase,
+       _signOutUseCase = signOutUseCase;
 
   UserState _state = const UserState();
   UserState get state => _state;
@@ -73,6 +77,14 @@ class UserProvider extends ChangeNotifier {
         return signIn(email: email, password: password);
       case Error<void>():
         return BaseState.error;
+    }
+  }
+
+  void signout() async {
+    final result = await _signOutUseCase.execute();
+    switch (result) {
+      case Success<void>():
+      case Error<void>():
     }
   }
 }
