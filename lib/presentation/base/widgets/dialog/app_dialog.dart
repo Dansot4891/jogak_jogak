@@ -54,10 +54,10 @@ class AppDialog extends Dialog {
     return AppDialog(
       title: title,
       subText: subText,
-      btnText: btnLeftText,
-      btnLeftText: btnRightText,
-      onBtnClicked: onBtnLeftClicked,
-      onBtnLeftClicked: onBtnRightClicked,
+      btnText: btnRightText,
+      btnLeftText: btnLeftText,
+      onBtnClicked: onBtnRightClicked,
+      onBtnLeftClicked: onBtnLeftClicked,
       width: width,
     );
   }
