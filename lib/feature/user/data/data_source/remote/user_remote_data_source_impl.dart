@@ -4,10 +4,10 @@ import 'package:jogak_jogak/feature/user/domain/model/puzzle_history.dart';
 import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart';
 import 'package:jogak_jogak/feature/user/data/dto/user_dto.dart';
 
-class UserRemoteDataSource implements UserDataSource {
+class UserRemoteDataSourceImpl implements UserDataSource {
   final FirebaseFirestore _store;
 
-  UserRemoteDataSource(this._store);
+  UserRemoteDataSourceImpl(this._store);
 
   @override
   Future<List<PuzzleHistory>> getPuzzleHistory(String email) {

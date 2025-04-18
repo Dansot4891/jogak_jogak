@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jogak_jogak/core/constants/firebase_collections.dart';
 import 'package:jogak_jogak/core/constants/firebase_query.dart';
 import 'package:jogak_jogak/feature/ranking/data/dto/ranking_dto.dart';
-import 'package:jogak_jogak/feature/ranking/data/data_source/ranking_remote_data_source.dart';
+import 'package:jogak_jogak/feature/ranking/data/data_source/ranking_data_source.dart';
 
-class RankingRemoteDataSourceImpl implements RankingRemoteDataSource {
+class RankingRemoteDataSourceImpl implements RankingDataSource {
   final FirebaseFirestore _instance;
 
   RankingRemoteDataSourceImpl(this._instance);
