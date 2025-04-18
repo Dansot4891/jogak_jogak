@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jogak_jogak/presentation/auth/pages/sign_in_page.dart';
-import 'package:jogak_jogak/presentation/auth/pages/sign_up_page.dart';
+import 'package:jogak_jogak/presentation/auth/pages/sign_in/sign_in_page.dart';
+import 'package:jogak_jogak/presentation/auth/pages/sign_up/sign_up_page.dart';
 import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page.dart';

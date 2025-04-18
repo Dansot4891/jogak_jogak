@@ -4,6 +4,8 @@ import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_dat
 import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_data_source_impl.dart';
 import 'package:jogak_jogak/feature/auth/data/repository_impl/auth_repository_impl.dart';
 import 'package:jogak_jogak/feature/auth/domain/repository/auth_repository.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/sign_up_use_case.dart';
 import 'package:jogak_jogak/feature/puzzle/data/data_source/puzzle_data_source.dart';
 import 'package:jogak_jogak/feature/puzzle/data/data_source/remote/puzzle_remote_data_source_impl.dart';
 import 'package:jogak_jogak/feature/puzzle/data/repository_impl/puzzle_repository_impl.dart';
@@ -18,36 +20,43 @@ import 'package:jogak_jogak/feature/user/data/data_source/remote/user_remote_dat
 import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart';
 import 'package:jogak_jogak/feature/user/data/repository_impl/user_repository_impl.dart';
 import 'package:jogak_jogak/feature/user/domain/repository/user_repository.dart';
+import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
+import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
 final locator = GetIt.instance;
 
 void diSetup() {
-  // auth
-  locator.registerSingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl());
-  locator.registerSingleton<AuthRepository>(AuthRepositoryImpl(locator()));
-
-  // ------------------
-  // puzzle / home
+  // DataSource
   locator.registerSingleton<PuzzleDataSource>(
     PuzzleRemoteDataSourceImpl(FirebaseFirestore.instance),
   );
-  locator.registerSingleton<PuzzleRepository>(PuzzleRepositoryImpl(locator()));
-  locator.registerSingleton(GetRandomImageUrlUseCase(locator()));
-
-  // ------------------
-  // ranking
   locator.registerSingleton<RankingDataSource>(
     RankingRemoteDataSourceImpl(FirebaseFirestore.instance),
   );
-  locator.registerSingleton<RankingRepository>(
-    RankingRepositoryImpl(locator()),
-  );
-  locator.registerSingleton(GetRankingsUseCase(locator()));
-
-  // ------------------
-  // user
+  locator.registerSingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl());
   locator.registerSingleton<UserDataSource>(
     UserRemoteDataSourceImpl(FirebaseFirestore.instance),
   );
+
+  // Repository
+  locator.registerSingleton<PuzzleRepository>(PuzzleRepositoryImpl(locator()));
+  locator.registerSingleton<RankingRepository>(
+    RankingRepositoryImpl(locator()),
+  );
+  locator.registerSingleton<AuthRepository>(AuthRepositoryImpl(locator()));
   locator.registerSingleton<UserRepository>(UserRepositoryImpl(locator()));
+
+  // UseCase
+  locator.registerSingleton(GetRandomImageUrlUseCase(locator()));
+  locator.registerSingleton(GetRankingsUseCase(locator()));
+  locator.registerSingleton(SignUpUseCase(locator()));
+  locator.registerSingleton(SignInUseCase(locator()));
+  locator.registerSingleton(GetUserUseCase(locator()));
+
+  // Provider
+  locator.registerSingleton(
+    UserProvider(signInUseCase: locator(), getUserUseCase: locator()),
+  );
+
+  // ViewModel
 }
