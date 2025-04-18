@@ -32,7 +32,7 @@ class _SignInPageState extends State<SignInPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: AppSize.fractionHeight(0.1)),
+              SizedBox(height: AppSize.fractionHeight(0.11)),
               Image.asset(AppImage.appIcon, width: AppSize.fractionWidth(0.6)),
               const SizedBox(height: 20),
               Text('조각조각', style: AppTextStyle.title1),
