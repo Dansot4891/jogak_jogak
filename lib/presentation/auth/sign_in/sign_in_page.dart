@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
@@ -27,9 +28,14 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   void initState() {
-    final UserProvider provider = locator();
-    provider.autoLogin();
+    _initialization();
     super.initState();
+  }
+
+  void _initialization() async {
+    provider = locator();
+    await provider.autoLogin();
+    FlutterNativeSplash.remove();
   }
 
   @override
@@ -42,7 +48,7 @@ class _SignInPageState extends State<SignInPage> {
           child: Column(
             children: [
               SizedBox(height: AppSize.fractionHeight(0.11)),
-              Image.asset(AppImage.appIcon, width: AppSize.fractionWidth(0.6)),
+              Image.asset(AppImage.appLogo, width: AppSize.fractionWidth(0.6)),
               const SizedBox(height: 20),
               Text('조각조각', style: AppTextStyle.title1),
               const SizedBox(height: 40),

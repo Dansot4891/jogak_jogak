@@ -156,22 +156,19 @@ Future<void> navigate(
   BuildContext context, {
   required AppRoute route,
   NavigationMethod method = NavigationMethod.push,
-  dynamic extra,
 }) async {
-  final goRouter = GoRouter.of(context);
-
   switch (method) {
     case NavigationMethod.push:
-      await goRouter.push(route.path, extra: extra);
+      context.push(route.path);
       break;
     case NavigationMethod.replace:
-      await goRouter.replace(route.path, extra: extra);
+      context.replace(route.path);
       break;
     case NavigationMethod.go:
-      goRouter.go(route.path, extra: extra);
+      context.go(route.path);
       break;
     case NavigationMethod.pushReplacement:
-      await goRouter.pushReplacement(route.path, extra: extra);
+      context.pushReplacement(route.path);
       break;
   }
 }

@@ -89,7 +89,7 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  void autoLogin() async {
+  Future<void> autoLogin() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       final uid = user.uid;

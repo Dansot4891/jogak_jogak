@@ -51,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Column(
                   children: [
                     Image.asset(
-                      AppImage.appIcon,
+                      AppImage.appLogo,
                       width: AppSize.fractionWidth(0.6),
                     ),
                     const SizedBox(height: 20),
