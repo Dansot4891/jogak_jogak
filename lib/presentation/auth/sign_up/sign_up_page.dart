@@ -36,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ChangeNotifierProvider<SignUpViewModel>(
           create:
-              (_) => SignUpViewModel(
+              (context) => SignUpViewModel(
                 userProvider: context.watch<UserProvider>(),
                 checkUsernameUseCase: locator(),
               ),
