@@ -14,9 +14,12 @@ class AppRouter {
       navigatorKey: _rootNavigatorKey,
       refreshListenable: userProvider,
       redirect: (context, state) {
+        print('state.fullPath : ${state.fullPath}');
         // 유저 정보가 있는데 화면이 null이면
         // 강제로 홈 화면으로 이동
-        if (userProvider.state.user != null && state.path == null) {
+        if (userProvider.state.user != null &&
+            state.fullPath == AppRoute.signIn.path) {
+          print('is redirect');
           return AppRoute.home.path;
         }
         return null;
