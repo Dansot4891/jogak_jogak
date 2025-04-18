@@ -98,14 +98,14 @@ class AppDialog extends Dialog {
                   AppButton(
                     text: btnLeftText!,
                     onTap: onBtnLeftClicked!,
+                    textColor: AppColor.grey80,
+                    bgColor: AppColor.greyE6,
                     isExpanded: true,
                   ),
                   const SizedBox(width: 8),
                   AppButton(
                     text: btnText,
                     onTap: onBtnClicked,
-                    textColor: AppColor.grey80,
-                    bgColor: AppColor.greyE6,
                     isExpanded: true,
                   ),
                 ],

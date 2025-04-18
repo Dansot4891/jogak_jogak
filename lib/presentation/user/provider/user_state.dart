@@ -15,4 +15,9 @@ class UserState {
       error: error ?? this.error,
     );
   }
+
+  // 유저 상태를 null로 변환
+  UserState resetUser() {
+    return UserState(state: state, user: null, error: error);
+  }
 }

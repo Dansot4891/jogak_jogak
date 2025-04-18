@@ -85,6 +85,8 @@ class UserProvider extends ChangeNotifier {
     final result = await _signOutUseCase.execute();
     switch (result) {
       case Success<void>():
+        _state = state.resetUser();
+        notifyListeners();
       case Error<void>():
     }
   }

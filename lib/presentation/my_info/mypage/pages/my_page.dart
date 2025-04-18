@@ -73,10 +73,15 @@ class MyPage extends StatelessWidget {
                             AppDialog(
                               title: '로그아웃',
                               subText: '로그아웃 하시겠습니까?',
-                              btnText: '취소',
-                              btnLeftText: '확인',
-                              onBtnLeftClicked: () {},
-                              onBtnClicked: () {},
+                              btnText: '확인',
+                              btnLeftText: '취소',
+                              onBtnLeftClicked: () {
+                                pop(context);
+                              },
+                              onBtnClicked: () {
+                                viewModel.signout();
+                                pop(context);
+                              },
                             ),
                           );
                         },
@@ -89,8 +94,8 @@ class MyPage extends StatelessWidget {
                             AppDialog(
                               title: '회원탈퇴',
                               subText: '회원탈퇴 하시겠습니까?',
-                              btnText: '취소',
-                              btnLeftText: '확인',
+                              btnText: '확인',
+                              btnLeftText: '취소',
                               onBtnLeftClicked: () {},
                               onBtnClicked: () {},
                             ),

@@ -10,16 +10,13 @@ class MyPageViewModel with ChangeNotifier {
       username: _userProvider.state.user?.username,
       state: BaseState.success,
     );
-    print(
-      ' _userProvider.state.user?.username: ${_userProvider.state.user?.username}',
-    );
     notifyListeners();
   }
 
   MyPageState _state = MyPageState();
   MyPageState get state => _state;
 
-  // void signout() {
-  //   _userProvider
-  // }
+  void signout() {
+    _userProvider.signout();
+  }
 }
