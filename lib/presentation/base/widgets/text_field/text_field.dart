@@ -26,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool isDense;
   final TextAlign textAlign;
   final VoidCallback? onTap;
+  final TextInputType? textInputType;
   const CustomTextFormField({
     required this.controller,
     required this.hintText,
@@ -50,6 +51,7 @@ class CustomTextFormField extends StatelessWidget {
     this.borderColor,
     this.contentPadding,
     this.filled = true,
+    this.textInputType,
     super.key,
   });
 
@@ -70,6 +72,7 @@ class CustomTextFormField extends StatelessWidget {
       style: AppTextStyle.textField,
       onChanged: onChanged,
       controller: controller,
+      keyboardType: textInputType,
       decoration: InputDecoration(
         isDense: isDense,
         fillColor: fillColor ?? Colors.white,

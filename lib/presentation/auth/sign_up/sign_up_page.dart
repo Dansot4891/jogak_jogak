@@ -22,12 +22,13 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _name = TextEditingController();
   final _password = TextEditingController();
   final _passwordCheck = TextEditingController();
 
-  bool isAbleUsername = false;
+  bool? isAbleUsername;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
         listenable: widget.viewModel,
         builder: (context, child) {
           return Form(
+            key: _formKey,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -48,6 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   CustomTextFormField(
                     controller: _email,
                     hintText: '이메일 입력',
+                    textInputType: TextInputType.emailAddress,
                     validator: AppValidator.emailValid,
                   ),
                   const SizedBox(height: 8),
@@ -67,11 +70,16 @@ class _SignUpPageState extends State<SignUpPage> {
                       AppButton(
                         text: '중복 확인',
                         horizontalPadding: 16,
-                        onTap: _name.text.isEmpty ? null : () {},
+                        onTap:
+                            _name.text.isEmpty
+                                ? null
+                                : () {
+                                  widget.viewModel.checkUsername(_name.text);
+                                },
                       ),
                     ],
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 40, child: Text('')),
                   CustomTextFormField(
                     controller: _password,
                     hintText: '비밀번호 입력',
@@ -95,35 +103,38 @@ class _SignUpPageState extends State<SignUpPage> {
                   AppButton(
                     text: '회원가입',
                     onTap:
-                        !isAbleUsername || _password.text != _passwordCheck.text
-                            ? null
-                            : () async {
-                              final UserProvider provider = locator();
-                              final result = await provider.signup(
-                                email: _email.text,
-                                password: _password.text,
-                                username: _name.text,
-                              );
-                              switch (result) {
-                                case BaseState.success:
-                                  navigate(
-                                    context,
-                                    route: AppRoute.root,
-                                    method: NavigationMethod.go,
-                                  );
-                                default:
-                                  AppShowDialog.show(
-                                    context,
-                                    AppDialog.singleBtn(
-                                      title: '에러가 발생하였습니다.',
-                                      btnText: '확인',
-                                      onBtnClicked: () {
-                                        pop(context);
-                                      },
-                                    ),
-                                  );
+                        isAbleUsername == true &&
+                                _password.text == _passwordCheck.text
+                            ? () async {
+                              if (_formKey.currentState!.validate()) {
+                                final UserProvider provider = locator();
+                                final result = await provider.signup(
+                                  email: _email.text,
+                                  password: _password.text,
+                                  username: _name.text,
+                                );
+                                switch (result) {
+                                  case BaseState.success:
+                                    navigate(
+                                      context,
+                                      route: AppRoute.root,
+                                      method: NavigationMethod.go,
+                                    );
+                                  default:
+                                    AppShowDialog.show(
+                                      context,
+                                      AppDialog.singleBtn(
+                                        title: '에러가 발생하였습니다.',
+                                        btnText: '확인',
+                                        onBtnClicked: () {
+                                          pop(context);
+                                        },
+                                      ),
+                                    );
+                                }
                               }
-                            },
+                            }
+                            : null,
                   ),
                   const Spacer(),
                 ],
