@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
@@ -8,7 +9,6 @@ import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
-import 'package:provider/provider.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -60,7 +60,8 @@ class _SignInPageState extends State<SignInPage> {
             AppButton(
               text: '로그인',
               onTap: () async {
-                final result = await context.read<UserProvider>().signIn(
+                final UserProvider provider = locator();
+                final result = await provider.signIn(
                   email: _email.text,
                   password: _password.text,
                 );
