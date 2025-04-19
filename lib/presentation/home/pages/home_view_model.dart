@@ -22,9 +22,9 @@ class HomeViewModel with ChangeNotifier {
     final result = await _getRandomImageUrlUseCase.execute();
     switch (result) {
       case Success<PuzzleImage>():
+        final now = DateTime.now();
         final url = result.data.imageUrl;
-        print(url);
-        final imageName = 'tmp_image.${url.split('.').last}';
+        final imageName = '$now.${url.split('.').last}';
         final obtainedFile = await TemporaryDir.getImageToTemporaryPath(
           url: url,
           imageName: imageName,

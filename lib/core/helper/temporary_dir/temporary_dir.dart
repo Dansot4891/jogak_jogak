@@ -19,32 +19,13 @@ abstract class TemporaryDir {
       await Dio().download(
         url,
         filePath,
+        fileAccessMode: FileAccessMode.write,
         options: Options(responseType: ResponseType.bytes),
       );
 
       return File(filePath);
     } catch (e) {
       return null;
-    }
-  }
-
-  // 파일 삭제
-  static Future<void> deleteImageFromTemporaryPath({
-    required String imageName,
-  }) async {
-    // 임시 저장소 경로
-    final Directory tempDir = await getTemporaryDirectory();
-
-    // 삭제할 파일 경로
-    final String filePath = "${tempDir.path}/$imageName";
-    print('delete file paht: $filePath');
-
-    final file = File(filePath);
-
-    // 파일이 존재하면 삭제
-    if (await file.exists()) {
-      print('deleted');
-      await file.delete();
     }
   }
 }
