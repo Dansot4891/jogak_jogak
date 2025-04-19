@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jogak_jogak/core/constants/firebase_collections.dart';
+import 'package:jogak_jogak/feature/user/data/dto/puzzle_history_dto.dart';
 import 'package:jogak_jogak/feature/user/domain/model/puzzle_history.dart';
 import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart';
 import 'package:jogak_jogak/feature/user/data/dto/user_dto.dart';
@@ -32,5 +33,12 @@ class UserRemoteDataSourceImpl implements UserDataSource {
     // 해당 닉네임이 사용가능하면 true
     // 해당 닉네임이 사용 불가능하면 false
     return snapshot.docs.isEmpty;
+  }
+
+  @override
+  Future<void> saveGameHistory(PuzzleHistoryDto puzzleHistory) async {
+    await _store
+        .collection(FirebaseCollections.puzzleHistory)
+        .add(puzzleHistory.toJson());
   }
 }
