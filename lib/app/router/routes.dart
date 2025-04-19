@@ -11,6 +11,7 @@ import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page.dart';
 import 'package:jogak_jogak/presentation/my_info/update_name/pages/update_nickname_page.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
+import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -141,7 +142,8 @@ abstract class PuzzlePath {
       path: AppRoute.puzzle.path,
       name: AppRoute.puzzle.name,
       builder: (context, state) {
-        return const PuzzlePage();
+        final PuzzleViewModel viewModel = locator();
+        return PuzzlePage(viewModel);
       },
     ),
   ];

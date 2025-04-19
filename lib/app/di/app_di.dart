@@ -83,7 +83,12 @@ void diSetup() {
     SignUpViewModel(userProvider: locator(), checkUsernameUseCase: locator()),
   );
   locator.registerFactory(() => HomeViewModel(locator()));
-  locator.registerFactory(() => PuzzleViewModel());
+  locator.registerFactory(
+    () => PuzzleViewModel(
+      uploadRankingUseCase: locator(),
+      userProvider: locator(),
+    ),
+  );
   locator.registerFactory(() => RankingViewModel(locator()));
   locator.registerFactory(() => MyPageViewModel(locator()));
 }

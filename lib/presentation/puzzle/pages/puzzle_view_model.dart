@@ -2,17 +2,27 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
+import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
+import 'package:jogak_jogak/feature/ranking/domain/use_case/upload_ranking_use_case.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_state.dart';
+import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
 class PuzzleViewModel extends ChangeNotifier {
+  final UploadRankingUseCase _uploadRankingUseCase;
+  final UserProvider _userProvider;
   final PuzzleController _controller = PuzzleController();
+  // state는 불변 객체만 담으므로 타이머는 별개로 구성
   Timer? _timer;
 
   PuzzleState _state = const PuzzleState();
   PuzzleState get state => _state;
 
-  PuzzleViewModel();
+  PuzzleViewModel({
+    required UploadRankingUseCase uploadRankingUseCase,
+    required UserProvider userProvider,
+  }) : _userProvider = userProvider,
+       _uploadRankingUseCase = uploadRankingUseCase;
 
   // 뷰모델 처음 생성시 시작되는 함수
   // 필요한 데이터 할당
@@ -76,8 +86,6 @@ class PuzzleViewModel extends ChangeNotifier {
                 AppSize.screenHeight -
                     16 -
                     ((AppSize.screenWidth - 32) / state.gridViewSize))) {
-      print('dx :$dx');
-      print('AppSize.screenPadding.top :${AppSize.screenPadding.top}');
       _controller.movePiece(
         index: index,
         dx: dx,
@@ -92,8 +100,22 @@ class PuzzleViewModel extends ChangeNotifier {
   void startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      // 게임오버시 타이머 종료 및 랭킹 데이터 업데이트
       if (_state.gameOver) {
         timer.cancel();
+        // final user = _userProvider.state.user;
+        // // 현재 유저 정보가 없다면 랭킹 업데이트 X
+        // if (user == null) {
+        //   return;
+        // }
+        // final ranking = Ranking(
+        //   nickname: user.username,
+        //   level: _state.gridViewSize,
+        //   email: user.email,
+        //   playTime: _timer.tick,
+        //   rank: rank,
+        // );
+        // _uploadRankingUseCase.execute(ranking);
       }
       _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
       notifyListeners();

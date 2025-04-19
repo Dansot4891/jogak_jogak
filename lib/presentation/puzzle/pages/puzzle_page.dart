@@ -11,10 +11,9 @@ import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
 import 'package:jogak_jogak/presentation/puzzle/widgets/empty_box.dart';
 import 'package:jogak_jogak/presentation/puzzle/widgets/puzzle_piece.dart';
 
-final viewModel = PuzzleViewModel();
-
 class PuzzlePage extends StatefulWidget {
-  const PuzzlePage({super.key});
+  final PuzzleViewModel viewModel;
+  const PuzzlePage(this.viewModel, {super.key});
 
   @override
   State<PuzzlePage> createState() => _PuzzlePageState();
@@ -23,20 +22,20 @@ class PuzzlePage extends StatefulWidget {
 class _PuzzlePageState extends State<PuzzlePage> {
   @override
   void initState() {
-    viewModel.initialize();
+    widget.viewModel.initialize();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: viewModel,
+      listenable: widget.viewModel,
       builder: (context, child) {
         return BasePage(
           appBar: DefaultAppbar(
             title: '조각조각',
             onTap: () {
-              viewModel.reset();
+              widget.viewModel.reset();
               pop(context);
             },
           ),
@@ -61,14 +60,14 @@ class _PuzzlePageState extends State<PuzzlePage> {
                             ),
                           ),
                           Text(
-                            '현재 시간: ${(viewModel.state.elapsedSeconds).formattedElapsed()}',
+                            '현재 시간: ${(widget.viewModel.state.elapsedSeconds).formattedElapsed()}',
                             style: AppTextStyle.body1,
                           ),
                         ],
                       ),
-                      if (viewModel.state.file != null)
+                      if (widget.viewModel.state.file != null)
                         Image.file(
-                          viewModel.state.file!,
+                          widget.viewModel.state.file!,
                           width: 60,
                           height: 60,
                           fit: BoxFit.cover,
@@ -76,8 +75,8 @@ class _PuzzlePageState extends State<PuzzlePage> {
                     ],
                   ),
                 ),
-                if (viewModel.state.pieces.isNotEmpty &&
-                    !viewModel.state.gameOver)
+                if (widget.viewModel.state.pieces.isNotEmpty &&
+                    !widget.viewModel.state.gameOver)
                   Expanded(
                     child: Column(
                       children: [
@@ -88,11 +87,12 @@ class _PuzzlePageState extends State<PuzzlePage> {
                           child: GridView.builder(
                             shrinkWrap: true,
                             itemCount:
-                                viewModel.state.gridViewSize *
-                                viewModel.state.gridViewSize,
+                                widget.viewModel.state.gridViewSize *
+                                widget.viewModel.state.gridViewSize,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: viewModel.state.gridViewSize,
+                                  crossAxisCount:
+                                      widget.viewModel.state.gridViewSize,
                                 ),
                             itemBuilder: (context, index) {
                               return DragTarget<int>(
@@ -103,11 +103,15 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                   rejectedData,
                                 ) {
                                   final piece =
-                                      viewModel.state.correctPieces[index];
+                                      widget
+                                          .viewModel
+                                          .state
+                                          .correctPieces[index];
                                   return PuzzlePiece(
                                     file: piece.file,
                                     isFrame: !piece.isRight,
-                                    gridViewSize: viewModel.state.gridViewSize,
+                                    gridViewSize:
+                                        widget.viewModel.state.gridViewSize,
                                   );
                                 },
                                 // draagable로부터
@@ -116,7 +120,10 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                   DragTargetDetails<int> details,
                                 ) {
                                   setState(() {
-                                    viewModel.matchPiece(index, details.data);
+                                    widget.viewModel.matchPiece(
+                                      index,
+                                      details.data,
+                                    );
                                   });
                                 },
                               );
@@ -126,7 +133,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                         Expanded(
                           child: Stack(
                             children:
-                                viewModel.state.pieces.map((e) {
+                                widget.viewModel.state.pieces.map((e) {
                                   return Positioned(
                                     top: e.top,
                                     left: e.left,
@@ -136,14 +143,14 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                       feedback: PuzzlePiece(
                                         file: e.file,
                                         gridViewSize:
-                                            viewModel.state.gridViewSize,
+                                            widget.viewModel.state.gridViewSize,
                                       ),
                                       // 드래그중일 때 원래 위젯 위치에 존재할 위젯
                                       childWhenDragging: const EmptyBox(),
                                       onDragEnd: (details) {
                                         final dx = details.offset.dx;
                                         final dy = details.offset.dy;
-                                        viewModel.movePiece(
+                                        widget.viewModel.movePiece(
                                           index: e.index,
                                           dx: dx,
                                           dy: dy,
@@ -154,7 +161,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                       child: PuzzlePiece(
                                         file: e.file,
                                         gridViewSize:
-                                            viewModel.state.gridViewSize,
+                                            widget.viewModel.state.gridViewSize,
                                         isRight: e.isRight,
                                       ),
                                     ),
@@ -165,7 +172,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                       ],
                     ),
                   ),
-                if (viewModel.state.gameOver)
+                if (widget.viewModel.state.gameOver)
                   Expanded(
                     child: Center(
                       child: Column(
