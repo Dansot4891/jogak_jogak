@@ -101,8 +101,10 @@ class PuzzleViewModel extends ChangeNotifier {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       // 게임오버시 타이머 종료 및 랭킹 데이터 업데이트
+      print(timer.tick);
       if (_state.gameOver) {
         timer.cancel();
+        print(timer.tick);
         // final user = _userProvider.state.user;
         // // 현재 유저 정보가 없다면 랭킹 업데이트 X
         // if (user == null) {
