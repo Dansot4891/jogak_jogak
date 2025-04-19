@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jogak_jogak/core/constants/firebase_collections.dart';
 import 'package:jogak_jogak/feature/user/data/dto/puzzle_history_dto.dart';
-import 'package:jogak_jogak/feature/user/domain/model/puzzle_history.dart';
 import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart';
 import 'package:jogak_jogak/feature/user/data/dto/user_dto.dart';
 
@@ -11,9 +10,16 @@ class UserRemoteDataSourceImpl implements UserDataSource {
   UserRemoteDataSourceImpl(this._store);
 
   @override
-  Future<List<PuzzleHistory>> getPuzzleHistory(String email) {
-    // TODO: implement getPuzzleHistory
-    throw UnimplementedError();
+  Future<List<PuzzleHistoryDto>> getPuzzleHistory(String uid) async {
+    final snapshot =
+        await _store
+            .collection(FirebaseCollections.users)
+            .doc(uid)
+            .collection(FirebaseCollections.puzzleHistory)
+            .get();
+    final puzzleHistory =
+        snapshot.docs.map((e) => PuzzleHistoryDto.fromFireBase(e)).toList();
+    return puzzleHistory;
   }
 
   @override

@@ -1,3 +1,6 @@
+import 'package:jogak_jogak/core/helper/extension/list_map_extension.dart';
+import 'package:jogak_jogak/feature/user/data/mapper/puzzle_history_dto.dart';
+import 'package:jogak_jogak/feature/user/domain/model/puzzle_history.dart';
 import 'package:jogak_jogak/feature/user/domain/model/user.dart';
 import 'package:jogak_jogak/feature/user/domain/repository/user_repository.dart';
 import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart';
@@ -9,9 +12,11 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl(this._dataSource);
 
   @override
-  Future<void> getPuzzleHistory(String email) {
-    // TODO: implement getPuzzleHistory
-    throw UnimplementedError();
+  Future<List<PuzzleHistory>> getPuzzleHistory(String uid) async {
+    final puzzleHistoryDto = await _dataSource.getPuzzleHistory(uid);
+    return puzzleHistoryDto
+        .mapToEntityList((e) => e.toPuzzleHistory())
+        .toList();
   }
 
   @override
