@@ -102,7 +102,6 @@ class PuzzleViewModel extends ChangeNotifier {
       // 게임오버시 타이머 종료 및 랭킹 데이터 업데이트
       if (_state.gameOver) {
         timer.cancel();
-        _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
         notifyListeners();
 
         // UI 먼저 변경 후 랭킹 등록하는 로직은
@@ -120,6 +119,8 @@ class PuzzleViewModel extends ChangeNotifier {
         );
         await _uploadRankingUseCase.execute(ranking);
       }
+      _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
+      notifyListeners();
     });
   }
 

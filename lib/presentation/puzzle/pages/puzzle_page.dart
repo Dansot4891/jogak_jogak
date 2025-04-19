@@ -184,6 +184,14 @@ class _PuzzlePageState extends State<PuzzlePage> {
                             height: AppSize.fractionHeight(0.2),
                           ),
                           Text('퍼즐 클리어!', style: AppTextStyle.title1),
+                          const SizedBox(height: 12),
+                          Text(
+                            '기록은 결과에 따라\n자동으로 랭킹에 갱신됩니다.',
+                            style: AppTextStyle.title1.copyWith(
+                              color: AppColor.grey80,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ],
                       ),
                     ),
