@@ -5,7 +5,7 @@ extension PuzzleHistoryMapper on PuzzleHistoryDto {
   PuzzleHistory toPuzzleHistory() {
     return PuzzleHistory(
       level: level ?? 0,
-      playTime: playTime ?? '',
+      playTime: playTime ?? 0,
       playDate: playDate ?? DateTime.now(),
     );
   }

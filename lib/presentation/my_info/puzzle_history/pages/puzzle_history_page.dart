@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/helper/extension/date_time_extension.dart';
+import 'package:jogak_jogak/core/helper/extension/timer_extension.dart';
 import 'package:jogak_jogak/feature/user/domain/model/puzzle_history.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
@@ -7,25 +8,25 @@ import 'package:jogak_jogak/presentation/my_info/puzzle_history/widgets/history_
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/widgets/history_header.dart';
 
 final List<PuzzleHistory> list = [
-  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2025, 04, 13)),
-  PuzzleHistory(level: 4, playTime: '3:01', playDate: DateTime(2025, 04, 13)),
-  PuzzleHistory(level: 3, playTime: '3:02', playDate: DateTime(2025, 04, 13)),
-  PuzzleHistory(level: 3, playTime: '3:04', playDate: DateTime(2025, 04, 12)),
-  PuzzleHistory(level: 4, playTime: '3:01', playDate: DateTime(2025, 04, 11)),
-  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2025, 04, 11)),
-  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2025, 04, 10)),
-  PuzzleHistory(level: 4, playTime: '3:01', playDate: DateTime(2025, 04, 9)),
-  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2025, 04, 8)),
-  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2025, 03, 13)),
-  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2025, 03, 7)),
-  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2025, 03, 1)),
-  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2025, 02, 25)),
-  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2024, 02, 13)),
-  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2024, 01, 13)),
-  PuzzleHistory(level: 4, playTime: '3:01', playDate: DateTime(2024, 04, 13)),
-  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2023, 03, 13)),
-  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2023, 02, 13)),
-  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2023, 01, 13)),
+  PuzzleHistory(level: 3, playTime: 192, playDate: DateTime(2025, 04, 13)),
+  PuzzleHistory(level: 4, playTime: 192, playDate: DateTime(2025, 04, 13)),
+  PuzzleHistory(level: 3, playTime: 192, playDate: DateTime(2025, 04, 13)),
+  PuzzleHistory(level: 3, playTime: 192, playDate: DateTime(2025, 04, 12)),
+  PuzzleHistory(level: 4, playTime: 192, playDate: DateTime(2025, 04, 11)),
+  PuzzleHistory(level: 5, playTime: 192, playDate: DateTime(2025, 04, 11)),
+  PuzzleHistory(level: 3, playTime: 192, playDate: DateTime(2025, 04, 10)),
+  PuzzleHistory(level: 4, playTime: 192, playDate: DateTime(2025, 04, 9)),
+  PuzzleHistory(level: 3, playTime: 192, playDate: DateTime(2025, 04, 8)),
+  PuzzleHistory(level: 5, playTime: 192, playDate: DateTime(2025, 03, 13)),
+  PuzzleHistory(level: 5, playTime: 192, playDate: DateTime(2025, 03, 7)),
+  PuzzleHistory(level: 5, playTime: 192, playDate: DateTime(2025, 03, 1)),
+  PuzzleHistory(level: 5, playTime: 192, playDate: DateTime(2025, 02, 25)),
+  PuzzleHistory(level: 3, playTime: 192, playDate: DateTime(2024, 02, 13)),
+  PuzzleHistory(level: 3, playTime: 192, playDate: DateTime(2024, 01, 13)),
+  PuzzleHistory(level: 4, playTime: 192, playDate: DateTime(2024, 04, 13)),
+  PuzzleHistory(level: 5, playTime: 192, playDate: DateTime(2023, 03, 13)),
+  PuzzleHistory(level: 3, playTime: 192, playDate: DateTime(2023, 02, 13)),
+  PuzzleHistory(level: 3, playTime: 192, playDate: DateTime(2023, 01, 13)),
 ];
 
 class PuzzleHistoryPage extends StatelessWidget {
@@ -55,7 +56,7 @@ class PuzzleHistoryPage extends StatelessWidget {
                   }
                   return HistoryCard(
                     level: data.level,
-                    playTime: data.playTime,
+                    playTime: data.playTime.formattedElapsed(),
                     playDate: data.playDate,
                     showDivider: showDivider,
                   );

@@ -1,6 +1,6 @@
 class PuzzleHistory {
   final int level;
-  final String playTime;
+  final int playTime;
   final DateTime playDate;
 
   const PuzzleHistory({
@@ -9,7 +9,7 @@ class PuzzleHistory {
     required this.playDate,
   });
 
-  PuzzleHistory copyWith({int? level, String? playTime, DateTime? playDate}) {
+  PuzzleHistory copyWith({int? level, int? playTime, DateTime? playDate}) {
     return PuzzleHistory(
       level: level ?? this.level,
       playTime: playTime ?? this.playTime,

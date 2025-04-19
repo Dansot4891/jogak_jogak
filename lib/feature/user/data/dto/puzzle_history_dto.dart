@@ -6,7 +6,7 @@ part 'puzzle_history_dto.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PuzzleHistoryDto {
   int? level;
-  String? playTime;
+  int? playTime;
   DateTime? playDate;
 
   PuzzleHistoryDto(this.level, this.playTime, this.playDate);
