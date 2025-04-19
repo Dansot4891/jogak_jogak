@@ -8,4 +8,6 @@ abstract interface class AuthRemoteDataSource {
     required String password,
     required String username,
   });
+
+  Future<void> changePassword(String email);
 }

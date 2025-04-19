@@ -56,4 +56,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     }
     return userCredential.user!.uid;
   }
+
+  @override
+  Future<void> changePassword(String email) async {
+    return await _auth.sendPasswordResetEmail(email: email);
+  }
 }

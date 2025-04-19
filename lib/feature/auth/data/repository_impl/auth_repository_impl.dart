@@ -32,4 +32,9 @@ class AuthRepositoryImpl implements AuthRepository {
       username: username,
     );
   }
+
+  @override
+  Future<void> changePassword(String email) async {
+    return await _dataSource.changePassword(email);
+  }
 }

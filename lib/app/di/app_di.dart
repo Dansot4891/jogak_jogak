@@ -4,6 +4,7 @@ import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_dat
 import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_data_source_impl.dart';
 import 'package:jogak_jogak/feature/auth/data/repository_impl/auth_repository_impl.dart';
 import 'package:jogak_jogak/feature/auth/domain/repository/auth_repository.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/change_password_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_out_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_up_use_case.dart';
@@ -72,6 +73,7 @@ void diSetup() {
   locator.registerSingleton(UploadRankingUseCase(locator()));
   locator.registerSingleton(GetPuzzleHistoryUseCase(locator()));
   locator.registerSingleton(SavePuzzleHistoryUseCase(locator()));
+  locator.registerSingleton(ChangePasswordUseCase(locator()));
 
   // 전역 provider
   locator.registerSingleton(
