@@ -15,7 +15,6 @@ class TabbarPage extends StatelessWidget {
   final Color? backgroundColor;
   final bool? resizeToAvoidBottomInset;
   final bool useSafeArea;
-  final Function(int) onTap;
   const TabbarPage({
     this.title,
     this.appBar,
@@ -26,7 +25,6 @@ class TabbarPage extends StatelessWidget {
     this.backgroundColor,
     this.resizeToAvoidBottomInset,
     this.useSafeArea = true,
-    required this.onTap,
     required this.tabs,
     required this.children,
     super.key,
@@ -49,7 +47,6 @@ class TabbarPage extends StatelessWidget {
         body: Column(
           children: [
             TabBar(
-              onTap: onTap,
               dividerColor: AppColor.sub,
               labelColor: AppColor.main,
               labelStyle: AppTextStyle.tabbar,

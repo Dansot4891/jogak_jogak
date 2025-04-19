@@ -9,7 +9,7 @@ class RankingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TabbarPage(tabs: _tabs, children: _chilren, onTap: (val) {});
+    return TabbarPage(tabs: _tabs, children: _chilren);
   }
 
   static final List<String> _tabs =

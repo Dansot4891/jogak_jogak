@@ -19,7 +19,6 @@ class _RootTabState extends State<RootTab> {
   Widget build(BuildContext context) {
     return BasePage(
       body: widget.child,
-
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -52,19 +51,19 @@ class _RootTabState extends State<RootTab> {
   }
 
   void onTap(int index) {
-    switch (index) {
-      case 0:
-        context.replace(AppRoute.home.path);
-        break;
-      case 1:
-        context.replace(AppRoute.ranking.path);
-        break;
-      case 2:
-        context.replace(AppRoute.myPage.path);
-        break;
-    }
     setState(() {
       currentIndex = index;
     });
+    switch (currentIndex) {
+      case 0:
+        context.go(AppRoute.home.path);
+        break;
+      case 1:
+        context.go(AppRoute.ranking.path);
+        break;
+      case 2:
+        context.go(AppRoute.myPage.path);
+        break;
+    }
   }
 }

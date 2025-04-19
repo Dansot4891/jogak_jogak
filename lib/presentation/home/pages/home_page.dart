@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BouncingBoxesBackground(
-      isScaffold: false,
+      isScaffold: true,
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (context, child) {

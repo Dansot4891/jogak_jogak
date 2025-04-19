@@ -16,7 +16,7 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BouncingBoxesBackground(
-      isScaffold: false,
+      isScaffold: true,
       minusHeight: AppSize.bottomNaviationHeight,
       body: ListenableBuilder(
         listenable: viewModel,
