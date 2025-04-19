@@ -52,7 +52,7 @@ class MyPage extends StatelessWidget {
                       SettingCard(
                         text: '닉네임 변경',
                         onTap: () {
-                          navigate(context, route: AppRoute.updateName);
+                          navigate(context, route: AppRoute.changeUsername);
                         },
                       ),
                       SettingCard(

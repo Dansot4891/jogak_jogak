@@ -9,6 +9,7 @@ import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
+import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_page.dart';
@@ -106,7 +107,8 @@ abstract class RootTabPath {
       path: AppRoute.myPage.path,
       name: AppRoute.myPage.name,
       builder: (context, state) {
-        return MyPage(locator());
+        final MyPageViewModel viewModel = locator();
+        return MyPage(viewModel);
       },
     ),
   ];

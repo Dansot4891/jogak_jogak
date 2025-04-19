@@ -31,6 +31,7 @@ import 'package:jogak_jogak/feature/user/domain/use_case/save_puzzle_history_use
 import 'package:jogak_jogak/presentation/auth/sign_up/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_view_model.dart';
+import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_view_model.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
@@ -107,4 +108,10 @@ void diSetup() {
   locator.registerFactory(() => MyPageViewModel(locator()));
   locator.registerFactory(() => PuzzleHistoryViewModel(locator()));
   locator.registerFactory(() => ChangePasswordViewModel(locator()));
+  locator.registerFactory(
+    () => ChangeUsernameViewModel(
+      changeUsernameUseCase: locator(),
+      checkUsernameUseCase: locator(),
+    ),
+  );
 }
