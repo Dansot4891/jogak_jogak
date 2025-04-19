@@ -4,6 +4,7 @@ import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/helper/extension/timer_extension.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
+import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/widgets/ranking_graph.dart';
 import 'package:jogak_jogak/presentation/rank/widgets/ranking_row.dart';
@@ -34,6 +35,21 @@ class RankingTabview extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
+                const SizedBox(height: 8),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: IntrinsicWidth(
+                    child: AppButton(
+                      text: '새로고침',
+                      onTap: () {},
+                      bgColor: AppColor.white,
+                      horizontalPadding: 4,
+                      verticalPadding: 8,
+                      border: Border.all(color: AppColor.grey80),
+                      textColor: AppColor.main,
+                    ),
+                  ),
+                ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
