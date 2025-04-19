@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
+import 'package:jogak_jogak/core/helper/toast/app_toast.dart';
+import 'package:jogak_jogak/core/helper/validator/app_validator.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
@@ -17,34 +20,56 @@ class ChangePasswordPage extends StatefulWidget {
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final _email = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BasePage(
       appBar: const DefaultAppbar(title: '비밀번호 변경'),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            CustomTextFormField(controller: _email, hintText: '이메일'),
-            const SizedBox(height: 20),
-            AppButton(
-              text: '메일 발송',
-              onTap: () {
-                AppShowDialog.show(
-                  context,
-                  AppDialog.doubleBtns(
-                    title: '비밀번호 재설정',
-                    subText: '해당 이메일로\n비밀번호 재설정 메일이 전송됩니다.',
-                    btnLeftText: '취소',
-                    btnRightText: '확인',
-                    onBtnLeftClicked: () {},
-                    onBtnRightClicked: () {},
+      body: ListenableBuilder(
+        listenable: widget.viewModel,
+        builder: (context, child) {
+          return Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  CustomTextFormField(
+                    controller: _email,
+                    hintText: '이메일',
+                    validator: AppValidator.emailValid,
                   ),
-                );
-              },
+                  const SizedBox(height: 20),
+                  AppButton(
+                    text: '메일 발송',
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        AppShowDialog.show(
+                          context,
+                          AppDialog.doubleBtns(
+                            title: '비밀번호 재설정',
+                            subText: '해당 이메일로\n비밀번호 재설정 메일이 전송됩니다.',
+                            btnLeftText: '취소',
+                            btnRightText: '확인',
+                            onBtnLeftClicked: () {
+                              pop(context);
+                            },
+                            onBtnRightClicked: () async {
+                              pop(context);
+                              // final message = await widget.viewModel
+                              //     .sendToEmail(_email.text);
+                              AppToast.show('message');
+                            },
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

@@ -60,6 +60,9 @@ dependencies:
   # splash screen
   flutter_native_splash: ^2.4.6
 
+  # toast msg
+  fluttertoast: ^8.2.12
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
