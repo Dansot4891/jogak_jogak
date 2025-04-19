@@ -8,7 +8,7 @@ class RankingDto {
   final String? nickname;
   final int? level;
   final String? email;
-  final String? playTime;
+  final int? playTime;
   final int? rank;
 
   const RankingDto({

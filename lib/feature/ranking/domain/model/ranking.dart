@@ -2,7 +2,7 @@ class Ranking {
   final String nickname;
   final int level;
   final String email;
-  final String playTime;
+  final int playTime;
   final int rank;
   const Ranking({
     required this.nickname,
@@ -16,7 +16,7 @@ class Ranking {
     String? nickname,
     int? level,
     String? email,
-    String? playTime,
+    int? playTime,
     int? rank,
   }) {
     return Ranking(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/helper/extension/timer_extension.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_view_model.dart';
@@ -42,7 +43,7 @@ class RankingTabview extends StatelessWidget {
                       return RankingGraph(
                         index: rankings[index].rank,
                         name: rankings[index].nickname,
-                        time: rankings[index].playTime,
+                        time: rankings[index].playTime.formattedElapsed(),
                       );
                     },
                   ),
@@ -60,7 +61,7 @@ class RankingTabview extends StatelessWidget {
                         return RankingRow(
                           index: '${ranking.rank}',
                           name: ranking.nickname,
-                          time: ranking.playTime,
+                          time: ranking.playTime.formattedElapsed(),
                         );
                       },
                       separatorBuilder: (context, index) {

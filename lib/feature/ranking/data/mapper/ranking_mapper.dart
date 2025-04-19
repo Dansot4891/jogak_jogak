@@ -19,15 +19,3 @@ extension RankingMapper on RankingDto {
     );
   }
 }
-
-extension RankingDtoMapper on Ranking {
-  RankingDto toRankingDto() {
-    return RankingDto(
-      nickname: nickname,
-      level: level,
-      email: email,
-      playTime: playTime,
-      rank: rank,
-    );
-  }
-}

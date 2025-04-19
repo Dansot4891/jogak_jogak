@@ -18,6 +18,6 @@ class RankingRepositoryImpl implements RankingRepository {
 
   @override
   Future<void> uploadRanking(Ranking ranking) async {
-    return await _dataSource.uploadRanking(ranking.toRankingDto());
+    // return await _dataSource.uploadRanking(ranking.toRankingDto());
   }
 }
