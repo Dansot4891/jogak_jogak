@@ -19,13 +19,20 @@ class RankingGraph extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            alignment: Alignment.center,
+            width: AppSize.ratioWidth(70),
             child: Text(
               name,
               style: AppTextStyle.rank,
-              overflow: TextOverflow.visible,
+              overflow: TextOverflow.fade,
+              textAlign: TextAlign.center,
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Text(time, style: AppTextStyle.rank),
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -38,7 +45,6 @@ class RankingGraph extends StatelessWidget {
                 topRight: Radius.circular(12),
               ),
             ),
-            child: Center(child: Text(time, style: AppTextStyle.rank)),
           ),
         ],
       ),

@@ -15,7 +15,7 @@ void main() {
         nickname: '임명우',
         level: 3,
         email: 'test@gmail.com',
-        playTime: '3:20',
+        playTime: 242,
         rank: 1,
       ),
     ];
@@ -28,7 +28,7 @@ void main() {
         case Success<List<Ranking>>():
           expect(
             resp.data.first,
-            mock.mapToEntityList((e) => e.toEntity()).first,
+            mock.mapToEntityList((e) => e.toRanking()).first,
           );
           break;
         case Error<List<Ranking>>():

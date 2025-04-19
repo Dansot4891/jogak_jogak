@@ -8,7 +8,7 @@ void main() async {
     nickname: '임명우',
     level: 3,
     email: 'test@gmail.com',
-    playTime: '3:20',
+    playTime: 240,
     rank: 1,
   );
   final instance = FakeFirebaseFirestore();
