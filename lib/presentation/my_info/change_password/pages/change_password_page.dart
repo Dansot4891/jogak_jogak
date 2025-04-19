@@ -56,9 +56,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                             },
                             onBtnRightClicked: () async {
                               pop(context);
-                              // final message = await widget.viewModel
-                              //     .sendToEmail(_email.text);
-                              AppToast.show('message');
+                              final message = await widget.viewModel
+                                  .sendToEmail(_email.text);
+                              AppToast.show(message);
                             },
                           ),
                         );

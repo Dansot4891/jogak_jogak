@@ -24,8 +24,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       email: email,
       password: password,
     );
-    // 회원가입시 유저가 작성한 닉네임을 프로필에 업데이트
-    await userCredential.user?.updateDisplayName(username);
     final id = userCredential.user?.uid;
 
     // uid가 존재하지 않는다면 에러
