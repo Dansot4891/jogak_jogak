@@ -1,25 +1,25 @@
 class PuzzleHistory {
   final int level;
   final String playTime;
-  final DateTime endTime;
+  final DateTime playDate;
 
   const PuzzleHistory({
     required this.level,
     required this.playTime,
-    required this.endTime,
+    required this.playDate,
   });
 
-  PuzzleHistory copyWith({int? level, String? playTime, DateTime? endTime}) {
+  PuzzleHistory copyWith({int? level, String? playTime, DateTime? playDate}) {
     return PuzzleHistory(
       level: level ?? this.level,
       playTime: playTime ?? this.playTime,
-      endTime: endTime ?? this.endTime,
+      playDate: playDate ?? this.playDate,
     );
   }
 
   @override
   String toString() =>
-      'PuzzleHistory(level: $level, playTime: $playTime, endTime: $endTime)';
+      'PuzzleHistory(level: $level, playTime: $playTime, playDate: $playDate)';
 
   @override
   bool operator ==(covariant PuzzleHistory other) {
@@ -27,9 +27,9 @@ class PuzzleHistory {
 
     return other.level == level &&
         other.playTime == playTime &&
-        other.endTime == endTime;
+        other.playDate == playDate;
   }
 
   @override
-  int get hashCode => level.hashCode ^ playTime.hashCode ^ endTime.hashCode;
+  int get hashCode => level.hashCode ^ playTime.hashCode ^ playDate.hashCode;
 }

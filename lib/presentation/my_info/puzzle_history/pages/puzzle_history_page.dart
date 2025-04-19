@@ -7,25 +7,25 @@ import 'package:jogak_jogak/presentation/my_info/puzzle_history/widgets/history_
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/widgets/history_header.dart';
 
 final List<PuzzleHistory> list = [
-  PuzzleHistory(level: 3, playTime: '3:01', endTime: DateTime(2025, 04, 13)),
-  PuzzleHistory(level: 4, playTime: '3:01', endTime: DateTime(2025, 04, 13)),
-  PuzzleHistory(level: 3, playTime: '3:02', endTime: DateTime(2025, 04, 13)),
-  PuzzleHistory(level: 3, playTime: '3:04', endTime: DateTime(2025, 04, 12)),
-  PuzzleHistory(level: 4, playTime: '3:01', endTime: DateTime(2025, 04, 11)),
-  PuzzleHistory(level: 5, playTime: '3:01', endTime: DateTime(2025, 04, 11)),
-  PuzzleHistory(level: 3, playTime: '3:01', endTime: DateTime(2025, 04, 10)),
-  PuzzleHistory(level: 4, playTime: '3:01', endTime: DateTime(2025, 04, 9)),
-  PuzzleHistory(level: 3, playTime: '3:01', endTime: DateTime(2025, 04, 8)),
-  PuzzleHistory(level: 5, playTime: '3:01', endTime: DateTime(2025, 03, 13)),
-  PuzzleHistory(level: 5, playTime: '3:01', endTime: DateTime(2025, 03, 7)),
-  PuzzleHistory(level: 5, playTime: '3:01', endTime: DateTime(2025, 03, 1)),
-  PuzzleHistory(level: 5, playTime: '3:01', endTime: DateTime(2025, 02, 25)),
-  PuzzleHistory(level: 3, playTime: '3:01', endTime: DateTime(2024, 02, 13)),
-  PuzzleHistory(level: 3, playTime: '3:01', endTime: DateTime(2024, 01, 13)),
-  PuzzleHistory(level: 4, playTime: '3:01', endTime: DateTime(2024, 04, 13)),
-  PuzzleHistory(level: 5, playTime: '3:01', endTime: DateTime(2023, 03, 13)),
-  PuzzleHistory(level: 3, playTime: '3:01', endTime: DateTime(2023, 02, 13)),
-  PuzzleHistory(level: 3, playTime: '3:01', endTime: DateTime(2023, 01, 13)),
+  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2025, 04, 13)),
+  PuzzleHistory(level: 4, playTime: '3:01', playDate: DateTime(2025, 04, 13)),
+  PuzzleHistory(level: 3, playTime: '3:02', playDate: DateTime(2025, 04, 13)),
+  PuzzleHistory(level: 3, playTime: '3:04', playDate: DateTime(2025, 04, 12)),
+  PuzzleHistory(level: 4, playTime: '3:01', playDate: DateTime(2025, 04, 11)),
+  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2025, 04, 11)),
+  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2025, 04, 10)),
+  PuzzleHistory(level: 4, playTime: '3:01', playDate: DateTime(2025, 04, 9)),
+  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2025, 04, 8)),
+  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2025, 03, 13)),
+  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2025, 03, 7)),
+  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2025, 03, 1)),
+  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2025, 02, 25)),
+  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2024, 02, 13)),
+  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2024, 01, 13)),
+  PuzzleHistory(level: 4, playTime: '3:01', playDate: DateTime(2024, 04, 13)),
+  PuzzleHistory(level: 5, playTime: '3:01', playDate: DateTime(2023, 03, 13)),
+  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2023, 02, 13)),
+  PuzzleHistory(level: 3, playTime: '3:01', playDate: DateTime(2023, 01, 13)),
 ];
 
 class PuzzleHistoryPage extends StatelessWidget {
@@ -50,13 +50,13 @@ class PuzzleHistoryPage extends StatelessWidget {
                   if (index != 0) {
                     final previous = list[index - 1];
                     showDivider =
-                        data.endTime.toRelativeDate() !=
-                        previous.endTime.toRelativeDate();
+                        data.playDate.toRelativeDate() !=
+                        previous.playDate.toRelativeDate();
                   }
                   return HistoryCard(
                     level: data.level,
                     playTime: data.playTime,
-                    endTime: data.endTime,
+                    playDate: data.playDate,
                     showDivider: showDivider,
                   );
                 },
