@@ -16,6 +16,8 @@ class RankingRemoteDataSourceImpl implements RankingDataSource {
         await _instance
             .collection(FirebaseCollections.ranking)
             .where(FirebaseQuery.level, isEqualTo: level)
+            .orderBy(FirebaseQuery.playTime)
+            .limit(15)
             .get();
     final ranking =
         snapshot.docs.map((e) => RankingDto.fromFireBase(e)).toList();

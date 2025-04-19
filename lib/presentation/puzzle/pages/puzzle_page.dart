@@ -183,7 +183,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                             width: AppSize.fractionHeight(0.2),
                             height: AppSize.fractionHeight(0.2),
                           ),
-                          Text('퍼즐, 클리어!', style: AppTextStyle.title1),
+                          Text('퍼즐 클리어!', style: AppTextStyle.title1),
                         ],
                       ),
                     ),

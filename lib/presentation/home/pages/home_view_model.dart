@@ -23,9 +23,11 @@ class HomeViewModel with ChangeNotifier {
     switch (result) {
       case Success<PuzzleImage>():
         final url = result.data.imageUrl;
+        print(url);
+        final imageName = 'tmp_image.${url.split('.').last}';
         final obtainedFile = await TemporaryDir.getImageToTemporaryPath(
           url: url,
-          imageName: 'tmp_image.${url.split('.').last}',
+          imageName: imageName,
         );
         _state = state.copyWith(file: obtainedFile, state: BaseState.success);
         _puzzleController.selectImage(obtainedFile: obtainedFile);

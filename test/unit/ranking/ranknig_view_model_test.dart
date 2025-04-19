@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/ranking/data/data_source/mock/mock_ranking_data_source_impl.dart';
 import 'package:jogak_jogak/feature/ranking/data/repository_impl/ranking_repository_impl.dart';
 import 'package:jogak_jogak/feature/ranking/domain/use_case/get_rankings_use_case.dart';

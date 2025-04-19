@@ -98,10 +98,15 @@ class PuzzleViewModel extends ChangeNotifier {
   // 타이머 시작
   void startTimer() {
     _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       // 게임오버시 타이머 종료 및 랭킹 데이터 업데이트
       if (_state.gameOver) {
         timer.cancel();
+        _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
+        notifyListeners();
+
+        // UI 먼저 변경 후 랭킹 등록하는 로직은
+        // 사용자가 알 수 없도록 뒤에 설정
         final user = _userProvider.state.user;
         // 현재 유저 정보가 없다면 랭킹 업데이트 X
         if (user == null) {
@@ -113,10 +118,8 @@ class PuzzleViewModel extends ChangeNotifier {
           email: user.email,
           playTime: _timer!.tick,
         );
-        _uploadRankingUseCase.execute(ranking);
+        await _uploadRankingUseCase.execute(ranking);
       }
-      _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
-      notifyListeners();
     });
   }
 
