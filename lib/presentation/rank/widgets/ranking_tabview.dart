@@ -41,7 +41,9 @@ class RankingTabview extends StatelessWidget {
                   child: IntrinsicWidth(
                     child: AppButton(
                       text: '새로고침',
-                      onTap: () {},
+                      onTap: () {
+                        viewModel.fetchRankings(level);
+                      },
                       bgColor: AppColor.white,
                       horizontalPadding: 4,
                       verticalPadding: 8,
