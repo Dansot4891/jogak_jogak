@@ -24,7 +24,7 @@ class PuzzleHistoryViewModel with ChangeNotifier {
           state: BaseState.error,
           errorMessage: result.error.message,
         );
-        notifyListeners();
     }
+    notifyListeners();
   }
 }
