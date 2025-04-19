@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
+import 'package:jogak_jogak/feature/ranking/domain/model/upload_ranking.dart';
 import 'package:jogak_jogak/feature/ranking/domain/use_case/upload_ranking_use_case.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_state.dart';
@@ -101,23 +100,20 @@ class PuzzleViewModel extends ChangeNotifier {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       // 게임오버시 타이머 종료 및 랭킹 데이터 업데이트
-      print(timer.tick);
       if (_state.gameOver) {
         timer.cancel();
-        print(timer.tick);
-        // final user = _userProvider.state.user;
-        // // 현재 유저 정보가 없다면 랭킹 업데이트 X
-        // if (user == null) {
-        //   return;
-        // }
-        // final ranking = Ranking(
-        //   nickname: user.username,
-        //   level: _state.gridViewSize,
-        //   email: user.email,
-        //   playTime: _timer.tick,
-        //   rank: rank,
-        // );
-        // _uploadRankingUseCase.execute(ranking);
+        final user = _userProvider.state.user;
+        // 현재 유저 정보가 없다면 랭킹 업데이트 X
+        if (user == null) {
+          return;
+        }
+        final ranking = UploadRanking(
+          nickname: user.username,
+          level: _state.gridViewSize,
+          email: user.email,
+          playTime: _timer!.tick,
+        );
+        _uploadRankingUseCase.execute(ranking);
       }
       _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
       notifyListeners();

@@ -1,6 +1,6 @@
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
-import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
+import 'package:jogak_jogak/feature/ranking/domain/model/upload_ranking.dart';
 import 'package:jogak_jogak/feature/ranking/domain/repository/ranking_repository.dart';
 
 class UploadRankingUseCase {
@@ -8,9 +8,9 @@ class UploadRankingUseCase {
 
   UploadRankingUseCase(this._rankingRepository);
 
-  Future<Result<void>> execute(Ranking ranking) async {
+  Future<Result<void>> execute(UploadRanking uploadRanking) async {
     try {
-      final resp = await _rankingRepository.uploadRanking(ranking);
+      final resp = await _rankingRepository.uploadRanking(uploadRanking);
       return Result.success(resp);
     } catch (e) {
       return const Result.error(UnexpectedException());

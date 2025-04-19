@@ -2,7 +2,7 @@ class UploadRanking {
   final String nickname;
   final int level;
   final String email;
-  final String playTime;
+  final int playTime;
   const UploadRanking({
     required this.nickname,
     required this.level,
@@ -14,7 +14,7 @@ class UploadRanking {
     String? nickname,
     int? level,
     String? email,
-    String? playTime,
+    int? playTime,
   }) {
     return UploadRanking(
       nickname: nickname ?? this.nickname,
