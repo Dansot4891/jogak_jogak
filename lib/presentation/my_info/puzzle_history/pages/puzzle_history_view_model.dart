@@ -17,6 +17,7 @@ class PuzzleHistoryViewModel with ChangeNotifier {
     final result = await _getPuzzleHistoryUseCase.execute();
     switch (result) {
       case Success<List<PuzzleHistory>>():
+        print(result.data);
         _state = state.copyWith(history: result.data, state: BaseState.success);
       case Error<List<PuzzleHistory>>():
         _state = state.copyWith(

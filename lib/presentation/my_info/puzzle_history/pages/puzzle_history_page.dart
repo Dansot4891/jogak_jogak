@@ -18,7 +18,7 @@ class PuzzleHistoryPage extends StatelessWidget {
     return BasePage(
       appBar: const DefaultAppbar(title: '퍼즐 기록'),
       body: ListenableBuilder(
-        listenable: viewModel,
+        listenable: viewModel..getPuzzleHistory(),
         builder: (context, child) {
           final state = viewModel.state;
           return StateHandling(

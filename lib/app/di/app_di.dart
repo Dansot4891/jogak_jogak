@@ -23,6 +23,7 @@ import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart'
 import 'package:jogak_jogak/feature/user/data/repository_impl/user_repository_impl.dart';
 import 'package:jogak_jogak/feature/user/domain/repository/user_repository.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case.dart';
+import 'package:jogak_jogak/feature/user/domain/use_case/get_puzzle_history_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
@@ -68,6 +69,7 @@ void diSetup() {
   locator.registerSingleton(GetUserUseCase(locator()));
   locator.registerSingleton(CheckUsernameUseCase(locator()));
   locator.registerSingleton(UploadRankingUseCase(locator()));
+  locator.registerSingleton(GetPuzzleHistoryUseCase(locator()));
 
   // 전역 provider
   locator.registerSingleton(
