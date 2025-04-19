@@ -6,8 +6,7 @@ extension RankingMapper on RankingDto {
     if (nickname == null ||
         level == null ||
         email == null ||
-        playTime == null ||
-        rank == null) {
+        playTime == null) {
       return null;
     }
     return Ranking(
@@ -15,7 +14,17 @@ extension RankingMapper on RankingDto {
       level: level!,
       email: email!,
       playTime: playTime!,
-      rank: rank!,
+    );
+  }
+}
+
+extension RankingDtoMapper on Ranking {
+  RankingDto toRankingDto() {
+    return RankingDto(
+      nickname: nickname,
+      level: level,
+      email: email,
+      playTime: playTime,
     );
   }
 }

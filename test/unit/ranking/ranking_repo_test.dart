@@ -16,7 +16,6 @@ void main() {
         level: 3,
         email: 'test@gmail.com',
         playTime: 242,
-        rank: 1,
       ),
     ];
     final mockDataSource = MockRankingDataSourceImpl();

@@ -8,8 +8,7 @@ void main() async {
     nickname: '임명우',
     level: 3,
     email: 'test@gmail.com',
-    playTime: 240,
-    rank: 1,
+    playTime: 242,
   );
   final instance = FakeFirebaseFirestore();
 
@@ -27,6 +26,5 @@ void main() async {
     expect(firebaseData[0].nickname, ranking[0].nickname);
     expect(firebaseData[0].level, ranking[0].level);
     expect(firebaseData[0].playTime, ranking[0].playTime);
-    expect(firebaseData[0].rank, ranking[0].rank);
   });
 }

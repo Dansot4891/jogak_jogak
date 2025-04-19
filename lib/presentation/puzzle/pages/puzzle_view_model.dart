@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/feature/ranking/domain/model/upload_ranking.dart';
+import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
 import 'package:jogak_jogak/feature/ranking/domain/use_case/upload_ranking_use_case.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_state.dart';
@@ -112,7 +112,7 @@ class PuzzleViewModel extends ChangeNotifier {
         if (user == null) {
           return;
         }
-        final ranking = UploadRanking(
+        final ranking = Ranking(
           nickname: user.username,
           level: _state.gridViewSize,
           email: user.email,

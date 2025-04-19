@@ -3,13 +3,11 @@ class Ranking {
   final int level;
   final String email;
   final int playTime;
-  final int rank;
   const Ranking({
     required this.nickname,
     required this.level,
     required this.email,
     required this.playTime,
-    required this.rank,
   });
 
   Ranking copyWith({
@@ -17,20 +15,18 @@ class Ranking {
     int? level,
     String? email,
     int? playTime,
-    int? rank,
   }) {
     return Ranking(
       nickname: nickname ?? this.nickname,
       level: level ?? this.level,
       email: email ?? this.email,
       playTime: playTime ?? this.playTime,
-      rank: rank ?? this.rank,
     );
   }
 
   @override
   String toString() {
-    return 'Ranking(nickname: $nickname, level: $level, email: $email, playTime: $playTime, rank: $rank)';
+    return 'Ranking(nickname: $nickname, level: $level, email: $email, playTime: $playTime)';
   }
 
   @override
@@ -40,8 +36,7 @@ class Ranking {
     return other.nickname == nickname &&
         other.level == level &&
         other.email == email &&
-        other.playTime == playTime &&
-        other.rank == rank;
+        other.playTime == playTime;
   }
 
   @override
@@ -49,7 +44,6 @@ class Ranking {
     return nickname.hashCode ^
         level.hashCode ^
         email.hashCode ^
-        playTime.hashCode ^
-        rank.hashCode;
+        playTime.hashCode;
   }
 }

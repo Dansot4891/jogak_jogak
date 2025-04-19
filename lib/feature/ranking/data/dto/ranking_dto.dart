@@ -9,15 +9,8 @@ class RankingDto {
   final int? level;
   final String? email;
   final int? playTime;
-  final int? rank;
 
-  const RankingDto({
-    this.nickname,
-    this.level,
-    this.email,
-    this.playTime,
-    this.rank,
-  });
+  const RankingDto({this.nickname, this.level, this.email, this.playTime});
 
   factory RankingDto.fromFireBase(
     DocumentSnapshot<Map<String, dynamic>> snapshot,

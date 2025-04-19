@@ -41,7 +41,7 @@ class RankingTabview extends StatelessWidget {
                     rankings.length > 3 ? 3 : rankings.length,
                     (index) {
                       return RankingGraph(
-                        index: rankings[index].rank,
+                        index: index + 1,
                         name: rankings[index].nickname,
                         time: rankings[index].playTime.formattedElapsed(),
                       );
@@ -59,7 +59,7 @@ class RankingTabview extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final ranking = rankings[index + 3];
                         return RankingRow(
-                          index: '${ranking.rank}',
+                          index: '${index + 1}',
                           name: ranking.nickname,
                           time: ranking.playTime.formattedElapsed(),
                         );
