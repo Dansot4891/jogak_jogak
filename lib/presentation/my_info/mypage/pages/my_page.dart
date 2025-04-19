@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
+import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
@@ -31,7 +32,10 @@ class MyPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 40),
-                      const Icon(Icons.extension_outlined, size: 120),
+                      Image.asset(
+                        AppImage.appLogo,
+                        width: AppSize.fractionWidth(0.4),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         child: Text(
