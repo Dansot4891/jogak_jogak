@@ -147,4 +147,10 @@ class MockRankingDataSourceImpl implements RankingDataSource {
       ),
     ];
   }
+
+  @override
+  Future<void> uploadRanking(RankingDto ranking) {
+    // TODO: implement uploadRanking
+    throw UnimplementedError();
+  }
 }

@@ -20,4 +20,11 @@ class RankingRemoteDataSourceImpl implements RankingDataSource {
         snapshot.docs.map((e) => RankingDto.fromFireBase(e)).toList();
     return ranking;
   }
+
+  @override
+  Future<void> uploadRanking(RankingDto ranking) async {
+    await _instance
+        .collection(FirebaseCollections.ranking)
+        .add(ranking.toJson());
+  }
 }

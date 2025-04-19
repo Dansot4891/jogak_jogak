@@ -76,6 +76,8 @@ class PuzzleViewModel extends ChangeNotifier {
                 AppSize.screenHeight -
                     16 -
                     ((AppSize.screenWidth - 32) / state.gridViewSize))) {
+      print('dx :$dx');
+      print('AppSize.screenPadding.top :${AppSize.screenPadding.top}');
       _controller.movePiece(
         index: index,
         dx: dx,

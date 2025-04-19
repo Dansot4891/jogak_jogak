@@ -2,7 +2,7 @@ import 'package:jogak_jogak/feature/ranking/data/dto/ranking_dto.dart';
 import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
 
 extension RankingMapper on RankingDto {
-  Ranking? toEntity() {
+  Ranking? toRanking() {
     if (nickname == null ||
         level == null ||
         email == null ||
@@ -16,6 +16,18 @@ extension RankingMapper on RankingDto {
       email: email!,
       playTime: playTime!,
       rank: rank!,
+    );
+  }
+}
+
+extension RankingDtoMapper on Ranking {
+  RankingDto toRankingDto() {
+    return RankingDto(
+      nickname: nickname,
+      level: level,
+      email: email,
+      playTime: playTime,
+      rank: rank,
     );
   }
 }
