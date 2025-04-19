@@ -11,7 +11,7 @@ import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_pa
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_view_model.dart';
-import 'package:jogak_jogak/presentation/my_info/update_name/pages/update_nickname_page.dart';
+import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_page.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
@@ -46,7 +46,7 @@ enum AppRoute {
 
   // my info
   changePw(path: '/change-pw', name: 'change-pw'),
-  updateName(path: '/update-name', name: 'update-name'),
+  changeUsername(path: '/change-username', name: 'change-username'),
   puzzleHistory(path: '/puzzle_history', name: 'puzzle_history'),
 
   // in Game
@@ -123,10 +123,10 @@ abstract class UserPath {
       },
     ),
     GoRoute(
-      path: AppRoute.updateName.path,
-      name: AppRoute.updateName.name,
+      path: AppRoute.changeUsername.path,
+      name: AppRoute.changeUsername.name,
       builder: (context, state) {
-        return const UpdateNicknamePage();
+        return const ChangeUsernamePage();
       },
     ),
     GoRoute(
