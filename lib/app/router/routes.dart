@@ -7,6 +7,7 @@ import 'package:jogak_jogak/presentation/auth/sign_up/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page.dart';
+import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_view_model.dart';
@@ -117,7 +118,8 @@ abstract class UserPath {
       path: AppRoute.changePw.path,
       name: AppRoute.changePw.name,
       builder: (context, state) {
-        return const ChangePasswordPage();
+        final ChangePasswordViewModel viewModel = locator();
+        return ChangePasswordPage(viewModel);
       },
     ),
     GoRoute(
