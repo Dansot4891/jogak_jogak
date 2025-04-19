@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -9,7 +10,11 @@ class PuzzleHistoryDto {
   int? playTime;
   DateTime? playDate;
 
-  PuzzleHistoryDto(this.level, this.playTime, this.playDate);
+  PuzzleHistoryDto({
+    required this.level,
+    required this.playTime,
+    required this.playDate,
+  });
 
   factory PuzzleHistoryDto.fromFireBase(
     DocumentSnapshot<Map<String, dynamic>> snapshot,

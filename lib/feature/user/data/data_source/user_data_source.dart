@@ -6,7 +6,10 @@ abstract interface class UserDataSource {
 
   Future<List<PuzzleHistoryDto>> getPuzzleHistory(String uid);
 
-  Future<void> saveGameHistory(PuzzleHistoryDto puzzleHistory);
+  Future<void> saveGameHistory({
+    required PuzzleHistoryDto puzzleHistory,
+    required String uid,
+  });
 
   Future<bool> checkUsername(String username);
 }

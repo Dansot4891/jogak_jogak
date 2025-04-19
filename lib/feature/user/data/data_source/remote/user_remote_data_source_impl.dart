@@ -42,8 +42,13 @@ class UserRemoteDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<void> saveGameHistory(PuzzleHistoryDto puzzleHistory) async {
+  Future<void> saveGameHistory({
+    required PuzzleHistoryDto puzzleHistory,
+    required String uid,
+  }) async {
     await _store
+        .collection(FirebaseCollections.users)
+        .doc(uid)
         .collection(FirebaseCollections.puzzleHistory)
         .add(puzzleHistory.toJson());
   }

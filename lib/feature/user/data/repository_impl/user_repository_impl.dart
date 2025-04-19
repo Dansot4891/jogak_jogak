@@ -30,4 +30,15 @@ class UserRepositoryImpl implements UserRepository {
     final userDto = await _dataSource.checkUsername(username);
     return userDto;
   }
+
+  @override
+  Future<void> savePuzzleHistory({
+    required PuzzleHistory puzzleHistory,
+    required String uid,
+  }) async {
+    return await _dataSource.saveGameHistory(
+      puzzleHistory: puzzleHistory.toPuzzleHistoryDto(),
+      uid: uid,
+    );
+  }
 }

@@ -10,3 +10,13 @@ extension PuzzleHistoryMapper on PuzzleHistoryDto {
     );
   }
 }
+
+extension PuzzleHistoryDtoMapper on PuzzleHistory {
+  PuzzleHistoryDto toPuzzleHistoryDto() {
+    return PuzzleHistoryDto(
+      level: level,
+      playTime: playTime,
+      playDate: playDate,
+    );
+  }
+}

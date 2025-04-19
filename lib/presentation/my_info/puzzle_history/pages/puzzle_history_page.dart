@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/helper/extension/date_time_extension.dart';
 import 'package:jogak_jogak/core/helper/extension/timer_extension.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
