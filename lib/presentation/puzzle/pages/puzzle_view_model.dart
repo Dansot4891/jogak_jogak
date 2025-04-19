@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
 import 'package:jogak_jogak/feature/ranking/domain/use_case/upload_ranking_use_case.dart';
+import 'package:jogak_jogak/feature/user/domain/model/puzzle_history.dart';
+import 'package:jogak_jogak/feature/user/domain/use_case/save_puzzle_history_use_case.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_state.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
@@ -10,6 +12,7 @@ import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 class PuzzleViewModel extends ChangeNotifier {
   final UploadRankingUseCase _uploadRankingUseCase;
   final UserProvider _userProvider;
+  final SavePuzzleHistoryUseCase _savePuzzleHistoryUseCase;
   final PuzzleController _controller = PuzzleController();
   // state는 불변 객체만 담으므로 타이머는 별개로 구성
   Timer? _timer;
@@ -20,8 +23,10 @@ class PuzzleViewModel extends ChangeNotifier {
   PuzzleViewModel({
     required UploadRankingUseCase uploadRankingUseCase,
     required UserProvider userProvider,
+    required SavePuzzleHistoryUseCase savePuzzleHistoryUseCase,
   }) : _userProvider = userProvider,
-       _uploadRankingUseCase = uploadRankingUseCase;
+       _uploadRankingUseCase = uploadRankingUseCase,
+       _savePuzzleHistoryUseCase = savePuzzleHistoryUseCase;
 
   // 뷰모델 처음 생성시 시작되는 함수
   // 필요한 데이터 할당
@@ -111,13 +116,21 @@ class PuzzleViewModel extends ChangeNotifier {
         if (user == null) {
           return;
         }
+        final playTime = _timer!.tick;
+        final level = _state.gridViewSize;
         final ranking = Ranking(
           nickname: user.username,
-          level: _state.gridViewSize,
+          level: level,
           email: user.email,
-          playTime: _timer!.tick,
+          playTime: playTime,
+        );
+        final puzzleHistory = PuzzleHistory(
+          level: level,
+          playTime: playTime,
+          playDate: DateTime.now(),
         );
         await _uploadRankingUseCase.execute(ranking);
+        await _savePuzzleHistoryUseCase.execute(puzzleHistory);
       }
       _state = _state.copyWith(elapsedSeconds: state.elapsedSeconds + 1);
       notifyListeners();

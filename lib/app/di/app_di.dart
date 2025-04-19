@@ -95,6 +95,7 @@ void diSetup() {
     () => PuzzleViewModel(
       uploadRankingUseCase: locator(),
       userProvider: locator(),
+      savePuzzleHistoryUseCase: locator(),
     ),
   );
   locator.registerFactory(() => RankingViewModel(locator()));
