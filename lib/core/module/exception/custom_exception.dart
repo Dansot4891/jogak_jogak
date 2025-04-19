@@ -12,7 +12,7 @@ class UnexpectedException extends CustomException {
 
 // 파이어베이스 Auth에서 유저 uid를 찾을 수 없을 때
 class UIDNotFoundException extends CustomException {
-  const UIDNotFoundException() : super(404, 'UID가 존재하지 않습니다. 올바른 UID를 확인해주세요.');
+  const UIDNotFoundException() : super(404, '유저 정보가 존재하지 않습니다. 다시 시도해주세요.');
 }
 
 // 파이어베이스 Auth에서 유저를 찾을 수 없을 때
