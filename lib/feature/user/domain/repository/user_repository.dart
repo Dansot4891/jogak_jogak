@@ -12,4 +12,6 @@ abstract interface class UserRepository {
     required PuzzleHistory puzzleHistory,
     required String uid,
   });
+
+  Future<void> changeUsername({required String uid, required String username});
 }

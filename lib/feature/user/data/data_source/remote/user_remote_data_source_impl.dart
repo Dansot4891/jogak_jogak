@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jogak_jogak/core/constants/firebase_collections.dart';
+import 'package:jogak_jogak/core/constants/firebase_query.dart';
 import 'package:jogak_jogak/feature/user/data/dto/puzzle_history_dto.dart';
 import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart';
 import 'package:jogak_jogak/feature/user/data/dto/user_dto.dart';
@@ -51,5 +52,15 @@ class UserRemoteDataSourceImpl implements UserDataSource {
         .doc(uid)
         .collection(FirebaseCollections.puzzleHistory)
         .add(puzzleHistory.toJson());
+  }
+
+  @override
+  Future<void> changeUsername({
+    required String uid,
+    required String username,
+  }) async {
+    await _store.collection(FirebaseCollections.users).doc(uid).update({
+      FirebaseQuery.username: username,
+    });
   }
 }

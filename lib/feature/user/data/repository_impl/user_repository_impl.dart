@@ -41,4 +41,12 @@ class UserRepositoryImpl implements UserRepository {
       uid: uid,
     );
   }
+
+  @override
+  Future<void> changeUsername({
+    required String uid,
+    required String username,
+  }) async {
+    return await _dataSource.changeUsername(uid: uid, username: username);
+  }
 }
