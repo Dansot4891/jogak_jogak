@@ -9,6 +9,7 @@ import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page.dart';
+import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/update_name/pages/update_nickname_page.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
@@ -130,7 +131,8 @@ abstract class UserPath {
       path: AppRoute.puzzleHistory.path,
       name: AppRoute.puzzleHistory.name,
       builder: (context, state) {
-        return const PuzzleHistoryPage();
+        final PuzzleHistoryViewModel viewModel = locator();
+        return PuzzleHistoryPage(viewModel);
       },
     ),
   ];
