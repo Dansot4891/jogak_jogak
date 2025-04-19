@@ -17,6 +17,7 @@ import 'package:jogak_jogak/feature/ranking/data/data_source/remote/ranking_remo
 import 'package:jogak_jogak/feature/ranking/data/repository_impl/ranking_repository_impl.dart';
 import 'package:jogak_jogak/feature/ranking/domain/repository/ranking_repository.dart';
 import 'package:jogak_jogak/feature/ranking/domain/use_case/get_rankings_use_case.dart';
+import 'package:jogak_jogak/feature/ranking/domain/use_case/upload_ranking_use_case.dart';
 import 'package:jogak_jogak/feature/user/data/data_source/remote/user_remote_data_source_impl.dart';
 import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart';
 import 'package:jogak_jogak/feature/user/data/repository_impl/user_repository_impl.dart';
@@ -65,6 +66,7 @@ void diSetup() {
   locator.registerSingleton(SignOutUseCase(locator()));
   locator.registerSingleton(GetUserUseCase(locator()));
   locator.registerSingleton(CheckUsernameUseCase(locator()));
+  locator.registerSingleton(UploadRankingUseCase(locator()));
 
   // 전역 provider
   locator.registerSingleton(
