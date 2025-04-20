@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';

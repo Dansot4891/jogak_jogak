@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_data.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';

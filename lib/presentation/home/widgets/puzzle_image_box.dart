@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
 
 class PuzzleImageBox extends StatelessWidget {

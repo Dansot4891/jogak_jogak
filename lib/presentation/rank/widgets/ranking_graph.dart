@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 
 class RankingGraph extends StatelessWidget {
   final int index;

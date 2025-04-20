@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/helper/validator/app_validator.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';

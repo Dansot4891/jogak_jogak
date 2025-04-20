@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;

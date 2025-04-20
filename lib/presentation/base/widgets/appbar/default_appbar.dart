@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 
 class DefaultAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

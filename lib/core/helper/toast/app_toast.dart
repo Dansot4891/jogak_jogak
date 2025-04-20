@@ -1,5 +1,5 @@
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
 
 abstract class AppToast {
   static void show(String message) {
