@@ -49,4 +49,9 @@ class UserRepositoryImpl implements UserRepository {
   }) async {
     return await _dataSource.changeUsername(uid: uid, username: username);
   }
+
+  @override
+  Future<void> withdrawal() async {
+    return await _dataSource.withdrawal();
+  }
 }
