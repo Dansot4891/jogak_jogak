@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
+import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/helper/validator/app_validator.dart';
@@ -47,6 +48,22 @@ class _SignUpPageState extends State<SignUpPage> {
         builder: (context, child) {
           if (viewModel.state.state == BaseState.loading) {
             return const BaseLoadingView();
+          }
+          if (viewModel.state.state == BaseState.success) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.celebration_outlined,
+                    color: AppColor.main,
+                    size: 150,
+                  ),
+                  const SizedBox(height: 20),
+                  Text('회원가입이 완료되었습니다!', style: AppTextStyle.header),
+                ],
+              ),
+            );
           }
           return Form(
             key: _formKey,
@@ -129,13 +146,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     password: _password.text,
                                     username: _name.text,
                                   );
-                                  if (result) {
-                                    navigate(
-                                      context,
-                                      route: AppRoute.home,
-                                      method: NavigationMethod.go,
-                                    );
-                                  } else {
+                                  if (!result) {
                                     AppShowDialog.show(
                                       context,
                                       AppDialog.singleBtn(
