@@ -3,6 +3,7 @@ import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
+import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
@@ -20,7 +21,7 @@ class ChangeUsernamePage extends StatefulWidget {
 
 class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
   late ChangeUsernameViewModel viewModel;
-  final _email = TextEditingController();
+  final _username = TextEditingController();
 
   @override
   void initState() {
@@ -45,11 +46,11 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                     children: [
                       Expanded(
                         child: CustomTextFormField(
-                          controller: _email,
+                          controller: _username,
                           hintText: '새로운 닉네임',
                           maxLength: 10,
                           onChanged: (val) {
-                            setState(() {});
+                            viewModel.resetIsAbleUsername();
                           },
                         ),
                       ),
@@ -61,7 +62,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                             isEmpty
                                 ? null
                                 : () {
-                                  viewModel.checkUsername(_email.text);
+                                  viewModel.checkUsername(_username.text);
                                 },
                       ),
                     ],
@@ -72,7 +73,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                     onTap:
                         viewModel.state.isAbleUsername == true
                             ? () {
-                              viewModel.checkUsername(_email.text);
+                              viewModel.changeUsername(_username.text);
                             }
                             : null,
                   ),
@@ -85,8 +86,12 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(AppImage.clear),
-                  Text('닉네임 변경이 완료되었습니다.', style: AppTextStyle.body1),
+                  Image.asset(
+                    AppImage.clear,
+                    width: AppSize.fractionWidth(0.3),
+                  ),
+                  const SizedBox(height: 20),
+                  Text('닉네임 변경이 완료되었습니다.', style: AppTextStyle.title2),
                 ],
               ),
             ),
@@ -96,5 +101,5 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
     );
   }
 
-  bool get isEmpty => _email.text.isEmpty;
+  bool get isEmpty => _username.text.isEmpty;
 }

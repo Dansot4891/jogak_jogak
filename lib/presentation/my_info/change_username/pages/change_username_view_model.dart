@@ -43,4 +43,9 @@ class ChangeUsernameViewModel with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void resetIsAbleUsername() {
+    _state = state.resetIsAbleUsername();
+    notifyListeners();
+  }
 }

@@ -11,6 +11,14 @@ class ChangeUsernameState {
     this.errorMessage = '',
   });
 
+  ChangeUsernameState resetIsAbleUsername() {
+    return ChangeUsernameState(
+      state: state,
+      isAbleUsername: null,
+      errorMessage: errorMessage,
+    );
+  }
+
   ChangeUsernameState copyWith({
     BaseState? state,
     bool? isAbleUsername,
