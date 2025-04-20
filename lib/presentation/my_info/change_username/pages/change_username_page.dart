@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/constants/app_image.dart';
+import 'package:jogak_jogak/core/module/state/base_state_view.dart';
+import 'package:jogak_jogak/core/module/state/state_handling.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
@@ -31,46 +35,60 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (context, child) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomTextFormField(
-                        controller: _email,
-                        hintText: '새로운 닉네임',
-                        maxLength: 10,
-                        onChanged: (val) {
-                          setState(() {});
-                        },
+          return StateHandling(
+            state: viewModel.state.state,
+            init: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextFormField(
+                          controller: _email,
+                          hintText: '새로운 닉네임',
+                          maxLength: 10,
+                          onChanged: (val) {
+                            setState(() {});
+                          },
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    AppButton(
-                      text: '중복확인',
-                      horizontalPadding: 8,
-                      onTap:
-                          isEmpty
-                              ? null
-                              : () {
-                                viewModel.checkUsername(_email.text);
-                              },
-                    ),
-                  ],
-                ),
-                UsernameNotice(viewModel.state.isAbleUsername),
-                AppButton(
-                  text: '닉네임 변경',
-                  onTap:
-                      viewModel.state.isAbleUsername == true
-                          ? () {
-                            viewModel.checkUsername(_email.text);
-                          }
-                          : null,
-                ),
-              ],
+                      const SizedBox(width: 8),
+                      AppButton(
+                        text: '중복확인',
+                        horizontalPadding: 8,
+                        onTap:
+                            isEmpty
+                                ? null
+                                : () {
+                                  viewModel.checkUsername(_email.text);
+                                },
+                      ),
+                    ],
+                  ),
+                  UsernameNotice(viewModel.state.isAbleUsername),
+                  AppButton(
+                    text: '닉네임 변경',
+                    onTap:
+                        viewModel.state.isAbleUsername == true
+                            ? () {
+                              viewModel.checkUsername(_email.text);
+                            }
+                            : null,
+                  ),
+                ],
+              ),
+            ),
+            loading: const BaseLoadingView(),
+            error: BaseErrorView(viewModel.state.errorMessage),
+            success: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(AppImage.clear),
+                  Text('닉네임 변경이 완료되었습니다.', style: AppTextStyle.body1),
+                ],
+              ),
             ),
           );
         },

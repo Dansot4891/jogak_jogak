@@ -86,6 +86,7 @@ void diSetup() {
       getUserUseCase: locator(),
       signUpUseCase: locator(),
       signOutUseCase: locator(),
+      changeUsernameUseCase: locator(),
     ),
   );
 
@@ -110,7 +111,7 @@ void diSetup() {
   locator.registerFactory(() => ChangePasswordViewModel(locator()));
   locator.registerFactory(
     () => ChangeUsernameViewModel(
-      changeUsernameUseCase: locator(),
+      userProvider: locator(),
       checkUsernameUseCase: locator(),
     ),
   );

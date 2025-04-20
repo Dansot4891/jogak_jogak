@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
+import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_state.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
@@ -27,13 +28,19 @@ class ChangeUsernameViewModel with ChangeNotifier {
     }
   }
 
-  Future<String> changeUsername(String username) async {
+  Future<void> changeUsername(String username) async {
+    _state = state.copyWith(state: BaseState.loading);
+    notifyListeners();
     final result = await _userProvider.changeUsername(username);
     switch (result) {
       case Success<void>():
-        return '닉네임이 변경되었습니다.';
+        _state = state.copyWith(state: BaseState.success);
       case Error<void>():
-        return '닉네임 변경에 실패하였습니다.';
+        _state = state.copyWith(
+          state: BaseState.error,
+          errorMessage: state.errorMessage,
+        );
     }
+    notifyListeners();
   }
 }
