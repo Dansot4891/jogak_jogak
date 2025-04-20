@@ -77,9 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             hintText: '닉네임 입력',
                             maxLength: 10,
                             onChanged: (val) {
-                              setState(() {
-                                viewModel.resetIsAbleUsername();
-                              });
+                              viewModel.resetIsAbleUsername();
                             },
                           ),
                         ),
@@ -102,6 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       hintText: '비밀번호 입력',
                       obsecure: true,
                       maxLines: 1,
+                      validator: AppValidator.passwordValid,
                       onChanged: (val) {
                         setState(() {});
                       },
@@ -112,6 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       hintText: '비밀번호 재확인',
                       obsecure: true,
                       maxLines: 1,
+                      validator: AppValidator.passwordValid,
                       onChanged: (val) {
                         setState(() {});
                       },
@@ -121,9 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       text: '회원가입',
                       onTap:
                           viewModel.state.isAbleUsername == true &&
-                                  _password.text == _passwordCheck.text &&
-                                  _password.text.isNotEmpty &&
-                                  _passwordCheck.text.isNotEmpty
+                                  _password.text == _passwordCheck.text
                               ? () async {
                                 if (_formKey.currentState!.validate()) {
                                   final result = await viewModel.signup(
@@ -141,7 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     AppShowDialog.show(
                                       context,
                                       AppDialog.singleBtn(
-                                        title: '에러가 발생하였습니다.',
+                                        title: viewModel.state.errorMessage,
                                         btnText: '확인',
                                         onBtnClicked: () {
                                           pop(context);

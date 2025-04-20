@@ -75,7 +75,11 @@ class AppDialog extends Dialog {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(title, style: AppTextStyle.title2),
+            Text(
+              title,
+              style: AppTextStyle.title2,
+              textAlign: TextAlign.center,
+            ),
 
             if (subText != null)
               Padding(

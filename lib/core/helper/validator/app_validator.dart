@@ -12,4 +12,15 @@ abstract class AppValidator {
 
     return null; // 유효할 경우 null 반환
   }
+
+  static String? passwordValid(String? input) {
+    if (input == null || input.isEmpty) {
+      return '비밀번호를 입력해주세요.';
+    }
+    if (input.length < 6) {
+      return '비밀번호는 6자 이상이어야합니다.';
+    }
+
+    return null; // 유효할 경우 null 반환
+  }
 }

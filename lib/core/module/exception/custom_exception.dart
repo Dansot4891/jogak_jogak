@@ -22,8 +22,7 @@ class UserNotFoundException extends CustomException {
 
 // 회원가입시 이메일이 존재할 때
 class EmailAlreadyExistsException extends CustomException {
-  const EmailAlreadyExistsException()
-    : super(409, '이미 존재하는 이메일입니다. 다른 이메일을 사용해주세요.');
+  const EmailAlreadyExistsException() : super(409, '이미 존재하는 이메일입니다.');
 }
 
 // 파이어베이스의 랜덤 이미지들의 총개수를 불러올 수 없을 때

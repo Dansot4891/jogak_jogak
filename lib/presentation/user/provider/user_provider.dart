@@ -29,7 +29,7 @@ class UserProvider extends ChangeNotifier {
   UserState get state => _state;
 
   // 로그인
-  Future<BaseState> signIn({
+  Future<Result<String>> signIn({
     required String email,
     required String password,
   }) async {
@@ -37,33 +37,10 @@ class UserProvider extends ChangeNotifier {
       email: email,
       password: password,
     );
-    // 로그인 결과
-    switch (loginResult) {
-      case Success<String>():
-        final userResult = await _getUserUseCase.execute(loginResult.data);
-        // 유저 정보 조회 결과
-        switch (userResult) {
-          case Success<AppUser>():
-            _state = state.copyWith(
-              user: userResult.data,
-              state: BaseState.success,
-            );
-          case Error():
-            _state = state.copyWith(
-              state: BaseState.error,
-              error: userResult.error.message,
-            );
-        }
-      case Error():
-        _state = state.copyWith(
-          state: BaseState.error,
-          error: loginResult.error.message,
-        );
-    }
-    return state.state;
+    return loginResult;
   }
 
-  Future<BaseState> signup({
+  Future<Result<void>> signup({
     required String email,
     required String password,
     required String username,
@@ -73,12 +50,7 @@ class UserProvider extends ChangeNotifier {
       password: password,
       username: username,
     );
-    switch (result) {
-      case Success<void>():
-        return signIn(email: email, password: password);
-      case Error<void>():
-        return BaseState.error;
-    }
+    return result;
   }
 
   void signout() async {

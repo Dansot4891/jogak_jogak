@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
 import 'package:jogak_jogak/feature/auth/domain/repository/auth_repository.dart';
@@ -18,6 +19,11 @@ class SignUpUseCase {
         username: username,
       );
       return Result.success(response);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        return const Result.error(EmailAlreadyExistsException());
+      }
+      return const Result.error(UnexpectedException());
     } catch (e) {
       return const Result.error(UnexpectedException());
     }

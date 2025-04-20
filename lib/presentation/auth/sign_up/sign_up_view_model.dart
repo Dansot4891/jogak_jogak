@@ -24,18 +24,21 @@ class SignUpViewModel with ChangeNotifier {
   }) async {
     _state = state.copyWith(state: BaseState.loading);
     notifyListeners();
-    final result = await _userProvider.signup(
+    final signupResult = await _userProvider.signup(
       email: email,
       password: password,
       username: username,
     );
-    switch (result) {
-      case BaseState.success:
+    switch (signupResult) {
+      case Success<void>():
         _state = state.copyWith(state: BaseState.success);
         notifyListeners();
         return true;
-      default:
-        _state = state.copyWith(state: BaseState.error);
+      case Error<void>():
+        _state = state.copyWith(
+          state: BaseState.error,
+          errorMessage: signupResult.error.message,
+        );
         notifyListeners();
         return false;
     }
@@ -49,9 +52,11 @@ class SignUpViewModel with ChangeNotifier {
       case Error<bool>():
         _state = state.copyWith(state: BaseState.error);
     }
+    notifyListeners();
   }
 
   void resetIsAbleUsername() {
     _state = state.copyWith(isAbleUsername: null);
+    notifyListeners();
   }
 }
