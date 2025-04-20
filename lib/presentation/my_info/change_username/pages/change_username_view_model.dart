@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
-import 'package:jogak_jogak/feature/user/domain/use_case/change_username_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_state.dart';
+import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
 class ChangeUsernameViewModel with ChangeNotifier {
-  final ChangeUsernameUseCase _changeUsernameUseCase;
+  final UserProvider _userProvider;
   final CheckUsernameUseCase _checkUsernameUseCase;
 
   ChangeUsernameViewModel({
-    required ChangeUsernameUseCase changeUsernameUseCase,
+    required UserProvider userProvider,
     required CheckUsernameUseCase checkUsernameUseCase,
-  }) : _changeUsernameUseCase = changeUsernameUseCase,
+  }) : _userProvider = userProvider,
        _checkUsernameUseCase = checkUsernameUseCase;
 
   ChangeUsernameState _state = const ChangeUsernameState();
@@ -28,7 +28,7 @@ class ChangeUsernameViewModel with ChangeNotifier {
   }
 
   Future<String> changeUsername(String username) async {
-    final result = await _changeUsernameUseCase.execute(username);
+    final result = await _userProvider.changeUsername(username);
     switch (result) {
       case Success<void>():
         return '닉네임이 변경되었습니다.';

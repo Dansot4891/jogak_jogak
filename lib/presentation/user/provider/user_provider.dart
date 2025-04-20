@@ -1,28 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_out_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_up_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/model/user.dart';
+import 'package:jogak_jogak/feature/user/domain/use_case/change_username_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_state.dart';
 
-class UserProvider {
+class UserProvider with ChangeNotifier {
   final SignInUseCase _signInUseCase;
   final GetUserUseCase _getUserUseCase;
   final SignUpUseCase _signUpUseCase;
   final SignOutUseCase _signOutUseCase;
+  final ChangeUsernameUseCase _changeUsernameUseCase;
 
   UserProvider({
     required SignInUseCase signInUseCase,
     required GetUserUseCase getUserUseCase,
     required SignUpUseCase signUpUseCase,
     required SignOutUseCase signOutUseCase,
+    required ChangeUsernameUseCase changeUsernameUseCase,
   }) : _signInUseCase = signInUseCase,
        _getUserUseCase = getUserUseCase,
        _signUpUseCase = signUpUseCase,
-       _signOutUseCase = signOutUseCase;
+       _signOutUseCase = signOutUseCase,
+       _changeUsernameUseCase = changeUsernameUseCase;
 
   UserState _state = const UserState();
   UserState get state => _state;
@@ -97,5 +102,16 @@ class UserProvider {
           );
       }
     }
+  }
+
+  Future<Result<void>> changeUsername(String username) async {
+    final result = await _changeUsernameUseCase.execute(username);
+    switch (result) {
+      case Success<void>():
+        _state = state.copyWith(user: state.user?.copyWith(username: username));
+        notifyListeners();
+      case Error<void>():
+    }
+    return result;
   }
 }
