@@ -101,6 +101,7 @@ class UserProvider with ChangeNotifier {
             error: result.error.message,
           );
       }
+      notifyListeners();
     }
   }
 

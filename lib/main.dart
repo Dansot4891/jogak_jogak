@@ -30,8 +30,6 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Pretendard',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      // TODO: 추후 app router를 전역적으로 관리하도록 설정해야함
-      // 현재는 빌드마다 계속 생성함
       routerConfig: router,
     );
   }
