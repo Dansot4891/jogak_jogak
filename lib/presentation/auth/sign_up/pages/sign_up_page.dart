@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/helper/validator/app_validator.dart';
@@ -8,7 +7,8 @@ import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/presentation/auth/sign_up/sign_up_view_model.dart';
+import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_view_model.dart';
+import 'package:jogak_jogak/presentation/auth/sign_up/widgets/sign_up_complete.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
@@ -50,20 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
             return const BaseLoadingView();
           }
           if (viewModel.state.state == BaseState.success) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.celebration_outlined,
-                    color: AppColor.main,
-                    size: 150,
-                  ),
-                  const SizedBox(height: 20),
-                  Text('회원가입이 완료되었습니다!', style: AppTextStyle.header),
-                ],
-              ),
-            );
+            return const SignUpComplete();
           }
           return Form(
             key: _formKey,

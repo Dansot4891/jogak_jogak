@@ -4,7 +4,6 @@ import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
-import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
@@ -87,24 +86,23 @@ class _SignInPageState extends State<SignInPage> {
                     email: _email.text,
                     password: _password.text,
                   );
-                  switch (result) {
-                    case BaseState.success:
-                      navigate(
-                        context,
-                        route: AppRoute.home,
-                        method: NavigationMethod.replace,
-                      );
-                    default:
-                      AppShowDialog.show(
-                        context,
-                        AppDialog.singleBtn(
-                          title: '로그인에 실패하였습니다.',
-                          btnText: '확인',
-                          onBtnClicked: () {
-                            pop(context);
-                          },
-                        ),
-                      );
+                  if (result) {
+                    navigate(
+                      context,
+                      route: AppRoute.home,
+                      method: NavigationMethod.replace,
+                    );
+                  } else {
+                    AppShowDialog.show(
+                      context,
+                      AppDialog.singleBtn(
+                        title: '로그인에 실패하였습니다.',
+                        btnText: '확인',
+                        onBtnClicked: () {
+                          pop(context);
+                        },
+                      ),
+                    );
                   }
                 },
               ),

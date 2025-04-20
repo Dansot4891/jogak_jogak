@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
@@ -9,7 +8,7 @@ import 'package:jogak_jogak/feature/user/domain/model/user.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_state.dart';
 
-class UserProvider extends ChangeNotifier {
+class UserProvider {
   final SignInUseCase _signInUseCase;
   final GetUserUseCase _getUserUseCase;
   final SignUpUseCase _signUpUseCase;
@@ -29,15 +28,36 @@ class UserProvider extends ChangeNotifier {
   UserState get state => _state;
 
   // 로그인
-  Future<Result<String>> signIn({
-    required String email,
-    required String password,
-  }) async {
+  Future<bool> signIn({required String email, required String password}) async {
     final loginResult = await _signInUseCase.execute(
       email: email,
       password: password,
     );
-    return loginResult;
+    // 로그인 결과
+    switch (loginResult) {
+      case Success<String>():
+        final userResult = await _getUserUseCase.execute(loginResult.data);
+        // 유저 정보 조회 결과
+        switch (userResult) {
+          case Success<AppUser>():
+            _state = state.copyWith(
+              user: userResult.data,
+              state: BaseState.success,
+            );
+            return true;
+          case Error():
+            _state = state.copyWith(
+              state: BaseState.error,
+              error: userResult.error.message,
+            );
+        }
+      case Error():
+        _state = state.copyWith(
+          state: BaseState.error,
+          error: loginResult.error.message,
+        );
+    }
+    return false;
   }
 
   Future<Result<void>> signup({
@@ -58,7 +78,6 @@ class UserProvider extends ChangeNotifier {
     switch (result) {
       case Success<void>():
         _state = state.resetUser();
-        notifyListeners();
       case Error<void>():
     }
   }
@@ -71,7 +90,6 @@ class UserProvider extends ChangeNotifier {
       switch (result) {
         case Success<AppUser>():
           _state = state.copyWith(user: result.data, state: BaseState.success);
-          notifyListeners();
         case Error():
           _state = state.copyWith(
             state: BaseState.error,

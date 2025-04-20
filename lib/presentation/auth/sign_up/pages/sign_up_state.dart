@@ -10,6 +10,14 @@ class SignupState {
     this.errorMessage = '',
   });
 
+  SignupState resetIsAbleUsername() {
+    return SignupState(
+      state: state,
+      isAbleUsername: null,
+      errorMessage: errorMessage,
+    );
+  }
+
   SignupState copyWith({
     BaseState? state,
     bool? isAbleUsername,

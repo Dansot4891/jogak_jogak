@@ -28,7 +28,7 @@ import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case
 import 'package:jogak_jogak/feature/user/domain/use_case/get_puzzle_history_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/save_puzzle_history_use_case.dart';
-import 'package:jogak_jogak/presentation/auth/sign_up/sign_up_view_model.dart';
+import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_view_model.dart';
