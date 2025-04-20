@@ -41,13 +41,17 @@ class SignUpViewModel with ChangeNotifier {
     }
   }
 
-  Future<bool> checkUsername(String username) async {
+  void checkUsername(String username) async {
     final result = await _checkUsernameUseCase.execute(username);
     switch (result) {
       case Success<bool>():
-        return result.data;
+        _state = state.copyWith(isAbleUsername: result.data);
       case Error<bool>():
-        return false;
+        _state = state.copyWith(state: BaseState.error);
     }
+  }
+
+  void resetIsAbleUsername() {
+    _state = state.copyWith(isAbleUsername: null);
   }
 }

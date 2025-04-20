@@ -24,13 +24,18 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  late SignUpViewModel viewModel;
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _name = TextEditingController();
   final _password = TextEditingController();
   final _passwordCheck = TextEditingController();
 
-  bool? isAbleUsername;
+  @override
+  void initState() {
+    viewModel = widget.viewModel;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +43,9 @@ class _SignUpPageState extends State<SignUpPage> {
       appBar: const DefaultAppbar(),
       resizeToAvoidBottomInset: true,
       body: ListenableBuilder(
-        listenable: widget.viewModel,
+        listenable: viewModel,
         builder: (context, child) {
-          if (widget.viewModel.state.state == BaseState.loading) {
+          if (viewModel.state.state == BaseState.loading) {
             return const BaseLoadingView();
           }
           return Form(
@@ -73,7 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             maxLength: 10,
                             onChanged: (val) {
                               setState(() {
-                                isAbleUsername = null;
+                                viewModel.resetIsAbleUsername();
                               });
                             },
                           ),
@@ -86,15 +91,12 @@ class _SignUpPageState extends State<SignUpPage> {
                               _name.text.isEmpty
                                   ? null
                                   : () async {
-                                    final resp = await widget.viewModel
-                                        .checkUsername(_name.text);
-                                    isAbleUsername = resp;
-                                    setState(() {});
+                                    viewModel.checkUsername(_name.text);
                                   },
                         ),
                       ],
                     ),
-                    UsernameNotice(isAbleUsername),
+                    UsernameNotice(viewModel.state.isAbleUsername),
                     CustomTextFormField(
                       controller: _password,
                       hintText: '비밀번호 입력',
@@ -118,13 +120,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     AppButton(
                       text: '회원가입',
                       onTap:
-                          isAbleUsername == true &&
+                          viewModel.state.isAbleUsername == true &&
                                   _password.text == _passwordCheck.text &&
                                   _password.text.isNotEmpty &&
                                   _passwordCheck.text.isNotEmpty
                               ? () async {
                                 if (_formKey.currentState!.validate()) {
-                                  final result = await widget.viewModel.signup(
+                                  final result = await viewModel.signup(
                                     email: _email.text,
                                     password: _password.text,
                                     username: _name.text,
