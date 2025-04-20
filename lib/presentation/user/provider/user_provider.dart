@@ -89,6 +89,7 @@ class UserProvider with ChangeNotifier {
         _state = state.resetUser();
       case Error<void>():
     }
+    notifyListeners();
   }
 
   Future<void> autoLogin() async {
@@ -120,7 +121,14 @@ class UserProvider with ChangeNotifier {
     return result;
   }
 
-  Future<Result<void>> withdrawal() async {
-    return await _withdrawalUseCase.execute();
+  Future<void> withdrawal() async {
+    final result = await _withdrawalUseCase.execute();
+
+    switch (result) {
+      case Success<void>():
+        _state = state.resetUser();
+      case Error<void>():
+    }
+    notifyListeners();
   }
 }

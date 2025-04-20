@@ -19,4 +19,8 @@ class MyPageViewModel with ChangeNotifier {
   void signout() {
     _userProvider.signout();
   }
+
+  void withdrawal() {
+    _userProvider.withdrawal();
+  }
 }

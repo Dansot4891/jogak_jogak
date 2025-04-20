@@ -98,8 +98,12 @@ class MyPage extends StatelessWidget {
                               subText: '회원탈퇴 하시겠습니까?',
                               btnText: '확인',
                               btnLeftText: '취소',
-                              onBtnLeftClicked: () {},
-                              onBtnClicked: () {},
+                              onBtnLeftClicked: () {
+                                pop(context);
+                              },
+                              onBtnClicked: () {
+                                viewModel.withdrawal();
+                              },
                             ),
                           );
                         },

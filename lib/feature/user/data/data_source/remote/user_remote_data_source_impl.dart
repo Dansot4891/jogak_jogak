@@ -68,7 +68,7 @@ class UserRemoteDataSourceImpl implements UserDataSource {
   @override
   Future<void> withdrawal() async {
     final user = FirebaseAuth.instance.currentUser;
-    await _store.collection(FirebaseCollections.users).doc(user!.uid).delete();
-    await user.delete();
+    await user!.delete();
+    await _store.collection(FirebaseCollections.users).doc(user.uid).delete();
   }
 }
