@@ -5,7 +5,7 @@ import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
-import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
+import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/widgets/setting_card.dart';
@@ -16,9 +16,7 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BouncingBoxesBackground(
-      isScaffold: true,
-      minusHeight: AppSize.bottomNaviationHeight,
+    return BasePage(
       body: ListenableBuilder(
         listenable: viewModel,
         builder: (context, child) {
@@ -33,7 +31,7 @@ class MyPage extends StatelessWidget {
                     children: [
                       const SizedBox(height: 40),
                       Image.asset(
-                        AppImage.appLogo,
+                        AppImage.appLogoWithColor,
                         width: AppSize.fractionWidth(0.4),
                       ),
                       Padding(

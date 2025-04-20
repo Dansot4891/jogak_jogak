@@ -15,13 +15,21 @@ class ChangeUsernamePage extends StatefulWidget {
 }
 
 class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
+  late ChangeUsernameViewModel viewModel;
   final _email = TextEditingController();
+
+  @override
+  void initState() {
+    viewModel = widget.viewModel;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BasePage(
       appBar: const DefaultAppbar(title: '닉네임 변경'),
       body: ListenableBuilder(
-        listenable: widget.viewModel,
+        listenable: viewModel,
         builder: (context, child) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -47,17 +55,19 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                           isEmpty
                               ? null
                               : () {
-                                widget.viewModel.checkUsername(_email.text);
+                                viewModel.checkUsername(_email.text);
                               },
                     ),
                   ],
                 ),
-                UsernameNotice(widget.viewModel.state.isAbleUsername),
+                UsernameNotice(viewModel.state.isAbleUsername),
                 AppButton(
                   text: '닉네임 변경',
                   onTap:
-                      widget.viewModel.state.isAbleUsername == true
-                          ? () {}
+                      viewModel.state.isAbleUsername == true
+                          ? () {
+                            viewModel.checkUsername(_email.text);
+                          }
                           : null,
                 ),
               ],
