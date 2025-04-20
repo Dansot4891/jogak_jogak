@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
 import 'package:jogak_jogak/app/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/helper/validator/app_validator.dart';
@@ -13,6 +12,7 @@ import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
+import 'package:jogak_jogak/presentation/base/widgets/notice/username_notice.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -94,11 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ],
                     ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      height: 40,
-                      child: noticeWidget,
-                    ),
+                    UsernameNotice(isAbleUsername),
                     CustomTextFormField(
                       controller: _password,
                       hintText: '비밀번호 입력',
@@ -164,17 +160,4 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-
-  Widget get noticeWidget =>
-      isAbleUsername == null
-          ? const Text('')
-          : isAbleUsername == true
-          ? Text(
-            '사용 가능한 닉네임입니다.',
-            style: AppTextStyle.body1.copyWith(color: AppColor.blue),
-          )
-          : Text(
-            '사용 불가능한 닉네임입니다.',
-            style: AppTextStyle.body1.copyWith(color: AppColor.red),
-          );
 }
