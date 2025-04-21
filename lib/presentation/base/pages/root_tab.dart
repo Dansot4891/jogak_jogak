@@ -54,6 +54,7 @@ class _RootTabState extends State<RootTab> {
     setState(() {
       currentIndex = index;
     });
+
     switch (currentIndex) {
       case 0:
         context.go(AppRoute.home.path);

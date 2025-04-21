@@ -53,6 +53,7 @@ class UserProvider with ChangeNotifier {
               user: userResult.data,
               state: BaseState.success,
             );
+            notifyListeners();
             return true;
           case Error():
             _state = state.copyWith(
@@ -66,6 +67,7 @@ class UserProvider with ChangeNotifier {
           error: loginResult.error.message,
         );
     }
+    notifyListeners();
     return false;
   }
 

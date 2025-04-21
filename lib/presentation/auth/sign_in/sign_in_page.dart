@@ -86,23 +86,19 @@ class _SignInPageState extends State<SignInPage> {
                     email: _email.text,
                     password: _password.text,
                   );
-                  if (result) {
-                    navigate(
-                      context,
-                      route: AppRoute.home,
-                      method: NavigationMethod.replace,
-                    );
-                  } else {
-                    AppShowDialog.show(
-                      context,
-                      AppDialog.singleBtn(
-                        title: '로그인에 실패하였습니다.',
-                        btnText: '확인',
-                        onBtnClicked: () {
-                          pop(context);
-                        },
-                      ),
-                    );
+                  if (!result) {
+                    if (mounted) {
+                      AppShowDialog.show(
+                        context,
+                        AppDialog.singleBtn(
+                          title: '로그인에 실패하였습니다.',
+                          btnText: '확인',
+                          onBtnClicked: () {
+                            pop(context);
+                          },
+                        ),
+                      );
+                    }
                   }
                 },
               ),
