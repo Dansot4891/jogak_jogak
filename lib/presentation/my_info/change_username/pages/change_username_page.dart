@@ -30,6 +30,12 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
   }
 
   @override
+  void dispose() {
+    _username.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BasePage(
       appBar: const DefaultAppbar(title: '닉네임 변경'),

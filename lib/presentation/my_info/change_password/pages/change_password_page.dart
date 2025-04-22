@@ -21,6 +21,13 @@ class ChangePasswordPage extends StatefulWidget {
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final _email = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _email.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BasePage(

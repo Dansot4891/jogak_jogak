@@ -29,6 +29,15 @@ class _SignUpPageState extends State<SignUpPage> {
   final _passwordCheck = TextEditingController();
 
   @override
+  void dispose() {
+    _email.dispose();
+    _name.dispose();
+    _password.dispose();
+    _passwordCheck.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (widget.state.state == BaseState.loading) {
       return const BaseLoadingView();
