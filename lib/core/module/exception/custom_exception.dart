@@ -29,3 +29,8 @@ class EmailAlreadyExistsException extends CustomException {
 class FailedToFetchImageException extends CustomException {
   const FailedToFetchImageException() : super(509, '데이터를 불러오는 데 실패했습니다.');
 }
+
+// 파이어베이스의 랜덤 이미지들의 총개수를 불러올 수 없을 때
+class FaileSignInWithInvalidCredential extends CustomException {
+  const FaileSignInWithInvalidCredential() : super(510, '아이디 비밀번호를\n확인해주세요.');
+}
