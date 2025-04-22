@@ -43,7 +43,7 @@ class ChangePasswordViewModel with ChangeNotifier {
           errorMessage: result.error.message,
         );
         _streamController.add(
-          const ChangePasswordEvent.showCheckDialog('에러가 발생하였습니다..'),
+          const ChangePasswordEvent.showCheckDialog('에러가 발생하였습니다.'),
         );
         notifyListeners();
     }

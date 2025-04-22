@@ -71,7 +71,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       hintText: '닉네임 입력',
                       maxLength: 10,
                       onChanged:
-                          (val) => widget.onAction(const ResetIsAbleUsername()),
+                          (val) => widget.onAction(
+                            const SignUpAction.resetIsAbleUsername(),
+                          ),
                     ),
                   ),
                   const SizedBox(width: 4),
@@ -82,7 +84,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         _name.text.isEmpty
                             ? null
                             : () async {
-                              widget.onAction(CheckUsername(_name.text));
+                              widget.onAction(
+                                SignUpAction.checkUsername(_name.text),
+                              );
                             },
                   ),
                 ],
@@ -118,7 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ? () async {
                           if (_formKey.currentState!.validate()) {
                             widget.onAction(
-                              Signup(
+                              SignUpAction.signup(
                                 email: _email.text,
                                 password: _password.text,
                                 username: _name.text,
