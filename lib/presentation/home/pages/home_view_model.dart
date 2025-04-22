@@ -4,6 +4,7 @@ import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/puzzle/domain/model/puzzle_image.dart';
 import 'package:jogak_jogak/feature/puzzle/domain/use_case/get_random_image_url_use_case.dart';
+import 'package:jogak_jogak/presentation/home/pages/home_action.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_state.dart';
 
@@ -15,8 +16,23 @@ class HomeViewModel with ChangeNotifier {
   HomeState _state = const HomeState();
   HomeState get state => _state;
 
+  void onAction(HomeAction action) {
+    switch (action) {
+      case GetRandomImageUrl():
+        _getRandomImageUrl();
+      case SelectLevel():
+        _selectLevel(action.level);
+      case SelectImage():
+        _selectImage();
+      case ResetState():
+        _resetState();
+      case RemoveImage():
+        _removeImage();
+    }
+  }
+
   // 랜덤 이미지 조회
-  void getRandomImageUrl() async {
+  void _getRandomImageUrl() async {
     _state = state.copyWith(state: BaseState.loading);
     notifyListeners();
     final result = await _getRandomImageUrlUseCase.execute();
@@ -41,28 +57,28 @@ class HomeViewModel with ChangeNotifier {
   }
 
   // 난이도 변경
-  void selectLevel(int level) {
+  void _selectLevel(int level) {
     _state = state.copyWith(level: level, file: state.file);
     _puzzleController.selectLevel(level);
     notifyListeners();
   }
 
   // 이미지 선택
-  void selectImage() async {
+  void _selectImage() async {
     await _puzzleController.selectImage();
     _state = state.copyWith(file: _puzzleController.file);
     notifyListeners();
   }
 
   // 이미지 제거
-  void removeImage() {
+  void _removeImage() {
     _puzzleController.removePuzzle();
     _state = state.copyWith(fileClear: true);
     notifyListeners();
   }
 
   // 데이터 리셋
-  void resetState() {
+  void _resetState() {
     _state = state.copyWith(state: BaseState.success);
     notifyListeners();
   }
