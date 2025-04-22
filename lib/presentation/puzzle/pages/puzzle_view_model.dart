@@ -6,6 +6,7 @@ import 'package:jogak_jogak/feature/ranking/domain/use_case/upload_ranking_use_c
 import 'package:jogak_jogak/feature/user/domain/model/puzzle_history.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/save_puzzle_history_use_case.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
+import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_action.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_state.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
@@ -28,11 +29,33 @@ class PuzzleViewModel extends ChangeNotifier {
        _uploadRankingUseCase = uploadRankingUseCase,
        _savePuzzleHistoryUseCase = savePuzzleHistoryUseCase;
 
+  void onAction(PuzzleAction action) {
+    switch (action) {
+      case Initialize():
+        _initialize();
+      case CropImage():
+        _cropImage();
+      case MatchPiece():
+        _matchPiece(action.targetIndex, action.matchIndex);
+      case MovePiece():
+        _movePiece(
+          index: action.index,
+          dx: action.dx,
+          dy: action.dy,
+          horizonPadding: action.horizonPadding,
+        );
+      case StartTimer():
+        _startTimer();
+      case Reset():
+        _reset();
+    }
+  }
+
   // 뷰모델 처음 생성시 시작되는 함수
   // 필요한 데이터 할당
-  void initialize() async {
-    await cropImage();
-    startTimer();
+  void _initialize() async {
+    await _cropImage();
+    _startTimer();
     _state = state.copyWith(
       file: _controller.file,
       pieces: _controller.pieces,
@@ -43,14 +66,14 @@ class PuzzleViewModel extends ChangeNotifier {
   }
 
   // 이미지 자르기
-  Future<void> cropImage() async {
+  Future<void> _cropImage() async {
     await _controller.cropImage();
   }
 
   // 퍼즐 맞추기
   // targetIndex : 맞추려는 퍼즐 피스
   // matchIndex : 사용자가 집은 퍼즐 피스
-  void matchPiece(int targetIndex, int matchIndex) {
+  void _matchPiece(int targetIndex, int matchIndex) {
     if (targetIndex == matchIndex) {
       _controller.matchPiece(targetIndex, matchIndex);
       _state = state.copyWith(
@@ -68,7 +91,7 @@ class PuzzleViewModel extends ChangeNotifier {
   }
 
   // 퍼즐 이동
-  void movePiece({
+  void _movePiece({
     required int index, // match하기위한 index
     required double dx, // 이동된 부분에서의 x 위치
     required double dy, // 이동된 부분에서의 y 위치
@@ -101,7 +124,7 @@ class PuzzleViewModel extends ChangeNotifier {
   }
 
   // 타이머 시작
-  void startTimer() {
+  void _startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       // 게임오버시 타이머 종료 및 랭킹 데이터 업데이트
@@ -138,7 +161,7 @@ class PuzzleViewModel extends ChangeNotifier {
   }
 
   // 데이터 리셋
-  void reset() async {
+  void _reset() async {
     _timer?.cancel();
     _timer = null;
     _state = state.copyWith(
