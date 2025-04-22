@@ -13,7 +13,6 @@ class GetRankingsUseCase {
       final rankings = await _rankingRepository.getRankings(level);
       return Result.success(rankings);
     } catch (e) {
-      print(e);
       return const Result.error(UnexpectedException());
     }
   }
