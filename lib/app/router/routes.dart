@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_page.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_page.dart';
+import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_page_root.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
@@ -67,7 +68,7 @@ abstract class AuthPath {
       name: AppRoute.signUp.name,
       builder: (context, state) {
         final SignUpViewModel viewModel = locator();
-        return SignUpPage(viewModel);
+        return SignUpPageRoot(viewModel);
       },
     ),
     GoRoute(
