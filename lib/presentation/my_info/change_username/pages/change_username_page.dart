@@ -72,9 +72,12 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
               text: '닉네임 변경',
               onTap:
                   widget.state.isAbleUsername == true
-                      ? () => widget.onAction(
-                        ChangeUsernameAction.changeUsername(_username.text),
-                      )
+                      ? () {
+                        widget.onAction(
+                          ChangeUsernameAction.changeUsername(_username.text),
+                        );
+                        _username.clear();
+                      }
                       : null,
             ),
           ],
