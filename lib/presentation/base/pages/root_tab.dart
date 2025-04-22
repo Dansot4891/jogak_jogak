@@ -1,50 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:go_router/go_router.dart';
+import 'package:jogak_jogak/app/router/routes.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
-import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
-import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
-import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
 class RootTab extends StatefulWidget {
-  const RootTab({super.key});
+  final Widget child;
+  const RootTab(this.child, {super.key});
 
   @override
   State<RootTab> createState() => _RootTabState();
 }
 
-class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
-  late TabController controller;
-  int index = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TabController(length: 3, vsync: this);
-    controller.addListener(tabListener);
-  }
-
-  @override
-  void dispose() {
-    controller.removeListener(tabListener);
-    super.dispose();
-  }
-
-  void tabListener() {
-    setState(() {
-      index = controller.index;
-    });
-  }
-
+class _RootTabState extends State<RootTab> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      body: TabBarView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: controller,
-        children: const [HomePage(), RankingPage(), MyPage()],
-      ),
-
+      body: widget.child,
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -55,15 +29,13 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
           ),
           BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            onTap: (int index) {
-              controller.animateTo(index);
-            },
+            onTap: onTap,
             selectedLabelStyle: AppTextStyle.body1,
             unselectedLabelStyle: AppTextStyle.body1,
             backgroundColor: AppColor.white,
             selectedItemColor: AppColor.main,
             unselectedItemColor: AppColor.greyC5,
-            currentIndex: index,
+            currentIndex: currentIndex,
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
               BottomNavigationBarItem(
@@ -76,5 +48,23 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
         ],
       ),
     );
+  }
+
+  void onTap(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+
+    switch (currentIndex) {
+      case 0:
+        context.go(AppRoute.home.path);
+        break;
+      case 1:
+        context.go(AppRoute.ranking.path);
+        break;
+      case 2:
+        context.go(AppRoute.myPage.path);
+        break;
+    }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
 
 class BouncingBox extends StatelessWidget {
   final double left;

@@ -1,17 +1,19 @@
-sealed class Result<T, D> {
+import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
+
+sealed class Result<T> {
   const factory Result.success(T data) = Success;
 
-  const factory Result.error(D error) = Error;
+  const factory Result.error(CustomException error) = Error;
 }
 
-class Success<T, D> implements Result<T, D> {
+class Success<T> implements Result<T> {
   final T data;
 
   const Success(this.data);
 }
 
-class Error<T, D> implements Result<T, D> {
-  final D error;
+class Error<T> implements Result<T> {
+  final CustomException error;
 
   const Error(this.error);
 }

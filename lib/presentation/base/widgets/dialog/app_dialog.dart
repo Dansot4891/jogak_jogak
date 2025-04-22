@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 
 class AppDialog extends Dialog {
@@ -10,7 +10,7 @@ class AppDialog extends Dialog {
   final String? btnLeftText;
   final String? subText;
   final VoidCallback onBtnClicked;
-  final VoidCallback? onBtnRightClicked;
+  final VoidCallback? onBtnLeftClicked;
   final double? width;
   const AppDialog({
     required this.title,
@@ -19,7 +19,7 @@ class AppDialog extends Dialog {
     this.innerWidget,
     this.btnLeftText,
     required this.onBtnClicked,
-    this.onBtnRightClicked,
+    this.onBtnLeftClicked,
     this.width,
     super.key,
   });
@@ -29,14 +29,14 @@ class AppDialog extends Dialog {
     required String title,
     required String btnText,
     String? subText,
-    required VoidCallback onBtnClicked,
+    VoidCallback? onBtnClicked,
     double? width,
   }) {
     return AppDialog(
       title: title,
       subText: subText,
       btnText: btnText,
-      onBtnClicked: onBtnClicked,
+      onBtnClicked: onBtnClicked ?? () {},
       width: width,
     );
   }
@@ -54,10 +54,10 @@ class AppDialog extends Dialog {
     return AppDialog(
       title: title,
       subText: subText,
-      btnText: btnLeftText,
-      btnLeftText: btnRightText,
-      onBtnClicked: onBtnLeftClicked,
-      onBtnRightClicked: onBtnRightClicked,
+      btnText: btnRightText,
+      btnLeftText: btnLeftText,
+      onBtnClicked: onBtnRightClicked,
+      onBtnLeftClicked: onBtnLeftClicked,
       width: width,
     );
   }
@@ -75,7 +75,11 @@ class AppDialog extends Dialog {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(title, style: AppTextStyle.title2),
+            Text(
+              title,
+              style: AppTextStyle.title2,
+              textAlign: TextAlign.center,
+            ),
 
             if (subText != null)
               Padding(
@@ -92,31 +96,31 @@ class AppDialog extends Dialog {
             if (innerWidget != null) innerWidget!,
 
             // two button
-            if (btnLeftText != null && onBtnRightClicked != null)
+            if (btnLeftText != null && onBtnLeftClicked != null)
               Row(
                 children: [
                   AppButton(
-                    text: btnText,
-                    onTap: onBtnClicked,
+                    text: btnLeftText!,
+                    onTap: onBtnLeftClicked!,
                     textColor: AppColor.grey80,
                     bgColor: AppColor.greyE6,
                     isExpanded: true,
                   ),
                   const SizedBox(width: 8),
                   AppButton(
-                    text: btnLeftText!,
-                    onTap: onBtnRightClicked,
+                    text: btnText,
+                    onTap: onBtnClicked,
                     isExpanded: true,
                   ),
                 ],
               ),
 
             // one button
-            if (btnLeftText == null || onBtnRightClicked == null)
+            if (btnLeftText == null || onBtnLeftClicked == null)
               AppButton(
                 text: btnText,
                 onTap: onBtnClicked,
-                bgColor: AppColor.sub,
+                bgColor: AppColor.main,
               ),
           ],
         ),

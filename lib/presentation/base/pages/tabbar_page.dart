@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 
 class TabbarPage extends StatelessWidget {
@@ -33,7 +33,6 @@ class TabbarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 1,
       length: 3,
       child: BasePage(
         title: title,

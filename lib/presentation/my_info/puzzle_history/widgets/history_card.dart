@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
-import 'package:jogak_jogak/core/helper/date_time_extension.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
+import 'package:jogak_jogak/core/helper/extension/date_time_extension.dart';
 
 class HistoryCard extends StatelessWidget {
   final int level;
   final String playTime;
-  final DateTime endTime;
+  final DateTime playDate;
   final bool showDivider;
   const HistoryCard({
     required this.level,
     required this.playTime,
-    required this.endTime,
+    required this.playDate,
     required this.showDivider,
     super.key,
   });
@@ -29,7 +29,7 @@ class HistoryCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Text(
-                    endTime.toRelativeDate(),
+                    playDate.toRelativeDate(),
                     style: AppTextStyle.body2.copyWith(color: AppColor.grey80),
                   ),
                 ),

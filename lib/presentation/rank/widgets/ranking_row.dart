@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 
 class RankingRow extends StatelessWidget {
   final String index;
@@ -26,7 +26,7 @@ class RankingRow extends StatelessWidget {
           Expanded(child: Text(name, style: AppTextStyle.rank)),
           const SizedBox(width: 16),
           SizedBox(
-            width: 40,
+            width: 100,
             child: Center(child: Text(time, style: AppTextStyle.rank)),
           ),
         ],

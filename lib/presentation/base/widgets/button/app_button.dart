@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/app/style/app_color.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_color.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 
 class AppButton extends StatefulWidget {
   // Todo
@@ -61,6 +61,11 @@ class _AppButtonState extends State<AppButton> {
       onTapDown: (details) {
         setState(() {
           disable = true;
+        });
+      },
+      onTapCancel: () {
+        setState(() {
+          disable = false;
         });
       },
       onTapUp: (details) {

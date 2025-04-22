@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jogak_jogak/app/style/app_text_style.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -26,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool isDense;
   final TextAlign textAlign;
   final VoidCallback? onTap;
+  final TextInputType? textInputType;
   const CustomTextFormField({
     required this.controller,
     required this.hintText,
@@ -50,6 +51,7 @@ class CustomTextFormField extends StatelessWidget {
     this.borderColor,
     this.contentPadding,
     this.filled = true,
+    this.textInputType,
     super.key,
   });
 
@@ -70,6 +72,7 @@ class CustomTextFormField extends StatelessWidget {
       style: AppTextStyle.textField,
       onChanged: onChanged,
       controller: controller,
+      keyboardType: textInputType,
       decoration: InputDecoration(
         isDense: isDense,
         fillColor: fillColor ?? Colors.white,
