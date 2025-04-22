@@ -4,8 +4,6 @@ import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
-import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/base/widgets/notice/username_notice.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
@@ -36,67 +34,62 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BasePage(
-      appBar: const DefaultAppbar(title: '닉네임 변경'),
-      body: StateHandling(
-        state: widget.state.state,
-        init: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomTextFormField(
-                      controller: _username,
-                      hintText: '새로운 닉네임',
-                      maxLength: 10,
-                      onChanged: (val) {
-                        widget.onAction(
-                          const ChangeUsernameAction.resetIsAbleUsername(),
-                        );
-                      },
-                    ),
+    return StateHandling(
+      state: widget.state.state,
+      init: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: CustomTextFormField(
+                    controller: _username,
+                    hintText: '새로운 닉네임',
+                    maxLength: 10,
+                    onChanged: (val) {
+                      widget.onAction(
+                        const ChangeUsernameAction.resetIsAbleUsername(),
+                      );
+                    },
                   ),
-                  const SizedBox(width: 8),
-                  AppButton(
-                    text: '중복확인',
-                    horizontalPadding: 8,
-                    onTap:
-                        isEmpty
-                            ? null
-                            : () => widget.onAction(
-                              ChangeUsernameAction.checkUsername(
-                                _username.text,
-                              ),
-                            ),
-                  ),
-                ],
-              ),
-              UsernameNotice(widget.state.isAbleUsername),
-              AppButton(
-                text: '닉네임 변경',
-                onTap:
-                    widget.state.isAbleUsername == true
-                        ? () => widget.onAction(
-                          ChangeUsernameAction.changeUsername(_username.text),
-                        )
-                        : null,
-              ),
-            ],
-          ),
+                ),
+                const SizedBox(width: 8),
+                AppButton(
+                  text: '중복확인',
+                  horizontalPadding: 8,
+                  onTap:
+                      isEmpty
+                          ? null
+                          : () => widget.onAction(
+                            ChangeUsernameAction.checkUsername(_username.text),
+                          ),
+                ),
+              ],
+            ),
+            UsernameNotice(widget.state.isAbleUsername),
+            AppButton(
+              text: '닉네임 변경',
+              onTap:
+                  widget.state.isAbleUsername == true
+                      ? () => widget.onAction(
+                        ChangeUsernameAction.changeUsername(_username.text),
+                      )
+                      : null,
+            ),
+          ],
         ),
-        loading: const BaseLoadingView(),
-        error: BaseErrorView(widget.state.errorMessage),
-        success: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(AppImage.clear, width: AppSize.fractionWidth(0.3)),
-              const SizedBox(height: 20),
-              Text('닉네임 변경이 완료되었습니다.', style: AppTextStyle.title2),
-            ],
-          ),
+      ),
+      loading: const BaseLoadingView(),
+      error: BaseErrorView(widget.state.errorMessage),
+      success: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(AppImage.clear, width: AppSize.fractionWidth(0.3)),
+            const SizedBox(height: 20),
+            Text('닉네임 변경이 완료되었습니다.', style: AppTextStyle.title2),
+          ],
         ),
       ),
     );

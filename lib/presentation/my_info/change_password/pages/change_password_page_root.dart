@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
@@ -27,7 +28,13 @@ class _ChangePasswordPageRootState extends State<ChangePasswordPageRoot> {
           case ShowCheckDialog():
             AppShowDialog.show(
               context,
-              AppDialog.singleBtn(title: event.message, btnText: '확인'),
+              AppDialog.singleBtn(
+                title: event.message,
+                btnText: '확인',
+                onBtnClicked: () {
+                  pop(context);
+                },
+              ),
             );
         }
       }
