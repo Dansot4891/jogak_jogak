@@ -5,14 +5,11 @@ import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_page.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_page_root.dart';
 import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page_root.dart';
-import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page_root.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_page_root.dart';
-import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_root.dart';
-import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page.dart';
-import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_page.dart';
-import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
+import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page_root.dart';
+import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page_root.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -130,7 +127,7 @@ abstract class UserPath {
       path: AppRoute.puzzleHistory.path,
       name: AppRoute.puzzleHistory.name,
       builder: (context, state) {
-        return PuzzleHistoryPage(locator());
+        return PuzzleHistoryPageRoot(locator());
       },
     ),
   ];
@@ -142,7 +139,7 @@ abstract class PuzzlePath {
       path: AppRoute.puzzle.path,
       name: AppRoute.puzzle.name,
       builder: (context, state) {
-        return PuzzlePage(locator());
+        return PuzzlePageRoot(locator());
       },
     ),
   ];
