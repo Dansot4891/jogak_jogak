@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/change_password_use_case.dart';
-import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_action.dart';
+import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_username_action.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_event.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_state.dart';
 
