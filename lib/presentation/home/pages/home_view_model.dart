@@ -10,7 +10,10 @@ import 'package:jogak_jogak/presentation/home/pages/home_state.dart';
 
 class HomeViewModel with ChangeNotifier {
   final GetRandomImageUrlUseCase _getRandomImageUrlUseCase;
-  HomeViewModel(this._getRandomImageUrlUseCase);
+  HomeViewModel(this._getRandomImageUrlUseCase) {
+    // 난이도 초기값 설정
+    _selectLevel(_puzzleController.gridViewSize);
+  }
 
   final _puzzleController = PuzzleController();
   HomeState _state = const HomeState();

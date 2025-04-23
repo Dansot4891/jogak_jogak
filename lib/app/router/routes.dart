@@ -94,7 +94,7 @@ abstract class RootTabPath {
       path: AppRoute.ranking.path,
       name: AppRoute.ranking.name,
       builder: (context, state) {
-        return const RankingPage();
+        return RankingPage(locator());
       },
     ),
     GoRoute(
