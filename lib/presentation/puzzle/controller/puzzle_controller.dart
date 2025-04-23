@@ -6,9 +6,7 @@ import 'package:jogak_jogak/feature/puzzle/domain/model/puzzle.dart';
 import 'package:jogak_jogak/feature/puzzle/utils/img_crop.dart';
 
 class PuzzleController {
-  static PuzzleController instance = PuzzleController._internal();
-  PuzzleController._internal();
-  factory PuzzleController() => instance;
+  PuzzleController();
 
   // 파일
   File? file;

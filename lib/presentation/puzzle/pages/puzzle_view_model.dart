@@ -14,7 +14,7 @@ class PuzzleViewModel extends ChangeNotifier {
   final UploadRankingUseCase _uploadRankingUseCase;
   final UserProvider _userProvider;
   final SavePuzzleHistoryUseCase _savePuzzleHistoryUseCase;
-  final PuzzleController _controller = PuzzleController();
+  final PuzzleController _puzzleController;
   // state는 불변 객체만 담으므로 타이머는 별개로 구성
   Timer? _timer;
 
@@ -22,10 +22,12 @@ class PuzzleViewModel extends ChangeNotifier {
   PuzzleState get state => _state;
 
   PuzzleViewModel({
+    required PuzzleController puzzleController,
     required UploadRankingUseCase uploadRankingUseCase,
     required UserProvider userProvider,
     required SavePuzzleHistoryUseCase savePuzzleHistoryUseCase,
-  }) : _userProvider = userProvider,
+  }) : _puzzleController = puzzleController,
+       _userProvider = userProvider,
        _uploadRankingUseCase = uploadRankingUseCase,
        _savePuzzleHistoryUseCase = savePuzzleHistoryUseCase;
 
@@ -57,17 +59,17 @@ class PuzzleViewModel extends ChangeNotifier {
     await _cropImage();
     _startTimer();
     _state = state.copyWith(
-      file: _controller.file,
-      pieces: _controller.pieces,
-      gridViewSize: _controller.gridViewSize,
-      correctPieces: _controller.correctPieces,
+      file: _puzzleController.file,
+      pieces: _puzzleController.pieces,
+      gridViewSize: _puzzleController.gridViewSize,
+      correctPieces: _puzzleController.correctPieces,
     );
     notifyListeners();
   }
 
   // 이미지 자르기
   Future<void> _cropImage() async {
-    await _controller.cropImage();
+    await _puzzleController.cropImage();
   }
 
   // 퍼즐 맞추기
@@ -75,10 +77,10 @@ class PuzzleViewModel extends ChangeNotifier {
   // matchIndex : 사용자가 집은 퍼즐 피스
   void _matchPiece(int targetIndex, int matchIndex) {
     if (targetIndex == matchIndex) {
-      _controller.matchPiece(targetIndex, matchIndex);
+      _puzzleController.matchPiece(targetIndex, matchIndex);
       _state = state.copyWith(
-        pieces: _controller.pieces,
-        correctPieces: _controller.correctPieces,
+        pieces: _puzzleController.pieces,
+        correctPieces: _puzzleController.correctPieces,
       );
     }
     // 현재 퍼즐 개수에서 맞춘것과 실제 정답의 개수와 같다면
@@ -113,7 +115,7 @@ class PuzzleViewModel extends ChangeNotifier {
                 AppSize.screenHeight -
                     16 -
                     ((AppSize.screenWidth - 32) / state.gridViewSize))) {
-      _controller.movePiece(
+      _puzzleController.movePiece(
         index: index,
         dx: dx,
         dy: dy,
@@ -170,7 +172,7 @@ class PuzzleViewModel extends ChangeNotifier {
       elapsedSeconds: 0,
       gameOver: false,
     );
-    _controller.reset();
+    _puzzleController.reset();
     notifyListeners();
   }
 
