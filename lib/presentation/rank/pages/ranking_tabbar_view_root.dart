@@ -19,7 +19,10 @@ class RankingTabviewRoot extends StatefulWidget {
 class _RankingTabviewRootState extends State<RankingTabviewRoot> {
   @override
   void initState() {
-    widget.viewModel.onAction(RankingAction.fetchRankings(widget.level));
+    // 빌드 이후 안전하게 호출
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.viewModel.onAction(RankingAction.fetchRankings(widget.level));
+    });
     super.initState();
   }
 

@@ -21,11 +21,19 @@ class RankingViewModel with ChangeNotifier {
   void onAction(RankingAction action) {
     switch (action) {
       case FetchRankings():
-        _fetchRankings(action.level);
+        _fetchRankings(action.level, isRefetching: action.isRefetching);
     }
   }
 
-  void _fetchRankings(int level) async {
+  void _fetchRankings(int level, {bool isRefetching = false}) async {
+    if (_state.withLevelRanking
+            .where((e) => e.level == level)
+            .first
+            .rankings
+            .isNotEmpty &&
+        !isRefetching) {
+      return;
+    }
     _state = state.copyWith(state: BaseState.loading);
     notifyListeners();
     final result = await _getRankingsUseCase.execute(level);

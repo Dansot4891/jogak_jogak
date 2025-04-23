@@ -40,7 +40,7 @@ class RankingTabview extends StatelessWidget {
                 child: AppButton(
                   text: '새로고침',
                   onTap: () {
-                    onAction(FetchRankings(level));
+                    onAction(FetchRankings(level, isRefetching: true));
                   },
                   bgColor: AppColor.white,
                   horizontalPadding: 4,

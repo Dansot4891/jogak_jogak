@@ -1,8 +1,10 @@
 sealed class RankingAction {
-  const factory RankingAction.fetchRankings(int level) = FetchRankings;
+  const factory RankingAction.fetchRankings(int level, {bool isRefetching}) =
+      FetchRankings;
 }
 
 class FetchRankings implements RankingAction {
   final int level;
-  const FetchRankings(this.level);
+  final bool isRefetching;
+  const FetchRankings(this.level, {this.isRefetching = false});
 }
