@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.kr.jogakjogak</string>
+	<string>com.myung.jogakjogak</string>
 	<key>PROJECT_ID</key>
 	<string>jogak-jogak</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:581342125266:ios:0449289f7fde47f24fa10b</string>
+	<string>1:581342125266:ios:dfb2c2c430d9390b4fa10b</string>
 </dict>
 </plist>
