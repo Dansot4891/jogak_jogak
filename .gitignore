@@ -55,3 +55,7 @@ app.*.map.json
 
 # Key properties file
 /android/key.properties
+
+# Firebase
+**/GoogleService-Info.plist
+**/google-services.json
