@@ -2,20 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_page.dart';
-import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_page.dart';
-import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_view_model.dart';
+import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_page_root.dart';
 import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
-import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
-import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page.dart';
-import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_view_model.dart';
-import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_view_model.dart';
-import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
-import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_view_model.dart';
-import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page.dart';
-import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_view_model.dart';
-import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_page.dart';
-import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page.dart';
-import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
+import 'package:jogak_jogak/presentation/home/pages/home_page_root.dart';
+import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page_root.dart';
+import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_page_root.dart';
+import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_root.dart';
+import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page_root.dart';
+import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page_root.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
 
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -66,8 +60,7 @@ abstract class AuthPath {
       path: AppRoute.signUp.path,
       name: AppRoute.signUp.name,
       builder: (context, state) {
-        final SignUpViewModel viewModel = locator();
-        return SignUpPage(viewModel);
+        return SignUpPageRoot(locator());
       },
     ),
     GoRoute(
@@ -94,22 +87,21 @@ abstract class RootTabPath {
       path: AppRoute.home.path,
       name: AppRoute.home.name,
       builder: (context, state) {
-        return HomePage(locator());
+        return HomePageRoot(locator());
       },
     ),
     GoRoute(
       path: AppRoute.ranking.path,
       name: AppRoute.ranking.name,
       builder: (context, state) {
-        return const RankingPage();
+        return RankingPage(locator());
       },
     ),
     GoRoute(
       path: AppRoute.myPage.path,
       name: AppRoute.myPage.name,
       builder: (context, state) {
-        final MyPageViewModel viewModel = locator();
-        return MyPage(viewModel);
+        return MyPageRoot(locator());
       },
     ),
   ];
@@ -121,24 +113,21 @@ abstract class UserPath {
       path: AppRoute.changePw.path,
       name: AppRoute.changePw.name,
       builder: (context, state) {
-        final ChangePasswordViewModel viewModel = locator();
-        return ChangePasswordPage(viewModel);
+        return ChangePasswordPageRoot(locator());
       },
     ),
     GoRoute(
       path: AppRoute.changeUsername.path,
       name: AppRoute.changeUsername.name,
       builder: (context, state) {
-        final ChangeUsernameViewModel viewModel = locator();
-        return ChangeUsernamePage(viewModel);
+        return ChangeUsernamePageRoot(locator());
       },
     ),
     GoRoute(
       path: AppRoute.puzzleHistory.path,
       name: AppRoute.puzzleHistory.name,
       builder: (context, state) {
-        final PuzzleHistoryViewModel viewModel = locator();
-        return PuzzleHistoryPage(viewModel);
+        return PuzzleHistoryPageRoot(locator());
       },
     ),
   ];
@@ -150,8 +139,7 @@ abstract class PuzzlePath {
       path: AppRoute.puzzle.path,
       name: AppRoute.puzzle.name,
       builder: (context, state) {
-        final PuzzleViewModel viewModel = locator();
-        return PuzzlePage(viewModel);
+        return PuzzlePageRoot(locator());
       },
     ),
   ];

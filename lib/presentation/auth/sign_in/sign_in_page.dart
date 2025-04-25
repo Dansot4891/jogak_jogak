@@ -38,6 +38,13 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BouncingBoxesBackground(
       resizeToAvoidBottomInset: true,

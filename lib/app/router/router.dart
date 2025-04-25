@@ -16,8 +16,6 @@ class AppRouter {
       redirect: (context, state) {
         // 유저 정보가 있는데 화면이 null이면
         // 홈 화면으로 강제 이동
-        print('userProvider.state.user: ${userProvider.state.user}');
-        print('state.fullPath: ${state.fullPath}');
         if (userProvider.state.user != null &&
             state.fullPath == AppRoute.signIn.path) {
           return AppRoute.home.path;

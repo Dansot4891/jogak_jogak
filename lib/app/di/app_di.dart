@@ -43,7 +43,7 @@ import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 final locator = GetIt.instance;
 
 void diSetup() {
-  // controller
+  // puzzle controller
   locator.registerSingleton(PuzzleController());
 
   // DataSource
@@ -100,12 +100,18 @@ void diSetup() {
       checkUsernameUseCase: locator(),
     ),
   );
-  locator.registerFactory(() => HomeViewModel(locator()));
+  locator.registerFactory(
+    () => HomeViewModel(
+      getRandomImageUrlUseCase: locator(),
+      puzzleController: locator(),
+    ),
+  );
   locator.registerFactory(
     () => PuzzleViewModel(
       uploadRankingUseCase: locator(),
       userProvider: locator(),
       savePuzzleHistoryUseCase: locator(),
+      puzzleController: locator(),
     ),
   );
   locator.registerFactory(() => RankingViewModel(locator()));
