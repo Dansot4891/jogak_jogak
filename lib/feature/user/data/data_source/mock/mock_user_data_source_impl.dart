@@ -2,9 +2,9 @@ import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart'
 import 'package:jogak_jogak/feature/user/data/dto/puzzle_history_dto.dart';
 import 'package:jogak_jogak/feature/user/data/dto/user_dto.dart';
 
-class MockRankingDataSourceImpl implements UserDataSource {
+class MockUserDataSourceImpl implements UserDataSource {
   final userList = [
-    UserDto(username: 'username1', email: 'email1'),
+    UserDto(email: 'test@gmail.com', username: 'username'),
     UserDto(username: 'username2', email: 'email2'),
     UserDto(username: 'username3', email: 'email3'),
   ];
