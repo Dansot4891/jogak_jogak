@@ -16,13 +16,14 @@ void main() {
       final repository = RankingRepositoryImpl(mockDataSource);
       final useCase = GetRankingsUseCase(repository);
       viewModel = RankingViewModel(useCase);
+      viewModel.onAction(FetchRankings(level));
     });
     test('ranking view model test', () async {
-      viewModel.onAction(FetchRankings(level));
       // 성공적으로 데이터가 들어왔는지 확인
       expect(
         viewModel.state.withLevelRanking
-            .firstWhere((e) => e.level == level)
+            .where((e) => e.level == level)
+            .first
             .rankings
             .isNotEmpty,
         equals(true),
