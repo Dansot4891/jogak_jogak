@@ -51,65 +51,71 @@ class _SignInPageState extends State<SignInPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: AppSize.fractionHeight(0.11)),
-              Image.asset(AppImage.appLogo, width: AppSize.fractionWidth(0.6)),
-              const SizedBox(height: 20),
-              Text('조각조각', style: AppTextStyle.title1),
-              const SizedBox(height: 40),
-              CustomTextFormField(controller: _email, hintText: '이메일 입력'),
-              const SizedBox(height: 8),
-              CustomTextFormField(
-                controller: _password,
-                obsecure: true,
-                maxLines: 1,
-                hintText: '비밀번호 입력',
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        navigate(context, route: AppRoute.signUp);
-                      },
-                      child: Text('회원가입', style: AppTextStyle.body1),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        navigate(context, route: AppRoute.changePw);
-                      },
-                      child: Text('비밀번호 재설정', style: AppTextStyle.body1),
-                    ),
-                  ],
+          child: Container(
+            constraints: BoxConstraints(minHeight: AppSize.screenHeight),
+            child: Column(
+              children: [
+                SizedBox(height: AppSize.fractionHeight(0.11)),
+                Image.asset(
+                  AppImage.appLogo,
+                  width: AppSize.fractionWidth(0.6),
                 ),
-              ),
-              AppButton(
-                text: '로그인',
-                onTap: () async {
-                  final result = await provider.signIn(
-                    email: _email.text,
-                    password: _password.text,
-                  );
-                  if (!result) {
-                    if (mounted) {
-                      AppShowDialog.show(
-                        context,
-                        AppDialog.singleBtn(
-                          title: '로그인에 실패하였습니다.',
-                          btnText: '확인',
-                          onBtnClicked: () {
-                            pop(context);
-                          },
-                        ),
-                      );
+                const SizedBox(height: 20),
+                Text('조각조각', style: AppTextStyle.title1),
+                const SizedBox(height: 40),
+                CustomTextFormField(controller: _email, hintText: '이메일 입력'),
+                const SizedBox(height: 8),
+                CustomTextFormField(
+                  controller: _password,
+                  obsecure: true,
+                  maxLines: 1,
+                  hintText: '비밀번호 입력',
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          navigate(context, route: AppRoute.signUp);
+                        },
+                        child: Text('회원가입', style: AppTextStyle.body1),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          navigate(context, route: AppRoute.changePw);
+                        },
+                        child: Text('비밀번호 재설정', style: AppTextStyle.body1),
+                      ),
+                    ],
+                  ),
+                ),
+                AppButton(
+                  text: '로그인',
+                  onTap: () async {
+                    final result = await provider.signIn(
+                      email: _email.text,
+                      password: _password.text,
+                    );
+                    if (!result) {
+                      if (mounted) {
+                        AppShowDialog.show(
+                          context,
+                          AppDialog.singleBtn(
+                            title: '로그인에 실패하였습니다.',
+                            btnText: '확인',
+                            onBtnClicked: () {
+                              pop(context);
+                            },
+                          ),
+                        );
+                      }
                     }
-                  }
-                },
-              ),
-            ],
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
