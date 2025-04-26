@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:image/image.dart' as img;
 import 'package:jogak_jogak/core/module/random/random_generator.dart';
+import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/feature/puzzle/domain/model/puzzle.dart';
 
 abstract class ImgCrop {
@@ -65,7 +66,12 @@ abstract class ImgCrop {
           // 2. 그리드뷰 퍼즐판 width(디바이스 너비)
           // 3. 퍼즐 조각의 크기
           // 을 빼고 나머지 크기에서 랜덤값으로 지정한다.
-          height - width - 56 - 70 - ((width - 32) / gridViewSize),
+          height -
+              width -
+              AppSize.screenPadding.top -
+              AppSize.screenPadding.bottom -
+              70 -
+              ((width - 32) / gridViewSize),
           seed: 0,
         );
         final leftRandom = randomGenerator.nextDouble(width / 7 * 4, seed: 10);
