@@ -54,6 +54,8 @@ enum AppRoute {
   const AppRoute({required this.path, required this.name});
 }
 
+// ------------------------------------------
+// 인증 관련 화면(로그인/회원가입)
 abstract class AuthPath {
   static final List<GoRoute> routes = [
     GoRoute(
@@ -73,6 +75,8 @@ abstract class AuthPath {
   ];
 }
 
+// ------------------------------------------
+// 홈 화면에 있는 탭들
 abstract class RootTabPath {
   static final ShellRoute shellRoute = ShellRoute(
     navigatorKey: _shellNavigatorKey,
@@ -107,6 +111,8 @@ abstract class RootTabPath {
   ];
 }
 
+// ------------------------------------------
+// 유저 정보 관련(비밀번호/닉네임 변경, 마이페이지)
 abstract class UserPath {
   static final List<GoRoute> routes = [
     GoRoute(
@@ -133,6 +139,8 @@ abstract class UserPath {
   ];
 }
 
+// ------------------------------------------
+// 퍼즐 인게임
 abstract class PuzzlePath {
   static final List<GoRoute> routes = [
     GoRoute(
@@ -145,6 +153,7 @@ abstract class PuzzlePath {
   ];
 }
 
+// 뒤로가기
 void pop(BuildContext context) {
   context.pop();
 }
@@ -173,5 +182,5 @@ Future<void> navigate(
   }
 }
 
-// Navigation methods enum
+// Navigation 이동 방법
 enum NavigationMethod { push, replace, go, pushReplacement }
