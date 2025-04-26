@@ -6,7 +6,7 @@ import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
-import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
+import 'package:jogak_jogak/presentation/base/pages/bouncy_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
@@ -46,16 +46,16 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BouncingBoxesBackground(
+    return BouncyPage(
       resizeToAvoidBottomInset: true,
-      body: Padding(
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Container(
             constraints: BoxConstraints(minHeight: AppSize.screenHeight),
             child: Column(
               children: [
-                SizedBox(height: AppSize.fractionHeight(0.11)),
+                SizedBox(height: AppSize.fractionHeight(0.15)),
                 Image.asset(
                   AppImage.appLogo,
                   width: AppSize.fractionWidth(0.6),

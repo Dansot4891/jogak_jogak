@@ -63,6 +63,9 @@ dependencies:
   # toast msg
   fluttertoast: ^8.2.12
 
+  # in_app_back_ground
+  bouncy_background: ^1.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

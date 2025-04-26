@@ -6,7 +6,7 @@ import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_event.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_page.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_view_model.dart';
-import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
+import 'package:jogak_jogak/presentation/base/pages/bouncy_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 
@@ -53,10 +53,10 @@ class _SignUpPageRootState extends State<SignUpPageRoot> {
 
   @override
   Widget build(BuildContext context) {
-    return BouncingBoxesBackground(
+    return BouncyPage(
       appBar: const DefaultAppbar(),
       resizeToAvoidBottomInset: true,
-      body: ListenableBuilder(
+      child: ListenableBuilder(
         listenable: viewModel,
         builder: (context, child) {
           return SignUpPage(
