@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
-import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_page.dart';
+import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_page_root.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_page_root.dart';
 import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page_root.dart';
@@ -69,7 +69,7 @@ abstract class AuthPath {
       path: AppRoute.signIn.path,
       name: AppRoute.signIn.name,
       builder: (context, state) {
-        return const SignInPage();
+        return SignInPageRoot(locator());
       },
     ),
   ];
