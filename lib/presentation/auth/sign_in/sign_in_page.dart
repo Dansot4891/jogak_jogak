@@ -77,11 +77,17 @@ class _SignInPageState extends State<SignInPage> {
               ),
               AppButton(
                 text: '로그인',
-                onTap: () async {
-                  widget.onAction(
-                    SignIn(email: _email.text, password: _password.text),
-                  );
-                },
+                onTap:
+                    (_email.text.isEmpty || _password.text.isEmpty)
+                        ? null
+                        : () async {
+                          widget.onAction(
+                            SignIn(
+                              email: _email.text,
+                              password: _password.text,
+                            ),
+                          );
+                        },
               ),
             ],
           ),
