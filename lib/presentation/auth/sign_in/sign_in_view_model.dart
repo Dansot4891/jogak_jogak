@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
@@ -12,6 +14,8 @@ class SignInViewModel with ChangeNotifier {
 
   SignInState _state = SignInState();
   SignInState get state => _state;
+
+  final StreamController _streamController = StreamController();
 
   void onAction(SignInAction action) {
     switch (action) {
