@@ -16,6 +16,9 @@ class SignInViewModel with ChangeNotifier {
     switch (action) {
       case SignIn():
         signIn(email: action.email, password: action.password);
+      case AutoSignIn():
+        // TODO: Handle this case.
+        throw UnimplementedError();
     }
   }
 
