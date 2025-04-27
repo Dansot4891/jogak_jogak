@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
+import 'package:jogak_jogak/core/module/state/base_state.dart';
+import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
@@ -22,6 +24,12 @@ class _SignInPageState extends State<SignInPage> {
   final _password = TextEditingController();
 
   @override
+  void initState() {
+    widget.onAction(const AutoSignIn());
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _email.dispose();
     _password.dispose();
@@ -30,6 +38,9 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.state.state == BaseState.loading) {
+      return const BaseLoadingView();
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
