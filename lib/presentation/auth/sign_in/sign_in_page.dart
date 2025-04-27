@@ -24,12 +24,6 @@ class _SignInPageState extends State<SignInPage> {
   final _password = TextEditingController();
 
   @override
-  void initState() {
-    widget.onAction(const AutoSignIn());
-    super.initState();
-  }
-
-  @override
   void dispose() {
     _email.dispose();
     _password.dispose();
