@@ -3,4 +3,5 @@ abstract class FirebaseCollections {
   static const String users = 'user';
   static const String puzzle = 'puzzle';
   static const String puzzleHistory = 'puzzleHistory';
+  static const String system = 'system';
 }
