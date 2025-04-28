@@ -7,11 +7,7 @@ import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 class MyPageViewModel with ChangeNotifier {
   final UserProvider _userProvider;
   MyPageViewModel(this._userProvider) {
-    _state = state.copyWith(
-      username: _userProvider.state.user?.username,
-      state: BaseState.success,
-    );
-    notifyListeners();
+    _initialization();
   }
 
   MyPageState _state = MyPageState();
@@ -32,5 +28,21 @@ class MyPageViewModel with ChangeNotifier {
 
   void _withdrawal() {
     _userProvider.withdrawal();
+  }
+
+  // 전역 관리하는 유저 데이터 할당
+  void _initialization() async {
+    if (_userProvider.state.user == null) {
+      _state = state.copyWith(
+        state: BaseState.error,
+        errorMessage: _userProvider.state.error,
+      );
+    } else {
+      _state = state.copyWith(
+        username: _userProvider.state.user?.username,
+        state: BaseState.success,
+      );
+    }
+    notifyListeners();
   }
 }

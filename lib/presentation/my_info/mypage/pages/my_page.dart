@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
+import 'package:jogak_jogak/core/module/state/base_state.dart';
+import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
@@ -17,6 +19,9 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (state.state == BaseState.error) {
+      return BaseErrorView(state.errorMessage);
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: CustomScrollView(

@@ -4,17 +4,25 @@ class MyPageState {
   final String username;
   final String version;
   final BaseState state;
+  final String errorMessage;
   MyPageState({
     this.username = '',
     this.version = 'ver 1.0.0',
     this.state = BaseState.init,
+    this.errorMessage = '',
   });
 
-  MyPageState copyWith({String? username, String? version, BaseState? state}) {
+  MyPageState copyWith({
+    String? username,
+    String? version,
+    BaseState? state,
+    String? errorMessage,
+  }) {
     return MyPageState(
       username: username ?? this.username,
       version: version ?? this.version,
       state: state ?? this.state,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }

@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // app size 할당
     BouncyDeviceSize.init(context);
+    // app size 할당
     AppSize.init(context);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
