@@ -37,7 +37,7 @@ class _SignInPageRootState extends State<SignInPageRoot> {
                 },
               ),
             );
-          case ShowSystemErrorDialog():
+          case ShowVersionErrorDialog():
             AppShowDialog.show(
               context,
               barrierDismissible: false,

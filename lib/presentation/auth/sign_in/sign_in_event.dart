@@ -1,8 +1,8 @@
 sealed class SignInEvent {
   const factory SignInEvent.showSignInErrorDialog(String text) =
       ShowSignInErrorDialog;
-  const factory SignInEvent.showSystemErrorDialog(String text) =
-      ShowSystemErrorDialog;
+  const factory SignInEvent.showVersionErrorDialog(String text) =
+      ShowVersionErrorDialog;
 }
 
 class ShowSignInErrorDialog implements SignInEvent {
@@ -11,8 +11,8 @@ class ShowSignInErrorDialog implements SignInEvent {
   const ShowSignInErrorDialog(this.text);
 }
 
-class ShowSystemErrorDialog implements SignInEvent {
+class ShowVersionErrorDialog implements SignInEvent {
   final String text;
 
-  const ShowSystemErrorDialog(this.text);
+  const ShowVersionErrorDialog(this.text);
 }
