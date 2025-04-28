@@ -138,7 +138,10 @@ void diSetup() {
     ),
   );
   locator.registerFactory(() => RankingViewModel(locator()));
-  locator.registerFactory(() => MyPageViewModel(locator()));
+  locator.registerFactory(
+    () =>
+        MyPageViewModel(userProvider: locator(), getVersionUseCase: locator()),
+  );
   locator.registerFactory(() => PuzzleHistoryViewModel(locator()));
   locator.registerFactory(() => ChangePasswordViewModel(locator()));
   locator.registerFactory(

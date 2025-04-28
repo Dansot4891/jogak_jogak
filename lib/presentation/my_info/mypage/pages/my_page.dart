@@ -110,10 +110,13 @@ class MyPage extends StatelessWidget {
                   },
                   baseColor: AppColor.greyC5,
                 ),
-                // Align(
-                //   alignment: Alignment.bottomRight,
-                //   child: Text(state.version, style: AppTextStyle.version),
-                // ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    'ver ${state.version}',
+                    style: AppTextStyle.version,
+                  ),
+                ),
               ],
             ),
           ),
