@@ -47,13 +47,22 @@ class _SignInPageState extends State<SignInPage> {
               const SizedBox(height: 20),
               Text('조각조각', style: AppTextStyle.title1),
               const SizedBox(height: 40),
-              CustomTextFormField(controller: _email, hintText: '이메일 입력'),
+              CustomTextFormField(
+                controller: _email,
+                hintText: '이메일 입력',
+                onChanged: (val) {
+                  setState(() {});
+                },
+              ),
               const SizedBox(height: 8),
               CustomTextFormField(
                 controller: _password,
                 obsecure: true,
                 maxLines: 1,
                 hintText: '비밀번호 입력',
+                onChanged: (val) {
+                  setState(() {});
+                },
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
