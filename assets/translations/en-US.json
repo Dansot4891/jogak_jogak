@@ -10,6 +10,8 @@
       "resetPassword": "Reset Password",
       "login": "Log In",
       "logout": "Log Out",
+      "changeNickname": "Change Nickname",
+      "withdrawal": "Withdraw Membership",
       "ok": "OK",
       "cancel": "Cancel",
       "validation": {
@@ -41,6 +43,19 @@
       "tabHome": "Home",
       "tabRanking": "Ranking",
       "tabMy": "My Page"
+    },
+    "inGame": {
+      "croppedScreen": "⚠️ The screen may be cropped and\ndiffer from the original!",
+      "currentTime": "Current time: {seconds} seconds",
+      "clear": "Puzzle Cleared!",
+      "rankingInfo": "Your record will be automatically updated\nin the rankings based on the result."
+    },
+    "myPage": {
+      "sir": "sir",
+      "welcome": "Welcome!",
+      "puzzleRecord": "Puzzle Records",
+      "confirmLogout": "Are you sure you want to log out?",
+      "confirmWithdrawal": "Are you sure you want to withdraw?"
     },
     "error": {
       "unexpected": "An error occurred. Please try again later.",

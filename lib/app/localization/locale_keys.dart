@@ -8,6 +8,8 @@ abstract class LocaleKeys {
   static const resetPassword = 'common.resetPassword';
   static const login = 'common.login';
   static const logout = 'common.logout';
+  static const changeUsername = 'common.changeNickname';
+  static const withdrawal = 'common.withdrawal';
   static const ok = 'common.ok';
   static const cancel = 'common.cancel';
 
@@ -40,6 +42,19 @@ abstract class LocaleKeys {
   static const homeTodayPuzzleButton = 'home.todayPuzzleButton';
   static const homeTodayPuzzleGuide = 'home.todayPuzzleGuide';
   static const homeStartGameButton = 'home.startGameButton';
+
+  // In-Game screen
+  static const inGameCroppedScreen = 'inGame.croppedScreen';
+  static const inGameCurrentTime = 'inGame.currentTime';
+  static const inGameClear = 'inGame.clear';
+  static const inGameRankingInfo = 'inGame.rankingInfo';
+
+  // My Page screen
+  static const myPageSir = 'myPage.sir';
+  static const myPageWelcome = 'myPage.welcome';
+  static const myPagePuzzleRecord = 'myPage.puzzleRecord';
+  static const myPageConfirmLogout = 'myPage.confirmLogout';
+  static const myPageConfirmWithdrawal = 'myPage.confirmWithdrawal';
 
   // Bottom navigation
   static const tabHome = 'home.tabHome';

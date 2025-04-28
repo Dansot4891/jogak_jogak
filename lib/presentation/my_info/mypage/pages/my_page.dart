@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
@@ -38,24 +40,24 @@ class MyPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text(
-                    '${state.username}님\n환영합니다.',
+                    '${state.username} ${LocaleKeys.myPageSir.tr()}\n${LocaleKeys.myPageWelcome.tr()}',
                     style: AppTextStyle.title2,
                   ),
                 ),
                 SettingCard(
-                  text: '비밀번호 변경',
+                  text: LocaleKeys.resetPassword.tr(),
                   onTap: () {
                     navigate(context, route: AppRoute.changePw);
                   },
                 ),
                 SettingCard(
-                  text: '닉네임 변경',
+                  text: LocaleKeys.changeUsername.tr(),
                   onTap: () {
                     navigate(context, route: AppRoute.changeUsername);
                   },
                 ),
                 SettingCard(
-                  text: '퍼즐 기록',
+                  text: LocaleKeys.myPagePuzzleRecord.tr(),
                   onTap: () {
                     navigate(context, route: AppRoute.puzzleHistory);
                   },
@@ -69,15 +71,15 @@ class MyPage extends StatelessWidget {
               children: [
                 const Spacer(),
                 SettingCard(
-                  text: '로그아웃',
+                  text: LocaleKeys.logout.tr(),
                   onTap: () {
                     AppShowDialog.show(
                       context,
                       AppDialog(
-                        title: '로그아웃',
-                        subText: '로그아웃 하시겠습니까?',
-                        btnText: '확인',
-                        btnLeftText: '취소',
+                        title: LocaleKeys.logout,
+                        subText: LocaleKeys.myPageConfirmLogout.tr(),
+                        btnText: LocaleKeys.ok.tr(),
+                        btnLeftText: LocaleKeys.cancel.tr(),
                         onBtnLeftClicked: () {
                           pop(context);
                         },
@@ -90,15 +92,15 @@ class MyPage extends StatelessWidget {
                   },
                 ),
                 SettingCard(
-                  text: '회원탈퇴',
+                  text: LocaleKeys.withdrawal.tr(),
                   onTap: () {
                     AppShowDialog.show(
                       context,
                       AppDialog(
-                        title: '회원탈퇴',
-                        subText: '회원탈퇴 하시겠습니까?',
-                        btnText: '확인',
-                        btnLeftText: '취소',
+                        title: LocaleKeys.withdrawal.tr(),
+                        subText: LocaleKeys.myPageConfirmWithdrawal.tr(),
+                        btnText: LocaleKeys.ok.tr(),
+                        btnLeftText: LocaleKeys.cancel.tr(),
                         onBtnLeftClicked: () {
                           pop(context);
                         },

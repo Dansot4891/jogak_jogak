@@ -10,6 +10,8 @@
       "resetPassword": "비밀번호 재설정",
       "login": "로그인",
       "logout": "로그아웃",
+      "changeNickname": "닉네임 변경",
+      "withdrawal": "회원탈퇴",
       "ok": "확인",
       "cancel": "취소",
       "validation" : {
@@ -41,6 +43,19 @@
       "tabHome": "홈",
       "tabRanking": "랭킹",
       "tabMy": "마이"
+    },
+    "inGame": {
+      "croppedScreen": "⚠️ 화면이 잘리면서 원본과 다를 수 있습니다!",
+      "currentTime": "현재 시간: {seconds}초",
+      "clear": "퍼즐 클리어!",
+      "rankingInfo": "기록은 결과에 따라\n자동으로 랭킹에 갱신됩니다."
+    },
+    "myPage": {
+      "sir":"님",
+      "welcome": "환영합니다.",
+      "puzzleRecord": "퍼즐 기록",
+      "confirmLogout": "로그아웃 하시겠습니까?",
+      "confirmWithdrawal": "회원탈퇴 하시겠습니까?"
     },
     "error": {
       "unexpected": "문제가 발생했습니다. 잠시 후 다시 시도해주세요.",
