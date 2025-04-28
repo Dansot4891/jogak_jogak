@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:jogak_jogak/core/constants/app_data.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 
 import 'package:jogak_jogak/core/module/state/base_state.dart';
@@ -12,6 +13,7 @@ import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_event.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_state.dart';
 import 'package:jogak_jogak/presentation/system/system_provider.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignInViewModel with ChangeNotifier {
   final UserProvider _userProvider;
@@ -37,8 +39,7 @@ class SignInViewModel with ChangeNotifier {
       case SignInInitialize():
         _signInInitialize();
       case RedirectStoreUrl():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _redirectStoreUrl();
     }
   }
 
@@ -78,7 +79,12 @@ class SignInViewModel with ChangeNotifier {
   }
 
   void _redirectStoreUrl() async {
+    String url = '';
     if (Platform.isAndroid) {
-    } else if (Platform.isIOS) {}
+      url = AppData.playStoreUrl;
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else if (Platform.isIOS) {
+      url = AppData.appStoreUrl;
+    }
   }
 }

@@ -44,7 +44,11 @@ class _SignInPageRootState extends State<SignInPageRoot> {
               AppDialog.singleBtn(
                 title: event.text,
                 btnText: '확인',
-                onBtnClicked: () {},
+                onBtnClicked: () {
+                  widget.viewModel.onAction(
+                    const SignInAction.redirectStoreUrl(),
+                  );
+                },
               ),
             );
         }
