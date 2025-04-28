@@ -52,6 +52,13 @@
       "clear": "퍼즐 클리어!",
       "rankingInfo": "기록은 결과에 따라\n자동으로 랭킹에 갱신됩니다."
     },
+    "ranking": {
+      "refresh": "새로고침",
+      "rank": "등수",
+      "name": "이름",
+      "time": "시간",
+      "noRanking": "현재 등록된 랭킹이 없습니다."
+    },
     "myPage": {
       "sir":"님",
       "welcome": "환영합니다.",

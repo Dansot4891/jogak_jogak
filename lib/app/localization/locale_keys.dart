@@ -51,6 +51,13 @@ abstract class LocaleKeys {
   static const inGameClear = 'inGame.clear';
   static const inGameRankingInfo = 'inGame.rankingInfo';
 
+  // Ranking screen
+  static const rankingRefresh = 'ranking.refresh';
+  static const rankingRank = 'ranking.rank';
+  static const rankingName = 'ranking.name';
+  static const rankingTime = 'ranking.time';
+  static const rankingNoRanking = 'ranking.noRanking';
+
   // My Page screen
   static const myPageSir = 'myPage.sir';
   static const myPageWelcome = 'myPage.welcome';

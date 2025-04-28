@@ -52,6 +52,13 @@
       "clear": "Puzzle Cleared!",
       "rankingInfo": "Your record will be automatically updated\nin the rankings based on the result."
     },
+    "ranking": {
+      "refresh": "Refresh",
+      "rank": "Rank",
+      "name": "Name",
+      "time": "Time",
+      "noRanking": "No rankings available."
+    },
     "myPage": {
       "sir": "sir",
       "welcome": "Welcome!",
