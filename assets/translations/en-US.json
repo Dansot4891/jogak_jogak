@@ -31,6 +31,18 @@
       "okText": "Nickname is available.",
       "noText": "Nickname is not available.",
       "completed": "Sign up completed!"
+    },
+    "error": {
+      "unexpected": "An error occurred. Please try again later.",
+      "uidNotFound": "User information not found. Please try again.",
+      "userNotFound": "User does not exist.",
+      "emailAlreadyExists": "This email already exists.",
+      "failedToFetchImage": "Failed to fetch data.",
+      "failedSignInWithInvalidCredential": "Please check your ID and password.",
+      "version": "Failed to fetch app version.",
+      "versionMismatch": "The app has been updated.\nPlease update to the latest version.",
+      "unsupportedPlatform": "Unsupported platform.",
+      "signIn": "Failed to SignIn"
     }
   }
   

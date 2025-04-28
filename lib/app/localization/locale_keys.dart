@@ -33,4 +33,17 @@ abstract class LocaleKeys {
   static const signUpOkText = 'signUp.okText';
   static const signUpNoText = 'signUp.noText';
   static const signUpCompleted = 'signUp.completed';
+
+  // Error
+  static const unexpectedError = 'error.unexpected';
+  static const uidNotFoundError = 'error.uidNotFound';
+  static const userNotFoundError = 'error.userNotFound';
+  static const emailAlreadyExistsError = 'error.emailAlreadyExists';
+  static const failedToFetchImageError = 'error.failedToFetchImage';
+  static const failedSignInWithInvalidCredentialError =
+      'error.failedSignInWithInvalidCredential';
+  static const versionError = 'error.version';
+  static const versionMismatchError = 'error.versionMismatch';
+  static const unsupportedPlatformError = 'error.unsupportedPlatform';
+  static const signInError = 'error.signIn';
 }
