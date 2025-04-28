@@ -41,6 +41,12 @@ class VersionException extends CustomException {
   const VersionException() : super(511, '버전을 불러올 수 없습니다.');
 }
 
+// 업데이트가 필요함
+class VersionMismatchException extends CustomException {
+  const VersionMismatchException()
+    : super(511, '앱이 업데이트 되었습니다.\n앱 업데이트를 진행해주세요.');
+}
+
 // 지원되지 않는 플랫폼
 class UnsupportedPlatformException extends CustomException {
   const UnsupportedPlatformException() : super(512, '지원되지 않는 플랫폼입니다.');
