@@ -7,7 +7,7 @@ class MyPageState {
   final String errorMessage;
   MyPageState({
     this.username = '',
-    this.version = 'ver 1.0.0',
+    this.version = '',
     this.state = BaseState.init,
     this.errorMessage = '',
   });
