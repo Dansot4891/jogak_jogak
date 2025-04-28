@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jogak_jogak/presentation/base/pages/bouncing_boxes_page.dart';
+import 'package:jogak_jogak/presentation/base/pages/bouncy_page.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
 
@@ -9,9 +9,8 @@ class HomePageRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BouncingBoxesBackground(
-      isScaffold: true,
-      body: ListenableBuilder(
+    return BouncyPage(
+      child: ListenableBuilder(
         listenable: viewModel,
         builder: (context, child) {
           return HomePage(state: viewModel.state, onAction: viewModel.onAction);

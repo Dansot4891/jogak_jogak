@@ -94,7 +94,7 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> autoLogin() async {
+  Future<void> autoSignIn() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       final uid = user.uid;
