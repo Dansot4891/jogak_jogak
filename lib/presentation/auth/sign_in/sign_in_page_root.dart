@@ -22,11 +22,6 @@ class _SignInPageRootState extends State<SignInPageRoot> {
 
   @override
   void initState() {
-    _initialize();
-    super.initState();
-  }
-
-  void _initialize() async {
     widget.viewModel.onAction(const SignInAction.signInInitialize());
     _sub = widget.viewModel.streamEvent.listen((event) {
       if (mounted) {
@@ -42,9 +37,20 @@ class _SignInPageRootState extends State<SignInPageRoot> {
                 },
               ),
             );
+          case ShowSystemErrorDialog():
+            AppShowDialog.show(
+              context,
+              barrierDismissible: false,
+              AppDialog.singleBtn(
+                title: event.text,
+                btnText: '확인',
+                onBtnClicked: () {},
+              ),
+            );
         }
       }
     });
+    super.initState();
   }
 
   @override

@@ -67,7 +67,7 @@ class SignInViewModel with ChangeNotifier {
         _autoSignIn();
       case Error<bool>():
         _streamController.add(
-          SignInEvent.showSignInErrorDialog(result.error.message),
+          SignInEvent.showSystemErrorDialog(result.error.message),
         );
         FlutterNativeSplash.remove();
     }
