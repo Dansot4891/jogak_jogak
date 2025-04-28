@@ -47,6 +47,7 @@ import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_his
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_view_model.dart';
+import 'package:jogak_jogak/presentation/system/system_provider.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
 final locator = GetIt.instance;
@@ -113,6 +114,12 @@ void diSetup() {
       withdrawalUseCase: locator(),
     ),
   );
+  locator.registerSingleton(
+    SystemProvider(
+      checkVersionUseCase: locator(),
+      getVersionUseCase: locator(),
+    ),
+  );
 
   // ViewModel
   locator.registerFactory(
@@ -122,7 +129,9 @@ void diSetup() {
     ),
   );
   // ViewModel
-  locator.registerFactory(() => SignInViewModel(locator()));
+  locator.registerFactory(
+    () => SignInViewModel(userProvider: locator(), systemProvider: locator()),
+  );
   locator.registerFactory(
     () => HomeViewModel(
       getRandomImageUrlUseCase: locator(),

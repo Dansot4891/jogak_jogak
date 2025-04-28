@@ -5,6 +5,8 @@ sealed class SignInAction {
   }) = SignIn;
 
   const factory SignInAction.autoSignIn() = AutoSignIn;
+
+  const factory SignInAction.checkVersion() = CheckVersion;
 }
 
 class SignIn implements SignInAction {
@@ -15,4 +17,8 @@ class SignIn implements SignInAction {
 
 class AutoSignIn implements SignInAction {
   const AutoSignIn();
+}
+
+class CheckVersion implements SignInAction {
+  const CheckVersion();
 }

@@ -22,6 +22,7 @@ class _SignInPageRootState extends State<SignInPageRoot> {
 
   @override
   void initState() {
+    widget.viewModel.onAction(const SignInAction.checkVersion());
     widget.viewModel.onAction(const SignInAction.autoSignIn());
     _sub = widget.viewModel.streamEvent.listen((event) {
       if (mounted) {
