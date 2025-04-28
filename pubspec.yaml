@@ -73,6 +73,9 @@ dependencies:
   # 외부 url
   url_launcher: ^6.3.1
 
+  # 다국어 지원
+  easy_localization: ^3.0.7+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -118,6 +121,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/translations/
     - assets/logo/
 
   # An image asset can refer to one or more resolution-specific "variants", see

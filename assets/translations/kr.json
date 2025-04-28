@@ -1,0 +1,33 @@
+{
+    "common": {
+      "appName": "조각조각",
+      "emailHintText": "이메일 입력",
+      "passwordHintText": "비밀번호 입력",
+      "usernameHintText": "닉네임 입력",
+      "signup": "회원가입",
+      "resetPassword": "비밀번호 재설정",
+      "login": "로그인",
+      "logout": "로그아웃",
+      "ok": "확인",
+      "cancel": "취소",
+      "validation" : {
+        "emailFormValidateText": "올바른 이메일 양식을 입력해주세요.",
+        "emailValidateText": "이메일을 입력해주세요.",
+        "passwordValidateText": "비밀번호를 입력해주세요.",
+        "passwordFormValidateText": "비밀번호는 6자 이상이어야합니다."
+      }
+    },
+    "changePassword": {
+      "button": "메일 발송",
+      "validateText": "이메일을 입력해주세요.",
+      "dialogMsg": "해당 이메일로 비밀번호 재설정 메일이 전송됩니다.",
+      "success": "메시지가 발송되었습니다."
+    },
+    "signUp": {
+      "duplicate": "중복 확인",
+      "checkPasswordHintText": "비밀번호 재확인",
+      "okText": "사용 가능한 닉네임입니다.",
+      "noText": "사용 불가능한 닉네임입니다.",
+      "completed": "회원가입이 완료되었습니다!"
+    }
+  }

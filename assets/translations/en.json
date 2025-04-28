@@ -1,0 +1,34 @@
+{
+    "common": {
+      "appName": "JogakJogak",
+      "emailHintText": "Enter your email",
+      "passwordHintText": "Enter your password",
+      "usernameHintText": "Enter your nickname",
+      "signup": "Sign Up",
+      "resetPassword": "Reset Password",
+      "login": "Log In",
+      "logout": "Log Out",
+      "ok": "OK",
+      "cancel": "Cancel",
+      "validation": {
+        "emailFormValidateText": "Please enter a valid email format.",
+        "emailValidateText": "Please enter your email.",
+        "passwordValidateText": "Please enter your password.",
+        "passwordFormValidateText": "Password must be at least 6 characters long."
+      }
+    },
+    "changePassword": {
+      "button": "Send Email",
+      "validateText": "Please enter your email.",
+      "dialogMsg": "A password reset email will be sent to the provided email address.",
+      "success": "Message has been sent."
+    },
+    "signUp": {
+      "duplicate": "Check Availability",
+      "checkPasswordHintText": "Confirm your password",
+      "okText": "Nickname is available.",
+      "noText": "Nickname is not available.",
+      "completed": "Sign up completed!"
+    }
+  }
+  
