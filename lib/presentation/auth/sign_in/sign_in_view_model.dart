@@ -29,14 +29,12 @@ class SignInViewModel with ChangeNotifier {
       StreamController<SignInEvent>();
   Stream<SignInEvent> get streamEvent => _streamController.stream;
 
-  void onAction(SignInAction action) {
+  void onAction(SignInAction action) async {
     switch (action) {
       case SignIn():
         _signIn(email: action.email, password: action.password);
-      case AutoSignIn():
-        _autoSignIn();
-      case CheckVersion():
-        _checkVersion();
+      case SignInInitialize():
+        _signInInitialize();
     }
   }
 
@@ -62,15 +60,16 @@ class SignInViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void _checkVersion() async {
+  void _signInInitialize() async {
     final result = await _systemProvider.checkVersion();
     switch (result) {
       case Success<bool>():
-        return;
+        _autoSignIn();
       case Error<bool>():
         _streamController.add(
           SignInEvent.showSignInErrorDialog(result.error.message),
         );
+        FlutterNativeSplash.remove();
     }
   }
 }

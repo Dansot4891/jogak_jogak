@@ -4,9 +4,7 @@ sealed class SignInAction {
     required String password,
   }) = SignIn;
 
-  const factory SignInAction.autoSignIn() = AutoSignIn;
-
-  const factory SignInAction.checkVersion() = CheckVersion;
+  const factory SignInAction.signInInitialize() = SignInInitialize;
 }
 
 class SignIn implements SignInAction {
@@ -15,10 +13,6 @@ class SignIn implements SignInAction {
   const SignIn({required this.email, required this.password});
 }
 
-class AutoSignIn implements SignInAction {
-  const AutoSignIn();
-}
-
-class CheckVersion implements SignInAction {
-  const CheckVersion();
+class SignInInitialize implements SignInAction {
+  const SignInInitialize();
 }
