@@ -5,6 +5,8 @@ sealed class SignInAction {
   }) = SignIn;
 
   const factory SignInAction.signInInitialize() = SignInInitialize;
+
+  const factory SignInAction.redirectStoreUrl() = RedirectStoreUrl;
 }
 
 class SignIn implements SignInAction {
@@ -15,4 +17,8 @@ class SignIn implements SignInAction {
 
 class SignInInitialize implements SignInAction {
   const SignInInitialize();
+}
+
+class RedirectStoreUrl implements SignInAction {
+  const RedirectStoreUrl();
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -35,6 +36,9 @@ class SignInViewModel with ChangeNotifier {
         _signIn(email: action.email, password: action.password);
       case SignInInitialize():
         _signInInitialize();
+      case RedirectStoreUrl():
+        // TODO: Handle this case.
+        throw UnimplementedError();
     }
   }
 
@@ -71,5 +75,10 @@ class SignInViewModel with ChangeNotifier {
         );
         FlutterNativeSplash.remove();
     }
+  }
+
+  void _redirectStoreUrl() async {
+    if (Platform.isAndroid) {
+    } else if (Platform.isIOS) {}
   }
 }
