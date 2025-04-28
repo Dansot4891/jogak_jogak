@@ -19,6 +19,14 @@ import 'package:jogak_jogak/feature/ranking/data/repository_impl/ranking_reposit
 import 'package:jogak_jogak/feature/ranking/domain/repository/ranking_repository.dart';
 import 'package:jogak_jogak/feature/ranking/domain/use_case/get_rankings_use_case.dart';
 import 'package:jogak_jogak/feature/ranking/domain/use_case/upload_ranking_use_case.dart';
+import 'package:jogak_jogak/feature/system/data/data_source/local/local_system_data_source.dart';
+import 'package:jogak_jogak/feature/system/data/data_source/local/local_system_data_source_impl.dart';
+import 'package:jogak_jogak/feature/system/data/data_source/remote/remote_system_data_source.dart';
+import 'package:jogak_jogak/feature/system/data/data_source/remote/remote_system_data_source_impl.dart';
+import 'package:jogak_jogak/feature/system/data/repository_impl/system_repository_impl.dart';
+import 'package:jogak_jogak/feature/system/domain/repository/system_repository.dart';
+import 'package:jogak_jogak/feature/system/domain/use_case/check_version_use_case.dart';
+import 'package:jogak_jogak/feature/system/domain/use_case/get_version_use_case.dart';
 import 'package:jogak_jogak/feature/user/data/data_source/remote/user_remote_data_source_impl.dart';
 import 'package:jogak_jogak/feature/user/data/data_source/user_data_source.dart';
 import 'package:jogak_jogak/feature/user/data/repository_impl/user_repository_impl.dart';
@@ -58,6 +66,10 @@ void diSetup() {
   locator.registerSingleton<UserDataSource>(
     UserRemoteDataSourceImpl(FirebaseFirestore.instance),
   );
+  locator.registerSingleton<LocalSystemDataSource>(LocalSystemDataSourceImpl());
+  locator.registerSingleton<RemoteSystemDataSource>(
+    RemoteSystemDataSourceImpl(FirebaseFirestore.instance),
+  );
 
   // Repository
   locator.registerSingleton<PuzzleRepository>(PuzzleRepositoryImpl(locator()));
@@ -66,6 +78,12 @@ void diSetup() {
   );
   locator.registerSingleton<AuthRepository>(AuthRepositoryImpl(locator()));
   locator.registerSingleton<UserRepository>(UserRepositoryImpl(locator()));
+  locator.registerSingleton<SystemRepository>(
+    SystemRepositoryImpl(
+      localSystemDataSource: locator(),
+      remoteSystemDataSource: locator(),
+    ),
+  );
 
   // UseCase
   locator.registerSingleton(GetRandomImageUrlUseCase(locator()));
@@ -81,6 +99,8 @@ void diSetup() {
   locator.registerSingleton(ChangePasswordUseCase(locator()));
   locator.registerSingleton(ChangeUsernameUseCase(locator()));
   locator.registerSingleton(WithdrawalUseCase(locator()));
+  locator.registerSingleton(GetVersionUseCase(locator()));
+  locator.registerSingleton(CheckVersionUseCase(locator()));
 
   // 전역 provider
   locator.registerSingleton(
