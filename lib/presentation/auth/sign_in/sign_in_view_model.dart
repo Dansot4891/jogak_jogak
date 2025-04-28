@@ -38,7 +38,9 @@ class SignInViewModel with ChangeNotifier {
       notifyListeners();
     } else {
       _state = state.copyWith(state: BaseState.error);
-      _streamController.add(const SignInEvent.showErrorDialog('로그인에 실패하였습니다.'));
+      _streamController.add(
+        const SignInEvent.showSignInErrorDialog('로그인에 실패하였습니다.'),
+      );
       notifyListeners();
     }
   }

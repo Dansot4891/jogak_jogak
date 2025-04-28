@@ -5,9 +5,9 @@ class SystemState {
   final String errorMessage;
   final String version;
   SystemState({
-    required this.state,
-    required this.errorMessage,
-    required this.version,
+    this.state = BaseState.init,
+    this.errorMessage = '',
+    this.version = '',
   });
 
   SystemState copyWith({

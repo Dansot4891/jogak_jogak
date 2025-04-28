@@ -1,9 +1,10 @@
 sealed class SignInEvent {
-  const factory SignInEvent.showErrorDialog(String text) = ShowErrorDialog;
+  const factory SignInEvent.showSignInErrorDialog(String text) =
+      ShowSignInErrorDialog;
 }
 
-class ShowErrorDialog implements SignInEvent {
+class ShowSignInErrorDialog implements SignInEvent {
   final String text;
 
-  const ShowErrorDialog(this.text);
+  const ShowSignInErrorDialog(this.text);
 }

@@ -26,7 +26,7 @@ class _SignInPageRootState extends State<SignInPageRoot> {
     _sub = widget.viewModel.streamEvent.listen((event) {
       if (mounted) {
         switch (event) {
-          case ShowErrorDialog():
+          case ShowSignInErrorDialog():
             AppShowDialog.show(
               context,
               AppDialog.singleBtn(
