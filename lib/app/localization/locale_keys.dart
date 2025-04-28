@@ -34,6 +34,18 @@ abstract class LocaleKeys {
   static const signUpNoText = 'signUp.noText';
   static const signUpCompleted = 'signUp.completed';
 
+  // Home screen
+  static const homeGuideText = 'home.guideText';
+  static const homeSelectImageText = 'home.selectImageText';
+  static const homeTodayPuzzleButton = 'home.todayPuzzleButton';
+  static const homeTodayPuzzleGuide = 'home.todayPuzzleGuide';
+  static const homeStartGameButton = 'home.startGameButton';
+
+  // Bottom navigation
+  static const tabHome = 'home.tabHome';
+  static const tabRanking = 'home.tabRanking';
+  static const tabMy = 'home.tabMy';
+
   // Error
   static const unexpectedError = 'error.unexpected';
   static const uidNotFoundError = 'error.uidNotFound';

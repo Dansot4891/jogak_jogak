@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
@@ -36,13 +38,19 @@ class _RootTabState extends State<RootTab> {
             selectedItemColor: AppColor.main,
             unselectedItemColor: AppColor.greyC5,
             currentIndex: currentIndex,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.emoji_events_outlined),
-                label: '랭킹',
+                icon: const Icon(Icons.home),
+                label: LocaleKeys.tabHome.tr(),
               ),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: '마이'),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.emoji_events_outlined),
+                label: LocaleKeys.tabRanking.tr(),
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.person),
+                label: LocaleKeys.tabMy.tr(),
+              ),
             ],
           ),
         ],

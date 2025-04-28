@@ -32,6 +32,16 @@
       "noText": "Nickname is not available.",
       "completed": "Sign up completed!"
     },
+    "home": {
+      "guideText": "Start easily with a random puzzle\nor upload a photo!",
+      "selectImageText": "Please select an image",
+      "todayPuzzleButton": "Get Today's Puzzle",
+      "todayPuzzleGuide": "Today's puzzle changes every game",
+      "startGameButton": "Start Game",
+      "tabHome": "Home",
+      "tabRanking": "Ranking",
+      "tabMy": "My Page"
+    },
     "error": {
       "unexpected": "An error occurred. Please try again later.",
       "uidNotFound": "User information not found. Please try again.",

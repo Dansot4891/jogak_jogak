@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_data.dart';
@@ -34,7 +36,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('사진을 넣거나 랜덤 퍼즐로\n가볍게 시작해보세요!', style: AppTextStyle.title2),
+              Text(LocaleKeys.homeGuideText.tr(), style: AppTextStyle.title2),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 20,
@@ -58,12 +60,12 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               AppButton(
-                text: '오늘의 퍼즐 가져오기',
+                text: LocaleKeys.homeTodayPuzzleButton.tr(),
                 onTap: () => onAction(const HomeAction.getRandomImageUrl()),
               ),
               const AlertMessage(),
               AppButton(
-                text: '게임 시작',
+                text: LocaleKeys.homeStartGameButton.tr(),
                 onTap:
                     state.file == null
                         ? null

@@ -32,6 +32,16 @@
       "noText": "사용 불가능한 닉네임입니다.",
       "completed": "회원가입이 완료되었습니다!"
     },
+    "home": {
+      "guideText": "사진을 넣거나 랜덤 퍼즐로\n가볍게 시작해보세요!",
+      "selectImageText": "이미지를 선택해주세요",
+      "todayPuzzleButton": "오늘의 퍼즐 가져오기",
+      "todayPuzzleGuide": "!! 오늘의 퍼즐은 매 게임마다 변경됩니다 !!",
+      "startGameButton": "게임 시작",
+      "tabHome": "홈",
+      "tabRanking": "랭킹",
+      "tabMy": "마이"
+    },
     "error": {
       "unexpected": "문제가 발생했습니다. 잠시 후 다시 시도해주세요.",
       "uidNotFound": "유저 정보가 존재하지 않습니다. 다시 시도해주세요.",
