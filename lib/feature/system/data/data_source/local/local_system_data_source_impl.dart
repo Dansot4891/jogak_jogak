@@ -3,7 +3,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 class LocalSystemDataSourceImpl implements LocalSystemDataSource {
   @override
-  Future<String> getDeviceAppVersion() async {
+  Future<String> getDeviceVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     final version = packageInfo.version;
     return version;

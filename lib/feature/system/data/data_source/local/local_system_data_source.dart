@@ -1,3 +1,3 @@
 abstract interface class LocalSystemDataSource {
-  Future<String> getDeviceAppVersion();
+  Future<String> getDeviceVersion();
 }
