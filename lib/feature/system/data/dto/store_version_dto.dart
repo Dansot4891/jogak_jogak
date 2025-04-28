@@ -5,13 +5,10 @@ part 'store_version_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class StoreVersionDto {
-  final String playStoreVersion;
-  final String appStoreVersion;
+  String? playStoreVersion;
+  String? appStoreVersion;
 
-  StoreVersionDto({
-    required this.playStoreVersion,
-    required this.appStoreVersion,
-  });
+  StoreVersionDto({this.playStoreVersion, this.appStoreVersion});
 
   factory StoreVersionDto.fromFireBase(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
