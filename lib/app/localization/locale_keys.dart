@@ -1,15 +1,15 @@
 abstract class LocaleKeys {
-  // common
-  static const commonAppName = 'common.appName';
-  static const commonEmailHintText = 'common.emailHintText';
-  static const commonPasswordHintText = 'common.passwordHintText';
-  static const commonUsernameHintText = 'common.usernameHintText';
-  static const commonSignup = 'common.signup';
-  static const commonResetPassword = 'common.resetPassword';
-  static const commonLogin = 'common.login';
-  static const commonLogout = 'common.logout';
-  static const commonOk = 'common.ok';
-  static const commonCancel = 'common.cancel';
+  // Common
+  static const appName = 'common.appName';
+  static const emailHintText = 'common.hintText.emailHintText';
+  static const passwordHintText = 'common.hintText.passwordHintText';
+  static const usernameHintText = 'common.hintText.usernameHintText';
+  static const signup = 'common.signup';
+  static const resetPassword = 'common.resetPassword';
+  static const login = 'common.login';
+  static const logout = 'common.logout';
+  static const ok = 'common.ok';
+  static const cancel = 'common.cancel';
 
   // common.validation
   static const commonValidationEmailFormValidateText =

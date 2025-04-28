@@ -1,9 +1,11 @@
 {
     "common": {
       "appName": "JogakJogak",
-      "emailHintText": "Enter your email",
-      "passwordHintText": "Enter your password",
-      "usernameHintText": "Enter your nickname",
+      "hintText": {
+        "emailHintText": "Enter your email",
+        "passwordHintText": "Enter your password",
+        "usernameHintText": "Enter your nickname"
+      },
       "signup": "Sign Up",
       "resetPassword": "Reset Password",
       "login": "Log In",

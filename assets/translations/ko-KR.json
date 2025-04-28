@@ -1,9 +1,11 @@
 {
     "common": {
       "appName": "조각조각",
-      "emailHintText": "이메일 입력",
-      "passwordHintText": "비밀번호 입력",
-      "usernameHintText": "닉네임 입력",
+      "hintText": {
+        "emailHintText": "이메일 입력",
+        "passwordHintText": "비밀번호 입력",
+        "usernameHintText": "닉네임 입력"
+      },
       "signup": "회원가입",
       "resetPassword": "비밀번호 재설정",
       "login": "로그인",
