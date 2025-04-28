@@ -12,13 +12,13 @@ abstract class LocaleKeys {
   static const cancel = 'common.cancel';
 
   // common.validation
-  static const commonValidationEmailFormValidateText =
+  static const validationEmailFormValidateText =
       'common.validation.emailFormValidateText';
-  static const commonValidationEmailValidateText =
+  static const validationEmailValidateText =
       'common.validation.emailValidateText';
-  static const commonValidationPasswordValidateText =
+  static const validationPasswordValidateText =
       'common.validation.passwordValidateText';
-  static const commonValidationPasswordFormValidateText =
+  static const validationPasswordFormValidateText =
       'common.validation.passwordFormValidateText';
 
   // changePassword

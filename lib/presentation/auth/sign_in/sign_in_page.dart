@@ -93,7 +93,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
               AppButton(
-                text: '로그인',
+                text: LocaleKeys.login.tr(),
                 onTap:
                     (_email.text.isEmpty || _password.text.isEmpty)
                         ? null

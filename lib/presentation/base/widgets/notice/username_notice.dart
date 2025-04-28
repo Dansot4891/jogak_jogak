@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 
@@ -16,11 +18,11 @@ class UsernameNotice extends StatelessWidget {
               ? const Text('')
               : isAbleUsername == true
               ? Text(
-                '사용 가능한 닉네임입니다.',
+                LocaleKeys.signUpOkText.tr(),
                 style: AppTextStyle.body1.copyWith(color: AppColor.blue),
               )
               : Text(
-                '사용 불가능한 닉네임입니다.',
+                LocaleKeys.signUpNoText.tr(),
                 style: AppTextStyle.body1.copyWith(color: AppColor.red),
               ),
     );

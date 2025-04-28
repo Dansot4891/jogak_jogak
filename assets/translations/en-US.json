@@ -26,7 +26,7 @@
       "success": "Message has been sent."
     },
     "signUp": {
-      "duplicate": "Check Availability",
+      "duplicate": "duplicate",
       "checkPasswordHintText": "Confirm your password",
       "okText": "Nickname is available.",
       "noText": "Nickname is not available.",
