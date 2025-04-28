@@ -25,7 +25,6 @@ class _ChangePasswordPageRootState extends State<ChangePasswordPageRoot> {
   @override
   void initState() {
     _sub = widget.viewModel.eventStream.listen((event) {
-      print(event);
       if (mounted) {
         switch (event) {
           case ShowCheckDialog():

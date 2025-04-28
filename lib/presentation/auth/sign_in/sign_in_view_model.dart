@@ -2,8 +2,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/constants/app_data.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 
@@ -53,7 +55,7 @@ class SignInViewModel with ChangeNotifier {
     } else {
       _state = state.copyWith(state: BaseState.error);
       _streamController.add(
-        const SignInEvent.showSignInErrorDialog('로그인에 실패하였습니다.'),
+        SignInEvent.showSignInErrorDialog(LocaleKeys.signInError.tr()),
       );
       notifyListeners();
     }
