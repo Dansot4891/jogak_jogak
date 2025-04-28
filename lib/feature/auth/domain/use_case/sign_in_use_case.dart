@@ -20,7 +20,7 @@ class SignInUseCase {
       return Result.success(response);
     } on FirebaseAuthException catch (e) {
       if (e.code == AppErrorText.invalidCredential) {
-        return const Result.error(FaileSignInWithInvalidCredential());
+        return const Result.error(FaileSignInWithInvalidCredentialException());
       }
       return const Result.error(UnexpectedException());
     } catch (e) {
