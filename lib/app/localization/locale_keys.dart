@@ -12,6 +12,8 @@ abstract class LocaleKeys {
   static const withdrawal = 'common.withdrawal';
   static const ok = 'common.ok';
   static const cancel = 'common.cancel';
+  static const seconds = 'common.seconds';
+  static const minutes = 'common.minutes';
 
   // common.validation
   static const validationEmailFormValidateText =

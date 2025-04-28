@@ -76,7 +76,7 @@ class MyPage extends StatelessWidget {
                     AppShowDialog.show(
                       context,
                       AppDialog(
-                        title: LocaleKeys.logout,
+                        title: LocaleKeys.logout.tr(),
                         subText: LocaleKeys.myPageConfirmLogout.tr(),
                         btnText: LocaleKeys.ok.tr(),
                         btnLeftText: LocaleKeys.cancel.tr(),

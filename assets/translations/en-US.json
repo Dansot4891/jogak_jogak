@@ -14,6 +14,8 @@
       "withdrawal": "Withdraw Membership",
       "ok": "OK",
       "cancel": "Cancel",
+      "seconds": "seconds",
+      "minutes": "minutes",
       "validation": {
         "emailFormValidateText": "Please enter a valid email format.",
         "emailValidateText": "Please enter your email.",
@@ -46,7 +48,7 @@
     },
     "inGame": {
       "croppedScreen": "⚠️ The screen may be cropped and\ndiffer from the original!",
-      "currentTime": "Current time: {seconds} seconds",
+      "currentTime": "Current time: {seconds}",
       "clear": "Puzzle Cleared!",
       "rankingInfo": "Your record will be automatically updated\nin the rankings based on the result."
     },

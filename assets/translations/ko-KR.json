@@ -14,6 +14,8 @@
       "withdrawal": "회원탈퇴",
       "ok": "확인",
       "cancel": "취소",
+      "seconds": "초",
+      "minutes": "분",
       "validation" : {
         "emailFormValidateText": "올바른 이메일 양식을 입력해주세요.",
         "emailValidateText": "이메일을 입력해주세요.",
@@ -46,7 +48,7 @@
     },
     "inGame": {
       "croppedScreen": "⚠️ 화면이 잘리면서 원본과 다를 수 있습니다!",
-      "currentTime": "현재 시간: {seconds}초",
+      "currentTime": "현재 시간: {seconds}",
       "clear": "퍼즐 클리어!",
       "rankingInfo": "기록은 결과에 따라\n자동으로 랭킹에 갱신됩니다."
     },

@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
+import 'package:jogak_jogak/core/helper/extension/timer_extension.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
-import 'package:jogak_jogak/core/helper/extension/timer_extension.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_action.dart';
@@ -54,7 +54,8 @@ class _PuzzlePageState extends State<PuzzlePage> {
                       Text(
                         LocaleKeys.inGameCurrentTime.tr(
                           namedArgs: {
-                            'seconds': '${widget.state.elapsedSeconds}',
+                            'seconds':
+                                widget.state.elapsedSeconds.formattedElapsed(),
                           },
                         ),
                         style: AppTextStyle.body1,
