@@ -16,6 +16,7 @@
       "cancel": "취소",
       "seconds": "초",
       "minutes": "분",
+      "duplicate": "중복 확인",
       "validation" : {
         "emailFormValidateText": "올바른 이메일 양식을 입력해주세요.",
         "emailValidateText": "이메일을 입력해주세요.",
@@ -29,8 +30,12 @@
       "dialogMsg": "해당 이메일로 비밀번호 재설정 메일이 전송됩니다.",
       "success": "메시지가 발송되었습니다."
     },
+    "changeUsername": {
+      "hintText": "새로운 닉네임",
+      "completed": "닉네임 변경이 완료되었습니다.",
+      "failed": "닉네임 변경에 실패하였습니다."
+    },
     "signUp": {
-      "duplicate": "중복 확인",
       "checkPasswordHintText": "비밀번호 재확인",
       "okText": "사용 가능한 닉네임입니다.",
       "noText": "사용 불가능한 닉네임입니다.",

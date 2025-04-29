@@ -30,9 +30,10 @@ void main() async {
   diSetup();
 
   runApp(
+    // Localization
     EasyLocalization(
       supportedLocales: const [Locale('en', 'US'), Locale('ko', 'KR')],
-      path: 'assets/translations', // <-- 여기에 JSON 파일 넣은 폴더
+      path: 'assets/translations',
       fallbackLocale: const Locale('en', 'US'),
       startLocale: const Locale('en', 'US'),
       child: const MyApp(),

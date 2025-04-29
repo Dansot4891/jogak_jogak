@@ -85,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     const SizedBox(width: 4),
                     AppButton(
-                      text: LocaleKeys.signUpDuplicate.tr(),
+                      text: LocaleKeys.duplicate.tr(),
                       horizontalPadding: 16,
                       onTap:
                           _name.text.isEmpty

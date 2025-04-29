@@ -16,6 +16,7 @@
       "cancel": "Cancel",
       "seconds": "seconds",
       "minutes": "minutes",
+      "duplicate": "duplicate",
       "validation": {
         "emailFormValidateText": "Please enter a valid email format.",
         "emailValidateText": "Please enter your email.",
@@ -29,8 +30,12 @@
       "dialogMsg": "A password reset email will be sent to the provided email address.",
       "success": "Message has been sent."
     },
+    "changeUsername": {
+      "hintText": "new nickname",
+      "completed": "Nickname change completed.",
+      "failed": "Nickname change failed."
+    },
     "signUp": {
-      "duplicate": "duplicate",
       "checkPasswordHintText": "Confirm your password",
       "okText": "Nickname is available.",
       "noText": "Nickname is not available.",

@@ -31,8 +31,13 @@ abstract class LocaleKeys {
   static const changePasswordDialogMsg = 'changePassword.dialogMsg';
   static const changePasswordSuccess = 'changePassword.success';
 
+  // changeUsername
+  static const changeUsernameHintText = 'changeUsername.hintText';
+  static const changeUsernameCompleted = 'changeUsername.completed';
+  static const changeUsernameFailed = 'changeUsername.failed';
+
   // signUp
-  static const signUpDuplicate = 'signUp.duplicate';
+  static const duplicate = 'common.duplicate';
   static const signUpCheckPasswordHintText = 'signUp.checkPasswordHintText';
   static const signUpOkText = 'signUp.okText';
   static const signUpNoText = 'signUp.noText';
