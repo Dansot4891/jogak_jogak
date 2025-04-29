@@ -37,6 +37,7 @@
 - **로그인 방식:** Email/Password
 - **모델링:** JsonSerializable
 - **에러 처리:** Result 패턴 + CustomException
+- **다국어 지원:** Easy Localization
 
 ---
 ## 폴더 구조
