@@ -10,20 +10,14 @@ import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_view_model.dart';
 import 'package:provider/provider.dart';
 
-final providers = [
-  ChangeNotifierProvider(create: (pContext) => locator<SignInViewModel>()),
-  ChangeNotifierProvider(create: (pContext) => locator<SignUpViewModel>()),
-  ChangeNotifierProvider(create: (pContext) => locator<HomeViewModel>()),
-  ChangeNotifierProvider(
-    create: (pContext) => locator<ChangePasswordViewModel>(),
-  ),
-  ChangeNotifierProvider(
-    create: (pContext) => locator<ChangeUsernameViewModel>(),
-  ),
-  ChangeNotifierProvider(create: (pContext) => locator<MyPageViewModel>()),
-  ChangeNotifierProvider(
-    create: (pContext) => locator<PuzzleHistoryViewModel>(),
-  ),
-  ChangeNotifierProvider(create: (pContext) => locator<PuzzleViewModel>()),
-  ChangeNotifierProvider(create: (pContext) => locator<RankingViewModel>()),
+final appProviders = [
+  ChangeNotifierProvider(create: (_) => locator<SignInViewModel>()),
+  ChangeNotifierProvider(create: (_) => locator<SignUpViewModel>()),
+  ChangeNotifierProvider(create: (_) => locator<HomeViewModel>()),
+  ChangeNotifierProvider(create: (_) => locator<ChangePasswordViewModel>()),
+  ChangeNotifierProvider(create: (_) => locator<ChangeUsernameViewModel>()),
+  ChangeNotifierProvider(create: (_) => locator<MyPageViewModel>()),
+  ChangeNotifierProvider(create: (_) => locator<PuzzleHistoryViewModel>()),
+  ChangeNotifierProvider(create: (_) => locator<PuzzleViewModel>()),
+  ChangeNotifierProvider(create: (_) => locator<RankingViewModel>()),
 ];

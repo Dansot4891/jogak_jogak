@@ -37,6 +37,7 @@ class RankingViewModel with ChangeNotifier {
     _state = state.copyWith(state: BaseState.loading);
     notifyListeners();
     final result = await _getRankingsUseCase.execute(level);
+    print(result);
     switch (result) {
       case Success():
         _state = state.copyWith(
@@ -51,13 +52,11 @@ class RankingViewModel with ChangeNotifier {
                   .toList(),
           state: BaseState.success,
         );
-        break;
       case Error():
         _state = state.copyWith(
           state: BaseState.error,
           errorMessage: result.error.message,
         );
-        break;
     }
     notifyListeners();
   }
