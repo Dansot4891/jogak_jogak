@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
+import 'package:jogak_jogak/app/di/providers.dart';
 import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/firebase/firebase_options.dart';
+import 'package:provider/provider.dart';
 
 final router = AppRouter.appRouter();
 
@@ -49,16 +51,19 @@ class MyApp extends StatelessWidget {
     BouncyDeviceSize.init(context);
     // app size 할당
     AppSize.init(context);
-    return MaterialApp.router(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Pretendard',
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return MultiProvider(
+      providers: providers,
+      child: MaterialApp.router(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Pretendard',
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        routerConfig: router,
       ),
-      routerConfig: router,
     );
   }
 }
