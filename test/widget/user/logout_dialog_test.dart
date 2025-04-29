@@ -35,14 +35,16 @@ void main() async {
     );
   });
 
-  testWidgets('MyPage find text', (tester) async {
+  testWidgets('MyPage shows logout dialogs', (tester) async {
     await tester.pumpWidget(mypage);
 
-    // 기본 텍스트 검증
-    expect(find.textContaining(LocaleKeys.changeUsername.tr()), findsOneWidget);
-    expect(find.textContaining(LocaleKeys.resetPassword.tr()), findsOneWidget);
+    final logoutButton = find.text(LocaleKeys.logout.tr());
+
+    // 로그아웃 시 다이얼로그 확인
+    await tester.tap(logoutButton);
+    await tester.pumpAndSettle();
     expect(
-      find.textContaining(LocaleKeys.myPagePuzzleRecord.tr()),
+      find.textContaining(LocaleKeys.myPageConfirmLogout.tr()),
       findsOneWidget,
     );
   });
