@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
@@ -30,8 +32,8 @@ class _ChangeUsernamePageRootState extends State<ChangeUsernamePageRoot> {
             AppShowDialog.show(
               context,
               AppDialog.singleBtn(
-                title: event.message,
-                btnText: '확인',
+                title: event.message.tr(),
+                btnText: LocaleKeys.ok.tr(),
                 onBtnClicked: () {
                   pop(context);
                 },
@@ -52,7 +54,7 @@ class _ChangeUsernamePageRootState extends State<ChangeUsernamePageRoot> {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      appBar: const DefaultAppbar(title: '닉네임 변경'),
+      appBar: DefaultAppbar(title: LocaleKeys.changeUsername.tr()),
       body: ListenableBuilder(
         listenable: widget.viewModel,
         builder: (context, child) {

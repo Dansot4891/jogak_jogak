@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
@@ -30,7 +32,10 @@ class PuzzleImageBox extends StatelessWidget {
         child:
             state.file == null
                 ? Center(
-                  child: Text('이미지를 선택해주세요', style: AppTextStyle.subText1),
+                  child: Text(
+                    LocaleKeys.homeSelectImageText.tr(),
+                    style: AppTextStyle.subText1,
+                  ),
                 )
                 : ClipRRect(
                   borderRadius: _borderRadiusGeometry,

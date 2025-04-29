@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_action.dart';
@@ -23,7 +25,7 @@ class _PuzzleHistoryPageRootState extends State<PuzzleHistoryPageRoot> {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      appBar: const DefaultAppbar(title: '퍼즐 기록'),
+      appBar: DefaultAppbar(title: LocaleKeys.history.tr()),
       body: ListenableBuilder(
         listenable: widget.viewModel,
         builder: (context, child) {

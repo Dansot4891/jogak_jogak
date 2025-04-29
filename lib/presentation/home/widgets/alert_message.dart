@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 
@@ -12,14 +14,14 @@ class AlertMessage extends StatelessWidget {
       alignment: Alignment.center,
       child: RichText(
         text: TextSpan(
-          text: '!!',
+          text: '!! ',
           style: AppTextStyle.subText2.copyWith(color: AppColor.red),
           children: [
             TextSpan(
-              text: ' 오늘의 퍼즐은 매 게임마다 변경됩니다 ',
+              text: LocaleKeys.homeTodayPuzzleGuide.tr(),
               style: AppTextStyle.subText2,
             ),
-            const TextSpan(text: '!!'),
+            const TextSpan(text: ' !!'),
           ],
         ),
       ),

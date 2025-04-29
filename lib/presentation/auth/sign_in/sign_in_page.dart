@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
@@ -45,11 +47,11 @@ class _SignInPageState extends State<SignInPage> {
               SizedBox(height: AppSize.fractionHeight(0.15)),
               Image.asset(AppImage.appLogo, width: AppSize.fractionWidth(0.6)),
               const SizedBox(height: 20),
-              Text('조각조각', style: AppTextStyle.title1),
+              Text(LocaleKeys.appName.tr(), style: AppTextStyle.title1),
               const SizedBox(height: 40),
               CustomTextFormField(
                 controller: _email,
-                hintText: '이메일 입력',
+                hintText: LocaleKeys.emailHintText.tr(),
                 onChanged: (val) {
                   setState(() {});
                 },
@@ -59,7 +61,7 @@ class _SignInPageState extends State<SignInPage> {
                 controller: _password,
                 obsecure: true,
                 maxLines: 1,
-                hintText: '비밀번호 입력',
+                hintText: LocaleKeys.passwordHintText.tr(),
                 onChanged: (val) {
                   setState(() {});
                 },
@@ -73,19 +75,25 @@ class _SignInPageState extends State<SignInPage> {
                       onPressed: () {
                         navigate(context, route: AppRoute.signUp);
                       },
-                      child: Text('회원가입', style: AppTextStyle.body1),
+                      child: Text(
+                        LocaleKeys.signup.tr(),
+                        style: AppTextStyle.body1,
+                      ),
                     ),
                     TextButton(
                       onPressed: () {
                         navigate(context, route: AppRoute.changePw);
                       },
-                      child: Text('비밀번호 재설정', style: AppTextStyle.body1),
+                      child: Text(
+                        LocaleKeys.resetPassword.tr(),
+                        style: AppTextStyle.body1,
+                      ),
                     ),
                   ],
                 ),
               ),
               AppButton(
-                text: '로그인',
+                text: LocaleKeys.login.tr(),
                 onTap:
                     (_email.text.isEmpty || _password.text.isEmpty)
                         ? null

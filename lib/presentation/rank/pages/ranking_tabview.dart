@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/helper/extension/timer_extension.dart';
@@ -38,7 +40,7 @@ class RankingTabview extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IntrinsicWidth(
                 child: AppButton(
-                  text: '새로고침',
+                  text: LocaleKeys.rankingRefresh.tr(),
                   onTap: () {
                     onAction(FetchRankings(level, isRefetching: true));
                   },
@@ -66,7 +68,11 @@ class RankingTabview extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Divider(color: AppColor.sub),
-            const RankingRow(index: '등수', name: '이름', time: '시간'),
+            RankingRow(
+              index: LocaleKeys.rankingRank.tr(),
+              name: LocaleKeys.rankingName.tr(),
+              time: LocaleKeys.rankingTime.tr(),
+            ),
             if (_rankings.length > 3)
               Expanded(
                 child: ListView.separated(
@@ -88,7 +94,10 @@ class RankingTabview extends StatelessWidget {
             else if (_rankings.length < 3)
               Expanded(
                 child: Center(
-                  child: Text('현재 등록된 랭킹이 없습니다.', style: AppTextStyle.body1),
+                  child: Text(
+                    LocaleKeys.rankingNoRanking.tr(),
+                    style: AppTextStyle.body1,
+                  ),
                 ),
               ),
           ],

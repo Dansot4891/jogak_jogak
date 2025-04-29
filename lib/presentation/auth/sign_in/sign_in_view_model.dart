@@ -1,8 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
+import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
+import 'package:jogak_jogak/core/constants/app_data.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 
 import 'package:jogak_jogak/core/module/state/base_state.dart';
@@ -11,6 +15,7 @@ import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_event.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_state.dart';
 import 'package:jogak_jogak/presentation/system/system_provider.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignInViewModel with ChangeNotifier {
   final UserProvider _userProvider;
@@ -35,6 +40,8 @@ class SignInViewModel with ChangeNotifier {
         _signIn(email: action.email, password: action.password);
       case SignInInitialize():
         _signInInitialize();
+      case RedirectStoreUrl():
+        _redirectStoreUrl();
     }
   }
 
@@ -48,7 +55,7 @@ class SignInViewModel with ChangeNotifier {
     } else {
       _state = state.copyWith(state: BaseState.error);
       _streamController.add(
-        const SignInEvent.showSignInErrorDialog('로그인에 실패하였습니다.'),
+        SignInEvent.showSignInErrorDialog(LocaleKeys.signInError.tr()),
       );
       notifyListeners();
     }
@@ -70,6 +77,16 @@ class SignInViewModel with ChangeNotifier {
           SignInEvent.showVersionErrorDialog(result.error.message),
         );
         FlutterNativeSplash.remove();
+    }
+  }
+
+  void _redirectStoreUrl() async {
+    String url = '';
+    if (Platform.isAndroid) {
+      url = AppData.playStoreUrl;
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else if (Platform.isIOS) {
+      url = AppData.appStoreUrl;
     }
   }
 }

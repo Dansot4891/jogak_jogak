@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
@@ -45,7 +47,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                 Expanded(
                   child: CustomTextFormField(
                     controller: _username,
-                    hintText: '새로운 닉네임',
+                    hintText: LocaleKeys.changeUsernameHintText.tr(),
                     maxLength: 10,
                     onChanged: (val) {
                       widget.onAction(
@@ -56,7 +58,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                 ),
                 const SizedBox(width: 8),
                 AppButton(
-                  text: '중복확인',
+                  text: LocaleKeys.duplicate.tr(),
                   horizontalPadding: 8,
                   onTap:
                       isEmpty
@@ -69,7 +71,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
             ),
             UsernameNotice(widget.state.isAbleUsername),
             AppButton(
-              text: '닉네임 변경',
+              text: LocaleKeys.changeUsername.tr(),
               onTap:
                   widget.state.isAbleUsername == true
                       ? () {
@@ -91,7 +93,10 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
           children: [
             Image.asset(AppImage.clear, width: AppSize.fractionWidth(0.3)),
             const SizedBox(height: 20),
-            Text('닉네임 변경이 완료되었습니다.', style: AppTextStyle.title2),
+            Text(
+              LocaleKeys.changeUsernameCompleted.tr(),
+              style: AppTextStyle.title2,
+            ),
           ],
         ),
       ),

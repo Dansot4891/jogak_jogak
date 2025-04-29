@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
+import 'package:jogak_jogak/core/helper/extension/timer_extension.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
-import 'package:jogak_jogak/core/helper/extension/timer_extension.dart';
 import 'package:jogak_jogak/presentation/base/pages/base_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_action.dart';
@@ -25,7 +27,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
   Widget build(BuildContext context) {
     return BasePage(
       appBar: DefaultAppbar(
-        title: '조각조각',
+        title: LocaleKeys.appName.tr(),
         onTap: () {
           widget.onAction(const Reset());
           pop(context);
@@ -46,11 +48,16 @@ class _PuzzlePageState extends State<PuzzlePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '⚠️ 화면이 잘리면서 원본과 다를 수 있습니다!',
+                        LocaleKeys.inGameCroppedScreen.tr(),
                         style: AppTextStyle.body1.copyWith(color: AppColor.red),
                       ),
                       Text(
-                        '현재 시간: ${(widget.state.elapsedSeconds).formattedElapsed()}',
+                        LocaleKeys.inGameCurrentTime.tr(
+                          namedArgs: {
+                            'seconds':
+                                widget.state.elapsedSeconds.formattedElapsed(),
+                          },
+                        ),
                         style: AppTextStyle.body1,
                       ),
                     ],

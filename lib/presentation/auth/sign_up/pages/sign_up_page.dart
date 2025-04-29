@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/helper/validator/app_validator.dart';
@@ -59,11 +61,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   width: AppSize.fractionWidth(0.6),
                 ),
                 const SizedBox(height: 20),
-                Text('조각조각', style: AppTextStyle.title1),
+                Text(LocaleKeys.appName.tr(), style: AppTextStyle.title1),
                 const SizedBox(height: 40),
                 CustomTextFormField(
                   controller: _email,
-                  hintText: '이메일 입력',
+                  hintText: LocaleKeys.emailHintText.tr(),
                   textInputType: TextInputType.emailAddress,
                   validator: AppValidator.emailValid,
                 ),
@@ -73,7 +75,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Expanded(
                       child: CustomTextFormField(
                         controller: _name,
-                        hintText: '닉네임 입력',
+                        hintText: LocaleKeys.usernameHintText.tr(),
                         maxLength: 10,
                         onChanged:
                             (val) => widget.onAction(
@@ -83,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     const SizedBox(width: 4),
                     AppButton(
-                      text: '중복 확인',
+                      text: LocaleKeys.duplicate.tr(),
                       horizontalPadding: 16,
                       onTap:
                           _name.text.isEmpty
@@ -99,7 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 UsernameNotice(widget.state.isAbleUsername),
                 CustomTextFormField(
                   controller: _password,
-                  hintText: '비밀번호 입력',
+                  hintText: LocaleKeys.passwordHintText.tr(),
                   obsecure: true,
                   maxLines: 1,
                   validator: AppValidator.passwordValid,
@@ -110,7 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(height: 8),
                 CustomTextFormField(
                   controller: _passwordCheck,
-                  hintText: '비밀번호 재확인',
+                  hintText: LocaleKeys.signUpCheckPasswordHintText.tr(),
                   obsecure: true,
                   maxLines: 1,
                   validator: AppValidator.passwordValid,
@@ -120,7 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 const SizedBox(height: 16),
                 AppButton(
-                  text: '회원가입',
+                  text: LocaleKeys.signup.tr(),
                   onTap:
                       widget.state.isAbleUsername == true &&
                               _password.text == _passwordCheck.text

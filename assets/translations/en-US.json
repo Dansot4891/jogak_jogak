@@ -1,0 +1,101 @@
+{
+    "common": {
+      "appName": "JogakJogak",
+      "hintText": {
+        "emailHintText": "Enter your email",
+        "passwordHintText": "Enter your password",
+        "usernameHintText": "Enter your nickname"
+      },
+      "date": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "daysAgo": "{n} days ago",
+        "weeksAgo": "{n} weeks ago",
+        "monthsAgo": "{n} months ago",
+        "yearsAgo": "{n} years ago"
+      },
+      "signup": "Sign Up",
+      "resetPassword": "Reset Password",
+      "history": "Puzzle History",
+      "login": "Log In",
+      "logout": "Log Out",
+      "changeNickname": "Change Nickname",
+      "withdrawal": "Withdraw Membership",
+      "ok": "OK",
+      "cancel": "Cancel",
+      "seconds": "seconds",
+      "minutes": "minutes",
+      "duplicate": "duplicate",
+      "validation": {
+        "emailFormValidateText": "Please enter a valid email format.",
+        "emailValidateText": "Please enter your email.",
+        "passwordValidateText": "Please enter your password.",
+        "passwordFormValidateText": "Password must be at least 6 characters long."
+      }
+    },
+    "changePassword": {
+      "button": "Send Email",
+      "validateText": "Please enter your email.",
+      "dialogMsg": "A password reset email will be sent to the provided email address.",
+      "success": "Message has been sent."
+    },
+    "changeUsername": {
+      "hintText": "new nickname",
+      "completed": "Nickname change completed.",
+      "failed": "Nickname change failed."
+    },
+    "signUp": {
+      "checkPasswordHintText": "Confirm your password",
+      "okText": "Nickname is available.",
+      "noText": "Nickname is not available.",
+      "completed": "Sign up completed!"
+    },
+    "home": {
+      "guideText": "Start easily with a random puzzle\nor upload a photo!",
+      "selectImageText": "Please select an image",
+      "todayPuzzleButton": "Get Today's Puzzle",
+      "todayPuzzleGuide": "Today's puzzle changes every game",
+      "startGameButton": "Start Game",
+      "tabHome": "Home",
+      "tabRanking": "Ranking",
+      "tabMy": "My Page"
+    },
+    "inGame": {
+      "croppedScreen": "⚠️ The screen may be cropped and\ndiffer from the original!",
+      "currentTime": "Current time: {seconds}",
+      "clear": "Puzzle Cleared!",
+      "rankingInfo": "Your record will be automatically updated\nin the rankings based on the result."
+    },
+    "ranking": {
+      "refresh": "Refresh",
+      "rank": "Rank",
+      "name": "Name",
+      "time": "Time",
+      "noRanking": "No rankings available."
+    },
+    "history": {
+      "level": "Level",
+      "playTime": "PlayTime",
+      "noHistory": "No history available."
+    },
+    "myPage": {
+      "sir": "sir",
+      "welcome": "Welcome!",
+      "puzzleRecord": "Puzzle Records",
+      "confirmLogout": "Are you sure you want to log out?",
+      "confirmWithdrawal": "Are you sure you want to withdraw?"
+    },
+    "error": {
+      "unexpected": "An error occurred. Please try again later.",
+      "uidNotFound": "User information not found. Please try again.",
+      "userNotFound": "User does not exist.",
+      "emailAlreadyExists": "This email already exists.",
+      "failedToFetchImage": "Failed to fetch data.",
+      "failedSignInWithInvalidCredential": "Please check your ID and password.",
+      "version": "Failed to fetch app version.",
+      "versionMismatch": "The app has been updated.\nPlease update to the latest version.",
+      "unsupportedPlatform": "Unsupported platform.",
+      "signIn": "Failed to SignIn"
+    }
+  }
+  

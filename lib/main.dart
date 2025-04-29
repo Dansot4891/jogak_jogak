@@ -1,4 +1,5 @@
 import 'package:bouncy_background/bouncy_background.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,10 +19,26 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  // Localization
+  await EasyLocalization.ensureInitialized();
+
+  // Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // DI Setup
   diSetup();
 
-  runApp(const MyApp());
+  runApp(
+    // Localization
+    EasyLocalization(
+      supportedLocales: const [Locale('en', 'US'), Locale('ko', 'KR')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en', 'US'),
+      // startLocale: const Locale('en', 'US'),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -33,6 +50,9 @@ class MyApp extends StatelessWidget {
     // app size 할당
     AppSize.init(context);
     return MaterialApp.router(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Pretendard',

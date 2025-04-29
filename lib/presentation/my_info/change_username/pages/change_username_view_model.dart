@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case.dart';
@@ -55,7 +57,9 @@ class ChangeUsernameViewModel with ChangeNotifier {
       case Success<void>():
         _state = state.copyWith(state: BaseState.success);
         _streamController.add(
-          const ChangeUsernameEvent.showUsernameDialog('닉네임 변경이 완료되었습니다!'),
+          ChangeUsernameEvent.showUsernameDialog(
+            LocaleKeys.changeUsernameCompleted.tr(),
+          ),
         );
       case Error<void>():
         _state = state.copyWith(
@@ -63,7 +67,9 @@ class ChangeUsernameViewModel with ChangeNotifier {
           errorMessage: state.errorMessage,
         );
         _streamController.add(
-          const ChangeUsernameEvent.showUsernameDialog('닉네임 변경에 실패하였습니다.'),
+          ChangeUsernameEvent.showUsernameDialog(
+            LocaleKeys.changeUsernameFailed.tr(),
+          ),
         );
     }
     notifyListeners();

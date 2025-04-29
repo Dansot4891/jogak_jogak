@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 
@@ -14,7 +16,7 @@ class NoHistory extends StatelessWidget {
         children: [
           Icon(Icons.close, color: AppColor.red, size: 64),
           Text(
-            '퍼즐 기록이 없습니다.',
+            LocaleKeys.historyNoHistory.tr(),
             style: AppTextStyle.body2.copyWith(color: AppColor.grey43),
           ),
         ],

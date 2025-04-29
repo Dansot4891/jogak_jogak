@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_action.dart';
@@ -31,7 +33,7 @@ class _SignInPageRootState extends State<SignInPageRoot> {
               context,
               AppDialog.singleBtn(
                 title: event.text,
-                btnText: '확인',
+                btnText: LocaleKeys.ok.tr(),
                 onBtnClicked: () {
                   pop(context);
                 },
@@ -43,8 +45,12 @@ class _SignInPageRootState extends State<SignInPageRoot> {
               barrierDismissible: false,
               AppDialog.singleBtn(
                 title: event.text,
-                btnText: '확인',
-                onBtnClicked: () {},
+                btnText: LocaleKeys.ok.tr(),
+                onBtnClicked: () {
+                  widget.viewModel.onAction(
+                    const SignInAction.redirectStoreUrl(),
+                  );
+                },
               ),
             );
         }

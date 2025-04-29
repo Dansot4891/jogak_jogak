@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/helper/dialog_service/app_show_dialog.dart';
 import 'package:jogak_jogak/core/helper/validator/app_validator.dart';
@@ -41,21 +43,21 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           children: [
             CustomTextFormField(
               controller: _email,
-              hintText: '이메일',
+              hintText: LocaleKeys.emailHintText.tr(),
               validator: AppValidator.emailValid,
             ),
             const SizedBox(height: 20),
             AppButton(
-              text: '메일 발송',
+              text: LocaleKeys.changePasswordButton.tr(),
               onTap: () {
                 if (_formKey.currentState!.validate()) {
                   AppShowDialog.show(
                     context,
                     AppDialog.doubleBtns(
-                      title: '비밀번호 재설정',
-                      subText: '해당 이메일로\n비밀번호 재설정 메일이 전송됩니다.',
-                      btnLeftText: '취소',
-                      btnRightText: '확인',
+                      title: LocaleKeys.resetPassword.tr(),
+                      subText: LocaleKeys.changePasswordDialogMsg.tr(),
+                      btnLeftText: LocaleKeys.cancel.tr(),
+                      btnRightText: LocaleKeys.ok.tr(),
                       onBtnLeftClicked: () {
                         pop(context);
                       },

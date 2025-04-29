@@ -19,7 +19,7 @@ class RankingRow extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: 30,
+            width: 40,
             child: Center(child: Text(index, style: AppTextStyle.rank)),
           ),
           const SizedBox(width: 32),
