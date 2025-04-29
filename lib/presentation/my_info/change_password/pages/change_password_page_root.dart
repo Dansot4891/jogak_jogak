@@ -10,10 +10,10 @@ import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_event.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_view_model.dart';
+import 'package:provider/provider.dart';
 
 class ChangePasswordPageRoot extends StatefulWidget {
-  final ChangePasswordViewModel viewModel;
-  const ChangePasswordPageRoot(this.viewModel, {super.key});
+  const ChangePasswordPageRoot({super.key});
 
   @override
   State<ChangePasswordPageRoot> createState() => _ChangePasswordPageRootState();
@@ -24,22 +24,25 @@ class _ChangePasswordPageRootState extends State<ChangePasswordPageRoot> {
 
   @override
   void initState() {
-    _sub = widget.viewModel.eventStream.listen((event) {
-      if (mounted) {
-        switch (event) {
-          case ShowCheckDialog():
-            AppShowDialog.show(
-              context,
-              AppDialog.singleBtn(
-                title: event.message,
-                btnText: LocaleKeys.ok,
-                onBtnClicked: () {
-                  pop(context);
-                },
-              ),
-            );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final viewModel = context.read<ChangePasswordViewModel>();
+      _sub = viewModel.eventStream.listen((event) {
+        if (mounted) {
+          switch (event) {
+            case ShowCheckDialog():
+              AppShowDialog.show(
+                context,
+                AppDialog.singleBtn(
+                  title: event.message,
+                  btnText: LocaleKeys.ok,
+                  onBtnClicked: () {
+                    pop(context);
+                  },
+                ),
+              );
+          }
         }
-      }
+      });
     });
     super.initState();
   }
@@ -52,16 +55,12 @@ class _ChangePasswordPageRootState extends State<ChangePasswordPageRoot> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<ChangePasswordViewModel>();
     return BasePage(
       appBar: DefaultAppbar(title: LocaleKeys.resetPassword.tr()),
-      body: ListenableBuilder(
-        listenable: widget.viewModel,
-        builder: (context, child) {
-          return ChangePasswordPage(
-            state: widget.viewModel.state,
-            onAction: widget.viewModel.onAction,
-          );
-        },
+      body: ChangePasswordPage(
+        state: viewModel.state,
+        onAction: viewModel.onAction,
       ),
     );
   }

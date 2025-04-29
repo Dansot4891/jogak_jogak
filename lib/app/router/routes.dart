@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_page_root.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_page_root.dart';
 import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
@@ -62,14 +61,14 @@ abstract class AuthPath {
       path: AppRoute.signUp.path,
       name: AppRoute.signUp.name,
       builder: (context, state) {
-        return SignUpPageRoot(locator());
+        return const SignUpPageRoot();
       },
     ),
     GoRoute(
       path: AppRoute.signIn.path,
       name: AppRoute.signIn.name,
       builder: (context, state) {
-        return SignInPageRoot(locator());
+        return const SignInPageRoot();
       },
     ),
   ];
@@ -91,21 +90,21 @@ abstract class RootTabPath {
       path: AppRoute.home.path,
       name: AppRoute.home.name,
       builder: (context, state) {
-        return HomePageRoot(locator());
+        return const HomePageRoot();
       },
     ),
     GoRoute(
       path: AppRoute.ranking.path,
       name: AppRoute.ranking.name,
       builder: (context, state) {
-        return RankingPage(locator());
+        return const RankingPage();
       },
     ),
     GoRoute(
       path: AppRoute.myPage.path,
       name: AppRoute.myPage.name,
       builder: (context, state) {
-        return MyPageRoot(locator());
+        return const MyPageRoot();
       },
     ),
   ];
@@ -119,21 +118,21 @@ abstract class UserPath {
       path: AppRoute.changePw.path,
       name: AppRoute.changePw.name,
       builder: (context, state) {
-        return ChangePasswordPageRoot(locator());
+        return const ChangePasswordPageRoot();
       },
     ),
     GoRoute(
       path: AppRoute.changeUsername.path,
       name: AppRoute.changeUsername.name,
       builder: (context, state) {
-        return ChangeUsernamePageRoot(locator());
+        return const ChangeUsernamePageRoot();
       },
     ),
     GoRoute(
       path: AppRoute.puzzleHistory.path,
       name: AppRoute.puzzleHistory.name,
       builder: (context, state) {
-        return PuzzleHistoryPageRoot(locator());
+        return const PuzzleHistoryPageRoot();
       },
     ),
   ];
@@ -147,7 +146,7 @@ abstract class PuzzlePath {
       path: AppRoute.puzzle.path,
       name: AppRoute.puzzle.name,
       builder: (context, state) {
-        return PuzzlePageRoot(locator());
+        return const PuzzlePageRoot();
       },
     ),
   ];

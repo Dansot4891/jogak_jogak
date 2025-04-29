@@ -35,14 +35,22 @@ void main() async {
     );
   });
 
-  testWidgets('MyPage find text', (tester) async {
+  testWidgets('MyPage shows withdrawal dialogs', (tester) async {
     await tester.pumpWidget(mypage);
 
-    // 기본 텍스트 검증
-    expect(find.textContaining(LocaleKeys.changeUsername.tr()), findsOneWidget);
-    expect(find.textContaining(LocaleKeys.resetPassword.tr()), findsOneWidget);
+    // 회원탈퇴버튼
+    final withdrawalButton = find.text(LocaleKeys.withdrawal.tr());
+
+    // 버튼이 보이도록 설정
+    await tester.tap(withdrawalButton);
+
+    // 모든 애니메이션, 모든 비동기 작업들이 끝날 때까지 기다렸다가 테스트를 다음 단계로 넘긴다.
+    await tester.pumpAndSettle();
+
+    // expect(, matcher)
+
     expect(
-      find.textContaining(LocaleKeys.myPagePuzzleRecord.tr()),
+      find.textContaining(LocaleKeys.myPageConfirmWithdrawal.tr()),
       findsOneWidget,
     );
   });

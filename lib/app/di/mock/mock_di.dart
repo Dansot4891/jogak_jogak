@@ -8,13 +8,13 @@ import 'package:jogak_jogak/feature/auth/domain/use_case/change_password_use_cas
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_out_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_up_use_case.dart';
+import 'package:jogak_jogak/feature/puzzle/data/data_source/mock/mock_puzzle_data_source_impl.dart';
 import 'package:jogak_jogak/feature/puzzle/data/data_source/puzzle_data_source.dart';
-import 'package:jogak_jogak/feature/puzzle/data/data_source/remote/puzzle_remote_data_source_impl.dart';
 import 'package:jogak_jogak/feature/puzzle/data/repository_impl/puzzle_repository_impl.dart';
 import 'package:jogak_jogak/feature/puzzle/domain/repository/puzzle_repository.dart';
 import 'package:jogak_jogak/feature/puzzle/domain/use_case/get_random_image_url_use_case.dart';
+import 'package:jogak_jogak/feature/ranking/data/data_source/mock/mock_ranking_data_source_impl.dart';
 import 'package:jogak_jogak/feature/ranking/data/data_source/ranking_data_source.dart';
-import 'package:jogak_jogak/feature/ranking/data/data_source/remote/ranking_remote_data_source_impl.dart';
 import 'package:jogak_jogak/feature/ranking/data/repository_impl/ranking_repository_impl.dart';
 import 'package:jogak_jogak/feature/ranking/domain/repository/ranking_repository.dart';
 import 'package:jogak_jogak/feature/ranking/domain/use_case/get_rankings_use_case.dart';
@@ -50,112 +50,123 @@ import 'package:jogak_jogak/presentation/rank/pages/ranking_view_model.dart';
 import 'package:jogak_jogak/presentation/system/system_provider.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
-final locator = GetIt.instance;
+final mockLocator = GetIt.instance;
 
-void diSetup() {
+void mockdDISetup() {
   // puzzle controller
-  locator.registerSingleton(PuzzleController());
+  mockLocator.registerSingleton(PuzzleController());
 
   // DataSource
-  locator.registerSingleton<PuzzleDataSource>(
-    PuzzleRemoteDataSourceImpl(FirebaseFirestore.instance),
+  mockLocator.registerSingleton<PuzzleDataSource>(MockPuzzleDataSourceImpl());
+  mockLocator.registerSingleton<RankingDataSource>(MockRankingDataSourceImpl());
+  mockLocator.registerSingleton<AuthRemoteDataSource>(
+    AuthRemoteDataSourceImpl(),
   );
-  locator.registerSingleton<RankingDataSource>(
-    RankingRemoteDataSourceImpl(FirebaseFirestore.instance),
-  );
-  locator.registerSingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl());
-  locator.registerSingleton<UserDataSource>(
+  mockLocator.registerSingleton<UserDataSource>(
     UserRemoteDataSourceImpl(FirebaseFirestore.instance),
   );
-  locator.registerSingleton<LocalSystemDataSource>(LocalSystemDataSourceImpl());
-  locator.registerSingleton<RemoteSystemDataSource>(
+  mockLocator.registerSingleton<LocalSystemDataSource>(
+    LocalSystemDataSourceImpl(),
+  );
+  mockLocator.registerSingleton<RemoteSystemDataSource>(
     RemoteSystemDataSourceImpl(FirebaseFirestore.instance),
   );
 
   // Repository
-  locator.registerSingleton<PuzzleRepository>(PuzzleRepositoryImpl(locator()));
-  locator.registerSingleton<RankingRepository>(
-    RankingRepositoryImpl(locator()),
+  mockLocator.registerSingleton<PuzzleRepository>(
+    PuzzleRepositoryImpl(mockLocator()),
   );
-  locator.registerSingleton<AuthRepository>(AuthRepositoryImpl(locator()));
-  locator.registerSingleton<UserRepository>(UserRepositoryImpl(locator()));
-  locator.registerSingleton<SystemRepository>(
+  mockLocator.registerSingleton<RankingRepository>(
+    RankingRepositoryImpl(mockLocator()),
+  );
+  mockLocator.registerSingleton<AuthRepository>(
+    AuthRepositoryImpl(mockLocator()),
+  );
+  mockLocator.registerSingleton<UserRepository>(
+    UserRepositoryImpl(mockLocator()),
+  );
+  mockLocator.registerSingleton<SystemRepository>(
     SystemRepositoryImpl(
-      localSystemDataSource: locator(),
-      remoteSystemDataSource: locator(),
+      localSystemDataSource: mockLocator(),
+      remoteSystemDataSource: mockLocator(),
     ),
   );
 
   // UseCase
-  locator.registerSingleton(GetRandomImageUrlUseCase(locator()));
-  locator.registerSingleton(GetRankingsUseCase(locator()));
-  locator.registerSingleton(SignUpUseCase(locator()));
-  locator.registerSingleton(SignInUseCase(locator()));
-  locator.registerSingleton(SignOutUseCase(locator()));
-  locator.registerSingleton(GetUserUseCase(locator()));
-  locator.registerSingleton(CheckUsernameUseCase(locator()));
-  locator.registerSingleton(UploadRankingUseCase(locator()));
-  locator.registerSingleton(GetPuzzleHistoryUseCase(locator()));
-  locator.registerSingleton(SavePuzzleHistoryUseCase(locator()));
-  locator.registerSingleton(ChangePasswordUseCase(locator()));
-  locator.registerSingleton(ChangeUsernameUseCase(locator()));
-  locator.registerSingleton(WithdrawalUseCase(locator()));
-  locator.registerSingleton(GetVersionUseCase(locator()));
-  locator.registerSingleton(CheckVersionUseCase(locator()));
+  mockLocator.registerSingleton(GetRandomImageUrlUseCase(mockLocator()));
+  mockLocator.registerSingleton(GetRankingsUseCase(mockLocator()));
+  mockLocator.registerSingleton(SignUpUseCase(mockLocator()));
+  mockLocator.registerSingleton(SignInUseCase(mockLocator()));
+  mockLocator.registerSingleton(SignOutUseCase(mockLocator()));
+  mockLocator.registerSingleton(GetUserUseCase(mockLocator()));
+  mockLocator.registerSingleton(CheckUsernameUseCase(mockLocator()));
+  mockLocator.registerSingleton(UploadRankingUseCase(mockLocator()));
+  mockLocator.registerSingleton(GetPuzzleHistoryUseCase(mockLocator()));
+  mockLocator.registerSingleton(SavePuzzleHistoryUseCase(mockLocator()));
+  mockLocator.registerSingleton(ChangePasswordUseCase(mockLocator()));
+  mockLocator.registerSingleton(ChangeUsernameUseCase(mockLocator()));
+  mockLocator.registerSingleton(WithdrawalUseCase(mockLocator()));
+  mockLocator.registerSingleton(GetVersionUseCase(mockLocator()));
+  mockLocator.registerSingleton(CheckVersionUseCase(mockLocator()));
 
   // 전역 provider
-  locator.registerSingleton(
+  mockLocator.registerSingleton(
     UserProvider(
-      signInUseCase: locator(),
-      getUserUseCase: locator(),
-      signUpUseCase: locator(),
-      signOutUseCase: locator(),
-      changeUsernameUseCase: locator(),
-      withdrawalUseCase: locator(),
+      signInUseCase: mockLocator(),
+      getUserUseCase: mockLocator(),
+      signUpUseCase: mockLocator(),
+      signOutUseCase: mockLocator(),
+      changeUsernameUseCase: mockLocator(),
+      withdrawalUseCase: mockLocator(),
     ),
   );
-  locator.registerSingleton(
+  mockLocator.registerSingleton(
     SystemProvider(
-      checkVersionUseCase: locator(),
-      getVersionUseCase: locator(),
+      checkVersionUseCase: mockLocator(),
+      getVersionUseCase: mockLocator(),
     ),
   );
 
   // ViewModel
-  locator.registerFactory(
+  mockLocator.registerFactory(
     () => SignUpViewModel(
-      userProvider: locator(),
-      checkUsernameUseCase: locator(),
+      userProvider: mockLocator(),
+      checkUsernameUseCase: mockLocator(),
     ),
   );
-  locator.registerFactory(
-    () => SignInViewModel(userProvider: locator(), systemProvider: locator()),
+  mockLocator.registerFactory(
+    () => SignInViewModel(
+      userProvider: mockLocator(),
+      systemProvider: mockLocator(),
+    ),
   );
-  locator.registerFactory(
+  mockLocator.registerFactory(
     () => HomeViewModel(
-      getRandomImageUrlUseCase: locator(),
-      puzzleController: locator(),
+      getRandomImageUrlUseCase: mockLocator(),
+      puzzleController: mockLocator(),
     ),
   );
-  locator.registerFactory(
+  mockLocator.registerFactory(
     () => PuzzleViewModel(
-      uploadRankingUseCase: locator(),
-      userProvider: locator(),
-      savePuzzleHistoryUseCase: locator(),
-      puzzleController: locator(),
+      uploadRankingUseCase: mockLocator(),
+      userProvider: mockLocator(),
+      savePuzzleHistoryUseCase: mockLocator(),
+      puzzleController: mockLocator(),
     ),
   );
-  locator.registerFactory(() => RankingViewModel(locator()));
-  locator.registerFactory(
-    () =>
-        MyPageViewModel(userProvider: locator(), getVersionUseCase: locator()),
+  mockLocator.registerFactory(() => RankingViewModel(mockLocator()));
+  mockLocator.registerFactory(
+    () => MyPageViewModel(
+      userProvider: mockLocator(),
+      getVersionUseCase: mockLocator(),
+    ),
   );
-  locator.registerFactory(() => PuzzleHistoryViewModel(locator()));
-  locator.registerFactory(() => ChangePasswordViewModel(locator()));
-  locator.registerFactory(
+  mockLocator.registerFactory(() => PuzzleHistoryViewModel(mockLocator()));
+  mockLocator.registerFactory(() => ChangePasswordViewModel(mockLocator()));
+  mockLocator.registerFactory(
     () => ChangeUsernameViewModel(
-      userProvider: locator(),
-      checkUsernameUseCase: locator(),
+      userProvider: mockLocator(),
+      checkUsernameUseCase: mockLocator(),
     ),
   );
 }
