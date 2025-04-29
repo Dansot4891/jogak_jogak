@@ -9,22 +9,21 @@ import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_view_model.d
 import 'package:jogak_jogak/presentation/base/pages/bouncy_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/appbar/default_appbar.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPageRoot extends StatefulWidget {
-  final SignUpViewModel viewModel;
-  const SignUpPageRoot(this.viewModel, {super.key});
+  const SignUpPageRoot({super.key});
 
   @override
   State<SignUpPageRoot> createState() => _SignUpPageRootState();
 }
 
 class _SignUpPageRootState extends State<SignUpPageRoot> {
-  late SignUpViewModel viewModel;
   late StreamSubscription? sub;
 
   @override
   void initState() {
-    viewModel = widget.viewModel;
+    final viewModel = context.read<SignUpViewModel>();
     sub = viewModel.eventStream.listen((event) {
       if (mounted) {
         switch (event) {
@@ -53,18 +52,11 @@ class _SignUpPageRootState extends State<SignUpPageRoot> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<SignUpViewModel>();
     return BouncyPage(
       appBar: const DefaultAppbar(),
       resizeToAvoidBottomInset: true,
-      child: ListenableBuilder(
-        listenable: viewModel,
-        builder: (context, child) {
-          return SignUpPage(
-            state: viewModel.state,
-            onAction: viewModel.onAction,
-          );
-        },
-      ),
+      child: SignUpPage(state: viewModel.state, onAction: viewModel.onAction),
     );
   }
 }

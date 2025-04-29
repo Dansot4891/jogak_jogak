@@ -10,10 +10,10 @@ import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_page.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_view_model.dart';
 import 'package:jogak_jogak/presentation/base/pages/bouncy_page.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
+import 'package:provider/provider.dart';
 
 class SignInPageRoot extends StatefulWidget {
-  final SignInViewModel viewModel;
-  const SignInPageRoot(this.viewModel, {super.key});
+  const SignInPageRoot({super.key});
 
   @override
   State<SignInPageRoot> createState() => _SignInPageRootState();
@@ -24,8 +24,9 @@ class _SignInPageRootState extends State<SignInPageRoot> {
 
   @override
   void initState() {
-    widget.viewModel.onAction(const SignInAction.signInInitialize());
-    _sub = widget.viewModel.streamEvent.listen((event) {
+    final viewModel = context.read<SignInViewModel>();
+    viewModel.onAction(const SignInAction.signInInitialize());
+    _sub = viewModel.streamEvent.listen((event) {
       if (mounted) {
         switch (event) {
           case ShowSignInErrorDialog():
@@ -47,9 +48,7 @@ class _SignInPageRootState extends State<SignInPageRoot> {
                 title: event.text,
                 btnText: LocaleKeys.ok.tr(),
                 onBtnClicked: () {
-                  widget.viewModel.onAction(
-                    const SignInAction.redirectStoreUrl(),
-                  );
+                  viewModel.onAction(const SignInAction.redirectStoreUrl());
                 },
               ),
             );
@@ -67,17 +66,10 @@ class _SignInPageRootState extends State<SignInPageRoot> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<SignInViewModel>();
     return BouncyPage(
       resizeToAvoidBottomInset: true,
-      child: ListenableBuilder(
-        listenable: widget.viewModel,
-        builder: (context, child) {
-          return SignInPage(
-            state: widget.viewModel.state,
-            onAction: widget.viewModel.onAction,
-          );
-        },
-      ),
+      child: SignInPage(state: viewModel.state, onAction: viewModel.onAction),
     );
   }
 }

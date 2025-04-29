@@ -11,10 +11,10 @@ import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_event.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_page.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_view_model.dart';
+import 'package:provider/provider.dart';
 
 class ChangeUsernamePageRoot extends StatefulWidget {
-  final ChangeUsernameViewModel viewModel;
-  const ChangeUsernamePageRoot(this.viewModel, {super.key});
+  const ChangeUsernamePageRoot({super.key});
 
   @override
   State<ChangeUsernamePageRoot> createState() => _ChangeUsernamePageRootState();
@@ -25,7 +25,8 @@ class _ChangeUsernamePageRootState extends State<ChangeUsernamePageRoot> {
 
   @override
   void initState() {
-    _sub = widget.viewModel.eventStream.listen((event) {
+    final viewModel = context.read<ChangeUsernameViewModel>();
+    _sub = viewModel.eventStream.listen((event) {
       if (mounted) {
         switch (event) {
           case ShowUsernameDialog():
@@ -53,16 +54,12 @@ class _ChangeUsernamePageRootState extends State<ChangeUsernamePageRoot> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<ChangeUsernameViewModel>();
     return BasePage(
       appBar: DefaultAppbar(title: LocaleKeys.changeUsername.tr()),
-      body: ListenableBuilder(
-        listenable: widget.viewModel,
-        builder: (context, child) {
-          return ChangeUsernamePage(
-            state: widget.viewModel.state,
-            onAction: widget.viewModel.onAction,
-          );
-        },
+      body: ChangeUsernamePage(
+        state: viewModel.state,
+        onAction: viewModel.onAction,
       ),
     );
   }
