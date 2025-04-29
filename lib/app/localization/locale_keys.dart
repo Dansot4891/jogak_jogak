@@ -6,6 +6,7 @@ abstract class LocaleKeys {
   static const usernameHintText = 'common.hintText.usernameHintText';
   static const signup = 'common.signup';
   static const resetPassword = 'common.resetPassword';
+  static const history = 'common.history';
   static const login = 'common.login';
   static const logout = 'common.logout';
   static const changeUsername = 'common.changeNickname';
@@ -14,6 +15,14 @@ abstract class LocaleKeys {
   static const cancel = 'common.cancel';
   static const seconds = 'common.seconds';
   static const minutes = 'common.minutes';
+
+  // Date difference strings
+  static const dateToday = 'common.date.today';
+  static const dateYesterday = 'common.date.yesterday';
+  static const dateDaysAgo = 'common.date.daysAgo';
+  static const dateWeeksAgo = 'common.date.weeksAgo';
+  static const dateMonthsAgo = 'common.date.monthsAgo';
+  static const dateYearsAgo = 'common.date.yearsAgo';
 
   // common.validation
   static const validationEmailFormValidateText =
@@ -69,6 +78,11 @@ abstract class LocaleKeys {
   static const myPagePuzzleRecord = 'myPage.puzzleRecord';
   static const myPageConfirmLogout = 'myPage.confirmLogout';
   static const myPageConfirmWithdrawal = 'myPage.confirmWithdrawal';
+
+  // Puzzle History
+  static const historyLevel = 'history.level';
+  static const historyPlayTime = 'history.playTime';
+  static const historyNoHistory = 'history.noHistory';
 
   // Bottom navigation
   static const tabHome = 'home.tabHome';

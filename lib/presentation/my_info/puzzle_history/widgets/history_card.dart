@@ -45,7 +45,6 @@ class HistoryCard extends StatelessWidget {
                 child: Text('$level X $level', style: AppTextStyle.body2),
               ),
               Container(
-                width: 110,
                 alignment: Alignment.center,
                 child: Center(child: Text(playTime, style: AppTextStyle.body2)),
               ),

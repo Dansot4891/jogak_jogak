@@ -6,8 +6,17 @@
         "passwordHintText": "비밀번호 입력",
         "usernameHintText": "닉네임 입력"
       },
+      "date": {
+        "today": "오늘",
+        "yesterday": "어제",
+        "daysAgo": "{n}일 전",
+        "weeksAgo": "{n}주 전",
+        "monthsAgo": "{n}달 전",
+        "yearsAgo": "{n}년 전"
+      },
       "signup": "회원가입",
       "resetPassword": "비밀번호 재설정",
+      "history": "퍼즐 기록",
       "login": "로그인",
       "logout": "로그아웃",
       "changeNickname": "닉네임 변경",
@@ -63,6 +72,11 @@
       "name": "이름",
       "time": "시간",
       "noRanking": "현재 등록된 랭킹이 없습니다."
+    },
+    "history": {
+      "level": "난이도",
+      "playTime": "플레이 타임",
+      "noHistory": "퍼즐 기록이 없습니다."
     },
     "myPage": {
       "sir":"님",
