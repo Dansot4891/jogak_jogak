@@ -6,20 +6,6 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<!-- Url Launcher Settings -->
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>sms</string>
-		<string>tel</string>
-	</array>
-	<!-- Url Launcher Settings -->
-	<!-- Localization -->
-	<key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-		<string>nb</string>
-	</array>
-	<!-- Localization -->
 	<key>CFBundleDisplayName</key>
 	<string>조각조각</string>
 	<key>CFBundleExecutable</key>
@@ -28,6 +14,11 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>nb</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>jogak_jogak</string>
 	<key>CFBundlePackageType</key>
@@ -38,6 +29,11 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>sms</string>
+		<string>tel</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
