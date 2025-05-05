@@ -479,7 +479,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8T5894B4QC;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = DSVYZZZ96S;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "조각조각";
@@ -491,7 +491,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.myungwoo.jogakjogak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "조각조각.myung.AppStore";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = jogakjogak_provisioning;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -675,7 +675,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8T5894B4QC;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = DSVYZZZ96S;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "조각조각";
@@ -687,7 +687,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.myungwoo.jogakjogak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "조각조각.myung.AppStore";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = jogakjogak_provisioning;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -709,7 +709,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8T5894B4QC;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = DSVYZZZ96S;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "조각조각";
@@ -721,7 +721,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.myungwoo.jogakjogak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "조각조각.myung.AppStore";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = jogakjogak_provisioning;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
