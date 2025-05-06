@@ -79,8 +79,6 @@ dependencies:
   # 다국어 지원
   easy_localization: ^3.0.7+1
   shared_preferences: ^2.5.3 # 테스트를 위해서 사용
-  firebase_crashlytics: ^4.3.5
-  firebase_analytics: ^11.4.5
 
 dev_dependencies:
   flutter_test:
