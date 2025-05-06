@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jogak_jogak/app/di/mock/mock_di.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/exception/custom_exception.dart';
 import 'package:jogak_jogak/feature/user/data/data_source/mock/mock_user_data_source_impl.dart';

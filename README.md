@@ -28,15 +28,14 @@
 
 ## 🧩 아키텍처 및 기술 스택
 
-- **아키텍처:** Clean Architecture 기반 MVVM (Model-View-ViewModel) 패턴
-<img width=100% src='https://github.com/user-attachments/assets/808de2f1-f134-4cc2-bd66-9848526f9c62'>
-
-- **상태 관리:** ListenableBuilder + ChangeNotifier
+- **아키텍처:** MVVM 기반의 클린 아키텍처 + MVI 패턴 적용
+<img width=100% src='https://github.com/user-attachments/assets/a574bfcd-5c25-4bb8-843f-5453f0c566d0'>
+- **상태 관리:** Provider
 - **의존성 주입:** GetIt
 - **라우팅:** GoRouter
 - **로그인 방식:** Email/Password
 - **모델링:** JsonSerializable
-- **에러 처리:** Result 패턴 + CustomException
+- **에러 처리:** Result Pattern
 - **다국어 지원:** Easy Localization
 
 ---
@@ -45,6 +44,8 @@
 |-- lib
     |-- app
     |   |-- di                # 의존성 주입 설정
+    |   |-- environment       # 앱 버전 관리 설정
+    |   |-- localization      # 다국어 지원 설정
     |   |-- router            # 라우터 설정
     |
     |-- core
