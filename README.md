@@ -29,7 +29,7 @@
 ## 🧩 아키텍처 및 기술 스택
 
 - **아키텍처:** MVVM 기반의 클린 아키텍처 + MVI 패턴 적용
-<img width=100% src='https://github.com/user-attachments/assets/808de2f1-f134-4cc2-bd66-9848526f9c62'>
+<img width=100% src='https://github.com/user-attachments/assets/a574bfcd-5c25-4bb8-843f-5453f0c566d0'>
 
 - **상태 관리:** Provider
 - **의존성 주입:** GetIt
