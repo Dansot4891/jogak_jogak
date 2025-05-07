@@ -14,9 +14,9 @@ import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart'
 void main() {
   group('user repo test', () {
     final userMock = [
-      UserDto(email: 'test@gmail.com', username: 'username'),
-      UserDto(username: 'username2', email: 'email2'),
-      UserDto(username: 'username3', email: 'email3'),
+      CertifiedUserDto(email: 'test@gmail.com', username: 'username'),
+      CertifiedUserDto(username: 'username2', email: 'email2'),
+      CertifiedUserDto(username: 'username3', email: 'email3'),
     ];
     final historyMock = [
       PuzzleHistoryDto(level: 3, playTime: 132, playDate: DateTime.now()),
@@ -35,9 +35,9 @@ void main() {
       final userResult = await userUsecase.execute('');
 
       switch (userResult) {
-        case Success<AppUser>():
+        case Success<CertifiedUser>():
           expect(userResult.data, equals(userMock[0].toUser()));
-        case Error<AppUser>():
+        case Error<CertifiedUser>():
           expect(userResult.error, const UnexpectedException());
       }
     });

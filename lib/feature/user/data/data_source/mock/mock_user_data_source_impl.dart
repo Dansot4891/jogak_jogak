@@ -4,9 +4,9 @@ import 'package:jogak_jogak/feature/user/data/dto/user_dto.dart';
 
 class MockUserDataSourceImpl implements UserDataSource {
   final userList = [
-    UserDto(email: 'test@gmail.com', username: 'username'),
-    UserDto(username: 'username2', email: 'email2'),
-    UserDto(username: 'username3', email: 'email3'),
+    CertifiedUserDto(email: 'test@gmail.com', username: 'username'),
+    CertifiedUserDto(username: 'username2', email: 'email2'),
+    CertifiedUserDto(username: 'username3', email: 'email3'),
   ];
 
   final historyList = [
@@ -33,7 +33,7 @@ class MockUserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<UserDto> getUser(String uid) async {
+  Future<CertifiedUserDto> getUser(String uid) async {
     return userList[0];
   }
 

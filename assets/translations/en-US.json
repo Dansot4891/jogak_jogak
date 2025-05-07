@@ -18,6 +18,7 @@
       "resetPassword": "Reset Password",
       "history": "Puzzle History",
       "login": "Log In",
+      "unAuthButton": "To start as a non-member",
       "logout": "Log Out",
       "changeNickname": "Change Nickname",
       "withdrawal": "Withdraw Membership",
@@ -71,7 +72,8 @@
       "rank": "Rank",
       "name": "Name",
       "time": "Time",
-      "noRanking": "No rankings available."
+      "noRanking": "No rankings available.",
+      "unAuthMessage": "Non-member users cannot use the ranking."
     },
     "history": {
       "level": "Level",
@@ -83,7 +85,8 @@
       "welcome": "Welcome!",
       "puzzleRecord": "Puzzle Records",
       "confirmLogout": "Are you sure you want to log out?",
-      "confirmWithdrawal": "Are you sure you want to withdraw?"
+      "confirmWithdrawal": "Are you sure you want to withdraw?",
+      "unAuthMessage": "Non-member users cannot use My Page."
     },
     "error": {
       "unexpected": "An error occurred. Please try again later.",

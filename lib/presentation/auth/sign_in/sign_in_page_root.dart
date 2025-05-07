@@ -24,38 +24,46 @@ class _SignInPageRootState extends State<SignInPageRoot> {
 
   @override
   void initState() {
+    super.initState();
     final viewModel = context.read<SignInViewModel>();
     viewModel.onAction(const SignInAction.signInInitialize());
-    _sub = viewModel.streamEvent.listen((event) {
-      if (mounted) {
-        switch (event) {
-          case ShowSignInErrorDialog():
-            AppShowDialog.show(
-              context,
-              AppDialog.singleBtn(
-                title: event.text,
-                btnText: LocaleKeys.ok.tr(),
-                onBtnClicked: () {
-                  pop(context);
-                },
-              ),
-            );
-          case ShowVersionErrorDialog():
-            AppShowDialog.show(
-              context,
-              barrierDismissible: false,
-              AppDialog.singleBtn(
-                title: event.text,
-                btnText: LocaleKeys.ok.tr(),
-                onBtnClicked: () {
-                  viewModel.onAction(const SignInAction.redirectStoreUrl());
-                },
-              ),
-            );
+    try {
+      _sub = viewModel.streamEvent.listen((event) {
+        if (mounted) {
+          switch (event) {
+            case ShowSignInErrorDialog():
+              AppShowDialog.show(
+                context,
+                AppDialog.singleBtn(
+                  title: event.text,
+                  btnText: LocaleKeys.ok.tr(),
+                  onBtnClicked: () {
+                    pop(context);
+                  },
+                ),
+              );
+            case ShowVersionErrorDialog():
+              AppShowDialog.show(
+                context,
+                barrierDismissible: false,
+                AppDialog.singleBtn(
+                  title: event.text,
+                  btnText: LocaleKeys.ok.tr(),
+                  onBtnClicked: () {
+                    viewModel.onAction(const SignInAction.redirectStoreUrl());
+                  },
+                ),
+              );
+          }
         }
-      }
-    });
-    super.initState();
+      });
+    } on StateError catch (e, st) {
+      // 여기서 두 번째 listen() 이 던지는 에러를 잡고,
+      // st(스택트레이스) 에 “어디서” 호출됐는지 다 나옵니다.
+      // print(e);
+      print(st);
+      // debugPrint('$st');
+    }
   }
 
   @override

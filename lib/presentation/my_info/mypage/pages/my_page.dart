@@ -40,7 +40,7 @@ class MyPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text(
-                    '${state.username} ${LocaleKeys.myPageSir.tr()}\n${LocaleKeys.myPageWelcome.tr()}',
+                    '${state.username()} ${LocaleKeys.myPageSir.tr()}\n${LocaleKeys.myPageWelcome.tr()}',
                     style: AppTextStyle.title2,
                   ),
                 ),
@@ -85,7 +85,6 @@ class MyPage extends StatelessWidget {
                         },
                         onBtnClicked: () {
                           onAction(const MyPageAction.signout());
-                          pop(context);
                         },
                       ),
                     );

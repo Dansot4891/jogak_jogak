@@ -4,6 +4,7 @@ import 'package:jogak_jogak/core/service/app_size.dart';
 import 'package:jogak_jogak/feature/ranking/domain/model/ranking.dart';
 import 'package:jogak_jogak/feature/ranking/domain/use_case/upload_ranking_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/model/puzzle_history.dart';
+import 'package:jogak_jogak/feature/user/domain/model/user.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/save_puzzle_history_use_case.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_action.dart';
@@ -58,11 +59,13 @@ class PuzzleViewModel extends ChangeNotifier {
   void _initialize() async {
     await _cropImage();
     _startTimer();
+    final isCertified = _userProvider.state.user is CertifiedUser;
     _state = state.copyWith(
       file: _puzzleController.file,
       pieces: _puzzleController.pieces,
       gridViewSize: _puzzleController.gridViewSize,
       correctPieces: _puzzleController.correctPieces,
+      isCertified: isCertified,
     );
     notifyListeners();
   }
@@ -137,8 +140,8 @@ class PuzzleViewModel extends ChangeNotifier {
         // UI 먼저 변경 후 랭킹 등록하는 로직은
         // 사용자가 알 수 없도록 뒤에 설정
         final user = _userProvider.state.user;
-        // 현재 유저 정보가 없다면 랭킹 업데이트 X
-        if (user == null) {
+        // 현재 유저 정보가 없거나 비회원이라면 랭킹 업데이트 X
+        if (user is! CertifiedUser) {
           return;
         }
         final playTime = _timer!.tick;

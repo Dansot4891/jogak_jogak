@@ -25,10 +25,7 @@ class _RootTabState extends State<RootTab> {
         mainAxisSize: MainAxisSize.min,
         children: [
           // 구분선
-          Container(
-            height: 1,
-            color: Colors.grey[300], // 원하는 선 색상
-          ),
+          Container(height: 1, color: Colors.grey[300]),
           BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             onTap: onTap,

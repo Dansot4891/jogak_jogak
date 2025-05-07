@@ -7,7 +7,8 @@ import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 
 class GameOverView extends StatelessWidget {
-  const GameOverView({super.key});
+  final bool isCertified;
+  const GameOverView({super.key, required this.isCertified});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,12 @@ class GameOverView extends StatelessWidget {
             ),
             Text(LocaleKeys.inGameClear.tr(), style: AppTextStyle.title1),
             const SizedBox(height: 12),
-            Text(
-              LocaleKeys.inGameRankingInfo.tr(),
-              style: AppTextStyle.title1.copyWith(color: AppColor.grey80),
-              textAlign: TextAlign.center,
-            ),
+            if (isCertified)
+              Text(
+                LocaleKeys.inGameRankingInfo.tr(),
+                style: AppTextStyle.title1.copyWith(color: AppColor.grey80),
+                textAlign: TextAlign.center,
+              ),
           ],
         ),
       ),

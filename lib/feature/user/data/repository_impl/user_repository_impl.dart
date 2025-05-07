@@ -20,7 +20,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<AppUser> getUser(String uid) async {
+  Future<CertifiedUser> getUser(String uid) async {
     final userDto = await _dataSource.getUser(uid);
     return userDto.toUser();
   }

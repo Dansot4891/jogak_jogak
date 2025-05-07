@@ -42,6 +42,8 @@ class SignInViewModel with ChangeNotifier {
         _signInInitialize();
       case RedirectStoreUrl():
         _redirectStoreUrl();
+      case SetUnCertifiedUser():
+        _setUnCertifiedUser();
     }
   }
 
@@ -88,5 +90,10 @@ class SignInViewModel with ChangeNotifier {
     } else if (Platform.isIOS) {
       url = AppData.appStoreUrl;
     }
+  }
+
+  void _setUnCertifiedUser() {
+    _userProvider.setUnCertifiedUser();
+    print('_userProvider.state.user: ${_userProvider.state.user}');
   }
 }

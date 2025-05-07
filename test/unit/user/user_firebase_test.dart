@@ -6,7 +6,10 @@ import 'package:jogak_jogak/feature/user/data/dto/puzzle_history_dto.dart';
 import 'package:jogak_jogak/feature/user/data/dto/user_dto.dart';
 
 void main() async {
-  final userMockData = UserDto(email: 'test@gmail.com', username: 'username');
+  final userMockData = CertifiedUserDto(
+    email: 'test@gmail.com',
+    username: 'username',
+  );
   final historyMockData = PuzzleHistoryDto(
     level: 3,
     playTime: 132,
@@ -22,7 +25,9 @@ void main() async {
       final snapshot =
           await instance.collection(FirebaseCollections.users).get();
       final firebaseData =
-          snapshot.docs.map((e) => UserDto.fromJson(e.data())).toList();
+          snapshot.docs
+              .map((e) => CertifiedUserDto.fromJson(e.data()))
+              .toList();
 
       final mockDataSource = MockUserDataSourceImpl();
       final user = await mockDataSource.getUser('');

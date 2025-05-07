@@ -8,7 +8,7 @@ class GetUserUseCase {
 
   GetUserUseCase(this._userRepository);
 
-  Future<Result<AppUser>> execute(String uid) async {
+  Future<Result<CertifiedUser>> execute(String uid) async {
     try {
       final user = await _userRepository.getUser(uid);
       return Result.success(user);
