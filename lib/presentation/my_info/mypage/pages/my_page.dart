@@ -84,7 +84,6 @@ class MyPage extends StatelessWidget {
                           pop(context);
                         },
                         onBtnClicked: () {
-                          pop(context);
                           onAction(const MyPageAction.signout());
                         },
                       ),
