@@ -1,8 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/system/domain/model/app_version.dart';
 import 'package:jogak_jogak/feature/system/domain/use_case/get_version_use_case.dart';
+import 'package:jogak_jogak/feature/user/domain/model/user.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_action.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_state.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
@@ -47,9 +50,14 @@ class MyPageViewModel with ChangeNotifier {
         state: BaseState.error,
         errorMessage: _userProvider.state.error,
       );
+    } else if (_userProvider.state.user is UnCertifiedUser) {
+      _state = state.copyWith(
+        state: BaseState.error,
+        errorMessage: LocaleKeys.myPageUnAuthMessage.tr(),
+      );
     } else {
       _state = state.copyWith(
-        username: _userProvider.state.user?.username,
+        user: _userProvider.state.user,
         state: BaseState.success,
       );
     }

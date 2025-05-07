@@ -116,7 +116,8 @@ class UserProvider with ChangeNotifier {
     final result = await _changeUsernameUseCase.execute(username);
     switch (result) {
       case Success<void>():
-        _state = state.copyWith(user: state.user?.copyWith(username: username));
+        final pUser = state.user as CertifiedUser;
+        _state = state.copyWith(user: pUser.copyWith(username: username));
         notifyListeners();
       case Error<void>():
     }
@@ -132,5 +133,9 @@ class UserProvider with ChangeNotifier {
       case Error<void>():
     }
     notifyListeners();
+  }
+
+  void setUnCertifiedUser() {
+    _state = state.copyWith(user: UnCertifiedUser());
   }
 }

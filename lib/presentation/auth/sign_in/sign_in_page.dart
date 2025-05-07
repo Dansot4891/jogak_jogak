@@ -99,7 +99,7 @@ class _SignInPageState extends State<SignInPage> {
                         ? null
                         : () async {
                           widget.onAction(
-                            SignIn(
+                            SignInAction.signIn(
                               email: _email.text,
                               password: _password.text,
                             ),
@@ -107,7 +107,12 @@ class _SignInPageState extends State<SignInPage> {
                         },
               ),
               const SizedBox(height: 16),
-              AppButton(text: LocaleKeys.unAuthButton.tr(), onTap: () async {}),
+              AppButton(
+                text: LocaleKeys.unAuthButton.tr(),
+                onTap: () async {
+                  widget.onAction(const SignInAction.setUnCertifiedUser());
+                },
+              ),
             ],
           ),
         ),

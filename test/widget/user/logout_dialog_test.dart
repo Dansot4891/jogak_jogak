@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
+import 'package:jogak_jogak/feature/user/domain/model/user.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_state.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_action.dart';
@@ -14,7 +15,9 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  final state = MyPageState(username: '테스터');
+  final state = MyPageState(
+    user: const CertifiedUser(username: '테스터', email: 'test@test.com'),
+  );
   void onAction(MyPageAction action) {}
 
   late Widget mypage;

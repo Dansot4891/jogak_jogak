@@ -7,6 +7,8 @@ sealed class SignInAction {
   const factory SignInAction.signInInitialize() = SignInInitialize;
 
   const factory SignInAction.redirectStoreUrl() = RedirectStoreUrl;
+
+  const factory SignInAction.setUnCertifiedUser() = SetUnCertifiedUser;
 }
 
 class SignIn implements SignInAction {
@@ -21,4 +23,8 @@ class SignInInitialize implements SignInAction {
 
 class RedirectStoreUrl implements SignInAction {
   const RedirectStoreUrl();
+}
+
+class SetUnCertifiedUser implements SignInAction {
+  const SetUnCertifiedUser();
 }
