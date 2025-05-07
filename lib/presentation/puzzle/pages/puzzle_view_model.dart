@@ -59,11 +59,13 @@ class PuzzleViewModel extends ChangeNotifier {
   void _initialize() async {
     await _cropImage();
     _startTimer();
+    final isCertified = _userProvider.state.user is CertifiedUser;
     _state = state.copyWith(
       file: _puzzleController.file,
       pieces: _puzzleController.pieces,
       gridViewSize: _puzzleController.gridViewSize,
       correctPieces: _puzzleController.correctPieces,
+      isCertified: isCertified,
     );
     notifyListeners();
   }

@@ -152,7 +152,8 @@ class _PuzzlePageState extends State<PuzzlePage> {
                   ],
                 ),
               ),
-            if (widget.state.gameOver) const GameOverView(),
+            if (widget.state.gameOver)
+              GameOverView(isCertified: widget.state.isCertified),
           ],
         ),
       ),

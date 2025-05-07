@@ -11,6 +11,7 @@ class PuzzleState {
   // 경과 시간
   final int elapsedSeconds;
   final bool gameOver;
+  final bool isCertified;
 
   const PuzzleState({
     this.file,
@@ -19,24 +20,26 @@ class PuzzleState {
     this.correctPieces = const [],
     this.elapsedSeconds = 0,
     this.gameOver = false,
+    this.isCertified = false,
   });
 
   PuzzleState copyWith({
     File? file,
-    bool clearFile = false,
     List<Puzzle>? pieces,
     List<Puzzle>? correctPieces,
     int? gridViewSize,
     int? elapsedSeconds,
     bool? gameOver,
+    bool? isCertified,
   }) {
     return PuzzleState(
-      file: clearFile ? null : file ?? this.file,
+      file: file ?? this.file,
       pieces: pieces ?? this.pieces,
       correctPieces: correctPieces ?? this.correctPieces,
       gridViewSize: gridViewSize ?? this.gridViewSize,
       elapsedSeconds: elapsedSeconds ?? this.elapsedSeconds,
       gameOver: gameOver ?? this.gameOver,
+      isCertified: isCertified ?? this.isCertified,
     );
   }
 }
