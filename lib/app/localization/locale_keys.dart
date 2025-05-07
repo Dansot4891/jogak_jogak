@@ -8,6 +8,7 @@ abstract class LocaleKeys {
   static const resetPassword = 'common.resetPassword';
   static const history = 'common.history';
   static const login = 'common.login';
+  static const unAuthButton = 'common.unAuthButton';
   static const logout = 'common.logout';
   static const changeUsername = 'common.changeNickname';
   static const withdrawal = 'common.withdrawal';
@@ -70,6 +71,7 @@ abstract class LocaleKeys {
   static const rankingRank = 'ranking.rank';
   static const rankingName = 'ranking.name';
   static const rankingTime = 'ranking.time';
+  static const rankingUnAuthMessage = 'ranking.unAuthMessage';
   static const rankingNoRanking = 'ranking.noRanking';
 
   // My Page screen
@@ -78,6 +80,7 @@ abstract class LocaleKeys {
   static const myPagePuzzleRecord = 'myPage.puzzleRecord';
   static const myPageConfirmLogout = 'myPage.confirmLogout';
   static const myPageConfirmWithdrawal = 'myPage.confirmWithdrawal';
+  static const myPageUnAuthMessage = 'myPage.unAuthMessage';
 
   // Puzzle History
   static const historyLevel = 'history.level';

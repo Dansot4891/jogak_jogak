@@ -66,6 +66,7 @@ class _SignInPageRootState extends State<SignInPageRoot> {
 
   @override
   Widget build(BuildContext context) {
+    print('signin');
     final viewModel = context.watch<SignInViewModel>();
     return BouncyPage(
       resizeToAvoidBottomInset: true,

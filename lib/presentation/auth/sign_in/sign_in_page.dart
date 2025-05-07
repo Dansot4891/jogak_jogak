@@ -106,6 +106,8 @@ class _SignInPageState extends State<SignInPage> {
                           );
                         },
               ),
+              const SizedBox(height: 16),
+              AppButton(text: LocaleKeys.unAuthButton.tr(), onTap: () async {}),
             ],
           ),
         ),
