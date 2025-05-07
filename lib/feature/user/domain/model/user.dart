@@ -1,21 +1,30 @@
-class AppUser {
+// 기본 베이스 유저 객체
+abstract class AppUser {
+  const AppUser();
+}
+
+// 비회원 유저
+class UnCertifiedUser extends AppUser {}
+
+// 회원 유저
+class CertifiedUser extends AppUser {
   final String username;
   final String email;
 
-  const AppUser({required this.username, required this.email});
+  const CertifiedUser({required this.username, required this.email});
 
-  AppUser copyWith({String? username, String? email}) {
-    return AppUser(
+  CertifiedUser copyWith({String? username, String? email}) {
+    return CertifiedUser(
       username: username ?? this.username,
       email: email ?? this.email,
     );
   }
 
   @override
-  String toString() => 'AppUser(username: $username, email: $email)';
+  String toString() => 'CertifiedUser(username: $username, email: $email)';
 
   @override
-  bool operator ==(covariant AppUser other) {
+  bool operator ==(covariant CertifiedUser other) {
     if (identical(this, other)) return true;
 
     return other.username == username && other.email == email;

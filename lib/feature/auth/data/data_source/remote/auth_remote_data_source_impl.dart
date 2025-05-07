@@ -33,7 +33,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     // 유저의 닉네임을 store에 저장
     // 유저의 uid값을 문서 id로 설정
-    final user = UserDto(username: username, email: email);
+    final user = CertifiedUserDto(username: username, email: email);
     await _store
         .collection(FirebaseCollections.users)
         .doc(id)

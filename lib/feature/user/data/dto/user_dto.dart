@@ -4,18 +4,18 @@ import 'package:json_annotation/json_annotation.dart';
 part 'user_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class UserDto {
+class CertifiedUserDto {
   String? username;
   String? email;
 
-  UserDto({this.username, this.email});
+  CertifiedUserDto({this.username, this.email});
 
-  factory UserDto.fromFireBase(
+  factory CertifiedUserDto.fromFireBase(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
-  ) => UserDto.fromJson(snapshot.data()!);
+  ) => CertifiedUserDto.fromJson(snapshot.data()!);
 
-  factory UserDto.fromJson(Map<String, dynamic> json) =>
-      _$UserDtoFromJson(json);
+  factory CertifiedUserDto.fromJson(Map<String, dynamic> json) =>
+      _$CertifiedUserDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserDtoToJson(this);
+  Map<String, dynamic> toJson() => _$CertifiedUserDtoToJson(this);
 }

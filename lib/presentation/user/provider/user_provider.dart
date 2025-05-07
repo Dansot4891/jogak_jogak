@@ -48,7 +48,7 @@ class UserProvider with ChangeNotifier {
         final userResult = await _getUserUseCase.execute(loginResult.data);
         // 유저 정보 조회 결과
         switch (userResult) {
-          case Success<AppUser>():
+          case Success<CertifiedUser>():
             _state = state.copyWith(
               user: userResult.data,
               state: BaseState.success,
@@ -100,7 +100,7 @@ class UserProvider with ChangeNotifier {
       final uid = user.uid;
       final result = await _getUserUseCase.execute(uid);
       switch (result) {
-        case Success<AppUser>():
+        case Success<CertifiedUser>():
           _state = state.copyWith(user: result.data, state: BaseState.success);
         case Error():
           _state = state.copyWith(

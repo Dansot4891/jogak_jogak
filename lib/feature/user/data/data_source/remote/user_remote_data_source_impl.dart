@@ -25,10 +25,10 @@ class UserRemoteDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<UserDto> getUser(String uid) async {
+  Future<CertifiedUserDto> getUser(String uid) async {
     final snapshot =
         await _store.collection(FirebaseCollections.users).doc(uid).get();
-    return UserDto.fromFireBase(snapshot);
+    return CertifiedUserDto.fromFireBase(snapshot);
   }
 
   @override
