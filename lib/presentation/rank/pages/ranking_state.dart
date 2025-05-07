@@ -3,12 +3,10 @@ import 'package:jogak_jogak/feature/ranking/domain/model/with_level_ranking.dart
 
 class RankingState {
   final List<WithLevelRanking> withLevelRanking;
-  final bool isCertified;
   final BaseState state;
   final String errorMessage;
   const RankingState({
     required this.withLevelRanking,
-    this.isCertified = true,
     this.state = BaseState.init,
     this.errorMessage = '',
   });

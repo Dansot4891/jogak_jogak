@@ -137,5 +137,6 @@ class UserProvider with ChangeNotifier {
 
   void setUnCertifiedUser() {
     _state = state.copyWith(user: UnCertifiedUser());
+    notifyListeners();
   }
 }

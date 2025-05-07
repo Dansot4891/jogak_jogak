@@ -94,5 +94,6 @@ class SignInViewModel with ChangeNotifier {
 
   void _setUnCertifiedUser() {
     _userProvider.setUnCertifiedUser();
+    print('_userProvider.state.user: ${_userProvider.state.user}');
   }
 }

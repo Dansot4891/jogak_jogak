@@ -50,11 +50,13 @@ class MyPageViewModel with ChangeNotifier {
         state: BaseState.error,
         errorMessage: _userProvider.state.error,
       );
+      return;
     } else if (_userProvider.state.user is UnCertifiedUser) {
       _state = state.copyWith(
         state: BaseState.error,
         errorMessage: LocaleKeys.myPageUnAuthMessage.tr(),
       );
+      return;
     } else {
       _state = state.copyWith(
         user: _userProvider.state.user,
