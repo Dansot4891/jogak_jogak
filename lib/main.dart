@@ -40,13 +40,13 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // Firebase Crashlytics
-  // FlutterError.onError = (errorDetails) {
-  //   FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-  // };
-  // PlatformDispatcher.instance.onError = (error, stack) {
-  //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-  //   return true;
-  // };
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   // DI Setup
   diSetup();
@@ -75,7 +75,7 @@ void main() async {
         supportedLocales: const [Locale('en', 'US'), Locale('ko', 'KR')],
         path: 'assets/translations',
         fallbackLocale: const Locale('en', 'US'),
-        // startLocale: const Locale('en', 'US'),
+        // startLocale: const Locale('ko', 'KR'),
         child: const MyApp(),
       ),
     ),
