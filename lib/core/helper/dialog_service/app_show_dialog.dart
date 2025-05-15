@@ -10,7 +10,11 @@ class AppShowDialog {
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (context) {
-        return dialog;
+        return PopScope(
+          // 뒤로가기를 막는 속성
+          canPop: barrierDismissible,
+          child: dialog,
+        );
       },
     );
   }

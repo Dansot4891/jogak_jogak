@@ -89,11 +89,11 @@ class SignInViewModel with ChangeNotifier {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     } else if (Platform.isIOS) {
       url = AppData.appStoreUrl;
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     }
   }
 
   void _setUnCertifiedUser() {
     _userProvider.setUnCertifiedUser();
-    print('_userProvider.state.user: ${_userProvider.state.user}');
   }
 }
