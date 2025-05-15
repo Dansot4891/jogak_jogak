@@ -7,7 +7,6 @@ on:
       - main
 
 jobs:
-  # 1) 변경된 경로 필터링
   filter:
     runs-on: ubuntu-latest
     outputs:
@@ -15,10 +14,20 @@ jobs:
       native:  ${{ steps.paths.outputs.native }}
       assets:  ${{ steps.paths.outputs.assets }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout full history
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0    # ← 전체 커밋 기록 가져오기
+
+      - name: List changed files
+        run: |
+          echo "→ Changed files between ${{ github.event.before }} and ${{ github.sha }}:"
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
+
       - id: paths
         uses: dorny/paths-filter@v2
         with:
+          debug: true
           filters: |
             flutter:
               - 'lib/**'
@@ -27,6 +36,7 @@ jobs:
               - 'ios/**'
             assets:
               - 'assets/**'
+
 
   # 2) Flutter 코드 변경이 있을 때만 테스트 실행
   test:
