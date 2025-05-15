@@ -40,10 +40,16 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: List changed files (Debugging)
+        run: |
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
+
       - name: Detect Changes
         uses: dorny/paths-filter@v3
         id: filter
         with:
+          base: ${{ github.event.before }}
+          ref: ${{ github.sha }}
           filters: |
             flutter:
               - 'lib/**'

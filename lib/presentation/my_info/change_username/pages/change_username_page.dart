@@ -86,7 +86,9 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
           ],
         ),
       ),
+      // 로딩
       loading: const BaseLoadingView(),
+      // 에러
       error: BaseErrorView(widget.state.errorMessage),
       success: Center(
         child: Column(
