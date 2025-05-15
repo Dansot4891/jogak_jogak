@@ -23,7 +23,6 @@ class SystemRepositoryImpl implements SystemRepository {
   @override
   Future<StoreVersion> getStoreVersion() async {
     final version = await _remoteSystemDataSource.getStoreVersion();
-    print('repo get store version: $version');
     return version.toStoreVersion();
   }
 }

@@ -25,6 +25,7 @@ class _ChangeUsernamePageRootState extends State<ChangeUsernamePageRoot> {
 
   @override
   void initState() {
+    super.initState();
     final viewModel = context.read<ChangeUsernameViewModel>();
     _sub = viewModel.eventStream.listen((event) {
       if (mounted) {
@@ -43,7 +44,6 @@ class _ChangeUsernamePageRootState extends State<ChangeUsernamePageRoot> {
         }
       }
     });
-    super.initState();
   }
 
   @override

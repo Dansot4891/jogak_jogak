@@ -23,6 +23,7 @@ class _SignUpPageRootState extends State<SignUpPageRoot> {
 
   @override
   void initState() {
+    super.initState();
     final viewModel = context.read<SignUpViewModel>();
     sub = viewModel.eventStream.listen((event) {
       if (mounted) {
@@ -41,7 +42,6 @@ class _SignUpPageRootState extends State<SignUpPageRoot> {
         }
       }
     });
-    super.initState();
   }
 
   @override

@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_page_root.dart';
+import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_view_model.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_page_root.dart';
+import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/base/pages/root_tab.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_page_root.dart';
+import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_page_root.dart';
+import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_page_root.dart';
+import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_root.dart';
+import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page_root.dart';
+import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_view_model.dart';
 import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_page_root.dart';
+import 'package:jogak_jogak/presentation/puzzle/pages/puzzle_view_model.dart';
 import 'package:jogak_jogak/presentation/rank/pages/ranking_page.dart';
+import 'package:jogak_jogak/presentation/rank/pages/ranking_view_model.dart';
+import 'package:provider/provider.dart';
 
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -61,14 +72,20 @@ abstract class AuthPath {
       path: AppRoute.signUp.path,
       name: AppRoute.signUp.name,
       builder: (context, state) {
-        return const SignUpPageRoot();
+        return ChangeNotifierProvider(
+          create: (_) => locator<SignUpViewModel>(),
+          child: const SignUpPageRoot(),
+        );
       },
     ),
     GoRoute(
       path: AppRoute.signIn.path,
       name: AppRoute.signIn.name,
       builder: (context, state) {
-        return const SignInPageRoot();
+        return ChangeNotifierProvider(
+          create: (_) => locator<SignInViewModel>(),
+          child: const SignInPageRoot(),
+        );
       },
     ),
   ];
@@ -90,21 +107,30 @@ abstract class RootTabPath {
       path: AppRoute.home.path,
       name: AppRoute.home.name,
       builder: (context, state) {
-        return const HomePageRoot();
+        return ChangeNotifierProvider(
+          create: (_) => locator<HomeViewModel>(),
+          child: const HomePageRoot(),
+        );
       },
     ),
     GoRoute(
       path: AppRoute.ranking.path,
       name: AppRoute.ranking.name,
       builder: (context, state) {
-        return const RankingPage();
+        return ChangeNotifierProvider(
+          create: (_) => locator<RankingViewModel>(),
+          child: const RankingPage(),
+        );
       },
     ),
     GoRoute(
       path: AppRoute.myPage.path,
       name: AppRoute.myPage.name,
       builder: (context, state) {
-        return const MyPageRoot();
+        return ChangeNotifierProvider(
+          create: (_) => locator<MyPageViewModel>(),
+          child: const MyPageRoot(),
+        );
       },
     ),
   ];
@@ -118,21 +144,30 @@ abstract class UserPath {
       path: AppRoute.changePw.path,
       name: AppRoute.changePw.name,
       builder: (context, state) {
-        return const ChangePasswordPageRoot();
+        return ChangeNotifierProvider(
+          create: (_) => locator<ChangePasswordViewModel>(),
+          child: const ChangePasswordPageRoot(),
+        );
       },
     ),
     GoRoute(
       path: AppRoute.changeUsername.path,
       name: AppRoute.changeUsername.name,
       builder: (context, state) {
-        return const ChangeUsernamePageRoot();
+        return ChangeNotifierProvider(
+          create: (_) => locator<ChangeUsernameViewModel>(),
+          child: const ChangeUsernamePageRoot(),
+        );
       },
     ),
     GoRoute(
       path: AppRoute.puzzleHistory.path,
       name: AppRoute.puzzleHistory.name,
       builder: (context, state) {
-        return const PuzzleHistoryPageRoot();
+        return ChangeNotifierProvider(
+          create: (_) => locator<PuzzleHistoryViewModel>(),
+          child: const PuzzleHistoryPageRoot(),
+        );
       },
     ),
   ];
@@ -146,7 +181,10 @@ abstract class PuzzlePath {
       path: AppRoute.puzzle.path,
       name: AppRoute.puzzle.name,
       builder: (context, state) {
-        return const PuzzlePageRoot();
+        return ChangeNotifierProvider(
+          create: (_) => locator<PuzzleViewModel>(),
+          child: const PuzzlePageRoot(),
+        );
       },
     ),
   ];

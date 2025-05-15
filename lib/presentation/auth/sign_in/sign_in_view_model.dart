@@ -32,7 +32,7 @@ class SignInViewModel with ChangeNotifier {
 
   final StreamController<SignInEvent> _streamController =
       StreamController<SignInEvent>();
-  Stream<SignInEvent> get streamEvent => _streamController.stream;
+  Stream<SignInEvent> get eventStream => _streamController.stream;
 
   void onAction(SignInAction action) async {
     switch (action) {

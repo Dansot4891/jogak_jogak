@@ -27,8 +27,6 @@ class CheckVersionUseCase {
       if (deviceVersion == appVersion.version) {
         return const Result.success(true);
       }
-      print('deviceVersion: $deviceVersion');
-      print('appVersion: ${appVersion.version}');
       return const Result.error(VersionMismatchException());
     } catch (e) {
       return const Result.error(VersionException());
