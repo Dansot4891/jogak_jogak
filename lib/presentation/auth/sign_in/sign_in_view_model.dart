@@ -71,6 +71,7 @@ class SignInViewModel with ChangeNotifier {
 
   void _signInInitialize() async {
     final result = await _systemProvider.checkVersion();
+    print(result);
     switch (result) {
       case Success<bool>():
         _autoSignIn();
@@ -94,6 +95,5 @@ class SignInViewModel with ChangeNotifier {
 
   void _setUnCertifiedUser() {
     _userProvider.setUnCertifiedUser();
-    print('_userProvider.state.user: ${_userProvider.state.user}');
   }
 }
