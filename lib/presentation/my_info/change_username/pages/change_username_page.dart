@@ -90,6 +90,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
       loading: const BaseLoadingView(),
       // 에러
       error: BaseErrorView(widget.state.errorMessage),
+      // 성공
       success: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
