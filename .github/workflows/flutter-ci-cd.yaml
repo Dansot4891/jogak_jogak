@@ -1,0 +1,65 @@
+# .github/workflows/flutter-ci-cd.yaml
+name: CI & Flutter Patch on Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # 1) 변경된 경로 필터링
+  filter:
+    runs-on: ubuntu-latest
+    outputs:
+      flutter: ${{ steps.paths.outputs.flutter }}
+      native:  ${{ steps.paths.outputs.native }}
+      assets:  ${{ steps.paths.outputs.assets }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: paths
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            flutter:
+              - 'lib/**'
+            native:
+              - 'android/**'
+              - 'ios/**'
+            assets:
+              - 'assets/**'
+
+  # 2) Flutter 코드 변경이 있을 때만 테스트 실행
+  test:
+    needs: filter
+    if: ${{ needs.filter.outputs.flutter == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.3'
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+
+  # 3) Flutter 코드만 변경되고, 네이티브/에셋 변경이 없을 때만 Shorebird Patch
+  patch:
+    needs: test
+    if: >
+      needs.filter.outputs.flutter == 'true' &&
+      needs.filter.outputs.native  == 'false' &&
+      needs.filter.outputs.assets  == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Shorebird CLI
+        run: dart pub global activate shorebird_cli
+      - name: Authenticate Shorebird
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+        run: shorebird auth --token "$SHOREBIRD_TOKEN"
+      - name: Create & Upload Patch
+        run: |
+          shorebird patch create
+          shorebird patch upload
