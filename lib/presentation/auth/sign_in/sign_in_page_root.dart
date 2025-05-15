@@ -56,20 +56,10 @@ class _SignInPageRootState extends State<SignInPageRoot> {
         }
       }
     });
-    // try {
-
-    // } on StateError catch (e, st) {
-    //   // 여기서 두 번째 listen() 이 던지는 에러를 잡고,
-    //   // st(스택트레이스) 에 “어디서” 호출됐는지 다 나옵니다.
-    //   // print(e);
-    //   print(st);
-    //   // debugPrint('$st');
-    // }
   }
 
   @override
   void dispose() {
-    print('signin dispose');
     _sub?.cancel();
     super.dispose();
   }

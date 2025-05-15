@@ -47,7 +47,6 @@ class _SignUpPageRootState extends State<SignUpPageRoot> {
   @override
   void dispose() {
     sub?.cancel();
-    print('signup dispose');
     super.dispose();
   }
 

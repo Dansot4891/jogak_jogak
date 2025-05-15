@@ -50,7 +50,6 @@ class _ChangePasswordPageRootState extends State<ChangePasswordPageRoot> {
   @override
   void dispose() {
     _sub?.cancel();
-    print('password dispose');
     super.dispose();
   }
 
