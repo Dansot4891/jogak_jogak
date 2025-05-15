@@ -107,5 +107,6 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
     );
   }
 
+  // 현재 텍스트가 비어있는지
   bool get isEmpty => _username.text.isEmpty;
 }

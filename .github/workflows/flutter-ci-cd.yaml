@@ -73,6 +73,10 @@ jobs:
         run: |
           curl --proto '=https' --tlsv1.2 -sSf https://downloads.shorebird.dev/install.sh | bash
           echo "$HOME/.shorebird/bin" >> $GITHUB_PATH
+          echo "export PATH=\$HOME/.shorebird/bin:\$PATH" >> $GITHUB_ENV
+
+      - name: Confirm Shorebird Installation
+        run: shorebird --version
 
       - name: Shorebird Login
         run: shorebird login --token ${{ secrets.SHOREBIRD_TOKEN }}
