@@ -51,6 +51,7 @@ class _SignInPageState extends State<SignInPage> {
               const SizedBox(height: 40),
               CustomTextFormField(
                 controller: _email,
+                maxLines: 1,
                 hintText: LocaleKeys.emailHintText.tr(),
                 onChanged: (val) {
                   setState(() {});

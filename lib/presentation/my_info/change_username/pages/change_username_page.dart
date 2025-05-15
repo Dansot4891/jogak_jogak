@@ -47,6 +47,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                 Expanded(
                   child: CustomTextFormField(
                     controller: _username,
+                    maxLines: 1,
                     hintText: LocaleKeys.changeUsernameHintText.tr(),
                     maxLength: 10,
                     onChanged: (val) {
