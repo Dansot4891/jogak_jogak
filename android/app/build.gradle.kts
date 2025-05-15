@@ -36,7 +36,7 @@ require(detStorePassword != null) { "storePassword not found in key.properties f
 
 android {
     namespace = "com.kr.jogakjogak"
-    compileSdk = 33
+    compileSdk = 35
     // NDK 버전을 명시적으로 설정
     ndkVersion = "27.0.12077973"
 
