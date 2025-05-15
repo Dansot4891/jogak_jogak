@@ -7,6 +7,7 @@ on:
       - main
 
 jobs:
+  # 1) 변경된 경로 필터링
   filter:
     runs-on: ubuntu-latest
     outputs:
@@ -17,7 +18,7 @@ jobs:
       - name: Checkout full history
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0    # ← 전체 커밋 기록 가져오기
+          fetch-depth: 0
 
       - name: List changed files
         run: |
@@ -27,7 +28,6 @@ jobs:
       - id: paths
         uses: dorny/paths-filter@v2
         with:
-          debug: true
           filters: |
             flutter:
               - 'lib/**'
@@ -36,12 +36,11 @@ jobs:
               - 'ios/**'
             assets:
               - 'assets/**'
+          list-files: true
 
-
-  # 2) Flutter 코드 변경이 있을 때만 테스트 실행
+  # 2) 테스트: 항상 실행
   test:
     needs: filter
-    if: ${{ needs.filter.outputs.flutter == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -53,13 +52,10 @@ jobs:
       - run: flutter analyze
       - run: flutter test
 
-  # 3) Flutter 코드만 변경되고, 네이티브/에셋 변경이 없을 때만 Shorebird Patch
+  # 3) Flutter 코드가 변경됐을 때만 Shorebird Patch
   patch:
     needs: test
-    if: >
-      needs.filter.outputs.flutter == 'true' &&
-      needs.filter.outputs.native  == 'false' &&
-      needs.filter.outputs.assets  == 'false'
+    if: ${{ needs.filter.outputs.flutter == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
