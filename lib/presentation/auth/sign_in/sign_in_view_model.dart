@@ -71,7 +71,6 @@ class SignInViewModel with ChangeNotifier {
 
   void _signInInitialize() async {
     final result = await _systemProvider.checkVersion();
-    print(result);
     switch (result) {
       case Success<bool>():
         _autoSignIn();
@@ -90,6 +89,7 @@ class SignInViewModel with ChangeNotifier {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     } else if (Platform.isIOS) {
       url = AppData.appStoreUrl;
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     }
   }
 

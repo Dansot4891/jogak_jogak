@@ -4,7 +4,6 @@ import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
-import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/core/constants/app_image.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
@@ -110,7 +109,6 @@ class _SignInPageState extends State<SignInPage> {
               const SizedBox(height: 16),
               AppButton(
                 text: LocaleKeys.unAuthButton.tr(),
-                bgColor: AppColor.sub,
                 onTap: () async {
                   widget.onAction(const SignInAction.setUnCertifiedUser());
                 },
