@@ -75,6 +75,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Expanded(
                       child: CustomTextFormField(
                         controller: _name,
+                        maxLines: 1,
                         hintText: LocaleKeys.usernameHintText.tr(),
                         maxLength: 10,
                         onChanged:

@@ -43,6 +43,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           children: [
             CustomTextFormField(
               controller: _email,
+              maxLines: 1,
               hintText: LocaleKeys.emailHintText.tr(),
               validator: AppValidator.emailValid,
             ),
