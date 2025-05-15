@@ -24,6 +24,7 @@ class _ChangePasswordPageRootState extends State<ChangePasswordPageRoot> {
 
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final viewModel = context.read<ChangePasswordViewModel>();
       _sub = viewModel.eventStream.listen((event) {
@@ -44,12 +45,12 @@ class _ChangePasswordPageRootState extends State<ChangePasswordPageRoot> {
         }
       });
     });
-    super.initState();
   }
 
   @override
   void dispose() {
     _sub?.cancel();
+    print('password dispose');
     super.dispose();
   }
 
