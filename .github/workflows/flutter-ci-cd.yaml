@@ -1,5 +1,4 @@
-# .github/workflows/flutter-ci-cd.yaml
-name: CI & Flutter Patch on Main
+name: Flutter CI/CD
 
 on:
   push:
@@ -7,65 +6,68 @@ on:
       - main
 
 jobs:
-  # 1) 변경된 경로 필터링
-  filter:
+  flutter-tests:
+    name: Run Flutter Tests
     runs-on: ubuntu-latest
-    outputs:
-      flutter: ${{ steps.paths.outputs.flutter }}
-      native:  ${{ steps.paths.outputs.native }}
-      assets:  ${{ steps.paths.outputs.assets }}
+
     steps:
-      - name: Checkout full history
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: List changed files
-        run: |
-          echo "→ Changed files between ${{ github.event.before }} and ${{ github.sha }}:"
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
-
-      - id: paths
-        uses: dorny/paths-filter@v2
-        with:
-          filters: |
-            flutter:
-              - 'lib/**'
-            native:
-              - 'android/**'
-              - 'ios/**'
-            assets:
-              - 'assets/**'
-          list-files: true
-
-  # 2) 테스트: 항상 실행
-  test:
-    needs: filter
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.29.3'
-      - run: flutter pub get
-      - run: flutter analyze
-      - run: flutter test
 
-  # 3) Flutter 코드가 변경됐을 때만 Shorebird Patch
-  patch:
-    needs: test
-    if: ${{ needs.filter.outputs.flutter == 'true' }}
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Run Tests
+        run: flutter test
+
+  detect-flutter-changes:
+    name: Detect Flutter Code Changes
     runs-on: ubuntu-latest
+    outputs:
+      flutter_changed: ${{ steps.filter.outputs.flutter }}
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect Changes
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            flutter:
+              - 'lib/**'
+
+  shorebird-patch:
+    name: Shorebird Patch
+    needs: [flutter-tests, detect-flutter-changes]
+    if: needs.detect-flutter-changes.outputs.flutter_changed == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.3'
+
       - name: Install Shorebird CLI
-        run: dart pub global activate shorebird_cli
-      - name: Authenticate Shorebird
-        env:
-          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
-        run: shorebird auth --token "$SHOREBIRD_TOKEN"
-      - name: Create & Upload Patch
-        run: |
-          shorebird patch create
-          shorebird patch upload
+        run: curl --proto '=https' --tlsv1.2 -sSf https://downloads.shorebird.dev/install.sh | bash
+
+      - name: Shorebird Login
+        run: shorebird login --token ${{ secrets.SHOREBIRD_TOKEN }}
+
+      - name: Shorebird Android Patch
+        run: shorebird patch android
+
+      - name: Shorebird iOS Patch
+        run: shorebird patch ios
