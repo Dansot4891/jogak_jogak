@@ -15,6 +15,7 @@ class RankingPage extends StatelessWidget {
     );
   }
 
+  // 레벨 표시 탭바
   static final List<String> _tabs =
       AppData.levels.map((e) => '$e X $e').toList();
 }
