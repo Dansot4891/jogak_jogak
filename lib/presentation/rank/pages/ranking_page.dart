@@ -15,7 +15,6 @@ class RankingPage extends StatelessWidget {
     );
   }
 
-  //
   static final List<String> _tabs =
       AppData.levels.map((e) => '$e X $e').toList();
 }
