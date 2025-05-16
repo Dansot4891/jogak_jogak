@@ -20,124 +20,59 @@ env:
   ANDROID_KEY_ALIAS:      ${{ secrets.ANDROID_KEY_ALIAS }}
 
 jobs:
-  # flutter-tests:
-  #   name: Run Flutter Tests
-  #   runs-on: ubuntu-latest
+  flutter-tests:
+    name: Run Flutter Tests
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout Repository
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-  #     - name: Set up Flutter
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         flutter-version: '3.29.3'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.3'
 
-  #     - name: Install Dependencies
-  #       run: flutter pub get
+      - name: Install Dependencies
+        run: flutter pub get
 
-  #     - name: Run Code Generation
-  #       run: flutter pub run build_runner build --delete-conflicting-outputs
+      - name: Run Code Generation
+        run: flutter pub run build_runner build --delete-conflicting-outputs
 
-  #     - name: Run Tests
-  #       run: flutter test
+      - name: Run Tests
+        run: flutter test
 
-  # detect-flutter-changes:
-  #   name: Detect Flutter Code Changes
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     flutter_changed: ${{ steps.filter.outputs.flutter }}
+  detect-flutter-changes:
+    name: Detect Flutter Code Changes
+    runs-on: ubuntu-latest
+    outputs:
+      flutter_changed: ${{ steps.filter.outputs.flutter }}
 
-  #   steps:
-  #     - name: Checkout Repository
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  #     - name: List changed files (Debugging)
-  #       run: |
-  #         git diff --name-only ${{ github.event.before }} ${{ github.sha }}
+      - name: List changed files (Debugging)
+        run: |
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
 
-  #     - name: Detect Changes
-  #       uses: dorny/paths-filter@v3
-  #       id: filter
-  #       with:
-  #         base: ${{ github.event.before }}
-  #         ref: ${{ github.sha }}
-  #         filters: |
-  #           flutter:
-  #             - 'lib/**'
-
-  # # android shorebird release
-  # release-android:
-  #   runs-on: ubuntu-latest
-  #   name: 🤖 Release Android
-
-  #   steps:
-  #     - name: 📚 Git Checkout
-  #       uses: actions/checkout@v4
-      
-  #     - name: Set up Flutter
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         flutter-version: '3.29.3'
-
-  #     - name: Install Dependencies
-  #       run: flutter pub get
-
-  #     - name: Run Code Generation
-  #       run: flutter pub run build_runner build --delete-conflicting-outputs
-
-  #     - name: ☕️ Setup Java
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: "17"
-  #         distribution: "temurin"
-  #         cache: gradle
-
-  #     - name: 🐦 Setup Shorebird
-  #       uses: shorebirdtech/setup-shorebird@v1
-  #       with:
-  #         cache: true
-
-  #     # base64로 이루어진 keystore Decode
-  #     - name: 🔐 Decode Keystore
-  #       run: echo ${{ secrets.ANDROID_KEYSTORE_BASE64 }} | base64 --decode > ${{ github.workspace }}/keystore.jks
-
-  #     - name: ✏️ Create key.properties
-  #       run: |
-  #         cat <<EOF > android/app/key.properties
-  #         storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-  #         keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}
-  #         keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}
-  #         storeFile=${{ github.workspace }}/keystore.jks
-  #         EOF
-
-  #     - name: 🚀 Shorebird Release
-  #       uses: shorebirdtech/shorebird-release@v0
-  #       env:
-  #         KEYSTORE_FILE: ${{ github.workspace }}/keystore.jks
-  #         KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-  #         KEYSTORE_ALIAS:  ${{ secrets.ANDROID_KEY_ALIAS }}
-  #       with:
-  #         platform: android
-  #         args: "--verbose --artifact=apk"
-
-  #     - name: 📦 Upload APK
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: flutter_and_friends-${{ github.ref_name }}.apk
-  #         path: build/app/outputs/apk/release/app-release.apk
-
-  #     - name: 📦 Upload App Bundle
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: flutter_and_friends-${{ github.ref_name }}.aab
-  #         path: build/app/outputs/bundle/release/app-release.aab
+      - name: Detect Changes
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          base: ${{ github.event.before }}
+          ref: ${{ github.sha }}
+          filters: |
+            flutter:
+              - 'lib/**'
 
   # android shorebird patch
   patch-android:
     name: 🤖 Patch Android
+    needs: [flutter-tests, detect-flutter-changes]
+    if: needs.detect-flutter-changes.outputs.flutter_changed == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -218,137 +153,64 @@ jobs:
           platform: android
           args: "--verbose --track=staging"
 
-  # # ios shorebird release
-  # release-ios:
-  #   runs-on: macos-latest
-
-  #   name: 🍎 Release iOS
-
-  #   steps:
-  #     - name: 📚 Git Checkout
-  #       uses: actions/checkout@v4
-
-  #     - name: Set up Flutter
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         flutter-version: '3.29.3'
-
-  #     - name: Install Dependencies
-  #       run: flutter pub get
-
-  #     - name: Run Code Generation
-  #       run: flutter pub run build_runner build --delete-conflicting-outputs
-
-  #     - name: 🐦 Setup Shorebird
-  #       uses: shorebirdtech/setup-shorebird@v1
-  #       with:
-  #         cache: true
-
-  #     - name: ✍️ Setup XCode Signing
-  #       run: |
-  #         # create variables
-  #         CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-  #         KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-  #         PP_PATH=$RUNNER_TEMP/temp.mobileprovision
-
-  #         # import certificate and provisioning profile from secrets
-  #         echo -n "$CERTIFICATE" | base64 --decode -o $CERTIFICATE_PATH
-  #         echo -n "$PROVISIONING_PROFILE" | base64 --decode -o $PP_PATH
-
-  #         # create temporary keychain
-  #         security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-  #         security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-  #         security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-
-  #         # import certificate to keychain
-  #         security import $CERTIFICATE_PATH -P "$CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-  #         security list-keychain -d user -s $KEYCHAIN_PATH
-  #         security find-identity -v
-
-  #         # use uuid for the name of provisioning profile
-  #         UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(/usr/bin/security cms -D -i $PP_PATH))
-
-  #         # apply provisioning profile
-  #         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-  #         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles/$UUID.mobileprovision
-
-  #     - name: 🚀 Shorebird Release
-  #       uses: shorebirdtech/shorebird-release@v0
-  #       with:
-  #         platform: ios
-  #         args: "--export-options-plist ios/GHAExportOptions.plist --verbose"
-
-  #     - name: 🧹 Clean Up
-  #       if: ${{ always() }}
-  #       run: |
-  #         PP_PATH=$RUNNER_TEMP/temp.mobileprovision
-  #         security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-  #         rm $RUNNER_TEMP/temp.mobileprovision
-
-  #     - name: 📦 Upload Artifact
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: flutter_and_friends-${{ github.ref_name }}.ipa
-  #         path: build/ios/ipa/flutter_and_friends.ipa
-
   # ios shorebird patch
-  # patch-ios:
-  #   name: 🍎 Patch iOS
-  #   #needs: [flutter-tests, detect-flutter-changes]
-  #   #if: needs.detect-flutter-changes.outputs.flutter_changed == 'true'
-  #   runs-on: macos-latest
+  patch-ios:
+    name: 🍎 Patch iOS
+    needs: [flutter-tests, detect-flutter-changes]
+    if: needs.detect-flutter-changes.outputs.flutter_changed == 'true'
+    runs-on: macos-latest
 
-  #   steps:
-  #     - name: 📚 Checkout repository
-  #       uses: actions/checkout@v4
+    steps:
+      - name: 📚 Checkout repository
+        uses: actions/checkout@v4
 
-  #     - name: Set up Flutter
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         flutter-version: '3.29.3'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.3'
 
-  #     - name: Install Dependencies
-  #       run: flutter pub get
+      - name: Install Dependencies
+        run: flutter pub get
 
-  #     - name: Run Code Generation
-  #       run: flutter pub run build_runner build --delete-conflicting-outputs
+      - name: Run Code Generation
+        run: flutter pub run build_runner build --delete-conflicting-outputs
 
-  #     - name: 🐦 Setup Shorebird
-  #       uses: shorebirdtech/setup-shorebird@v1
-  #       with:
-  #         cache: true
+      - name: 🐦 Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+        with:
+          cache: true
 
-  #     - name: ✍️ Setup Xcode Signing
-  #       run: |
-  #         # Paths
-  #         CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-  #         KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-  #         PP_PATH=$RUNNER_TEMP/temp.mobileprovision
+      - name: ✍️ Setup Xcode Signing
+        run: |
+          # Paths
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          PP_PATH=$RUNNER_TEMP/temp.mobileprovision
 
-  #         # Decode & import
-  #         echo -n "$CERTIFICATE" | base64 --decode -o $CERTIFICATE_PATH
-  #         echo -n "$PROVISIONING_PROFILE" | base64 --decode -o $PP_PATH
+          # Decode & import
+          echo -n "$CERTIFICATE" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$PROVISIONING_PROFILE" | base64 --decode -o $PP_PATH
 
-  #         # Create & unlock an isolated keychain
-  #         security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-  #         security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-  #         security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          # Create & unlock an isolated keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
-  #         # Import your certificate
-  #         security import $CERTIFICATE_PATH -P "$CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-  #         security list-keychain -d user -s $KEYCHAIN_PATH
-  #         security find-identity -v
+          # Import your certificate
+          security import $CERTIFICATE_PATH -P "$CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+          security find-identity -v
 
-  #         # Verify identity
-  #         UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(/usr/bin/security cms -D -i $PP_PATH))
+          # Verify identity
+          UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(/usr/bin/security cms -D -i $PP_PATH))
 
-  #         # Install provisioning profile
-  #         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-  #         cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles/$UUID.mobileprovision
+          # Install provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles/$UUID.mobileprovision
 
-  #     - name: 🧩 Shorebird Patch iOS
-  #       uses: shorebirdtech/shorebird-patch@v0
-  #       id: shorebird-patch-ios
-  #       with:
-  #         platform: ios
-  #         args: "--export-options-plist ios/GHAExportOptions.plist --track=staging"
+      - name: 🧩 Shorebird Patch iOS
+        uses: shorebirdtech/shorebird-patch@v0
+        id: shorebird-patch-ios
+        with:
+          platform: ios
+          args: "--export-options-plist ios/GHAExportOptions.plist --track=staging"
