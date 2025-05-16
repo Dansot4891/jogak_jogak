@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+
 jobs:
   flutter-tests:
     name: Run Flutter Tests
@@ -74,6 +77,24 @@ jobs:
         with:
           cache: true
 
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # release
+      - name: 🚀 Shorebird Release
+        uses: shorebirdtech/shorebird-release@v0
+        with:
+          platform: android
+
+      - name: 🚀 Shorebird Release
+        uses: shorebirdtech/shorebird-release@v0
+        with:
+          platform: ios
+
+      # shorebird patch
       - name: Shorebird Patch Android
         uses: shorebirdtech/shorebird-patch@v1
         id: patch-android
