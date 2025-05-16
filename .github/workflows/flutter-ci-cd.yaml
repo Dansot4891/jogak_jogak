@@ -74,12 +74,6 @@ jobs:
         with:
           cache: true
 
-      - name: Confirm Shorebird Installation
-        run: shorebird --version
-
-      - name: Shorebird Login
-        run: shorebird login --token ${{ secrets.SHOREBIRD_TOKEN }}
-
       - name: Shorebird Android Patch
         run: shorebird patch android
 
