@@ -1,7 +1,6 @@
 name: Flutter CI/CD
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
@@ -196,11 +195,48 @@ jobs:
           storeFile=${{ github.workspace }}/keystore.jks
           EOF
 
-      - name: 🚨 Debug Gradle 직접 실행
+      # 1) 전체 파일 구조 확인
+      - name: 🔍 디버그: 워크스페이스 구조 출력
+        run: |
+          echo "🏷️ 현재 작업 디렉터리: $(pwd)"
+          ls -alR .
+
+      # 2) keystore.jks 확인 및 keytool로 내용 열람
+      - name: 🔐 디버그: Keystore 파일 점검
+        run: |
+          echo "· keystore.jks 파일 정보"
+          ls -lah keystore.jks || true
+          echo ""
+          echo "· Keytool 리스트 (alias 확인)"
+          keytool -list -v \
+            -keystore keystore.jks \
+            -storepass $ANDROID_KEYSTORE_PASSWORD || true
+
+      # 3) key.properties 파일 위치·내용 확인
+      - name: 📋 디버그: key.properties 점검
+        run: |
+          echo "· ANDROID_KEY_ALIAS 확인 (GitHub가 마스킹)"
+          echo "ANDROID_KEY_ALIAS=$ANDROID_KEY_ALIAS"
+          echo ""
+          echo "· 파일 존재 여부"
+          ls -lah android/key.properties android/app/key.properties || true
+          echo ""
+          echo "· 파일 내용"
+          cat android/key.properties     && echo "" \
+            || cat android/app/key.properties && echo "" \
+            || echo "❗ key.properties 파일이 없습니다."
+
+      # 4) gradlew 스크립트와 빌드 커맨드 실행
+      - name: 🚨 Debug Gradle 직접 실행 (verbose)
         working-directory: android
         run: |
-          chmod +x ./gradlew
-          ./gradlew bundleRelease --stacktrace --warning-mode=all
+          echo "· gradlew 스크립트 존재 여부"
+          ls -lah gradlew || true
+          echo ""
+          chmod +x gradlew || echo "⚠️ gradlew 파일을 찾을 수 없습니다."
+          echo ""
+          echo "· Gradle 빌드 (stacktrace + info + debug)"
+          ./gradlew bundleRelease --stacktrace --info --debug
 
       - name: 🧩 Shorebird Patch
         id: shorebird-patch
