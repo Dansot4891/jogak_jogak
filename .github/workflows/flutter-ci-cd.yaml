@@ -74,6 +74,20 @@ jobs:
         with:
           cache: true
 
+      - uses: shorebirdtech/shorebird-patch@v1
+        id: shorebird-patch
+        with:
+          platform: android
+          release-version: latest
+          working-directory: .
+      
+      - uses: shorebirdtech/shorebird-patch@v1
+        id: shorebird-patch
+        with:
+          platform: ios
+          release-version: latest
+          working-directory: .
+
       - name: Shorebird Android Patch
         run: shorebird patch android
 
