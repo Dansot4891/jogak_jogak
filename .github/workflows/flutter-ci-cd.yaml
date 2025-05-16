@@ -192,41 +192,11 @@ jobs:
           echo "keyPassword=${{ env.ANDROID_KEY_PASSWORD }}" >> android/app/key.properties
           echo "keyAlias=${{ env.ANDROID_KEY_ALIAS }}" >> android/app/key.properties
           echo "storeFile=${{ github.workspace }}/keystore.jks" >> android/app/key.properties
-      
-      - name: 📋 Debug key.properties
-        run: |
-          cat android/app/key.properties
 
-      - name: 🔍 Debug android/app 디렉터리 내용
-        run: ls -al android/app
-
-      - name: 🛠 Patch keystore path in build.gradle.kts
+      - name: 🔍 Debug build.gradle.kts 상단
         working-directory: android/app
         run: |
-          # 기존: rootProject.file("app/key.properties")
-          # 변경: file("key.properties")
-          sed -i 's|rootProject\.file("app/key.properties")|file("key.properties")|' build.gradle.kts
-
-      - name: 📋 Debug key.properties (app 폴더)
-        run: |
-          echo "· 경로 확인"
-          ls -lah android/app/key.properties
-          echo ""
-          echo "· 내용 확인"
-          cat android/app/key.properties
-
-      - name: 🚨 Gradle 빌드 (에러만 보기)
-        working-directory: android
-        shell: bash
-        run: |
-          chmod +x gradlew
-          # 1) 빌드 로그 남기기
-          ./gradlew bundleRelease --stacktrace --console=plain 2>&1 | tee build.log || true
-
-          # 2) 에러 블록만 출력
-          awk '/^FAILURE: Build failed/{flag=1} flag' build.log
-          # exit code는 이전 빌드 결과를 그대로 전달
-          grep -q "BUILD FAILED" build.log && exit 1 || exit 0
+          sed -n '1,100p' build.gradle.kts
 
       - name: 🧩 Shorebird Patch
         id: shorebird-patch
