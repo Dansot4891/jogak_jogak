@@ -215,10 +215,16 @@ jobs:
 
       - name: 🚨 Gradle 빌드 (에러 시 tail)
         working-directory: android
+        shell: bash
         run: |
           chmod +x gradlew
-          ./gradlew bundleRelease --stacktrace --info || (echo "🛑 Build failed, last 50 lines:" && tail -n50 build.log && exit 1)
-        shell: bash
+          # 1) 빌드 로그를 build.log 에 저장하면서 화면에도 출력
+          ./gradlew bundleRelease --stacktrace --info 2>&1 | tee build.log \
+            || { \
+                echo "🛑 Build failed, last 50 lines:"; \
+                tail -n50 build.log; \
+                exit 1; \
+              }
 
       - name: 🧩 Shorebird Patch
         id: shorebird-patch
