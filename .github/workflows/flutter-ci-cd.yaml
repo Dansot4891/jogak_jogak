@@ -137,118 +137,98 @@ jobs:
 
   # android shorebird patch
   patch-android:
-    name: 🤖 Patch Android
-    runs-on: ubuntu-latest
+  name: 🤖 Patch Android
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: 📚 Checkout repository
-        uses: actions/checkout@v4
+  steps:
+    - name: 📚 Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.29.3'
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.29.3'
 
-      - name: Install Dependencies
-        run: flutter pub get
+    - name: Install Dependencies
+      run: flutter pub get
 
-      - name: Run Code Generation
-        run: flutter pub run build_runner build --delete-conflicting-outputs
+    - name: Run Code Generation
+      run: flutter pub run build_runner build --delete-conflicting-outputs
 
-      - name: ☕️ Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-          cache: gradle
+    - name: ☕️ Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '17'
+        cache: gradle
 
-      - name: 🔧 Install Android SDK & Accept Licenses
-        env:
-          ANDROID_SDK_ROOT: ${{ runner.tool_cache }}/android-sdk
-          ANDROID_HOME:     ${{ runner.tool_cache }}/android-sdk
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip
-          wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
-          mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
-          unzip cmdline-tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
-          yes | $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
-          $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT \
-            "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+    - name: 🔧 Install Android SDK & Accept Licenses
+      env:
+        ANDROID_SDK_ROOT: ${{ runner.tool_cache }}/android-sdk
+        ANDROID_HOME:     ${{ runner.tool_cache }}/android-sdk
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y unzip
+        wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
+        mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
+        unzip cmdline-tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
+        yes | $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
+        $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT \
+          "platform-tools" "platforms;android-33" "build-tools;33.0.2"
 
-      - name: 🐦 Setup Shorebird
-        uses: shorebirdtech/setup-shorebird@v1
-        with:
-          cache: true
+    - name: 🐦 Setup Shorebird
+      uses: shorebirdtech/setup-shorebird@v1
+      with:
+        cache: true
 
-      - name: 🔐 Decode Keystore
-        run: |
-          echo "${{ env.ANDROID_KEYSTORE_BASE64 }}" \
-            | base64 --decode > keystore.jks
+    - name: 🔐 Decode Keystore
+      run: |
+        echo "${{ env.ANDROID_KEYSTORE_BASE64 }}" \
+          | base64 --decode > keystore.jks
 
-      - name: ✏️ Create key.properties
-        run: |
-          cat <<EOF > android/app/key.properties
-          storePassword=${{ env.ANDROID_KEYSTORE_PASSWORD }}
-          keyPassword=${{ env.ANDROID_KEY_PASSWORD }}
-          keyAlias=${{ env.ANDROID_KEY_ALIAS }}
-          storeFile=${{ github.workspace }}/keystore.jks
-          EOF
+    - name: ✏️ Create key.properties in app module
+      run: |
+        cat <<EOF > android/app/key.properties
+        storePassword=${{ env.ANDROID_KEYSTORE_PASSWORD }}
+        keyPassword=${{ env.ANDROID_KEY_PASSWORD }}
+        keyAlias=${{ env.ANDROID_KEY_ALIAS }}
+        storeFile=${{ github.workspace }}/keystore.jks
+        EOF
 
-      # 1) 전체 파일 구조 확인
-      - name: 🔍 Debug workspace structure
-        run: |
-          echo "🏷️ 현재 작업 디렉터리: $(pwd)"
-          ls -alR .
+    - name: 🛠 Patch build.gradle to use android/app/key.properties
+      run: |
+        sed -i "s|rootProject.file('key.properties')|rootProject.file('app/key.properties')|" android/app/build.gradle
 
-      # 2) keystore.jks 확인 및 keytool로 내용 열람
-      - name: 🔐 Defbug Keystore File
-        run: |
-          echo "· keystore.jks 파일 정보"
-          ls -lah keystore.jks || true
-          echo ""
-          echo "· Keytool 리스트 (alias 확인)"
-          keytool -list -v \
-            -keystore keystore.jks \
-            -storepass $ANDROID_KEYSTORE_PASSWORD || true
+    - name: 📋 Debug key.properties (app 폴더)
+      run: |
+        echo "· 경로 확인"
+        ls -lah android/app/key.properties
+        echo ""
+        echo "· 내용 확인"
+        cat android/app/key.properties
 
-      # 3) key.properties 파일 위치·내용 확인
-      - name: 📋 Debug key.properties
-        run: |
-          echo "· ANDROID_KEY_ALIAS 확인 (GitHub가 마스킹)"
-          echo "ANDROID_KEY_ALIAS=$ANDROID_KEY_ALIAS"
-          echo ""
-          echo "· 파일 존재 여부"
-          ls -lah android/key.properties android/app/key.properties || true
-          echo ""
-          echo "· 파일 내용"
-          cat android/key.properties     && echo "" \
-            || cat android/app/key.properties && echo "" \
-            || echo "❗ key.properties 파일이 없습니다."
+    - name: 🚨 Debug Gradle 직접 실행 (verbose)
+      working-directory: android
+      run: |
+        echo "· gradlew 존재 여부"
+        ls -lah gradlew
+        echo ""
+        chmod +x gradlew
+        echo ""
+        ./gradlew bundleRelease --stacktrace --info --debug
 
-      # 4) gradlew 스크립트와 빌드 커맨드 실행
-      - name: 🚨 Debug Gradle 직접 실행 (verbose)
-        working-directory: android
-        run: |
-          echo "· gradlew 스크립트 존재 여부"
-          ls -lah gradlew || true
-          echo ""
-          chmod +x gradlew || echo "⚠️ gradlew 파일을 찾을 수 없습니다."
-          echo ""
-          echo "· Gradle 빌드 (stacktrace + info + debug)"
-          ./gradlew bundleRelease --stacktrace --info --debug
+    - name: 🧩 Shorebird Patch
+      id: shorebird-patch
+      uses: shorebirdtech/shorebird-patch@v0
+      env:
+        SHOREBIRD_TOKEN:     ${{ env.SHOREBIRD_TOKEN }}
+        KEYSTORE_FILE:       ${{ github.workspace }}/keystore.jks
+        KEYSTORE_PASSWORD:   ${{ env.ANDROID_KEYSTORE_PASSWORD }}
+        KEYSTORE_ALIAS:      ${{ env.ANDROID_KEY_ALIAS }}
+      with:
+        platform: android
+        args: "--verbose --track=staging"
 
-      - name: 🧩 Shorebird Patch
-        id: shorebird-patch
-        uses: shorebirdtech/shorebird-patch@v0
-        env:
-          SHOREBIRD_TOKEN:     ${{ env.SHOREBIRD_TOKEN }}
-          KEYSTORE_FILE:       ${{ github.workspace }}/keystore.jks
-          KEYSTORE_PASSWORD:   ${{ env.ANDROID_KEYSTORE_PASSWORD }}
-          KEYSTORE_ALIAS:      ${{ env.ANDROID_KEY_ALIAS }}
-        with:
-          platform: android
-          args: "--verbose --track=staging"
 
 
   # # ios shorebird release
