@@ -4,6 +4,7 @@ import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/style/app_color.dart';
 import 'package:jogak_jogak/core/style/app_text_style.dart';
 
+// 주의 문구
 class AlertMessage extends StatelessWidget {
   const AlertMessage({super.key});
 

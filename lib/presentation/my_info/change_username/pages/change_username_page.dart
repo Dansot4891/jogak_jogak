@@ -86,8 +86,11 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
           ],
         ),
       ),
+      // 로딩
       loading: const BaseLoadingView(),
+      // 에러
       error: BaseErrorView(widget.state.errorMessage),
+      // 성공
       success: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -104,5 +107,6 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
     );
   }
 
+  // 현재 텍스트가 비어있는지
   bool get isEmpty => _username.text.isEmpty;
 }

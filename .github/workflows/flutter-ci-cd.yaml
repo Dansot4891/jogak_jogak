@@ -1,0 +1,215 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  # shorebird
+  SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+  # ios
+  CERTIFICATE: ${{ secrets.IOS_CERTIFICATE }}
+  CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+  PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
+  KEYCHAIN_PASSWORD: ${{ secrets.IOS_KEYCHAIN_PASSWORD }}
+  # android
+  ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+  ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+  ANDROID_KEY_PASSWORD:   ${{ secrets.ANDROID_KEY_PASSWORD }}
+  ANDROID_KEY_ALIAS:      ${{ secrets.ANDROID_KEY_ALIAS }}
+
+jobs:
+  flutter-tests:
+    name: Run Flutter Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.3'
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Run Code Generation
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Run Tests
+        run: flutter test
+
+  detect-flutter-changes:
+    name: Detect Flutter Code Changes
+    runs-on: ubuntu-latest
+    outputs:
+      flutter_changed: ${{ steps.filter.outputs.flutter }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: List changed files (Debugging)
+        run: |
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
+
+      - name: Detect Changes
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          base: ${{ github.event.before }}
+          ref: ${{ github.sha }}
+          filters: |
+            flutter:
+              - 'lib/**'
+
+  # android shorebird patch
+  patch-android:
+    name: 🤖 Patch Android
+    needs: [flutter-tests, detect-flutter-changes]
+    if: needs.detect-flutter-changes.outputs.flutter_changed == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📚 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.3'
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Run Code Generation
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: ☕️ Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: 🔧 Install Android SDK & Accept Licenses
+        env:
+          ANDROID_SDK_ROOT: ${{ runner.tool_cache }}/android-sdk
+          ANDROID_HOME:     ${{ runner.tool_cache }}/android-sdk
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+          wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
+          mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
+          unzip cmdline-tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
+          yes | $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
+          $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT \
+            "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+
+      - name: 🐦 Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+        with:
+          cache: true
+
+      - name: 🔐 Decode Keystore
+        run: |
+          echo "${{ env.ANDROID_KEYSTORE_BASE64 }}" \
+            | base64 --decode > keystore.jks
+
+      - name: ✏️ Create key.properties in app module
+        run: |
+          echo "key.store.password=${{ env.ANDROID_KEYSTORE_PASSWORD }}" > android/app/key.properties
+          echo "key.alias.password=${{ env.ANDROID_KEY_PASSWORD }}" >> android/app/key.properties
+          echo "key.alias.name=${{ env.ANDROID_KEY_ALIAS }}" >> android/app/key.properties
+          echo "key.store.file=${{ github.workspace }}/keystore.jks" >> android/app/key.properties
+
+      - name: 🚨 Gradle 빌드 (에러만 보기)
+        working-directory: android
+        shell: bash
+        run: |
+          chmod +x gradlew
+          # 1) 빌드 로그 남기기
+          ./gradlew bundleRelease --stacktrace --console=plain 2>&1 | tee build.log || true
+
+          # 2) 에러 블록만 출력
+          awk '/^FAILURE: Build failed/{flag=1} flag' build.log
+          # exit code는 이전 빌드 결과를 그대로 전달
+          grep -q "BUILD FAILED" build.log && exit 1 || exit 0
+
+      - name: 🧩 Shorebird Patch
+        id: shorebird-patch
+        uses: shorebirdtech/shorebird-patch@v0
+        env:
+          SHOREBIRD_TOKEN:     ${{ env.SHOREBIRD_TOKEN }}
+          KEYSTORE_FILE:       ${{ github.workspace }}/keystore.jks
+          KEYSTORE_PASSWORD:   ${{ env.ANDROID_KEYSTORE_PASSWORD }}
+          KEYSTORE_ALIAS:      ${{ env.ANDROID_KEY_ALIAS }}
+        with:
+          platform: android
+
+  # ios shorebird patch
+  patch-ios:
+    name: 🍎 Patch iOS
+    needs: [flutter-tests, detect-flutter-changes]
+    if: needs.detect-flutter-changes.outputs.flutter_changed == 'true'
+    runs-on: macos-latest
+
+    steps:
+      - name: 📚 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.3'
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Run Code Generation
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: 🐦 Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+        with:
+          cache: true
+
+      - name: ✍️ Setup Xcode Signing
+        run: |
+          # Paths
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          PP_PATH=$RUNNER_TEMP/temp.mobileprovision
+
+          # Decode & import
+          echo -n "$CERTIFICATE" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$PROVISIONING_PROFILE" | base64 --decode -o $PP_PATH
+
+          # Create & unlock an isolated keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # Import your certificate
+          security import $CERTIFICATE_PATH -P "$CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+          security find-identity -v
+
+          # Verify identity
+          UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(/usr/bin/security cms -D -i $PP_PATH))
+
+          # Install provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles/$UUID.mobileprovision
+
+      - name: 🧩 Shorebird Patch iOS
+        uses: shorebirdtech/shorebird-patch@v0
+        id: shorebird-patch-ios
+        with:
+          platform: ios
+          args: "--export-options-plist ios/GHAExportOptions.plist"
