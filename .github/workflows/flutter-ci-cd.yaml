@@ -60,8 +60,8 @@ jobs:
 
   patch-android:
     name: 🤖 Patch Android
-    needs: [flutter-tests, detect-flutter-changes]
-    if: needs.detect-flutter-changes.outputs.flutter_changed == 'true'
+    #needs: [flutter-tests, detect-flutter-changes]
+    #if: needs.detect-flutter-changes.outputs.flutter_changed == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -104,7 +104,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         with:
           platform: android
-          args: "--verbose --staging"
+          args: "--verbose --track=staging"
 
 
   patch-ios:
@@ -163,4 +163,4 @@ jobs:
         id: shorebird-patch-ios
         with:
           platform: ios
-          args: "--export-options-plist ios/GHAExportOptions.plist --staging"
+          args: "--export-options-plist ios/GHAExportOptions.plist --track=staging"
