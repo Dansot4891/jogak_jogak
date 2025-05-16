@@ -151,7 +151,6 @@ jobs:
           KEYSTORE_ALIAS:      ${{ env.ANDROID_KEY_ALIAS }}
         with:
           platform: android
-          args: "--verbose --track=staging"
 
   # ios shorebird patch
   patch-ios:
@@ -213,4 +212,4 @@ jobs:
         id: shorebird-patch-ios
         with:
           platform: ios
-          args: "--export-options-plist ios/GHAExportOptions.plist --track=staging"
+          args: "--export-options-plist ios/GHAExportOptions.plist"
