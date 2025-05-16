@@ -75,14 +75,14 @@ jobs:
           cache: true
 
       - uses: shorebirdtech/shorebird-patch@v1
-        id: shorebird-patch
+        id: patch-android
         with:
           platform: android
           release-version: latest
           working-directory: .
-      
+
       - uses: shorebirdtech/shorebird-patch@v1
-        id: shorebird-patch
+        id: patch-ios
         with:
           platform: ios
           release-version: latest
