@@ -213,15 +213,12 @@ jobs:
           echo "· 내용 확인"
           cat android/app/key.properties
 
-      - name: 🚨 Debug Gradle 직접 실행 (verbose)
+      - name: 🚨 Gradle 빌드 (에러 시 tail)
         working-directory: android
         run: |
-          echo "· gradlew 존재 여부"
-          ls -lah gradlew
-          echo ""
           chmod +x gradlew
-          echo ""
-          ./gradlew bundleRelease --stacktrace --info --debug
+          ./gradlew bundleRelease --stacktrace --info || (echo "🛑 Build failed, last 50 lines:" && tail -n50 build.log && exit 1)
+        shell: bash
 
       - name: 🧩 Shorebird Patch
         id: shorebird-patch
