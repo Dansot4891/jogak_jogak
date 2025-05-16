@@ -196,8 +196,11 @@ jobs:
           storeFile=${{ github.workspace }}/keystore.jks
           EOF
 
-      - name: 🚧 Debug Flutter build
-        run: flutter build appbundle --release --verbose
+      - name: 🚨 Debug Gradle 직접 실행
+        working-directory: android
+        run: |
+          chmod +x ./gradlew
+          ./gradlew bundleRelease --stacktrace --warning-mode=all
 
       - name: 🧩 Shorebird Patch
         id: shorebird-patch
