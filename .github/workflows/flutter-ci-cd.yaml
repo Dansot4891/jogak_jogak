@@ -138,61 +138,79 @@ jobs:
 
   # android shorebird patch
   patch-android:
-    name: 🤖 Patch Android
-    runs-on: ubuntu-latest
+  name: 🤖 Patch Android
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: 📚 Checkout repository
-        uses: actions/checkout@v4
+  steps:
+    - name: 📚 Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.29.3'
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.29.3'
 
-      - name: Install Dependencies
-        run: flutter pub get
+    - name: Install Dependencies
+      run: flutter pub get
 
-      - name: Run Code Generation
-        run: flutter pub run build_runner build --delete-conflicting-outputs
+    - name: Run Code Generation
+      run: flutter pub run build_runner build --delete-conflicting-outputs
 
-      - name: ☕️ Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-          cache: gradle
+    - name: ☕️ Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '17'
+        cache: gradle
 
-      - name: 🐦 Setup Shorebird
-        uses: shorebirdtech/setup-shorebird@v1
-        with:
-          cache: true
+    - name: 🔧 Install Android SDK & Accept Licenses
+      env:
+        ANDROID_SDK_ROOT: ${{ runner.tool_cache }}/android-sdk
+        ANDROID_HOME:     ${{ runner.tool_cache }}/android-sdk
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y unzip
+        wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
+        mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
+        unzip cmdline-tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
+        yes | $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
+        $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT \
+          "platform-tools" "platforms;android-33" "build-tools;33.0.2"
 
-      - name: 🔐 Decode Keystore
-        run: |
-          echo "${{ env.ANDROID_KEYSTORE_BASE64 }}" \
-            | base64 --decode > keystore.jks
+    - name: 🐦 Setup Shorebird
+      uses: shorebirdtech/setup-shorebird@v1
+      with:
+        cache: true
 
-      - name: ✏️ Create key.properties
-        run: |
-          cat <<EOF > android/app/key.properties
-          storePassword=${{ env.ANDROID_KEYSTORE_PASSWORD }}
-          keyPassword=${{ env.ANDROID_KEY_PASSWORD }}
-          keyAlias=${{ env.ANDROID_KEY_ALIAS }}
-          storeFile=${{ github.workspace }}/keystore.jks
-          EOF
+    - name: 🔐 Decode Keystore
+      run: |
+        echo "${{ env.ANDROID_KEYSTORE_BASE64 }}" \
+          | base64 --decode > keystore.jks
 
-      - name: 🧩 Shorebird Patch
-        id: shorebird-patch
-        uses: shorebirdtech/shorebird-patch@v0
-        env:
-          SHOREBIRD_TOKEN:     ${{ env.SHOREBIRD_TOKEN }}
-          KEYSTORE_FILE:       ${{ github.workspace }}/keystore.jks
-          KEYSTORE_PASSWORD:   ${{ env.ANDROID_KEYSTORE_PASSWORD }}
-          KEYSTORE_ALIAS:      ${{ env.ANDROID_KEY_ALIAS }}
-        with:
-          platform: android
-          args: "--verbose --track=staging"
+    - name: ✏️ Create key.properties
+      run: |
+        cat <<EOF > android/app/key.properties
+        storePassword=${{ env.ANDROID_KEYSTORE_PASSWORD }}
+        keyPassword=${{ env.ANDROID_KEY_PASSWORD }}
+        keyAlias=${{ env.ANDROID_KEY_ALIAS }}
+        storeFile=${{ github.workspace }}/keystore.jks
+        EOF
+
+    - name: 🚧 Debug Flutter build
+      run: flutter build appbundle --release --verbose
+
+    - name: 🧩 Shorebird Patch
+      id: shorebird-patch
+      uses: shorebirdtech/shorebird-patch@v0
+      env:
+        SHOREBIRD_TOKEN:     ${{ env.SHOREBIRD_TOKEN }}
+        KEYSTORE_FILE:       ${{ github.workspace }}/keystore.jks
+        KEYSTORE_PASSWORD:   ${{ env.ANDROID_KEYSTORE_PASSWORD }}
+        KEYSTORE_ALIAS:      ${{ env.ANDROID_KEY_ALIAS }}
+      with:
+        platform: android
+        args: "--verbose --track=staging"
+
 
   # # ios shorebird release
   # release-ios:
