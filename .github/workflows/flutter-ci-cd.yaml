@@ -188,12 +188,14 @@ jobs:
 
       - name: ✏️ Create key.properties in app module
         run: |
-          cat <<EOF > android/app/key.properties
-          storePassword=${{ env.ANDROID_KEYSTORE_PASSWORD }}
-          keyPassword=${{ env.ANDROID_KEY_PASSWORD }}
-          keyAlias=${{ env.ANDROID_KEY_ALIAS }}
-          storeFile=${{ github.workspace }}/keystore.jks
-          EOF
+          echo "storePassword=${{ env.ANDROID_KEYSTORE_PASSWORD }}" > android/app/key.properties
+          echo "keyPassword=${{ env.ANDROID_KEY_PASSWORD }}" >> android/app/key.properties
+          echo "keyAlias=${{ env.ANDROID_KEY_ALIAS }}" >> android/app/key.properties
+          echo "storeFile=${{ github.workspace }}/keystore.jks" >> android/app/key.properties
+      
+      - name: 📋 Debug key.properties
+        run: |
+          cat android/app/key.properties
 
       - name: 🔍 Debug android/app 디렉터리 내용
         run: ls -al android/app
