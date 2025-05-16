@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+
 jobs:
   flutter-tests:
     name: Run Flutter Tests
@@ -74,22 +77,21 @@ jobs:
         with:
           cache: true
 
-      - uses: shorebirdtech/shorebird-patch@v1
+      - name: Export SHOREBIRD_TOKEN for CLI
+        run: echo "SHOREBIRD_TOKEN=${{ secrets.SHOREBIRD_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Shorebird Patch Android
+        uses: shorebirdtech/shorebird-patch@v1
         id: patch-android
         with:
           platform: android
           release-version: latest
           working-directory: .
 
-      - uses: shorebirdtech/shorebird-patch@v1
+      - name: Shorebird Patch iOS
+        uses: shorebirdtech/shorebird-patch@v1
         id: patch-ios
         with:
           platform: ios
           release-version: latest
           working-directory: .
-
-      - name: Shorebird Android Patch
-        run: shorebird patch android
-
-      - name: Shorebird iOS Patch
-        run: shorebird patch ios
