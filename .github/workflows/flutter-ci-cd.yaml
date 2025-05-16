@@ -1,6 +1,7 @@
 name: Flutter CI/CD
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -57,45 +58,109 @@ jobs:
             flutter:
               - 'lib/**'
 
-  shorebird-patch:
-    name: Shorebird Patch
+  patch-android:
+    name: 🤖 Patch Android
     needs: [flutter-tests, detect-flutter-changes]
     if: needs.detect-flutter-changes.outputs.flutter_changed == 'true'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: 📚 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+      - name: ☕️ Setup Java
+        uses: actions/setup-java@v4
         with:
-          flutter-version: '3.29.3'
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
 
-      - name: Set up Shorebird CLI
+      - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v1
         with:
           cache: true
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+      - name: 🔐 Decode Android Keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" \
+            | base64 --decode > ${{ github.workspace }}/keystore.jks
 
-      # shorebird patch
-      - name: Shorebird Patch Android
-        uses: shorebirdtech/shorebird-patch@v1
-        id: patch-android
+      - name: 📝 Generate android/app/key.properties
+        run: |
+          cat <<EOF > android/app/key.properties
+          storeFile=${GITHUB_WORKSPACE}/keystore.jks
+          storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}
+          keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}
+          EOF
+
+      - name: 🧩 Shorebird Patch Android
+        uses: shorebirdtech/shorebird-patch@v0
+        id: shorebird-patch-android
+        env:
+          KEYSTORE_FILE: ${{ github.workspace }}/keystore.jks
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEYSTORE_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         with:
           platform: android
-          release-version: latest
-          working-directory: .
+          args: "--verbose --staging"
 
-      - name: Shorebird Patch iOS
-        uses: shorebirdtech/shorebird-patch@v1
-        id: patch-ios
+
+  patch-ios:
+    name: 🍎 Patch iOS
+    needs: [flutter-tests, detect-flutter-changes]
+    if: needs.detect-flutter-changes.outputs.flutter_changed == 'true'
+    runs-on: macos-latest
+
+    steps:
+      - name: 📚 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐦 Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+        with:
+          cache: true
+
+      - name: ✍️ Setup Xcode Signing
+        env:
+          CERTIFICATE: ${{ secrets.IOS_CERTIFICATE }}
+          CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+          PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
+          KEYCHAIN_PASSWORD: ${{ secrets.IOS_KEYCHAIN_PASSWORD }}
+        run: |
+          # Paths
+          CERT_PATH=$RUNNER_TEMP/cert.p12
+          PP_PATH=$RUNNER_TEMP/profile.mobileprovision
+          KC_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+          # Decode & import
+          echo -n "$CERTIFICATE" | base64 --decode > $CERT_PATH
+          echo -n "$PROVISIONING_PROFILE" | base64 --decode > $PP_PATH
+
+          # Create & unlock an isolated keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KC_PATH
+          security set-keychain-settings -lut 21600 $KC_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KC_PATH
+
+          # Import your certificate
+          security import $CERT_PATH \
+            -P "$CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KC_PATH
+
+          # Verify identity
+          security list-keychain -d user -s $KC_PATH
+          security find-identity -v
+
+          # Install provisioning profile
+          UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< \
+            $(security cms -D -i $PP_PATH))
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH \
+            ~/Library/MobileDevice/Provisioning\ Profiles/$UUID.mobileprovision
+
+      - name: 🧩 Shorebird Patch iOS
+        uses: shorebirdtech/shorebird-patch@v0
+        id: shorebird-patch-ios
         with:
           platform: ios
-          release-version: latest
-          working-directory: .
+          args: "--export-options-plist ios/GHAExportOptions.plist --staging"

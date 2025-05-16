@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- 배포 방식(ad-hoc / app-store / enterprise / development) -->
+  <key>method</key>
+  <string>ad-hoc</string>
+
+  <!-- 서명 스타일(manual 또는 automatic) -->
+  <key>signingStyle</key>
+  <string>manual</string>
+
+  <!-- 프로비저닝 프로파일 매핑 (Bundle ID → 프로비저닝 프로파일 이름) -->
+  <key>provisioningProfiles</key>
+  <dict>
+    <key>com.myungwoo.jogakjogak</key>
+    <string>jogakjogak_provisioning</string>
+  </dict>
+
+  <!-- 팀(Team) ID -->
+  <key>teamID</key>
+  <string>DSVYZZZ96S</string>
+
+</dict>
+</plist>
