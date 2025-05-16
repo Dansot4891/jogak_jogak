@@ -196,13 +196,13 @@ jobs:
           EOF
 
       # 1) 전체 파일 구조 확인
-      - name: 🔍 디버그: 워크스페이스 구조 출력
+      - name: 🔍 Debug workspace structure
         run: |
           echo "🏷️ 현재 작업 디렉터리: $(pwd)"
           ls -alR .
 
       # 2) keystore.jks 확인 및 keytool로 내용 열람
-      - name: 🔐 디버그: Keystore 파일 점검
+      - name: 🔐 Defbug Keystore File
         run: |
           echo "· keystore.jks 파일 정보"
           ls -lah keystore.jks || true
@@ -213,7 +213,7 @@ jobs:
             -storepass $ANDROID_KEYSTORE_PASSWORD || true
 
       # 3) key.properties 파일 위치·내용 확인
-      - name: 📋 디버그: key.properties 점검
+      - name: 📋 Debug key.properties
         run: |
           echo "· ANDROID_KEY_ALIAS 확인 (GitHub가 마스킹)"
           echo "ANDROID_KEY_ALIAS=$ANDROID_KEY_ALIAS"
