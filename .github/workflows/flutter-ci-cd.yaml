@@ -195,9 +195,13 @@ jobs:
           storeFile=${{ github.workspace }}/keystore.jks
           EOF
 
-      - name: 🛠 Patch build.gradle to use android/app/key.properties
+      - name: 🔍 Debug android/app 디렉터리 내용
+        run: ls -al android/app
+
+      - name: 🛠 Patch build.gradle
+        working-directory: android/app
         run: |
-          sed -i "s|rootProject.file('key.properties')|rootProject.file('app/key.properties')|" android/app/build.gradle
+          sed -i "s|rootProject.file('key.properties')|rootProject.file('app/key.properties')|" build.gradle
 
       - name: 📋 Debug key.properties (app 폴더)
         run: |
