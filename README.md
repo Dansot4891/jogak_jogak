@@ -37,6 +37,11 @@
 - **모델링:** JsonSerializable
 - **에러 처리:** Result Pattern
 - **다국어 지원:** Easy Localization
+- **code push:** shorebird
+
+---
+## 🌀 Github Action Logic
+<img width = 50% src='https://github.com/user-attachments/assets/cd67e57f-f3af-4bf5-86c6-91eff514d96a'>
 
 ---
 ## 폴더 구조
