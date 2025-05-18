@@ -128,19 +128,6 @@ jobs:
           echo "key.alias.name=${{ env.ANDROID_KEY_ALIAS }}" >> android/app/key.properties
           echo "key.store.file=${{ github.workspace }}/keystore.jks" >> android/app/key.properties
 
-      - name: 🚨 Gradle 빌드 (에러만 보기)
-        working-directory: android
-        shell: bash
-        run: |
-          chmod +x gradlew
-          # 1) 빌드 로그 남기기
-          ./gradlew bundleRelease --stacktrace --console=plain 2>&1 | tee build.log || true
-
-          # 2) 에러 블록만 출력
-          awk '/^FAILURE: Build failed/{flag=1} flag' build.log
-          # exit code는 이전 빌드 결과를 그대로 전달
-          grep -q "BUILD FAILED" build.log && exit 1 || exit 0
-
       - name: 🧩 Shorebird Patch
         id: shorebird-patch
         uses: shorebirdtech/shorebird-patch@v0
