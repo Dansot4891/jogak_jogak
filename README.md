@@ -30,6 +30,7 @@
 
 - **아키텍처:** MVVM 기반의 클린 아키텍처 + MVI 패턴 적용
 <img width=100% src='https://github.com/user-attachments/assets/a574bfcd-5c25-4bb8-843f-5453f0c566d0'>
+
 - **상태 관리:** Provider
 - **의존성 주입:** GetIt
 - **라우팅:** GoRouter
@@ -37,6 +38,11 @@
 - **모델링:** JsonSerializable
 - **에러 처리:** Result Pattern
 - **다국어 지원:** Easy Localization
+- **code push:** shorebird
+
+---
+## 🌀 Github Action Logic
+<img width = 50% src='https://github.com/user-attachments/assets/cd67e57f-f3af-4bf5-86c6-91eff514d96a'>
 
 ---
 ## 폴더 구조
