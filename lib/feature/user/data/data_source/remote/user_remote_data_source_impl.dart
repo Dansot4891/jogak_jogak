@@ -18,6 +18,7 @@ class UserRemoteDataSourceImpl implements UserDataSource {
             .collection(FirebaseCollections.users)
             .doc(uid)
             .collection(FirebaseCollections.puzzleHistory)
+            .orderBy(FirebaseQuery.playDate, descending: true)
             .get();
     final puzzleHistory =
         snapshot.docs.map((e) => PuzzleHistoryDto.fromFireBase(e)).toList();
