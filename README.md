@@ -29,7 +29,7 @@
 ## 🧩 아키텍처 및 기술 스택
 
 - **아키텍처:** MVVM 기반의 클린 아키텍처 + MVI 패턴 적용
-<img width=100% src='https://github.com/user-attachments/assets/a574bfcd-5c25-4bb8-843f-5453f0c566d0'>
+<img width=100% src='https://github.com/user-attachments/assets/9b52e46f-a6a4-4f65-ad9a-7ecd1eaf364e'>
 
 - **상태 관리:** Provider
 - **의존성 주입:** GetIt
@@ -42,7 +42,7 @@
 
 ---
 ## 🌀 Github Action Logic
-<img width = 50% src='https://github.com/user-attachments/assets/cd67e57f-f3af-4bf5-86c6-91eff514d96a'>
+<img src='https://github.com/user-attachments/assets/e8eb4550-105a-4784-afed-df78dc1e881d'>
 
 ---
 ## 폴더 구조
