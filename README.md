@@ -29,7 +29,7 @@
 ## 🧩 아키텍처 및 기술 스택
 
 - **아키텍처:** MVVM 기반의 클린 아키텍처 + MVI 패턴 적용
-<img width=100% src='https://github.com/user-attachments/assets/9b52e46f-a6a4-4f65-ad9a-7ecd1eaf364e'>
+<img width=100% src='https://github.com/user-attachments/assets/3b9683fa-2462-44c1-a1ac-a57782c70612'>
 
 - **상태 관리:** Provider
 - **의존성 주입:** GetIt
@@ -44,7 +44,6 @@
 ## 🌀 Github Action Logic
 <img src='https://github.com/user-attachments/assets/e8eb4550-105a-4784-afed-df78dc1e881d'>
 
----
 ## 폴더 구조
 ```
 |-- lib
@@ -79,6 +78,7 @@
     |       |-- pages
     |           |-- root_page          # 최상위 루트 페이지 관리
     |           |-- page               # 각 화면 단위 페이지
+    |           |-- event              # 화면 이벤트 처리 관리
     |           |-- state              # 화면 상태(State) 관리
     |           |-- viewmodel          # ViewModel (상태/로직 담당)
     |           |-- action             # 사용자 액션 정의
