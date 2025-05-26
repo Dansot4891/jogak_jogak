@@ -5,6 +5,7 @@ import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_dat
 import 'package:jogak_jogak/feature/auth/data/repository_impl/auth_repository_impl.dart';
 import 'package:jogak_jogak/feature/auth/domain/repository/auth_repository.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/change_password_use_case.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/delete_user_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_out_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_up_use_case.dart';
@@ -102,6 +103,7 @@ void diSetup() {
   locator.registerSingleton(WithdrawalUseCase(locator()));
   locator.registerSingleton(GetVersionUseCase(locator()));
   locator.registerSingleton(CheckVersionUseCase(locator()));
+  locator.registerSingleton(DeleteUserUseCase(locator()));
 
   // 전역 provider
   locator.registerSingleton(
@@ -147,8 +149,11 @@ void diSetup() {
   );
   locator.registerFactory(() => RankingViewModel(locator()));
   locator.registerFactory(
-    () =>
-        MyPageViewModel(userProvider: locator(), getVersionUseCase: locator()),
+    () => MyPageViewModel(
+      userProvider: locator(),
+      deleteUserUseCase: locator(),
+      getVersionUseCase: locator(),
+    ),
   );
   locator.registerFactory(() => PuzzleHistoryViewModel(locator()));
   locator.registerFactory(() => ChangePasswordViewModel(locator()));

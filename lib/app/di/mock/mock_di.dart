@@ -5,6 +5,7 @@ import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_dat
 import 'package:jogak_jogak/feature/auth/data/repository_impl/auth_repository_impl.dart';
 import 'package:jogak_jogak/feature/auth/domain/repository/auth_repository.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/change_password_use_case.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/delete_user_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_out_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_up_use_case.dart';
@@ -108,6 +109,7 @@ void mockdDISetup() {
   mockLocator.registerSingleton(WithdrawalUseCase(mockLocator()));
   mockLocator.registerSingleton(GetVersionUseCase(mockLocator()));
   mockLocator.registerSingleton(CheckVersionUseCase(mockLocator()));
+  mockLocator.registerSingleton(DeleteUserUseCase(mockLocator()));
 
   // 전역 provider
   mockLocator.registerSingleton(
@@ -158,6 +160,7 @@ void mockdDISetup() {
   mockLocator.registerFactory(
     () => MyPageViewModel(
       userProvider: mockLocator(),
+      deleteUserUseCase: mockLocator(),
       getVersionUseCase: mockLocator(),
     ),
   );

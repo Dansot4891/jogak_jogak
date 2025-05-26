@@ -1,7 +1,7 @@
 sealed class MyPageAction {
   const factory MyPageAction.signout() = Signout;
 
-  const factory MyPageAction.withdrawal() = Withdrawal;
+  const factory MyPageAction.withdrawal(String password) = Withdrawal;
 }
 
 class Signout implements MyPageAction {
@@ -9,5 +9,6 @@ class Signout implements MyPageAction {
 }
 
 class Withdrawal implements MyPageAction {
-  const Withdrawal();
+  final String password;
+  const Withdrawal(this.password);
 }

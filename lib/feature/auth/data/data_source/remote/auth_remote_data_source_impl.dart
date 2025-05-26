@@ -59,4 +59,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> changePassword(String email) async {
     return await _auth.sendPasswordResetEmail(email: email);
   }
+
+  @override
+  Future<void> deleteUser({
+    required String email,
+    required String password,
+  }) async {
+    // 1) 재인증: 이메일·비번 등으로 Credential 생성
+    final cred = EmailAuthProvider.credential(email: email, password: password);
+    await _auth.currentUser?.reauthenticateWithCredential(cred);
+    await _auth.currentUser?.delete();
+  }
 }

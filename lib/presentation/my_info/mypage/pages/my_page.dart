@@ -104,7 +104,7 @@ class MyPage extends StatelessWidget {
                           pop(context);
                         },
                         onBtnClicked: () {
-                          onAction(const MyPageAction.withdrawal());
+                          // onAction(const MyPageAction.withdrawal());
                         },
                       ),
                     );

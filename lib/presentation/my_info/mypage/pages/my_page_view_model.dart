@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/delete_user_use_case.dart';
 import 'package:jogak_jogak/feature/system/domain/model/app_version.dart';
 import 'package:jogak_jogak/feature/system/domain/use_case/get_version_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/model/user.dart';
@@ -12,12 +13,15 @@ import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
 class MyPageViewModel with ChangeNotifier {
   final UserProvider _userProvider;
+  final DeleteUserUseCase _deleteUserUseCase;
   final GetVersionUseCase _getVersionUseCase;
   MyPageViewModel({
     required UserProvider userProvider,
+    required DeleteUserUseCase deleteUserUseCase,
     required GetVersionUseCase getVersionUseCase,
   }) : _userProvider = userProvider,
-       _getVersionUseCase = getVersionUseCase {
+       _getVersionUseCase = getVersionUseCase,
+       _deleteUserUseCase = deleteUserUseCase {
     _initialization();
   }
 
@@ -29,7 +33,7 @@ class MyPageViewModel with ChangeNotifier {
       case Signout():
         _signout();
       case Withdrawal():
-        _withdrawal();
+        _withdrawal(action.password);
     }
   }
 
@@ -37,8 +41,10 @@ class MyPageViewModel with ChangeNotifier {
     _userProvider.signout();
   }
 
-  void _withdrawal() {
+  void _withdrawal(String password) {
     _userProvider.withdrawal();
+    final user = state.user as CertifiedUser;
+    _deleteUserUseCase.execute(email: user.email, password: password);
   }
 
   // 전역 관리하는 유저 데이터 할당
