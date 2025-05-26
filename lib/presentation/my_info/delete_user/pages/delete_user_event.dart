@@ -1,9 +1,9 @@
 sealed class DeleteUserEvent {
-  const factory DeleteUserEvent.showCheckDialog(String message) =
-      ShowCheckDialog;
+  const factory DeleteUserEvent.deleteUserShowDialog(String message) =
+      DeleteUserShowDialog;
 }
 
-class ShowCheckDialog implements DeleteUserEvent {
+class DeleteUserShowDialog implements DeleteUserEvent {
   final String message;
-  const ShowCheckDialog(this.message);
+  const DeleteUserShowDialog(this.message);
 }

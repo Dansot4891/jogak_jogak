@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/delete_user_use_case.dart';
 import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_action.dart';
 import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_event.dart';
@@ -27,6 +28,17 @@ class DeleteUserViewModel with ChangeNotifier {
     required String email,
     required String password,
   }) async {
-    _deleteUserUseCase.execute(email: email, password: password);
+    final result = await _deleteUserUseCase.execute(
+      email: email,
+      password: password,
+    );
+    switch (result) {
+      case Success<void>():
+        break;
+      case Error<void>():
+        _streamController.add(
+          DeleteUserEvent.deleteUserShowDialog(result.error.message),
+        );
+    }
   }
 }
