@@ -52,6 +52,7 @@ class _DeleteUserPageState extends State<DeleteUserPage> {
             CustomTextFormField(
               controller: _password,
               maxLines: 1,
+              obsecure: true,
               hintText: LocaleKeys.passwordHintText.tr(),
               validator: AppValidator.passwordValid,
             ),
