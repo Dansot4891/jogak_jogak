@@ -84,4 +84,19 @@
     |           |-- action             # 사용자 액션 정의
     |       |-- widgets                # 해당 섹션 위젯
 ```
+
+## 테스트 코드 폴더 구조
+```
+|-- test
+    |-- unit
+    |  |-- features                   # 각 기능별
+    |  |   |-- data_source_test       # Data Source 테스트
+    |  |   |-- repository_test        # Repository 테스트
+    |  |   |-- view_model_est         # ViewModel 테스트
+    |
+    |-- widget
+    |  |-- features                   # 각 기능별
+    |  |   |-- page_test              # 화면 테스트
+    |  |   |-- dialog_test            # Dialog 테스트
+```
 ---
