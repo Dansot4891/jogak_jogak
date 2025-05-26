@@ -54,6 +54,7 @@ enum AppRoute {
   changePw(path: '/change-pw', name: 'change-pw'),
   changeUsername(path: '/change-username', name: 'change-username'),
   puzzleHistory(path: '/puzzle_history', name: 'puzzle_history'),
+  deleteUser(path: '/delete_user', name: 'delete_user'),
 
   // in Game
   puzzle(path: '/puzzle', name: 'puzzle');
@@ -170,6 +171,16 @@ abstract class UserPath {
         );
       },
     ),
+    // GoRoute(
+    //   path: AppRoute.deleteUser.path,
+    //   name: AppRoute.deleteUser.name,
+    //   builder: (context, state) {
+    //     return ChangeNotifierProvider(
+    //       create: (_) => locator<PuzzleHistoryViewModel>(),
+    //       child: const DeleteUserP(),
+    //     );
+    //   },
+    // ),
   ];
 }
 

@@ -7,24 +7,25 @@ import 'package:jogak_jogak/core/helper/validator/app_validator.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/base/widgets/text_field/text_field.dart';
-import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_action.dart';
-import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_state.dart';
+import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_action.dart';
+import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_state.dart';
 
-class ChangePasswordPage extends StatefulWidget {
-  final ChangePasswordState state;
-  final void Function(ChangePasswordAction action) onAction;
-  const ChangePasswordPage({
+class DeleteUserPage extends StatefulWidget {
+  final DeleteUserState state;
+  final void Function(DeleteUserAction action) onAction;
+  const DeleteUserPage({
     required this.state,
     required this.onAction,
     super.key,
   });
 
   @override
-  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
+  State<DeleteUserPage> createState() => _DeleteUserPageState();
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage> {
+class _DeleteUserPageState extends State<DeleteUserPage> {
   final _email = TextEditingController();
+  final _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -48,31 +49,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               validator: AppValidator.emailValid,
             ),
             const SizedBox(height: 20),
-            AppButton(
-              text: LocaleKeys.changePasswordButton.tr(),
-              onTap: () {
-                if (_formKey.currentState!.validate()) {
-                  AppShowDialog.show(
-                    context,
-                    AppDialog.doubleBtns(
-                      title: LocaleKeys.resetPassword.tr(),
-                      subText: LocaleKeys.changePasswordDialogMsg.tr(),
-                      btnLeftText: LocaleKeys.cancel.tr(),
-                      btnRightText: LocaleKeys.ok.tr(),
-                      onBtnLeftClicked: () {
-                        pop(context);
-                      },
-                      onBtnRightClicked: () async {
-                        pop(context);
-                        widget.onAction(
-                          ChangePasswordAction.sendToEmail(_email.text),
-                        );
-                      },
-                    ),
-                  );
-                }
-              },
-            ),
+            AppButton(text: 'LocaleKeys.DeleteUserButton.tr()', onTap: () {}),
           ],
         ),
       ),

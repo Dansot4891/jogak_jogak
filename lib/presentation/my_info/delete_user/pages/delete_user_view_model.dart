@@ -4,48 +4,44 @@ import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/change_password_use_case.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/delete_user_use_case.dart';
+import 'package:jogak_jogak/feature/user/domain/model/user.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_action.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_event.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_state.dart';
+import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_action.dart';
+import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_event.dart';
+import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_state.dart';
+import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
-class ChangePasswordViewModel with ChangeNotifier {
-  final ChangePasswordUseCase _changePasswordUseCase;
+class DeleteUserViewModel with ChangeNotifier {
+  final UserProvider _userProvider;
+  final DeleteUserUseCase _deleteUserUseCase;
 
-  ChangePasswordViewModel(this._changePasswordUseCase);
+  DeleteUserViewModel({
+    required UserProvider userProvider,
+    required DeleteUserUseCase deleteUserUseCase,
+  }) : _userProvider = userProvider,
+       _deleteUserUseCase = deleteUserUseCase;
 
-  ChangePasswordState _state = const ChangePasswordState();
-  ChangePasswordState get state => _state;
+  final DeleteUserState _state = const DeleteUserState();
+  DeleteUserState get state => _state;
 
-  final _streamController = StreamController<ChangePasswordEvent>();
-  Stream<ChangePasswordEvent> get eventStream => _streamController.stream;
+  final _streamController = StreamController<DeleteUserEvent>();
+  Stream<DeleteUserEvent> get eventStream => _streamController.stream;
 
-  void onAction(ChangePasswordAction action) {
+  void onAction(DeleteUserAction action) {
     switch (action) {
-      case SendToEmail():
-        _sendToEmail(action.email);
+      case DeleteUser():
+        _deleteUser(email: action.email, password: action.password);
     }
   }
 
-  Future<void> _sendToEmail(String email) async {
-    _state = state.copyWith(state: BaseState.loading);
-    notifyListeners();
-    final result = await _changePasswordUseCase.execute(email);
-    switch (result) {
-      case Success<void>():
-        _state = state.copyWith(state: BaseState.success);
-        _streamController.add(
-          const ChangePasswordEvent.showCheckDialog('메시지가 발송되었습니다.'),
-        );
-        notifyListeners();
-      case Error<void>():
-        _state = state.copyWith(
-          state: BaseState.error,
-          errorMessage: result.error.message,
-        );
-        _streamController.add(
-          const ChangePasswordEvent.showCheckDialog('에러가 발생하였습니다.'),
-        );
-        notifyListeners();
-    }
+  Future<void> _deleteUser({
+    required String email,
+    required String password,
+  }) async {
+    final user = _userProvider.state.user as CertifiedUser;
+    _deleteUserUseCase.execute(email: user.email, password: password);
   }
 }

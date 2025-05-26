@@ -13,15 +13,13 @@ import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
 class MyPageViewModel with ChangeNotifier {
   final UserProvider _userProvider;
-  final DeleteUserUseCase _deleteUserUseCase;
   final GetVersionUseCase _getVersionUseCase;
   MyPageViewModel({
     required UserProvider userProvider,
     required DeleteUserUseCase deleteUserUseCase,
     required GetVersionUseCase getVersionUseCase,
   }) : _userProvider = userProvider,
-       _getVersionUseCase = getVersionUseCase,
-       _deleteUserUseCase = deleteUserUseCase {
+       _getVersionUseCase = getVersionUseCase {
     _initialization();
   }
 
@@ -32,19 +30,11 @@ class MyPageViewModel with ChangeNotifier {
     switch (action) {
       case Signout():
         _signout();
-      case Withdrawal():
-        _withdrawal(action.password);
     }
   }
 
   void _signout() {
     _userProvider.signout();
-  }
-
-  void _withdrawal(String password) {
-    _userProvider.withdrawal();
-    final user = state.user as CertifiedUser;
-    _deleteUserUseCase.execute(email: user.email, password: password);
   }
 
   // 전역 관리하는 유저 데이터 할당
