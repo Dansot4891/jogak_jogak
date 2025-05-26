@@ -35,7 +35,7 @@ class _ChangePasswordPageRootState extends State<ChangePasswordPageRoot> {
                 context,
                 AppDialog.singleBtn(
                   title: event.message,
-                  btnText: LocaleKeys.ok,
+                  btnText: LocaleKeys.ok.tr(),
                   onBtnClicked: () {
                     pop(context);
                   },
