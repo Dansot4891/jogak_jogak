@@ -12,6 +12,8 @@ import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_pa
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_page_root.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_view_model.dart';
+import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_page_root.dart';
+import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_root.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_page_root.dart';
@@ -171,16 +173,16 @@ abstract class UserPath {
         );
       },
     ),
-    // GoRoute(
-    //   path: AppRoute.deleteUser.path,
-    //   name: AppRoute.deleteUser.name,
-    //   builder: (context, state) {
-    //     return ChangeNotifierProvider(
-    //       create: (_) => locator<PuzzleHistoryViewModel>(),
-    //       child: const DeleteUserP(),
-    //     );
-    //   },
-    // ),
+    GoRoute(
+      path: AppRoute.deleteUser.path,
+      name: AppRoute.deleteUser.name,
+      builder: (context, state) {
+        return ChangeNotifierProvider(
+          create: (_) => locator<DeleteUserViewModel>(),
+          child: const DeleteUserPageRoot(),
+        );
+      },
+    ),
   ];
 }
 

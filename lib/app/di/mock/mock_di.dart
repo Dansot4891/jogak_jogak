@@ -109,7 +109,12 @@ void mockdDISetup() {
   mockLocator.registerSingleton(WithdrawalUseCase(mockLocator()));
   mockLocator.registerSingleton(GetVersionUseCase(mockLocator()));
   mockLocator.registerSingleton(CheckVersionUseCase(mockLocator()));
-  mockLocator.registerSingleton(DeleteUserUseCase(mockLocator()));
+  mockLocator.registerSingleton(
+    DeleteUserUseCase(
+      authRepository: mockLocator(),
+      userRepository: mockLocator(),
+    ),
+  );
 
   // 전역 provider
   mockLocator.registerSingleton(

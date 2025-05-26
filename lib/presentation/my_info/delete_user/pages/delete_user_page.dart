@@ -49,7 +49,40 @@ class _DeleteUserPageState extends State<DeleteUserPage> {
               validator: AppValidator.emailValid,
             ),
             const SizedBox(height: 20),
-            AppButton(text: 'LocaleKeys.DeleteUserButton.tr()', onTap: () {}),
+            CustomTextFormField(
+              controller: _password,
+              maxLines: 1,
+              hintText: LocaleKeys.passwordHintText.tr(),
+              validator: AppValidator.passwordValid,
+            ),
+            const SizedBox(height: 20),
+            AppButton(
+              text: LocaleKeys.withdrawal.tr(),
+              onTap: () {
+                if (_formKey.currentState!.validate()) {
+                  AppShowDialog.show(
+                    context,
+                    AppDialog(
+                      title: LocaleKeys.withdrawal.tr(),
+                      subText: LocaleKeys.myPageConfirmWithdrawal.tr(),
+                      btnText: LocaleKeys.ok.tr(),
+                      btnLeftText: LocaleKeys.cancel.tr(),
+                      onBtnLeftClicked: () {
+                        pop(context);
+                      },
+                      onBtnClicked: () {
+                        widget.onAction(
+                          DeleteUserAction.deleteUser(
+                            _email.text,
+                            _password.text,
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
+              },
+            ),
           ],
         ),
       ),

@@ -94,21 +94,6 @@ class MyPage extends StatelessWidget {
                   text: LocaleKeys.withdrawal.tr(),
                   onTap: () {
                     navigate(context, route: AppRoute.deleteUser);
-                    // AppShowDialog.show(
-                    //   context,
-                    //   AppDialog(
-                    //     title: LocaleKeys.withdrawal.tr(),
-                    //     subText: LocaleKeys.myPageConfirmWithdrawal.tr(),
-                    //     btnText: LocaleKeys.ok.tr(),
-                    //     btnLeftText: LocaleKeys.cancel.tr(),
-                    //     onBtnLeftClicked: () {
-                    //       pop(context);
-                    //     },
-                    //     onBtnClicked: () {
-                    //       // onAction(const MyPageAction.withdrawal());
-                    //     },
-                    //   ),
-                    // );
                   },
                   baseColor: AppColor.greyC5,
                 ),
