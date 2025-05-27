@@ -5,11 +5,17 @@ import 'package:jogak_jogak/feature/auth/domain/use_case/delete_user_use_case.da
 import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_action.dart';
 import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_event.dart';
 import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_state.dart';
+import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
 class DeleteUserViewModel with ChangeNotifier {
   final DeleteUserUseCase _deleteUserUseCase;
+  final UserProvider _userProvider;
 
-  DeleteUserViewModel(this._deleteUserUseCase);
+  DeleteUserViewModel({
+    required DeleteUserUseCase deleteUserUseCase,
+    required UserProvider userProvider,
+  }) : _deleteUserUseCase = deleteUserUseCase,
+       _userProvider = userProvider;
 
   final DeleteUserState _state = const DeleteUserState();
   DeleteUserState get state => _state;
@@ -34,6 +40,7 @@ class DeleteUserViewModel with ChangeNotifier {
     );
     switch (result) {
       case Success<void>():
+        _userProvider.signout();
         break;
       case Error<void>():
         _streamController.add(

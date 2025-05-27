@@ -37,7 +37,6 @@ import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case
 import 'package:jogak_jogak/feature/user/domain/use_case/get_puzzle_history_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/save_puzzle_history_use_case.dart';
-import 'package:jogak_jogak/feature/user/domain/use_case/withdrawal_use_case.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_view_model.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
@@ -101,7 +100,6 @@ void diSetup() {
   locator.registerSingleton(SavePuzzleHistoryUseCase(locator()));
   locator.registerSingleton(ChangePasswordUseCase(locator()));
   locator.registerSingleton(ChangeUsernameUseCase(locator()));
-  locator.registerSingleton(WithdrawalUseCase(locator()));
   locator.registerSingleton(GetVersionUseCase(locator()));
   locator.registerSingleton(CheckVersionUseCase(locator()));
   locator.registerSingleton(
@@ -116,7 +114,6 @@ void diSetup() {
       signUpUseCase: locator(),
       signOutUseCase: locator(),
       changeUsernameUseCase: locator(),
-      withdrawalUseCase: locator(),
     ),
   );
   locator.registerSingleton(
@@ -166,5 +163,10 @@ void diSetup() {
       checkUsernameUseCase: locator(),
     ),
   );
-  locator.registerFactory(() => DeleteUserViewModel(locator()));
+  locator.registerFactory(
+    () => DeleteUserViewModel(
+      deleteUserUseCase: locator(),
+      userProvider: locator(),
+    ),
+  );
 }

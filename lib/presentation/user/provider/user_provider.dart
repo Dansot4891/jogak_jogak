@@ -8,7 +8,6 @@ import 'package:jogak_jogak/feature/auth/domain/use_case/sign_up_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/model/user.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/change_username_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
-import 'package:jogak_jogak/feature/user/domain/use_case/withdrawal_use_case.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_state.dart';
 
 class UserProvider with ChangeNotifier {
@@ -17,7 +16,6 @@ class UserProvider with ChangeNotifier {
   final SignUpUseCase _signUpUseCase;
   final SignOutUseCase _signOutUseCase;
   final ChangeUsernameUseCase _changeUsernameUseCase;
-  final WithdrawalUseCase _withdrawalUseCase;
 
   UserProvider({
     required SignInUseCase signInUseCase,
@@ -25,13 +23,11 @@ class UserProvider with ChangeNotifier {
     required SignUpUseCase signUpUseCase,
     required SignOutUseCase signOutUseCase,
     required ChangeUsernameUseCase changeUsernameUseCase,
-    required WithdrawalUseCase withdrawalUseCase,
   }) : _signInUseCase = signInUseCase,
        _getUserUseCase = getUserUseCase,
        _signUpUseCase = signUpUseCase,
        _signOutUseCase = signOutUseCase,
-       _changeUsernameUseCase = changeUsernameUseCase,
-       _withdrawalUseCase = withdrawalUseCase;
+       _changeUsernameUseCase = changeUsernameUseCase;
 
   UserState _state = const UserState();
   UserState get state => _state;
@@ -122,17 +118,6 @@ class UserProvider with ChangeNotifier {
       case Error<void>():
     }
     return result;
-  }
-
-  Future<void> withdrawal() async {
-    final result = await _withdrawalUseCase.execute();
-
-    switch (result) {
-      case Success<void>():
-        _state = state.resetUser();
-      case Error<void>():
-    }
-    notifyListeners();
   }
 
   void setUnCertifiedUser() {

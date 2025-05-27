@@ -78,6 +78,7 @@ class _DeleteUserPageState extends State<DeleteUserPage> {
                             _password.text,
                           ),
                         );
+                        pop(context);
                       },
                     ),
                   );

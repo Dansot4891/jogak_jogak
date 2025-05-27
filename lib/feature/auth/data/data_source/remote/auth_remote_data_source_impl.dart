@@ -65,9 +65,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String email,
     required String password,
   }) async {
-    // 1) 재인증: 이메일·비번 등으로 Credential 생성
+    final user = _auth.currentUser!;
+    final uid = user.uid;
+
+    // 1) 재인증
     final cred = EmailAuthProvider.credential(email: email, password: password);
-    await _auth.currentUser?.reauthenticateWithCredential(cred);
-    await _auth.currentUser?.delete();
+    await user.reauthenticateWithCredential(cred);
+
+    // 2) Firestore 문서 삭제 (먼저)
+    await _store.collection(FirebaseCollections.users).doc(uid).delete();
+
+    // 3) Auth 계정 삭제
+    await user.delete();
   }
 }

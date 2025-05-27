@@ -7,13 +7,11 @@ import 'package:jogak_jogak/feature/user/domain/repository/user_repository.dart'
 
 class DeleteUserUseCase {
   final AuthRepository _authRepository;
-  final UserRepository _userRepository;
 
   DeleteUserUseCase({
     required AuthRepository authRepository,
     required UserRepository userRepository,
-  }) : _authRepository = authRepository,
-       _userRepository = userRepository;
+  }) : _authRepository = authRepository;
 
   Future<Result<void>> execute({
     required String email,
@@ -21,7 +19,6 @@ class DeleteUserUseCase {
   }) async {
     try {
       await _authRepository.deleteUser(email: email, password: password);
-      await _userRepository.withdrawal();
       return const Result.success(null);
     } on FirebaseAuthException catch (e) {
       if (e.code == AppErrorText.invalidCredential) {
@@ -29,6 +26,7 @@ class DeleteUserUseCase {
       }
       return const Result.error(UnexpectedException());
     } catch (e) {
+      print(e);
       return const Result.error(UnexpectedException());
     }
   }

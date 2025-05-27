@@ -45,10 +45,4 @@ class MockUserDataSourceImpl implements UserDataSource {
     // TODO: implement saveGameHistory
     throw UnimplementedError();
   }
-
-  @override
-  Future<void> withdrawal() {
-    // TODO: implement withdrawal
-    throw UnimplementedError();
-  }
 }
