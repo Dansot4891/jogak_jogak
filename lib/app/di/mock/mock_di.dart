@@ -5,6 +5,7 @@ import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_dat
 import 'package:jogak_jogak/feature/auth/data/repository_impl/auth_repository_impl.dart';
 import 'package:jogak_jogak/feature/auth/domain/repository/auth_repository.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/change_password_use_case.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/delete_user_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_out_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_up_use_case.dart';
@@ -36,7 +37,6 @@ import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case
 import 'package:jogak_jogak/feature/user/domain/use_case/get_puzzle_history_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/save_puzzle_history_use_case.dart';
-import 'package:jogak_jogak/feature/user/domain/use_case/withdrawal_use_case.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_view_model.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
@@ -105,9 +105,14 @@ void mockdDISetup() {
   mockLocator.registerSingleton(SavePuzzleHistoryUseCase(mockLocator()));
   mockLocator.registerSingleton(ChangePasswordUseCase(mockLocator()));
   mockLocator.registerSingleton(ChangeUsernameUseCase(mockLocator()));
-  mockLocator.registerSingleton(WithdrawalUseCase(mockLocator()));
   mockLocator.registerSingleton(GetVersionUseCase(mockLocator()));
   mockLocator.registerSingleton(CheckVersionUseCase(mockLocator()));
+  mockLocator.registerSingleton(
+    DeleteUserUseCase(
+      authRepository: mockLocator(),
+      userRepository: mockLocator(),
+    ),
+  );
 
   // 전역 provider
   mockLocator.registerSingleton(
@@ -117,7 +122,6 @@ void mockdDISetup() {
       signUpUseCase: mockLocator(),
       signOutUseCase: mockLocator(),
       changeUsernameUseCase: mockLocator(),
-      withdrawalUseCase: mockLocator(),
     ),
   );
   mockLocator.registerSingleton(
@@ -158,6 +162,7 @@ void mockdDISetup() {
   mockLocator.registerFactory(
     () => MyPageViewModel(
       userProvider: mockLocator(),
+      deleteUserUseCase: mockLocator(),
       getVersionUseCase: mockLocator(),
     ),
   );

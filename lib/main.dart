@@ -47,7 +47,7 @@ void main() async {
       supportedLocales: const [Locale('en', 'US'), Locale('ko', 'KR')],
       path: 'assets/translations',
       fallbackLocale: const Locale('en', 'US'),
-      // startLocale: const Locale('ko', 'KR'),
+      // startLocale: const Locale('en', 'US'),
       child: const MyApp(),
     ),
   );

@@ -10,4 +10,6 @@ abstract interface class AuthRepository {
   Future<String> signIn({required String email, required String password});
 
   Future<void> changePassword(String email);
+
+  Future<void> deleteUser({required String email, required String password});
 }

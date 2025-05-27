@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/delete_user_use_case.dart';
 import 'package:jogak_jogak/feature/system/domain/model/app_version.dart';
 import 'package:jogak_jogak/feature/system/domain/use_case/get_version_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/model/user.dart';
@@ -15,6 +16,7 @@ class MyPageViewModel with ChangeNotifier {
   final GetVersionUseCase _getVersionUseCase;
   MyPageViewModel({
     required UserProvider userProvider,
+    required DeleteUserUseCase deleteUserUseCase,
     required GetVersionUseCase getVersionUseCase,
   }) : _userProvider = userProvider,
        _getVersionUseCase = getVersionUseCase {
@@ -28,17 +30,11 @@ class MyPageViewModel with ChangeNotifier {
     switch (action) {
       case Signout():
         _signout();
-      case Withdrawal():
-        _withdrawal();
     }
   }
 
   void _signout() {
     _userProvider.signout();
-  }
-
-  void _withdrawal() {
-    _userProvider.withdrawal();
   }
 
   // 전역 관리하는 유저 데이터 할당

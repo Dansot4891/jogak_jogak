@@ -14,6 +14,4 @@ abstract interface class UserRepository {
   });
 
   Future<void> changeUsername({required String uid, required String username});
-
-  Future<void> withdrawal();
 }

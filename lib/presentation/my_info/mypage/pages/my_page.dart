@@ -93,21 +93,7 @@ class MyPage extends StatelessWidget {
                 SettingCard(
                   text: LocaleKeys.withdrawal.tr(),
                   onTap: () {
-                    AppShowDialog.show(
-                      context,
-                      AppDialog(
-                        title: LocaleKeys.withdrawal.tr(),
-                        subText: LocaleKeys.myPageConfirmWithdrawal.tr(),
-                        btnText: LocaleKeys.ok.tr(),
-                        btnLeftText: LocaleKeys.cancel.tr(),
-                        onBtnLeftClicked: () {
-                          pop(context);
-                        },
-                        onBtnClicked: () {
-                          onAction(const MyPageAction.withdrawal());
-                        },
-                      ),
-                    );
+                    navigate(context, route: AppRoute.deleteUser);
                   },
                   baseColor: AppColor.greyC5,
                 ),

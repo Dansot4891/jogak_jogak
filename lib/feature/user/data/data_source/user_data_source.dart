@@ -14,6 +14,4 @@ abstract interface class UserDataSource {
   Future<bool> checkUsername(String username);
 
   Future<void> changeUsername({required String uid, required String username});
-
-  Future<void> withdrawal();
 }

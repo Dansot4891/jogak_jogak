@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
@@ -8,8 +9,9 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppRouter {
   static GoRouter appRouter() {
+    final analytics = FirebaseAnalytics.instance;
     final UserProvider userProvider = locator();
-    return GoRouter(
+    final router = GoRouter(
       routes: routes,
       navigatorKey: _rootNavigatorKey,
       refreshListenable: userProvider,
@@ -32,5 +34,18 @@ class AppRouter {
       },
       initialLocation: AppRoute.signIn.path,
     );
+
+    router.routerDelegate.addListener(() {
+      // 실제 화면이 그려진 후 analytics에 현재 화면 이름을 전달
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final matches = router.routerDelegate.currentConfiguration;
+        if (matches.isNotEmpty) {
+          final screen = matches.last.matchedLocation;
+          analytics.logScreenView(screenName: screen);
+        }
+      });
+    });
+
+    return router;
   }
 }

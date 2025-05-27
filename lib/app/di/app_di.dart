@@ -5,6 +5,7 @@ import 'package:jogak_jogak/feature/auth/data/data_source/remote/auth_remote_dat
 import 'package:jogak_jogak/feature/auth/data/repository_impl/auth_repository_impl.dart';
 import 'package:jogak_jogak/feature/auth/domain/repository/auth_repository.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/change_password_use_case.dart';
+import 'package:jogak_jogak/feature/auth/domain/use_case/delete_user_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_in_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_out_use_case.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/sign_up_use_case.dart';
@@ -36,12 +37,12 @@ import 'package:jogak_jogak/feature/user/domain/use_case/check_username_use_case
 import 'package:jogak_jogak/feature/user/domain/use_case/get_puzzle_history_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/get_user_use_case.dart';
 import 'package:jogak_jogak/feature/user/domain/use_case/save_puzzle_history_use_case.dart';
-import 'package:jogak_jogak/feature/user/domain/use_case/withdrawal_use_case.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_view_model.dart';
 import 'package:jogak_jogak/presentation/auth/sign_up/pages/sign_up_view_model.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/change_username/pages/change_username_view_model.dart';
+import 'package:jogak_jogak/presentation/my_info/delete_user/pages/delete_user_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/mypage/pages/my_page_view_model.dart';
 import 'package:jogak_jogak/presentation/my_info/puzzle_history/pages/puzzle_history_view_model.dart';
 import 'package:jogak_jogak/presentation/puzzle/controller/puzzle_controller.dart';
@@ -99,9 +100,11 @@ void diSetup() {
   locator.registerSingleton(SavePuzzleHistoryUseCase(locator()));
   locator.registerSingleton(ChangePasswordUseCase(locator()));
   locator.registerSingleton(ChangeUsernameUseCase(locator()));
-  locator.registerSingleton(WithdrawalUseCase(locator()));
   locator.registerSingleton(GetVersionUseCase(locator()));
   locator.registerSingleton(CheckVersionUseCase(locator()));
+  locator.registerSingleton(
+    DeleteUserUseCase(authRepository: locator(), userRepository: locator()),
+  );
 
   // 전역 provider
   locator.registerSingleton(
@@ -111,7 +114,6 @@ void diSetup() {
       signUpUseCase: locator(),
       signOutUseCase: locator(),
       changeUsernameUseCase: locator(),
-      withdrawalUseCase: locator(),
     ),
   );
   locator.registerSingleton(
@@ -147,8 +149,11 @@ void diSetup() {
   );
   locator.registerFactory(() => RankingViewModel(locator()));
   locator.registerFactory(
-    () =>
-        MyPageViewModel(userProvider: locator(), getVersionUseCase: locator()),
+    () => MyPageViewModel(
+      userProvider: locator(),
+      deleteUserUseCase: locator(),
+      getVersionUseCase: locator(),
+    ),
   );
   locator.registerFactory(() => PuzzleHistoryViewModel(locator()));
   locator.registerFactory(() => ChangePasswordViewModel(locator()));
@@ -156,6 +161,12 @@ void diSetup() {
     () => ChangeUsernameViewModel(
       userProvider: locator(),
       checkUsernameUseCase: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => DeleteUserViewModel(
+      deleteUserUseCase: locator(),
+      userProvider: locator(),
     ),
   );
 }

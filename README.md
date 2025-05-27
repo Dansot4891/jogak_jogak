@@ -29,7 +29,7 @@
 ## 🧩 아키텍처 및 기술 스택
 
 - **아키텍처:** MVVM 기반의 클린 아키텍처 + MVI 패턴 적용
-<img width=100% src='https://github.com/user-attachments/assets/a574bfcd-5c25-4bb8-843f-5453f0c566d0'>
+<img width=100% src='https://github.com/user-attachments/assets/3b9683fa-2462-44c1-a1ac-a57782c70612'>
 
 - **상태 관리:** Provider
 - **의존성 주입:** GetIt
@@ -42,9 +42,8 @@
 
 ---
 ## 🌀 Github Action Logic
-<img width = 50% src='https://github.com/user-attachments/assets/cd67e57f-f3af-4bf5-86c6-91eff514d96a'>
+<img src='https://github.com/user-attachments/assets/e8eb4550-105a-4784-afed-df78dc1e881d'>
 
----
 ## 폴더 구조
 ```
 |-- lib
@@ -79,9 +78,25 @@
     |       |-- pages
     |           |-- root_page          # 최상위 루트 페이지 관리
     |           |-- page               # 각 화면 단위 페이지
+    |           |-- event              # 화면 이벤트 처리 관리
     |           |-- state              # 화면 상태(State) 관리
     |           |-- viewmodel          # ViewModel (상태/로직 담당)
     |           |-- action             # 사용자 액션 정의
     |       |-- widgets                # 해당 섹션 위젯
+```
+
+## 테스트 코드 폴더 구조
+```
+|-- test
+    |-- unit
+    |  |-- features                   # 각 기능별
+    |  |   |-- data_source_test       # Data Source 테스트
+    |  |   |-- repository_test        # Repository 테스트
+    |  |   |-- view_model_est         # ViewModel 테스트
+    |
+    |-- widget
+    |  |-- features                   # 각 기능별
+    |  |   |-- page_test              # 화면 테스트
+    |  |   |-- dialog_test            # Dialog 테스트
 ```
 ---

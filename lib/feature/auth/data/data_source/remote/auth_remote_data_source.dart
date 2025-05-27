@@ -10,4 +10,6 @@ abstract interface class AuthRemoteDataSource {
   });
 
   Future<void> changePassword(String email);
+
+  Future<void> deleteUser({required String email, required String password});
 }

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jogak_jogak/core/constants/firebase_collections.dart';
 import 'package:jogak_jogak/core/constants/firebase_query.dart';
 import 'package:jogak_jogak/feature/user/data/dto/puzzle_history_dto.dart';
@@ -64,12 +63,5 @@ class UserRemoteDataSourceImpl implements UserDataSource {
     await _store.collection(FirebaseCollections.users).doc(uid).update({
       FirebaseQuery.username: username,
     });
-  }
-
-  @override
-  Future<void> withdrawal() async {
-    final user = FirebaseAuth.instance.currentUser;
-    await user!.delete();
-    await _store.collection(FirebaseCollections.users).doc(user.uid).delete();
   }
 }
