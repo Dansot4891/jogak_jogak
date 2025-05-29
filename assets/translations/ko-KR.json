@@ -27,6 +27,8 @@
       "seconds": "초",
       "minutes": "분",
       "duplicate": "중복 확인",
+      "sendedMail": "메시지가 발송되었습니다.",
+      "error" : "에러가 발생하였습니다.",
       "validation" : {
         "emailFormValidateText": "올바른 이메일 양식을 입력해주세요.",
         "emailValidateText": "이메일을 입력해주세요.",
