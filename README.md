@@ -2,11 +2,18 @@
 
 사용자가 직접 퍼즐 이미지를 업로드하거나, 앱이 제공하는 랜덤 이미지를 이용해 퍼즐을 풀 수 있는 모바일 퍼즐 게임입니다.
 ---
+
+### IOS 다운로드
+<a href="https://apps.apple.com/us/app/%EC%A1%B0%EA%B0%81%EC%A1%B0%EA%B0%81-%ED%8D%BC%EC%A6%90/id6745454368" target="_blank" rel="noopener">
+  <img width="25%" src="https://github.com/user-attachments/assets/3f650be4-91e3-43d5-96c9-96889f99a45a" alt="iOS 다운로드">
+</a>
+
 ## 📱 앱 미리보기
 
-<img width=30% src='https://github.com/user-attachments/assets/703970b1-a5a7-4d8f-8d43-1ff705bfe661'>
-<img width=30% src='https://github.com/user-attachments/assets/55af6137-124a-4211-a67c-b415fa7c8164'>
-<img width=30% src='https://github.com/user-attachments/assets/09c2c434-6974-48d4-93b9-f75dde3e4924'>
+<img width=23% src='https://github.com/user-attachments/assets/703970b1-a5a7-4d8f-8d43-1ff705bfe661'>
+<img width=23% src='https://github.com/user-attachments/assets/55af6137-124a-4211-a67c-b415fa7c8164'>
+<img width=23% src='https://github.com/user-attachments/assets/09c2c434-6974-48d4-93b9-f75dde3e4924'>
+<img width=23% src='https://github.com/user-attachments/assets/d6acf176-5068-4357-b471-69d7195ae1f8'>
 
 ---
 
