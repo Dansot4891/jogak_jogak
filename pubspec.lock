@@ -1178,6 +1178,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  ui_event_bus:
+    dependency: "direct main"
+    description:
+      name: ui_event_bus
+      sha256: "34764a5f1d85c0bd8cf4ab0a3da70fc9f319c7c1bb55d9ecfb2aeed369a9c6d3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   universal_io:
     dependency: transitive
     description:

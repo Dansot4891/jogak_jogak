@@ -15,6 +15,7 @@ import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_event.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_state.dart';
 import 'package:jogak_jogak/presentation/system/system_provider.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
+import 'package:ui_event_bus/core/helper/app_event_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignInViewModel with ChangeNotifier {
@@ -75,6 +76,7 @@ class SignInViewModel with ChangeNotifier {
       case Success<bool>():
         _autoSignIn();
       case Error<bool>():
+        // EventHelpers.showDialog(builder: builder)
         _streamController.add(
           SignInEvent.showVersionErrorDialog(result.error.message),
         );

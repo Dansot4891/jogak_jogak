@@ -83,6 +83,9 @@ dependencies:
   firebase_crashlytics: ^4.3.5
   firebase_analytics: ^11.4.5
 
+  # 전역 이벤트 처리
+  ui_event_bus: ^1.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
