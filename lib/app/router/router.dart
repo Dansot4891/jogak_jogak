@@ -5,7 +5,7 @@ import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/service/analytics_observer.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
 
-final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppRouter {
   static GoRouter appRouter() {
@@ -13,7 +13,7 @@ class AppRouter {
     final observer = AnalyticsObserver();
     final router = GoRouter(
       routes: routes,
-      navigatorKey: _rootNavigatorKey,
+      navigatorKey: rootNavigatorKey,
       refreshListenable: userProvider,
       observers: [observer],
       redirect: (context, state) {

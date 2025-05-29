@@ -1,20 +1,18 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:async';
 import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jogak_jogak/app/localization/locale_keys.dart';
+import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/constants/app_data.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
-
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_action.dart';
-import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_event.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_state.dart';
+import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/system/system_provider.dart';
 import 'package:jogak_jogak/presentation/user/provider/user_provider.dart';
+import 'package:ui_event_bus/ui_event_bus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignInViewModel with ChangeNotifier {
@@ -29,10 +27,6 @@ class SignInViewModel with ChangeNotifier {
 
   SignInState _state = SignInState();
   SignInState get state => _state;
-
-  final StreamController<SignInEvent> _streamController =
-      StreamController<SignInEvent>();
-  Stream<SignInEvent> get eventStream => _streamController.stream;
 
   void onAction(SignInAction action) async {
     switch (action) {
@@ -56,8 +50,16 @@ class SignInViewModel with ChangeNotifier {
       notifyListeners();
     } else {
       _state = state.copyWith(state: BaseState.error);
-      _streamController.add(
-        SignInEvent.showSignInErrorDialog(LocaleKeys.signInError.tr()),
+      EventHelpers.showDialog(
+        builder: (ctx) {
+          return AppDialog.singleBtn(
+            title: LocaleKeys.signInError.tr(),
+            btnText: LocaleKeys.ok.tr(),
+            onBtnClicked: () {
+              pop(ctx);
+            },
+          );
+        },
       );
       notifyListeners();
     }
@@ -75,8 +77,16 @@ class SignInViewModel with ChangeNotifier {
       case Success<bool>():
         _autoSignIn();
       case Error<bool>():
-        _streamController.add(
-          SignInEvent.showVersionErrorDialog(result.error.message),
+        EventHelpers.showDialog(
+          builder: (ctx) {
+            return AppDialog.singleBtn(
+              title: result.error.message,
+              btnText: LocaleKeys.ok.tr(),
+              onBtnClicked: () {
+                pop(ctx);
+              },
+            );
+          },
         );
         FlutterNativeSplash.remove();
     }
