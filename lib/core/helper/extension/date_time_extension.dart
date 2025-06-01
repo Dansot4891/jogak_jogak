@@ -20,12 +20,12 @@ extension DateTimeExtension on DateTime {
 
     if (diff < 365) {
       return LocaleKeys.dateMonthsAgo.tr(
-        namedArgs: {'n': '${(diff / 30).floor()}달 전'},
+        namedArgs: {'n': '${(diff / 30).floor()}'},
       );
     }
 
     return LocaleKeys.dateYearsAgo.tr(
-      namedArgs: {'n': '${(diff / 365).floor()}년 전'},
+      namedArgs: {'n': '${(diff / 365).floor()}'},
     );
   }
 }

@@ -27,6 +27,8 @@
       "seconds": "seconds",
       "minutes": "minutes",
       "duplicate": "duplicate",
+      "sendedMail": "message has been sent.",
+      "error" : "An error has occurred.",
       "validation": {
         "emailFormValidateText": "Please enter a valid email format.",
         "emailValidateText": "Please enter your email.",

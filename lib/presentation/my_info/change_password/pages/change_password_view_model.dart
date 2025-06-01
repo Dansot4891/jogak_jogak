@@ -1,12 +1,15 @@
 import 'dart:async';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jogak_jogak/app/localization/locale_keys.dart';
+import 'package:jogak_jogak/app/router/routes.dart';
 import 'package:jogak_jogak/core/module/error_handling/result.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
 import 'package:jogak_jogak/feature/auth/domain/use_case/change_password_use_case.dart';
+import 'package:jogak_jogak/presentation/base/widgets/dialog/app_dialog.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_action.dart';
-import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_event.dart';
 import 'package:jogak_jogak/presentation/my_info/change_password/pages/change_password_state.dart';
+import 'package:ui_event_bus/ui_event_bus.dart';
 
 class ChangePasswordViewModel with ChangeNotifier {
   final ChangePasswordUseCase _changePasswordUseCase;
@@ -15,9 +18,6 @@ class ChangePasswordViewModel with ChangeNotifier {
 
   ChangePasswordState _state = const ChangePasswordState();
   ChangePasswordState get state => _state;
-
-  final _streamController = StreamController<ChangePasswordEvent>();
-  Stream<ChangePasswordEvent> get eventStream => _streamController.stream;
 
   void onAction(ChangePasswordAction action) {
     switch (action) {
@@ -33,8 +33,15 @@ class ChangePasswordViewModel with ChangeNotifier {
     switch (result) {
       case Success<void>():
         _state = state.copyWith(state: BaseState.success);
-        _streamController.add(
-          const ChangePasswordEvent.showCheckDialog('메시지가 발송되었습니다.'),
+        EventHelpers.showDialog(
+          builder:
+              (ctx) => AppDialog.singleBtn(
+                title: LocaleKeys.sendedMail.tr(),
+                btnText: LocaleKeys.ok.tr(),
+                onBtnClicked: () {
+                  pop(ctx);
+                },
+              ),
         );
         notifyListeners();
       case Error<void>():
@@ -42,8 +49,15 @@ class ChangePasswordViewModel with ChangeNotifier {
           state: BaseState.error,
           errorMessage: result.error.message,
         );
-        _streamController.add(
-          const ChangePasswordEvent.showCheckDialog('에러가 발생하였습니다.'),
+        EventHelpers.showDialog(
+          builder:
+              (ctx) => AppDialog.singleBtn(
+                title: LocaleKeys.error.tr(),
+                btnText: LocaleKeys.ok.tr(),
+                onBtnClicked: () {
+                  pop(ctx);
+                },
+              ),
         );
         notifyListeners();
     }

@@ -16,6 +16,8 @@ abstract class LocaleKeys {
   static const cancel = 'common.cancel';
   static const seconds = 'common.seconds';
   static const minutes = 'common.minutes';
+  static const sendedMail = 'common.sendedMail';
+  static const error = 'common.error';
 
   // Date difference strings
   static const dateToday = 'common.date.today';
