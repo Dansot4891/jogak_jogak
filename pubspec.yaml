@@ -85,8 +85,6 @@ dependencies:
 
   # 전역 이벤트 처리
   ui_event_bus: ^1.0.2
-  
-  
 
 dev_dependencies:
   flutter_test:
