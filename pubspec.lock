@@ -1182,10 +1182,10 @@ packages:
     dependency: "direct main"
     description:
       name: ui_event_bus
-      sha256: "34764a5f1d85c0bd8cf4ab0a3da70fc9f319c7c1bb55d9ecfb2aeed369a9c6d3"
+      sha256: "6553d72f57b75a01b62ded43a609750540a13d6c7b9d19a4b22486806248bf6d"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   universal_io:
     dependency: transitive
     description:
