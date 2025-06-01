@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_action.dart';
 import 'package:jogak_jogak/presentation/auth/sign_in/sign_in_page.dart';
@@ -14,19 +13,11 @@ class SignInPageRoot extends StatefulWidget {
 }
 
 class _SignInPageRootState extends State<SignInPageRoot> {
-  StreamSubscription? _sub;
-
   @override
   void initState() {
     super.initState();
     final viewModel = context.read<SignInViewModel>();
     viewModel.onAction(const SignInAction.signInInitialize());
-  }
-
-  @override
-  void dispose() {
-    _sub?.cancel();
-    super.dispose();
   }
 
   @override
