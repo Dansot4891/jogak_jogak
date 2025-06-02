@@ -7,8 +7,8 @@ import 'package:jogak_jogak/core/constants/app_dotenv.dart';
 // 구글 광고 객체
 class AdMobService {
   // dotenv를 이용하여 admob에 필요한 코드 불러오기
-  static String get _androidKey => dotenv.get(AppDotenv.ANDROID_ADMOB_KEY);
-  static String get _iosKey => dotenv.get(AppDotenv.IOS_ADMOB_KEY);
+  static String get _androidKey => dotenv.get(AppDotenv.androidAdKey);
+  static String get _iosKey => dotenv.get(AppDotenv.iosAdKey);
 
   // 배너 광고를 불러오기 위해 키 값 불러오기
   static String? get bannerAd {
