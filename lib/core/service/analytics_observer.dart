@@ -8,6 +8,5 @@ class AnalyticsObserver extends NavigatorObserver {
   void didPush(Route route, Route? previousRoute) {
     final name = route.settings.name;
     analytics.logScreenView(screenName: name ?? 'unknown');
-    print('route: $route');
   }
 }
