@@ -16,6 +16,7 @@ class AdMobService {
     if (Platform.isAndroid) {
       return _androidKey;
     }
+    // return 'ca-app-pub-3940256099942544/2435281174';
     return _iosKey;
   }
 
@@ -24,8 +25,9 @@ class AdMobService {
     onAdLoaded: (ad) {},
     onAdFailedToLoad: (ad, error) {
       ad.dispose();
+      print('error: $error');
     },
-    onAdOpened: (ad) {},
-    onAdClosed: (ad) {},
+    onAdOpened: (ad) => print('opend ad $ad'),
+    onAdClosed: (ad) => print('closed ad $ad'),
   );
 }
