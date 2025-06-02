@@ -89,6 +89,9 @@ dependencies:
   # Admob
   google_mobile_ads: ^6.0.0
 
+  # env
+  flutter_dotenv: ^5.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

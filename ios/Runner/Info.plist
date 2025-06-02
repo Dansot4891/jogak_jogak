@@ -14,6 +14,10 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<!-- 광고 Admob 설정 -->
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-9635790744570687~1884987764</string>
+	<!-- Localization -->
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>

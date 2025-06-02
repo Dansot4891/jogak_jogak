@@ -6,6 +6,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jogak_jogak/app/di/app_di.dart';
 import 'package:jogak_jogak/app/router/router.dart';
 import 'package:jogak_jogak/core/service/app_size.dart';
@@ -17,6 +18,10 @@ final router = AppRouter.appRouter();
 void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  // Google AdMob 광고 초기화
+  MobileAds.instance.initialize();
+
   // 가로모드 금지
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
