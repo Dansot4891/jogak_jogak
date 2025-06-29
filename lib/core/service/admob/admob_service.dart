@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:jogak_jogak/core/constants/app_dotenv.dart';
 
 // 구글 광고 객체
@@ -16,18 +14,6 @@ class AdMobService {
     if (Platform.isAndroid) {
       return _androidKey;
     }
-    // return 'ca-app-pub-3940256099942544/2435281174';
     return _iosKey;
   }
-
-  // 배너 광고 불러오기
-  static final BannerAdListener bannerAdListener = BannerAdListener(
-    onAdLoaded: (ad) {},
-    onAdFailedToLoad: (ad, error) {
-      ad.dispose();
-      print('error: $error');
-    },
-    onAdOpened: (ad) => print('opend ad $ad'),
-    onAdClosed: (ad) => print('closed ad $ad'),
-  );
 }

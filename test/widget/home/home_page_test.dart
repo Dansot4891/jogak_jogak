@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jogak_jogak/app/localization/locale_keys.dart';
 import 'package:jogak_jogak/core/module/state/base_state.dart';
@@ -17,6 +18,8 @@ void main() async {
 
   HomeState state = const HomeState(level: 3, state: BaseState.success);
   void onAction(HomeAction action) {}
+  // dotenv 호출
+  await dotenv.load(fileName: '.env');
 
   final home = EasyLocalization(
     supportedLocales: const [Locale('ko', 'KR'), Locale('en', 'US')],

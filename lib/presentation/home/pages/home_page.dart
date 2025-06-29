@@ -6,6 +6,7 @@ import 'package:jogak_jogak/core/service/admob/admob_mixin.dart';
 import 'package:jogak_jogak/core/constants/app_data.dart';
 import 'package:jogak_jogak/core/module/state/base_state_view.dart';
 import 'package:jogak_jogak/core/module/state/state_handling.dart';
+import 'package:jogak_jogak/core/style/app_text_style.dart';
 import 'package:jogak_jogak/presentation/base/widgets/button/app_button.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_action.dart';
 import 'package:jogak_jogak/presentation/home/pages/home_state.dart';
@@ -26,7 +27,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with AdmobMixin {
   @override
   void initState() {
-    getBanner();
+    initBanner();
     super.initState();
   }
 
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> with AdmobMixin {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              banner(),
+              buildBanner(),
               // Text(LocaleKeys.homeGuideText.tr(), style: AppTextStyle.title2),
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
